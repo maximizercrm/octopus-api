@@ -1,4 +1,4 @@
-name: Update Postman Collection
+name: Update public Postman collection
 
 on:
   push:
@@ -9,7 +9,7 @@ env:
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
 jobs:
-  update_collection:
+  update_public_collection:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout files
@@ -18,9 +18,13 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
+      - name: Prepare collection to send
+        run: |
+          echo "{\"collection\": $(cat postman/collections/OctopusAPI.json)}" > /tmp/OctopusAPI.json
+
       - name: Update the collection
         run: |
           curl --location --request PUT "https://api.getpostman.com/collections/{{ env.COLLECTION_ID }}" \
             -H "X-Api-Key: {{ env.POSTMAN_API_KEY }}" \
             -H 'Content-Type: application/json' \
-            --data "{\"collection\": $(cat postman/collections/OctopusAPI.json)}"
+            --data @/tmp/OctopusAPI.json
