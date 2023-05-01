@@ -25,8 +25,9 @@ jobs:
       - name: Update the collection
         run: |
           collection_id="${{ env.COLLECTION_ID }}"
+          api_key="${{ env.POSTMAN_API_KEY }}"
           curl --location --request PUT \
             "https://api.getpostman.com/collections/$collection_id" \
-            -H "X-Api-Key: {{ env.POSTMAN_API_KEY }}" \
+            -H "X-Api-Key: $api_key" \
             -H 'Content-Type: application/json' \
             --data @/tmp/OctopusAPI.json
