@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 env:
-#  COLLECTION_NAME: ${{ env.COLLECTION_NAME }}
-#  WORKSPACE_ID: ${{ env.WORKSPACE_ID }}
+  COLLECTION_NAME: ${{ vars.COLLECTION_NAME }}
+  WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
 jobs:
