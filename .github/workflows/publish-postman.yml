@@ -12,6 +12,12 @@ jobs:
   update_collection:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout files
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
       - name: Update the collection
         run: |
           curl --location --request PUT "https://api.getpostman.com/collections/{{ env.COLLECTION_ID }}" \
