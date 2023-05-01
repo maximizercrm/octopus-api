@@ -5,43 +5,16 @@ on:
     branches: [ main ]
 
 env:
-  COLLECTION_NAME: ${{ vars.COLLECTION_NAME }}
-  WORKSPACE_ID: ${{ vars.WORKSPACE_ID }}
+  COLLECTION_ID: ${{ vars.COLLECTION_ID }}
   POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
 
 jobs:
   update_collection:
     runs-on: ubuntu-latest
     steps:
-      - name: Load all collections
-        id: load_collections
+      - name: Update the collection
         run: |
-          collections=$(curl -s -X GET "https://api.getpostman.com/collections?workspace={{ env.WORKSPACE_ID }}" \
+          curl --location --request PUT "https://api.getpostman.com/collections/{{ env.COLLECTION_ID }}" \
             -H "X-Api-Key: {{ env.POSTMAN_API_KEY }}" \
-            | jq '.collections[] | { id, name }')
-          echo "::set-output name=collections::$collections"
-          echo "Public collections: $collections"
-
-      - name: Find collection ID
-        id: find_collection
-        run: |
-          collections="${{ steps.load_collections.outputs.collections }}"
-          collection_id=$(echo "$collections" | jq -r ".[] | select(.name == \"${{ env.COLLECTION_NAME }}\") | .id")
-          echo "::set-output name=collection_id::$collection_id"
-          echo "Collection ID: $collection_id"
-
-      - name: Delete existing collection
-        if: steps.find_collection.outputs.collection_id != null
-        run: |
-          collection_id="${{ steps.find_collection.outputs.collection_id }}"
-          curl -s -X DELETE \
-            "https://api.getpostman.com/collections/$collection_id" \
-            -H "X-Api-Key: {{ env.POSTMAN_API_KEY }}"
-
-      - name: Import new collection
-        run: |
-          curl -s -X POST \
-            "https://api.getpostman.com/collections/import" \
-            -H "X-Api-Key: {{ env.POSTMAN_API_KEY }}" \
-            -H "Content-Type: multipart/form-data" \
-            -F "file=@postman/collections/OctopusAPI.json"
+            -H 'Content-Type: application/json' \
+            --data "{\"collection\": $(cat postman/collections/OctopusAPI.json)}"
