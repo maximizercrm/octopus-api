@@ -2563,54 +2563,6 @@
           "id": "ef63e4a6-56f2-41f9-a415-3aa22ce8dcdd"
         },
         {
-          "name": "User/Permission",
-          "item": [
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "get interaction log permissions",
-                  "id": "be94151e-0c84-49cc-ab29-d610c2805720",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tuser: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key:{\r\n                    \"$EQ\":\"$CURRENTUSER()\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1,\r\n                permissions:{\r\n                    interactionLog: {\r\n                        create: 1,\r\n                        read: 1,\r\n                        update: 1,\r\n                        delete: 1\r\n                    }\r\n                }\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/UserRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "set interaction log permissions",
-                  "id": "cc4a2b29-3168-4ce5-92b5-c21e3c294302",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tuser: {\r\n\t\tdata: {\r\n            key: \"VXNlcglEQlJPV04=\",\r\n            permissions: {\r\n                interactionLog: {\r\n                    create: true,\r\n                    read: true,\r\n                    update: true,\r\n                    delete: false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/UserUpdate",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "f7dcb32e-1521-4598-a480-3b8dd0dd1865"
-            }
-          ],
-          "id": "1c4e04ab-e9a9-4718-8b7a-a288ec225fa2"
-        },
-        {
           "name": "User",
           "item": [
             {
