@@ -1642,7 +1642,7 @@
                   "response": []
                 },
                 {
-                  "name": "get field options for currency code",
+                  "name": "get currencies list",
                   "id": "4b476e1b-a212-4300-983e-0bd3097876e6",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
