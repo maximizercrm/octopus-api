@@ -1710,7 +1710,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q3VycmVuY3lFeGNoYW5nZQkxMQ==\", \r\n         \"CurrencyCode\": {\r\n          \"Code\": \"MYR\"\r\n        \r\n        },       \r\n         \"Description\":\"Currency TestArun11\",\r\n         \"Rate\": 4.0,\r\n         \"EffectiveDate\": \"2021-07-13\"\r\n\r\n\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q3VycmVuY3lFeGNoYW5nZQkxMQ==\", \r\n         \"CurrencyCode\": {\r\n           \"Code\": \"MYR\"\r\n         },       \r\n         \"Description\":\"Currency TestArun11\",\r\n         \"Rate\": 4.0,\r\n         \"EffectiveDate\": \"2021-07-13\"\r\n      }\r\n   }\r\n}"
                     },
                     "url": "{{BaseURL}}/Update"
                   },
