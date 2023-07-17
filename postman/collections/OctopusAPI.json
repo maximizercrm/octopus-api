@@ -1676,7 +1676,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n            \"CurrencyCode\":{               \r\n               \"$EQ\":\"AUD\"\r\n            }\r\n         },       \r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n             \"Key\":1,\r\n             \"Description\":1,\r\n            \"CurrencyCode\":{\r\n                \"Code\":1,\r\n                DisplayValue:1\r\n            },\r\n            \"Rate\":1,\r\n            \"EffectiveDate\":1,\r\n            \"DisplayValue\":1\r\n\r\n                      \r\n         }\r\n      }\r\n   }\r\n}\r\n"
+                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n            \"CurrencyCode\": {\r\n               \"$EQ\":\"AUD\"\r\n            }\r\n         },\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n             \"Key\":1,\r\n             \"Description\":1,\r\n            \"CurrencyCode\":{\r\n                \"Code\":1,\r\n                DisplayValue:1\r\n            },\r\n            \"Rate\":1,\r\n            \"EffectiveDate\":1,\r\n            \"DisplayValue\":1\r\n         }\r\n      }\r\n   }\r\n}\r\n"
                     },
                     "url": "{{BaseURL}}/Read"
                   },
