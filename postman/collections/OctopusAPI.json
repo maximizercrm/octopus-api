@@ -1693,7 +1693,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n       \"CurrencyCode\": {\r\n          \"Code\": \"USD\"\r\n        \r\n        },\r\n         \"Description\":\"test currency12\",\r\n         \"Rate\": 5.0,\r\n         \"EffectiveDate\": \"2022-07-13\"\r\n\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"CurrencyCode\": {\r\n           \"Code\": \"USD\"\r\n         },\r\n         \"Description\":\"test currency12\",\r\n         \"Rate\": 5.0,\r\n         \"EffectiveDate\": \"2022-07-13\"\r\n      }\r\n   }\r\n}"
                     },
                     "url": "{{BaseURL}}/Create"
                   },
