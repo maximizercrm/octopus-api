@@ -2962,56 +2962,6 @@
           "name": "System",
           "item": [
             {
-              "name": "authenticate",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "1997961b-6356-4b36-9332-3c7cf4aa6a3f",
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "2c4d6f08-7e5e-4f73-a429-2e618c3290ce",
-                    "exec": [
-                      "if(!pm.environment.get(\"Database\")) {",
-                      "    console.log(\"The Database environment variable is required.\");",
-                      "}",
-                      "if(!pm.environment.get(\"UID\")) {",
-                      "    console.log(\"The UID environment variable is required.\");",
-                      "}",
-                      "if(!pm.environment.get(\"Password\")) {",
-                      "    console.log(\"The Password environment variable is required.\");",
-                      "}"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "117c7395-e025-4503-a38b-fa79c9a421a4",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "noauth"
-                },
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\", // empty for on-prem\n\tappKey: \"{{AppKey}}\" // empty for on-prem\n}"
-                },
-                "url": "{{BaseURL}}/Authenticate"
-              },
-              "response": []
-            },
-            {
               "name": "get current session info",
               "event": [
                 {
@@ -3170,53 +3120,103 @@
                 "description": "Use the `GetSystemInfo` method to get information about the system, including the current API version and the versions of API components.\n\nNOTE: The `GetSystemInfo` method is un-authenticated, so you don't need to supply a token when calling it."
               },
               "response": []
-            },
-            {
-              "name": "validate token",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "1e418da7-b086-4408-ae64-3d860728c0dc",
-                    "exec": [
-                      "if(!pm.environment.get(\"Token\")) {",
-                      "    console.log(\"The Token environment variable is required.\");",
-                      "}"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "5dc50087-05f1-49f3-a727-9845569ac78e",
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "id": "a1c941a4-5566-4991-b27b-25174d0fe625",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n\ttoken: \"{{Token}}\"\n}"
-                },
-                "url": "{{BaseURL}}/Data.svc/json/TokenValid"
-              },
-              "response": []
             }
           ],
           "id": "45f17321-d923-4aff-8f9c-564fea0a4680"
         }
       ],
       "id": "eff3620c-fb2c-4476-8c0a-a5ee5cc1294a"
+    },
+    {
+      "name": "authenticate",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "1997961b-6356-4b36-9332-3c7cf4aa6a3f",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "2c4d6f08-7e5e-4f73-a429-2e618c3290ce",
+            "exec": [
+              "if(!pm.environment.get(\"Database\")) {",
+              "    console.log(\"The Database environment variable is required.\");",
+              "}",
+              "if(!pm.environment.get(\"UID\")) {",
+              "    console.log(\"The UID environment variable is required.\");",
+              "}",
+              "if(!pm.environment.get(\"Password\")) {",
+              "    console.log(\"The Password environment variable is required.\");",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "117c7395-e025-4503-a38b-fa79c9a421a4",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\", // empty for on-prem\n\tappKey: \"{{AppKey}}\" // empty for on-prem\n}"
+        },
+        "url": "{{BaseURL}}/Authenticate"
+      },
+      "response": []
+    },
+    {
+      "name": "validate token",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "1e418da7-b086-4408-ae64-3d860728c0dc",
+            "exec": [
+              "if(!pm.environment.get(\"Token\")) {",
+              "    console.log(\"The Token environment variable is required.\");",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "5dc50087-05f1-49f3-a727-9845569ac78e",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "id": "a1c941a4-5566-4991-b27b-25174d0fe625",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\ttoken: \"{{Token}}\"\n}"
+        },
+        "url": "{{BaseURL}}/Data.svc/json/TokenValid"
+      },
+      "response": []
     }
   ],
   "auth": {
