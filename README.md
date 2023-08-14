@@ -3,7 +3,7 @@
 [Postman](https://www.getpostman.com/postman) is an API development tool that allows you to quickly and easily create and execute API requests and examine the responses for web service APIs like OctopusAPI.
 It provides a great way to experiment with and learn about the OctopusAPI without having to write a single line of code.
 
-To help you get started with the OctopusAPI, this repository contains a series of Postman collections that provide example requests for the [OctopusAPI](https://www.postman.com/maximizer-crm/workspace/maximizer-api/overview).
+To help you get started with the OctopusAPI, this repository contains a series of Postman collections that provide example requests for the [OctopusAPI](https://www.postman.com/maximizercrm/workspace/maximizer-api/overview).
 
 If you aren't already using Postman, [you can download it here](https://www.getpostman.com/postman). Before getting started with the OctopusAPI collection, take a moment to browse the [introductory Postman documentation](https://learning.postman.com/docs/), especially the instructions for [how to send your first request](https://learning.postman.com/docs/getting-started/sending-the-first-request/) and [how to use collections](https://learning.postman.com/docs/sending-requests/intro-to-collections/).
 
@@ -11,7 +11,7 @@ If you aren't already using Postman, [you can download it here](https://www.getp
 
 ### Download the Source
 
-Once you have Postman installed on your machine, [click here](https://github.com/MaximizerSoftwareInc/octopus-api-postman/archive/master.zip) to download the source for the OctopusAPI collections.
+Once you have Postman installed on your machine, [click here](https://github.com/MaximizerCRM/octopus-api/archive/master.zip) to download the source for the OctopusAPI collections.
 
 ### Create an Environment
 
