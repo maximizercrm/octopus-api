@@ -11,7 +11,7 @@ If you aren't already using Postman, [you can download it here](https://www.getp
 
 ### Download the Source
 
-Once you have Postman installed on your machine, [click here](https://github.com/MaximizerCRM/octopus-api/archive/master.zip) to download the source for the OctopusAPI collections.
+Once you have Postman installed on your machine, [click here](https://github.com/MaximizerCRM/octopus-api/archive/main.zip) to download the source for the OctopusAPI collections.
 
 ### Create an Environment
 
@@ -19,7 +19,7 @@ In order to use the collections, you will need to [create an Environment in Post
 
 To set up your Postman environment:
 1. In the Postman toolbar, click **Import**.
-2. Browse to and select the starter environment in the `postman/environments` folder that you downloaded above.
+2. Browse and select the starter environment in the `postman/environments` folder that you downloaded above.
 3. Click the "Manage Environments" button (the gear icon in the upper-right corner of the Postman window).
 4. Click the name of the "OctopusAPI" environment that you imported.
 5. Update the values of each of the environment variables in the list and save your changes. Each of the environment variables and their expected values are described below.
