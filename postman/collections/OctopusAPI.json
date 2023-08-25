@@ -2968,7 +2968,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      \"Fields\": {\r\n        \"Key\": 1,\r\n        \"Alias\": 1,\r\n        \"Type\": 1,\r\n        \"Name\": 1,\r\n        \"AppliesTo\": 1,\r\n        \"Sortable\": 1,\r\n        \"Queryable\": 1,\r\n        \"Mandatory\": 1,\r\n        \"Attributes\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
+                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        \"Key\": 1,\r\n        \"Alias\": 1,\r\n        \"Type\": 1,\r\n        \"Name\": 1,\r\n        \"AppliesTo\": 1,\r\n        \"Sortable\": 1,\r\n        \"Queryable\": 1,\r\n        \"Mandatory\": 1,\r\n        \"Attributes\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
                     },
                     "url": "{{BaseURL}}/Read"
                   },
