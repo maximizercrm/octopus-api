@@ -3053,6 +3053,230 @@
             }
           ],
           "id": "982e80ae-824a-42a7-aae2-ccd77fa8107e"
+        },
+        {
+          "name": "SalesTeam",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Get Sales Teams",
+                  "id": "0b40c77f-418b-4664-8ae9-2cea0adfb14c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 33\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get Members of Sales Team",
+                  "id": "c6f9e3e4-cba0-4ac6-a0bd-ad0aa75aac47",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTM=\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"MemberKeys\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "77f73a91-8657-41e5-a787-8f673a69a69f"
+            },
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "SalesTeam - Read Metadata (simple)",
+                  "id": "0e505619-181f-4a06-b07c-3c0f5157016d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SalesTeam - Read Metadata (more)",
+                  "id": "ad78d35d-fff1-485f-8d1d-7e4b9c9161dc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "12e9a0d3-d2df-4fb0-a42f-dbf6c6570660"
+            },
+            {
+              "name": "SalesTeam CRUD",
+              "item": [
+                {
+                  "name": "SalesTeam - Read",
+                  "id": "c9e081df-df88-4278-8839-c10018a36e1a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayName\": 1,\r\n                \"Members\": {\r\n                    \"Key\": {\r\n                        \"Uid\": 1,\r\n                        \"Value\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Role\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Right\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SalesTeam - Create",
+                  "id": "6fefb20d-7e54-4e00-9022-c1f59bbe356d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"DisplayName\": \"TestSalesTeam\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER1\"\r\n                    },\r\n                    \"Role\": 1, // 1 = Leader\r\n                    \"Right\": 0 // 0 = Edit\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER2\"\r\n                    },\r\n                    \"Role\": 0, // 0 = Member\r\n                    \"Right\": 2 // 2 = Standard\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER3\"\r\n                    },\r\n                    \"Role\": 0, // 0 = Member\r\n                    \"Right\": 1 // 1 = Audit\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SalesTeam - Update (Append/Add User)",
+                  "id": "85aad719-a6a4-4c3e-b94d-e2ed9f65aeed",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"\r\n                    },\r\n                    \"Role\": 0,\r\n                    \"Right\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Append\": true,\r\n            \"ReadAfterSave\": true\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SalesTeam - Update (Remove User)",
+                  "id": "23e19d62-b4d8-42c6-b4c4-edad5127f42d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Remove\": true,\r\n            \"ReadAfterSave\": true\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SalesTeam - Delete",
+                  "id": "4614ac57-594c-4a05-b461-6a8d36e54b4b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "65e3ff32-4fa4-4b09-a63f-39a05bd63449"
+            }
+          ],
+          "id": "df58a0aa-5e0c-4628-9579-91a6c3f7fd49"
         }
       ],
       "id": "7c3d366e-8195-47ad-ae11-e5c41a2e726e"
