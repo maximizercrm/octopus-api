@@ -3615,7 +3615,7 @@
     {
       "listen": "prerequest",
       "script": {
-        "id": "6680441e-360e-426d-97f1-518d238704da",
+        "id": "cfad69d1-e8ba-48df-b6e6-478b6ae7c423",
         "type": "text/javascript",
         "exec": [
           "// This script checks to see if there is a valid token in",
@@ -3639,8 +3639,7 @@
           "// methods, we don't need a valid token and can skip the rest",
           "let path = pm.request.url.getPath().toLowerCase();",
           "if (path.endsWith(\"authenticate\") ",
-          "   || path.endsWith(\"tokenvalid\")",
-          "   || path.endsWith(\"getsysteminfo\")) {",
+          "   || path.endsWith(\"tokenvalid\")) {",
           "    return;",
           "}",
           "",
@@ -3760,7 +3759,7 @@
     {
       "listen": "test",
       "script": {
-        "id": "a4a8a90f-3dc9-402e-80a2-0c09478e274d",
+        "id": "af6f6718-cc5e-4bb8-b69b-24f77aab1374",
         "type": "text/javascript",
         "exec": [
           "pm.test(\"Status code is 200\", function () {",
