@@ -3342,7 +3342,7 @@
                   "response": [
                     {
                       "id": "29272bff-9149-4c56-acdf-dc59b987ecc2",
-                      "name": "Territory-Read",
+                      "name": "Territory-ReadByKeys",
                       "originalRequest": {
                         "method": "POST",
                         "header": [],
