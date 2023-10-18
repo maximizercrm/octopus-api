@@ -3519,7 +3519,12 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    addressBook:{\r\n        udbid: 1,\r\n        database: 1,\r\n        displayValue: 1\r\n    },\r\n    user: {\r\n        key: {\r\n            value: 1,\r\n            uid: 1\r\n        },\r\n        displayName: 1\r\n    },\r\n}"
+                  "raw": "{\r\n    addressBook:{\r\n        udbid: 1,\r\n        database: 1,\r\n        displayValue: 1\r\n    },\r\n    user: {\r\n        key: {\r\n            value: 1,\r\n            uid: 1\r\n        },\r\n        displayName: 1\r\n    },\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "text"
+                    }
+                  }
                 },
                 "url": "{{BaseURL}}/GetSessionInfo",
                 "description": "Use the `GetSessionInfo` method to retrieve information about the current user and Address Book database based on the token supplied in the request."
