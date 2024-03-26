@@ -620,7 +620,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    schema:{\r\n        scope: {\r\n            fields: 1\r\n        },\r\n        criteria:{\r\n            searchQuery:{\r\n                key:{\r\n                    \"$TREE\":\"/AbEntry\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    compatibility:{\r\n        schemaObject: \"1.0\"\r\n    }\r\n}"
+                      "raw": "{\r\n    \"schema\": {\r\n        \"scope\": {\r\n            \"fields\": 1\r\n        },\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$TREE\": \"/AbEntry\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"schemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
@@ -636,6 +641,15 @@
                   "request": {
                     "method": "POST",
                     "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    },\r\n    \"Schema\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/AbEntry\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": [\r\n                    {\r\n                        \"Value\": 1\r\n                    }\r\n                ],\r\n                \"Code\": 1,\r\n                \"AppliesTo\": [\r\n                    {\r\n                        \"Value\": 1\r\n                    }\r\n                ],\r\n                \"Folder\": {\r\n                    \"Key\": 1,\r\n                    \"Name\": 1,\r\n                    \"Path\": 1\r\n                },\r\n                \"SecAccess\": {\r\n                    \"Write\": [\r\n                        {\r\n                            \"Key\": {\r\n                                \"Value\": 1,\r\n                                \"Uid\": 1\r\n                            },\r\n                            \"DisplayValue\": 1\r\n                        }\r\n                    ],\r\n                    \"Read\": [\r\n                        {\r\n                            \"Key\": {\r\n                                \"Value\": 1,\r\n                                \"Uid\": 1\r\n                            },\r\n                            \"DisplayValue\": 1\r\n                        }\r\n                    ]\r\n                },\r\n                \"Creator\": {\r\n                    \"Key\": {\r\n                        \"Value\": 1,\r\n                        \"Uid\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"CreationDate\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"RequestedBy\": {\r\n                    \"Key\": {\r\n                        \"Value\": 1,\r\n                        \"Uid\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Inactive\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Mandatory\": {\r\n                    \"Rule\": 1\r\n                },\r\n                \"Formula\": {\r\n                    \"Rule\": 1\r\n                },\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"Nullable\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"ReadOnly\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Attributes\": 1,\r\n                \"Items\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"Value\": 1\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
@@ -697,10 +711,110 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tdata: {\r\n\t\t\tkey: null,\r\n\t\t\ttype: \"Company\",\r\n\t\t\tcompanyName: \"Postman Example Company\"\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"Company\",\r\n            \"companyName\": \"Postman Example Company\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/AbEntryCreate",
+                    "url": "{{BaseURL}}/Create",
                     "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "create abentry Contact",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "a66e26bb-c97a-4423-a7e2-0a3da9c84681",
+                        "exec": [
+                          "var jsonData = pm.response.json();",
+                          "if(jsonData && jsonData.abEntry && jsonData.abEntry.Data) {   ",
+                          "    pm.environment.set(\"AbEntryKey\", jsonData.abEntry.Data.key);",
+                          "}"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    },
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "id": "37c4cb6b-079f-4394-8408-a2b6c4ff6748",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "id": "669f5566-31e2-47d7-b4af-3b330845e39b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"Contact\",\r\n            \"lastName\": \"My Contact\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create",
+                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "create abentry (batch)",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "a66e26bb-c97a-4423-a7e2-0a3da9c84681",
+                        "exec": [
+                          "var jsonData = pm.response.json();",
+                          "if(jsonData && jsonData.abEntry && jsonData.abEntry.Data) {   ",
+                          "    pm.environment.set(\"AbEntryKey\", jsonData.abEntry.Data.key);",
+                          "}"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    },
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "id": "37c4cb6b-079f-4394-8408-a2b6c4ff6748",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "id": "d154aab8-36af-4996-a08b-0344f779c796",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"abEntry.1\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"Company\",\r\n            \"companyName\": \"Postman Example Company 1\"\r\n        }\r\n    },\r\n    \"abEntry.2\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"Company\",\r\n            \"companyName\": \"Postman Example Company 2\"\r\n        }\r\n    },\r\n    \"abEntry.3\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"Company\",\r\n            \"companyName\": \"Postman Example Company 3\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
@@ -727,9 +841,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EQ\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\ttype: 1,\r\n                webSite: 1,\r\n\t\t\t\tdisplayValue: 1\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\tabEntryKey: \"2.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$EQ\": \"Q29udGFjdAkyMzAxMjYyNTA1MzQxMjMzNzAwMDFDCTQ=\"\r\n                }\r\n            },\r\n            \"top\": 3\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Type\": 1,\r\n                \"Parent\": 1,\r\n                \"MrMs\": 1,\r\n                \"FullName\": 1,\r\n                \"Salutation\": 1,\r\n                \"TerritoryKey\": 1,\r\n                \"TerritoryStatus\": 1,\r\n                \"Starred\": 1,\r\n                \"PartnerKey\": 1,\r\n                \"ParentKey\": 1,\r\n                \"ProfilePic\": 1,\r\n                \"DoNotSolicitBy\": 1,\r\n                \"LastContactDate\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"CompanyName\": 1,\r\n                \"FirstName\": 1,\r\n                \"MiddleName\": 1,\r\n                \"LastName\": 1,\r\n                \"Position\": 1,\r\n                \"Department\": 1,\r\n                \"Division\": 1,\r\n                \"Phone1\": {\r\n                    \"Extension\": 1,\r\n                    \"Number\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Phone2\": {\r\n                    \"Extension\": 1,\r\n                    \"Number\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Phone3\": {\r\n                    \"Extension\": 1,\r\n                    \"Number\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Phone4\": {\r\n                    \"Extension\": 1,\r\n                    \"Number\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"AccountManager\": {\r\n                    \"Value\": 1,\r\n                    \"Uid\": 1\r\n                },\r\n                \"Creator\": {\r\n                    \"Value\": 1,\r\n                    \"Uid\": 1,\r\n                    \"DisplayName\": 1\r\n                },\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": {\r\n                    \"Value\": 1,\r\n                    \"Uid\": 1,\r\n                    \"DisplayName\": 1\r\n                },\r\n                \"Email1\": {\r\n                    \"Address\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Email2\": {\r\n                    \"Address\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Email3\": {\r\n                    \"Address\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"WebSite\": 1,\r\n                \"Address\": {\r\n                    \"AddressLine1\": 1,\r\n                    \"AddressLine2\": 1,\r\n                    \"City\": 1,\r\n                    \"StateProvince\": 1,\r\n                    \"ZipCode\": 1,\r\n                    \"Country\": 1,\r\n                    \"Description\": 1\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"configuration\": {\r\n        \"drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"abEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/AbEntryRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -757,9 +876,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EQ\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 1\r\n\t\t},\r\n\t\tscope: {\r\n            types:{\r\n                \"*\": 1\r\n            }\r\n\t\t},\r\n        options:{\r\n            all: false\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\tabEntryKey: \"2.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$EQ\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n                }\r\n            },\r\n            \"top\": 1\r\n        },\r\n        \"scope\": {\r\n            \"types\": {\r\n                \"*\": 1\r\n            }\r\n        },\r\n        \"options\": {\r\n            \"all\": false\r\n        }\r\n    },\r\n    \"configuration\": {\r\n        \"drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"abEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/AbEntryRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -800,9 +924,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tdata: {\r\n\t\t\tkey: \"{{AbEntryKey}}\",\r\n\t\t\twebSite: \"http://www.maximizer.com\"\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"data\": {\r\n            \"key\": \"{{AbEntryKey}}\",\r\n            \"webSite\": \"http://www.maximizer.com\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/AbEntryUpdate",
+                    "url": "{{BaseURL}}/Update",
                     "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
                   },
                   "response": []
@@ -843,9 +972,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tdata: {\r\n\t\t\tkey: \"{{AbEntryKey}}\"\r\n        }\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"abEntry\": {\r\n        \"data\": {\r\n            \"key\": \"{{AbEntryKey}}\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/AbEntryDelete",
+                    "url": "{{BaseURL}}/Delete",
                     "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
                   },
                   "response": []
@@ -889,9 +1023,71 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/AbEntry\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"schema\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$TREE\": \"/AbEntry\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"fields\": 1\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/SchemaRead",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "profile picture - get documentKey",
+                  "id": "c4383837-d769-42d9-ad36-d2a641bcaa71",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentSearcher\": \"Maximizer.Model.Access.Sql.DocumentSearcher\"\r\n        }\r\n    },\r\n    \"Document\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"ParentKey\": {\r\n                            \"$EQ\": \"Q29udGFjdAkyMjExMTQyNTEwMTk0OTIxOTAwMDFDCTM=\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": 14\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "profile picture - download binary",
+                  "id": "1d6d3f36-ebb1-4b56-9753-374304834921",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/AbEntry\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/DocumentDownload/RG9jdW1lbnQJMjAyMjU2NzA1Mg==",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "DocumentDownload",
+                        "RG9jdW1lbnQJMjAyMjU2NzA1Mg=="
+                      ],
+                      "query": [
+                        {
+                          "key": "",
+                          "value": "",
+                          "disabled": true
+                        }
+                      ]
+                    },
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
                   "response": []
@@ -1077,7 +1273,113 @@
                     "url": "{{BaseURL}}/AbEntryRead",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
-                  "response": []
+                  "response": [
+                    {
+                      "id": "91d8dee2-a3a2-4535-b193-a6a176dadcf3",
+                      "name": "get last contacted",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 33\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: { id:1, number:1 },\r\n\t\t\t\ttype: 1,\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}\r\n\t\t},\r\n\t\torderBy: {\r\n\t\t\tfields: [{\r\n\t\t\t\tlastContactDate: \"DESC\"\r\n\t\t\t}]\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\tabEntryKey: \"2.0\"\r\n\t}\r\n}"
+                        },
+                        "url": "{{BaseURL}}/AbEntryRead"
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "raw",
+                      "header": [
+                        {
+                          "key": "Date",
+                          "value": "Wed, 01 Nov 2023 20:17:19 GMT"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/octet-stream"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "4150"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "Authorization,Content-Type,Expires,Cache-Control,Pragma"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "POST, GET, OPTIONS"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "*"
+                        },
+                        {
+                          "key": "Access-Control-Max-Age",
+                          "value": "86400"
+                        },
+                        {
+                          "key": "Set-Cookie",
+                          "value": "ARRAffinity=aec031d53ca45abfe0fea1b76c91e7577152e11368d0bd63f7ff96cdeec86ceb;Path=/;HttpOnly;Secure;Domain=gs-redirect-cc-01.azurewebsites.net"
+                        },
+                        {
+                          "key": "Set-Cookie",
+                          "value": "ARRAffinitySameSite=aec031d53ca45abfe0fea1b76c91e7577152e11368d0bd63f7ff96cdeec86ceb;Path=/;HttpOnly;SameSite=None;Secure;Domain=gs-redirect-cc-01.azurewebsites.net"
+                        },
+                        {
+                          "key": "Strict-Transport-Security",
+                          "value": "max-age=31536000; includeSubDomains"
+                        },
+                        {
+                          "key": "Request-Context",
+                          "value": "appId=cid-v1:f1cdfa13-5337-4411-9a71-d879caab84dc"
+                        },
+                        {
+                          "key": "X-XSS-Protection",
+                          "value": "1; mode=block"
+                        },
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "Referrer-Policy",
+                          "value": "strict-origin"
+                        },
+                        {
+                          "key": "X-Powered-By",
+                          "value": "ASP.NET"
+                        },
+                        {
+                          "key": "set-cookie",
+                          "value": "ASLBSA=000317b7b4ac6d2d5962d531587560a4afe346ba5db8eed809205892d1d1415d4f08; Path=/; Secure; HttpOnly;"
+                        },
+                        {
+                          "key": "set-cookie",
+                          "value": "ASLBSACORS=000317b7b4ac6d2d5962d531587560a4afe346ba5db8eed809205892d1d1415d4f08; SameSite=none; Path=/; Secure; HttpOnly;"
+                        },
+                        {
+                          "key": "x-azure-ref",
+                          "value": "20231101T201718Z-6ndfqt31z14y583878xa7x5m2s00000001qg00000000hs7z"
+                        },
+                        {
+                          "key": "X-Cache",
+                          "value": "CONFIG_NOCACHE"
+                        },
+                        {
+                          "key": "Accept-Ranges",
+                          "value": "bytes"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\r\n  \"Code\": 0,\r\n  \"abEntry\": {\r\n    \"Data\": [\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_5C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Sunrise Adventures\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_5C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Chung, Rennie - Sunrise Adventures\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505251536598450005C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"DuPontGail\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252229373120031C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"New World\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252232032520010C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Tegan Fry CO\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252236447210012C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Gas Zone\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252252120680022C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Total Serve\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252252120680022C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Nicholls, Yasmin - Total Serve\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252236447210012C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Brown, Lloyd - Gas Zone\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252232032520010C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Fry, Tegan - Tegan Fry CO\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252229373120031C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Weeks, Martin - New World\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252227386640029C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Johnson, Steven - Access Asia\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"220505252227386640029C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Access Asia\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_1C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Ultimate Experience.\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_2C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Beach Cycle and Sport\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_3C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Island Surf Rents\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_4C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Delta Bike Company\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_1C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Anderson, Bill - Ultimate Experience.\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_2C\",\r\n          \"number\": 1\r\n        },\r\n        \"type\": \"Contact\",\r\n        \"displayValue\": \"Jackson, Alastair - Beach Cycle and Sport\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"230614251712483400002C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Melba Abshire\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"230623251913445970001C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Company\",\r\n        \"displayValue\": \"Juana Volkman\"\r\n      },\r\n      {\r\n        \"key\": {\r\n          \"id\": \"DEMO_6C\",\r\n          \"number\": 0\r\n        },\r\n        \"type\": \"Individual\",\r\n        \"displayValue\": \"DuPont, Gail - Mountain View Sports\"\r\n      }\r\n    ]\r\n  }\r\n}"
+                    }
+                  ]
                 },
                 {
                   "name": "get contacts",
@@ -1102,7 +1404,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Contact\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\ttype: 1,\r\n                firstName: 1,\r\n                lastName: 1,\r\n\t\t\t\tcompanyName: 1,\r\n                fullName: 1,\r\n\t\t\t\temail: 1\r\n\t\t\t}\r\n\t\t},\r\n\t\torderBy: {\r\n\t\t\tfields: [{\r\n\t\t\t\tlastModifyDate: \"DESC\"\r\n\t\t\t}]\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\tabEntryKey: \"2.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Individual\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\ttype: 1,\r\n                firstName: 1,\r\n                lastName: 1,\r\n\t\t\t\tcompanyName: 1,\r\n                fullName: 1,\r\n\t\t\t\temail: 1\r\n\t\t\t}\r\n\t\t},\r\n\t\torderBy: {\r\n\t\t\tfields: [{\r\n\t\t\t\tlastModifyDate: \"DESC\"\r\n\t\t\t}]\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\tabEntryKey: \"2.0\"\r\n\t}\r\n}"
                     },
                     "url": "{{BaseURL}}/AbEntryRead",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1489,7 +1791,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Udf/$TYPEID(60002)\": {\r\n                    \"$EQ\": [\r\n                        \"4\"\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"id\": 1,\r\n                    \"value\": 1\r\n                },\r\n                \"subject\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Organizer\": 1,\r\n                \"Private\": 1,\r\n                \"Priority\": 1,\r\n                \"Users\": {\r\n                    \"key\": 1,\r\n                    \"displayname\": 1,\r\n                    \"SecStatus\": {\r\n                        \"CanCreate\": 1,\r\n                        \"CanRead\": 1,\r\n                        \"CanUpdate\": 1,\r\n                        \"CanDelete\": 1\r\n                    }\r\n                },\r\n                \"AbEntries\": 1,\r\n                \"Leads\": 1,\r\n                \"description\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"Result\": 1,\r\n                \"Category\": 1,\r\n                \"Product\": 1,\r\n                \"InteractionCategory\": 1,\r\n                \"SecStatus\": {\r\n                    \"Private\": 1,\r\n                    \"CanUpdateUser\": 1\r\n                },\r\n                \"ActionPlan\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IApptSearcher\": \"Maximizer.Model.Access.Sql.ApptSearcher\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"RecurringPatternObject\": \"1.0\"\r\n    },\r\n    \"Appointment\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"StartDate\": {\r\n                            \"$GT\": \"2022-12-01T20:29:39\"\r\n                        },\r\n                        \"EndDate\": {\r\n                            \"$LT\": \"2122-12-01T20:29:39\"\r\n                        },\r\n\r\n                                \"Users/Item/Key\": {\r\n                                    \"$IN\": [\r\n                                        {\r\n                                            \"UID\": \"MASTER\"\r\n                                        }\r\n                                    ]\r\n                                }                 \r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"SecStatus\" : {\r\n                    \"CanRead\" : 1,\r\n                    \"CanUpdate\" : 1\r\n                },\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Organizer\": {\r\n                    \"Key\": 1,\r\n                    \"Uid\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Private\": 1,\r\n                \"Priority\": 1,\r\n                \"Users\": {\r\n                    \"key\": {\r\n                        \"Key\": 1,\r\n                        \"Uid\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"displayname\": 1,\r\n                    \"email\": 1,\r\n                    \"alarm\": 1,\r\n                    \"rsvp\": 1,\r\n                    \"reminder\": 1\r\n                },\r\n                \"AbEntries\": {\r\n                    \"displayvalue\": 1,\r\n                    \"email\": 1\r\n                },\r\n                \"Leads\": {\r\n                    \"displayvalue\": 1,\r\n                    \"email\": 1\r\n                },\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Key\": {\r\n                        \"UID\": 1\r\n                    },\r\n                    \"Name\": 1\r\n                },\r\n                \"RecurringPattern\": {\r\n                    \"Key\": 1,\r\n                    \"StartDate\": 1,\r\n                    \"EndDate\": 1,\r\n                    \"Frequency\": 1,\r\n                    \"Occurence\": 1,\r\n                    \"DayOfWeek\": 1,\r\n                    \"SkipWeekend\": 1,\r\n                    \"MoveToWeekday\": 1\r\n                },\r\n                \"LastModifyDate\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "text"
@@ -1511,7 +1813,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"subject\": \"Google! Doodle\",\r\n            \"StartDate\": \"2022-03-12T09:00:00\",\r\n            \"EndDate\": \"2022-03-12T10:00:00\",\r\n            \"Organizer\": \"VXNlcglKTkFQT0xJ\",\r\n            \"Private\": false,\r\n            \"Priority\": \"MED\",\r\n            \"Users\": [\r\n                \"VXNlcglKTkFQT0xJ\"\r\n            ],\r\n            \"AbEntries\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Value\": \"Q29tcGFueQkyMjA3MTMyNTAzMDczNjQ5NzAwMDhDCTA=\"\r\n                    }\r\n                }\r\n            ],\r\n            \"Leads\": null,\r\n            \"description\": \"Arati test_Arun\",\r\n            \"ModifiedBy\": null,\r\n            \"LastModifyDate\": null,\r\n            \"Creator\": \"VXNlcglKTkFQT0xJ\",\r\n            \"CreationDate\": \"2010-01-15T12:18:26\",\r\n            \"Result\": [\r\n                \"4\"\r\n            ]           \r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n    \"Compatibility\": {\r\n        \"RecurringPatternObject\": \"1.0\"\r\n    },\r\n    \"Appointment.1\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"outlook daily every day\",\r\n            \"StartDate\": \"2023-12-13T05:00:00Z\",\r\n            \"EndDate\": \"2023-12-13T05:30:00Z\",\r\n            \"Private\": false,\r\n            \"Priority\": \"MED\",\r\n            \"Users\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Key\": \"VXNlcglNQVNURVI=\",\r\n                        \"Uid\": \"MASTER\",\r\n                        \"DisplayValue\": \"Micheal Boone\"\r\n                    },\r\n                    \"Displayname\": null,\r\n                    \"Email\": null,\r\n                    \"Rsvp\": 0,\r\n                    \"Alarm\": \"2023-12-12T04:45:00Z\"\r\n                }\r\n            ],\r\n            \"Description\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n<meta name=\\\"ProgId\\\" content=\\\"Word.Document\\\">\\r\\n<meta name=\\\"Generator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<meta name=\\\"Originator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<style>\\r\\n<!--\\r\\n@font-face\\r\\n\\t{font-family:\\\"Cambria Math\\\"}\\r\\n@font-face\\r\\n\\t{font-family:Calibri}\\r\\np.MsoNormal, li.MsoNormal, div.MsoNormal\\r\\n\\t{margin:0in;\\r\\n\\tfont-size:11.0pt;\\r\\n\\tfont-family:\\\"Calibri\\\",sans-serif}\\r\\na:link, span.MsoHyperlink\\r\\n\\t{color:#0563C1;\\r\\n\\ttext-decoration:underline}\\r\\na:visited, span.MsoHyperlinkFollowed\\r\\n\\t{color:#954F72;\\r\\n\\ttext-decoration:underline}\\r\\nspan.EmailStyle17\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif;\\r\\n\\tcolor:windowtext}\\r\\n.MsoChpDefault\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif}\\r\\n@page WordSection1\\r\\n\\t{margin:1.0in 1.0in 1.0in 1.0in}\\r\\ndiv.WordSection1\\r\\n\\t{}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body lang=\\\"EN-US\\\" link=\\\"#0563C1\\\" vlink=\\\"#954F72\\\" style=\\\"word-wrap:break-word\\\">\\r\\n<div class=\\\"WordSection1\\\">\\r\\n<p class=\\\"MsoNormal\\\">&nbsp;</p>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n-- Attendees synced from Outlook Start --\\r\\nClark Lu (clarklu@maxlabcloud.ca) Response:None\\r\\n-- Attendees synced from Outlook End --\\r\\n\",\r\n            \"Location\": {\r\n                \"Name\": \"\",\r\n                \"Key\": {\r\n                    \"Uid\": \"L@FREEFORM\"\r\n                }\r\n            },\r\n            \"RecurringPattern\": {\r\n                \"Key\": \"1811163204\",\r\n                \"StartDate\": \"2023-12-11\",\r\n                \"EndDate\": \"2023-12-13\",\r\n                \"Frequency\": 0,\r\n                \"Occurence\": 0,\r\n                \"DayOfWeek\": [0],\r\n                \"SkipWeekend\": false,\r\n                \"MoveToWeekday\": false\r\n            }\r\n        }\r\n    }\r\n}"
                     },
                     "url": "{{BaseURL}}/Create"
                   },
@@ -1558,7 +1860,7 @@
           "id": "b50a1965-e98a-4dca-8a82-574b62701f6d"
         },
         {
-          "name": "CurrencyExchange",
+          "name": "CurrencyRate",
           "item": [
             {
               "name": "Metadata",
@@ -1574,7 +1876,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/CurrencyExchange\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/CurrencyRate\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/SchemaRead",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
@@ -1592,7 +1899,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/CurrencyExchange\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/CurrencyRate\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
                     },
                     "url": "{{BaseURL}}/SchemaRead",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
@@ -1610,7 +1917,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    currencyExchange: {\r\n        fieldOptions: {\r\n            currencyCode: [\r\n                {\r\n                    code: 1,\r\n                    displayValue:1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n    currencyRate: {\r\n        fieldOptions: {\r\n            currencyCode: [\r\n                {\r\n                    code: 1,\r\n                    displayValue:1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
@@ -1634,7 +1941,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tcurrencyExchange: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                { exchangeRate: \"DESC\" }\r\n            ]\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\tcurrencyRate: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                { rate: \"DESC\" }\r\n            ]\r\n        }\r\n    }\r\n}"
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1652,7 +1959,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tcurrencyExchange: {\r\n\t\tfieldOptions: {\r\n            currencyCode: {\r\n                code: 1,\r\n                displayValue: 1\r\n            }\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\tcurrencyRate: {\r\n\t\tfieldOptions: {\r\n            currencyCode: {\r\n                code: 1,\r\n                displayValue: 1\r\n            }\r\n        }\r\n    }\r\n}"
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1663,10 +1970,10 @@
               "id": "276992ab-0114-4ad7-abb7-7794d7654ecc"
             },
             {
-              "name": "CurrencyExchange CRUD",
+              "name": "CurrencyRate CRUD",
               "item": [
                 {
-                  "name": "CurrencyExchange-Read",
+                  "name": "CurrencyRate - Read",
                   "id": "93a9d521-0632-4e11-91d0-238cd78bc77d",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1676,14 +1983,19 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n            \"CurrencyCode\": {\r\n               \"$EQ\":\"AUD\"\r\n            }\r\n         },\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n             \"Key\":1,\r\n             \"Description\":1,\r\n            \"CurrencyCode\":{\r\n                \"Code\":1,\r\n                DisplayValue:1\r\n            },\r\n            \"Rate\":1,\r\n            \"EffectiveDate\":1,\r\n            \"DisplayValue\":1\r\n         }\r\n      }\r\n   }\r\n}\r\n"
+                      "raw": "{\r\n    \"CurrencyExchange\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CurrencyCode\": {\r\n                    \"$EQ\": \"AUD\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1,\r\n                \"CurrencyCode\": {\r\n                    \"Code\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Rate\": 1,\r\n                \"EffectiveDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
                 {
-                  "name": "CurrencyExchange-Create",
+                  "name": "CurrencyRate - Create",
                   "id": "d172dd4d-a97e-4b41-a036-ea2f77f3f6b6",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1693,14 +2005,19 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"CurrencyCode\": {\r\n           \"Code\": \"USD\"\r\n         },\r\n         \"Description\":\"test currency12\",\r\n         \"Rate\": 5.0,\r\n         \"EffectiveDate\": \"2022-07-13\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"CurrencyCode\": {\r\n           \"Code\": \"USD\"\r\n         },\r\n         \"Description\":\"test currency12\",\r\n         \"Rate\": 5.0,\r\n         \"EffectiveDate\": \"2022-07-13\"\r\n      }\r\n   }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
                 {
-                  "name": "CurrencyExchange-Update",
+                  "name": "CurrencyRate - Update",
                   "id": "62a4b99d-d90b-4bb7-acec-dced1f2e3326",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1710,14 +2027,19 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q3VycmVuY3lFeGNoYW5nZQkxMQ==\", \r\n         \"CurrencyCode\": {\r\n           \"Code\": \"MYR\"\r\n         },       \r\n         \"Description\":\"Currency TestArun11\",\r\n         \"Rate\": 4.0,\r\n         \"EffectiveDate\": \"2021-07-13\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q3VycmVuY3lFeGNoYW5nZQkxMQ==\", \r\n         \"CurrencyCode\": {\r\n           \"Code\": \"MYR\"\r\n         },       \r\n         \"Description\":\"Currency TestArun11\",\r\n         \"Rate\": 4.0,\r\n         \"EffectiveDate\": \"2021-07-13\"\r\n      }\r\n   }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
                   "response": []
                 },
                 {
-                  "name": "CurrencyExchange-Delete",
+                  "name": "CurrencyRate - Delete",
                   "id": "ae3ff1fe-f8f4-4f5a-923c-6d499047bc4e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1727,7 +2049,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"CurrencyExchange\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q3VycmVuY3lFeGNoYW5nZQkxMQ==\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Token\": \"{{Token}}\",\r\n    \"CurrencyRate\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q3VycmVuY3lSYXRlCTE=\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete"
                   },
@@ -1979,7 +2306,29 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IInteractionLogSearcher\": \"Maximizer.Model.Access.Sql.InteractionLogSearcher\"\r\n        }\r\n   },\r\n   \"InteractionLog\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n            \"$PHRASE\":\"New  desc\"\r\n         },       \r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,           \r\n            \"Subject\":1,           \r\n            \"Description\":1,\r\n            \"User\":1\r\n\r\n         }\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IInteractionLogSearcher\": \"Maximizer.Model.Access.Sql.InteractionLogSearcher\"\r\n        }\r\n    },\r\n    \"InteractionLog\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Test\"\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"User\": 1,\r\n                \"Source\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Lead\": {\r\n                    \"FirstName\": 1,\r\n                    \"LastName\": 1\r\n                },\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Data\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "InteractionLog-FieldOptions",
+                  "id": "b5ce33b0-2bac-4d0b-ad88-9f09f2206672",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"InteractionLog\":{\r\n      \"FieldOptions\":{\r\n          \"Type\":[\r\n            {\r\n                \"Key\":1,\r\n                \"Value\": 1,\r\n                \"Name\":1,\r\n                \"DisplayValue\":1,\r\n                \"Icon\":1,\r\n                \"BiDirectional\":1,\r\n                \"External\":1\r\n            }\r\n        ]\r\n      }\r\n   }\r\n}"
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2066,7 +2415,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Lead\":{\r\n      \"FieldOptions\":{\r\n          \"MrMs\":1,\r\n          \"Salutation\":1,\r\n          \"Position\":1,\r\n          \"Status\":1,\r\n          \"Partner\":1,\r\n          \"Udf/$TYPEID(57994)\":1\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Compatibility\": {\r\n        \"LeadObject\": \"1.0\"\r\n    },\r\n    \"Lead\": {\r\n        \"FieldOptions\": {\r\n            \"MrMs\": 1,\r\n            \"Salutation\": 1,\r\n            \"Position\": 1,\r\n            \"Status\": 1,\r\n            \"Partner\": [\r\n                { \"Key\": 1, \"DisplayValue\": 1 }\r\n            ],\r\n            \"Udf/$TYPEID(57994)\": [\r\n                { \"Key\": 1, \"DisplayValue\": 1 }\r\n            ],\r\n            \"Source\": [\r\n                { \"Key\": 1, \"DisplayValue\": 1 }\r\n            ],\r\n            \"ProcessSetup\": [\r\n                { \"Key\": 1, \"DisplayValue\": 1 }\r\n            ],\r\n            \"ProcessStageSetup\": [\r\n                { \"Key\": 1, \"DisplayValue\": 1 }\r\n            ]\r\n        },\r\n        \"Data\": {\r\n            \"ProcessSetupKey\": \"UHJvY2Vzc1NldHVwCUAqL0xFQUQJMA==\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "text"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2089,7 +2443,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ILeadSearcher\": \"Maximizer.Model.Access.Sql.LeadSearcher\"\r\n        }\r\n    },\r\n   \"Lead\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n           \"$PHRASE\":\"Test\"\r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"CompanyName\":1,\r\n            \"MrMs\":1,\r\n            \"FirstName\":1,\r\n            \"MiddleName\":1,\r\n            \"LastName\":1,\r\n            \"Salutation\":1,\r\n            \"Position\":1,\r\n            \"Email\":1,\r\n            \"WebSite\":1,\r\n            \"Status\":1,\r\n            \"AssignedTo\":1,\r\n            \"Address\":1,\r\n            \"Phone1\":1,\r\n            \"Phone2\":1,\r\n            \"Creator\":1,\r\n            \"CreationDate\":1,\r\n            \"ModifiedBy\":1,\r\n            \"LastModifyDate\":1,\r\n            \"FullName\":1,\r\n            \"SecStatus\":1,\r\n            \"AbEntryKey\":1,\r\n            \"OpportunityKey\":1,\r\n            \"Source\":1,\r\n            \"NoEmployees\":1,\r\n            \"Industry\":1,\r\n            \"SourceUrl\":1,\r\n            \"ArchivedDate\":1,\r\n            \"DisplayValue\":1\r\n         }\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ILeadSearcher\": \"Maximizer.Model.Access.Sql.LeadSearcher\"\r\n        }\r\n    },\r\n    \"Lead\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Test\"\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"CompanyName\": 1,\r\n                \"MrMs\": 1,\r\n                \"FirstName\": 1,\r\n                \"MiddleName\": 1,\r\n                \"LastName\": 1,\r\n                \"Salutation\": 1,\r\n                \"Position\": 1,\r\n                \"Email\": 1,\r\n                \"WebSite\": 1,\r\n                \"Status\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"Address\": 1,\r\n                \"Phone1\": 1,\r\n                \"Phone2\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"FullName\": 1,\r\n                \"SecStatus\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"OpportunityKey\": 1,\r\n                \"Source\": 1,\r\n                \"NoEmployees\": 1,\r\n                \"Industry\": 1,\r\n                \"SourceUrl\": 1,\r\n                \"ArchivedDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2106,7 +2465,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ILeadAccess\": \"Maximizer.Model.Access.Sql.LeadAccess\"\r\n        }\r\n    },\r\n   \"Lead\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"CompanyName\":\"Lead for Intraction phrase test\",\r\n         \"MrMs\":\"MrMs Test\",\r\n         \"FirstName\":\"FirstName Test\",\r\n         \"MiddleName\":\"MiddleName Test\",\r\n         \"LastName\":\"LastName Test\",\r\n         \"Salutation\":\"Salutation Test\",\r\n         \"Position\":\"Position Test\",\r\n         \"Email\":{\r\n            \"Address\":\"address\",\r\n            \"Description\":\"Main\",\r\n            \"Default\":true\r\n         },\r\n         \"WebSite\":\"https://www.example.com/\",\r\n         \"AssignedTo\":{\r\n            \"UID\":\"Master\"\r\n         },\r\n         \"Status\":{\r\n            \"Value\":1,\r\n            \"key\":{\r\n               \"Id\":\"@*/LEAD\",\r\n               \"Number\":3\r\n            }\r\n         },\r\n         \"Address\":{\r\n            \"AddressLine1\":\"addressline1 test\",\r\n            \"AddressLine2\":\"addressline2 test\",\r\n            \"City\":\"city test\",\r\n            \"StateProvince\":\"stateprovince test\",\r\n            \"Zipcode\":\"zipcode test\",\r\n            \"Country\":\"country test\"\r\n         },\r\n         \"Phone1\":{\r\n            \"Default\":true,\r\n            \"Number\":\"1-800-123-1234\",\r\n            \"Description\":\"Main\",\r\n            \"Extension\":\"888\"\r\n         },\r\n         \"Phone2\":\"1-800-123-4568\",         \r\n         \"Source\":[\r\n            \"2\"\r\n         ],\r\n         \"NoEmployees\":6,\r\n         \"Industry\":[\r\n            \"8\"\r\n         ],\r\n         \"SourceUrl\":\"https://maximizer.visualstudio.com/ Yahoo!\",\r\n         \"ArchivedDate\":\"2018-01-01 13:00:00\"\r\n      }\r\n   }\r\n}\r\n"
+                      "raw": "{\r\n    \"Lead\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"CompanyName\": \"Lead for Intraction phrase test\",\r\n            \"MrMs\": \"MrMs Test\",\r\n            \"FirstName\": \"FirstName Test\",\r\n            \"MiddleName\": \"MiddleName Test\",\r\n            \"LastName\": \"LastName Test\",\r\n            \"Salutation\": \"Salutation Test\",\r\n            \"Position\": \"Position Test\",\r\n            \"Email\": {\r\n                \"Address\": \"address\",\r\n                \"Description\": \"Main\",\r\n                \"Default\": true\r\n            },\r\n            \"WebSite\": \"https://www.example.com/\",\r\n            \"AssignedTo\": {\r\n                \"UID\": \"Master\"\r\n            },\r\n            \"Status\": {\r\n                \"Value\": 1,\r\n                \"key\": {\r\n                    \"Id\": \"@*/LEAD\",\r\n                    \"Number\": 3\r\n                }\r\n            },\r\n            \"Address\": {\r\n                \"AddressLine1\": \"addressline1 test\",\r\n                \"AddressLine2\": \"addressline2 test\",\r\n                \"City\": \"city test\",\r\n                \"StateProvince\": \"stateprovince test\",\r\n                \"Zipcode\": \"zipcode test\",\r\n                \"Country\": \"country test\"\r\n            },\r\n            \"Phone1\": {\r\n                \"Default\": true,\r\n                \"Number\": \"1-800-123-1234\",\r\n                \"Description\": \"Main\",\r\n                \"Extension\": \"888\"\r\n            },\r\n            \"Phone2\": \"1-800-123-4568\",\r\n            \"Source\": [\r\n                \"2\"\r\n            ],\r\n            \"NoEmployees\": 6,\r\n            \"Industry\": [\r\n                \"8\"\r\n            ],\r\n            \"SourceUrl\": \"https://maximizer.visualstudio.com/Yahoo\",\r\n            \"ArchivedDate\": \"2018-01-01 13:00:00\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
@@ -2123,7 +2487,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ILeadAccess\": \"Maximizer.Model.Access.Sql.LeadAccess\"\r\n        }\r\n    },\r\n   \"Lead\":{\r\n      \"Data\":{\r\n         \"Key\":\"TGVhZAkyMjA3MTIwMDAwNzA3NzIyMzgxNjlMRQkw\",\r\n         \"CompanyName\":\"CompanyName Test Update4\",\r\n         \"MrMs\":\"MrMs Test Update\",\r\n         \"FirstName\":\"FirstName Test Update\",\r\n         \"MiddleName\":\"MiddleName Test Update\",\r\n         \"LastName\":\"LastName Test Update\",\r\n         \"Salutation\":\"Salutation Test Update\",\r\n         \"Position\":\"Position Test Update\",\r\n         \"WebSite\":\"https://www.example.com/ Update\",\r\n         \"AssignedTo\":{\r\n            \"UID\":\"JNAPOLI\"\r\n         },\r\n         \"Status\":{\r\n            \"Value\":1,\r\n            \"Key\":{\r\n               \"Id\":\"@*/LEAD\",\r\n               \"Number\":1\r\n            }\r\n         },\r\n         \"Address\":{\r\n            \"AddressLine1\":\"addressline1 test update\",\r\n            \"AddressLine2\":\"addressline2 test update\",\r\n            \"City\":\"city test update\",\r\n            \"StateProvince\":\"stateprovince test update\",\r\n            \"Zipcode\":\"zipcode test update\",\r\n            \"Country\":\"country test update\"\r\n         },\r\n         \"Email\":{\r\n            \"Description\":\"Main update\",\r\n            \"Address\":\"max.test update\",\r\n            \"Default\":false\r\n         },\r\n         \"Phone1\":{\r\n            \"Number\":\"890\",\r\n            \"Description\":\"description update\",\r\n            \"extension\":\"866\",\r\n            \"Default\":true\r\n         },\r\n         \"Phone2\":\"980\",\r\n         \"OpportunityKey\":null,\r\n         \"Source\":[\r\n            \"1\"\r\n         ],\r\n         \"NoEmployees\":7,\r\n         \"Industry\":[\r\n            \"2\"\r\n         ],\r\n          \"SourceUrl\":{\r\n               \"Url\":\"https://maximizer.visualstudio.com/1\",\r\n               \"Text\":\"test\"\r\n          },\r\n         \"ArchivedDate\":\"2018-01-02 16:00:00\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Lead\": {\r\n        \"Data\": {\r\n            \"Key\": \"TGVhZAkyMzA3MDcwMDAyNDA3NzIyMzgxNjlMRQkw\",\r\n            \"CompanyName\": \"CompanyName Test Update5\",\r\n            \"MrMs\": \"MrMs Test Update\",\r\n            \"FirstName\": \"FirstName Test Update\",\r\n            \"MiddleName\": \"MiddleName Test Update\",\r\n            \"LastName\": \"LastName Test Update\",\r\n            \"Salutation\": \"Salutation Test Update\",\r\n            \"Position\": \"Position Test Update\",\r\n            \"WebSite\": \"https://www.example.com/Update\",\r\n            \"ArchivedDate\": \"2018-01-02T16:00:00\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
@@ -2249,7 +2618,7 @@
                       "mode": "raw",
                       "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: null,\r\n\t\t\tabEntryKey: \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\",\r\n\t\t\tcontactKey: \"QWJFbnRyeQkyMjA4MjMyNTAzMDcwNDk2ODAwMDNDCTE=\",\r\n\t\t\tobjective: \"Example\",\r\n\t\t\tdescription: \"This is an example opportunity\",\r\n\t\t\tstatus: 2,\r\n\t\t\tleader: \"VXNlcglNQVNURVI=\",\r\n\t\t\tsalesTeam: \"U2FsZXNUZWFtCTY1NTM1\",\r\n\t\t\tsalesProcessSetupKey: \"U2FsZXNQcm9jZXNzCTIyMDQwNjI1MTM1MTM0MDYwMDAwMUcJMA==\",\r\n\t\t\tsalesStageSetupKey: \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAk1MTEzMDMxMAkw\",\r\n\t\t\tcost: 1234.56,\r\n\t\t\trevenue: 2345.67,\r\n\t\t\tstartDate: \"2018-01-01\",\r\n\t\t\tcloseDate: \"2018-01-02\",\r\n\t\t}\r\n\t}\r\n}"
                     },
-                    "url": "{{BaseURL}}/OpportunityCreate",
+                    "url": "{{BaseURL}}/Create",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -2265,16 +2634,16 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$EQ\": \"T3Bwb3J0dW5pdHkJMjIwNTA1MjUyMjI3MzkzMDQwMDMwTwkw\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\ttop: 2\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"fields\": {\r\n\t\t\t\tkey: 1\r\n\t\t\t},\r\n\t\t\ttypes: {\r\n\t\t\t\t\"*\": {\r\n\t\t\t\t\t\"$metadata\": {\r\n\t\t\t\t\t\tkey: 1,\r\n\t\t\t\t\t\ttype: 1,\r\n\t\t\t\t\t\tdisplayValue: 1\r\n\t\t\t\t\t},\r\n\t\t\t\t\tdisplayValue: 1\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$EQ\": \"T3Bwb3J0dW5pdHkJMDIxMDA4MDAyOTUzMDYzNjcxMTU2Twkw\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\ttop: 2\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"fields\": {\r\n\t\t\t\tkey: 1\r\n\t\t\t},\r\n\t\t\ttypes: {\r\n\t\t\t\t\"*\": {\r\n\t\t\t\t\t\"$metadata\": {\r\n\t\t\t\t\t\tkey: 1,\r\n\t\t\t\t\t\ttype: 1,\r\n\t\t\t\t\t\tdisplayValue: 1,\r\n                        SecStatus: {\r\n                            CanRead: 1,\r\n                            CanUpdate: 1,\r\n                            CanCreate: 1,\r\n                            CanDelete: 1\r\n                        }\r\n\t\t\t\t\t},\r\n\t\t\t\t\tdisplayValue: 1\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
                     },
-                    "url": "{{BaseURL}}/OpportunityRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
                 },
                 {
-                  "name": "read opp",
-                  "id": "2b37ed5e-f72f-44be-853a-5c5e6c53b002",
+                  "name": "update opp to Lost",
+                  "id": "4e88a891-0a3c-44b7-bbe0-28f77749c29e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2283,9 +2652,9 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   opportunity: {\r\n      criteria: {\r\n         searchQuery: {\r\n            key: {\r\n               \"$EQ\": \"T3Bwb3J0dW5pdHkJMjIwNTA1MjUyMjI3MzkzMDQwMDMwTwkw\"\r\n            }\r\n         },\r\n         top: 3\r\n      },\r\n      scope: {\r\n         \"Fields\":{\r\n            key:1,\r\n            abEntry: {\r\n               key: 1,\r\n               displayValue: 1\r\n            },\r\n            contact: {\r\n               key: 1,\r\n               fullName: 1,\r\n               displayValue: 1,\r\n            },\r\n            objective: 1,\r\n            status: {\r\n                value: 1,\r\n                displayValue: 1\r\n            },\r\n            revenue: 1,\r\n            leader:{\r\n               key: 1,\r\n               displayValue: 1\r\n            },\r\n            salesTeam: {\r\n               key: 1,\r\n               displayName: 1\r\n            }\r\n         }\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\",\r\n\t\t\tstatus: 4,\r\n            lostToKey: \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n\t\t}\r\n\t}\r\n}"
                     },
-                    "url": "{{BaseURL}}/OpportunityRead",
+                    "url": "{{BaseURL}}/Update",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -2303,7 +2672,30 @@
                       "mode": "raw",
                       "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\",\r\n\t\t\tstatus: 3,\r\n\t\t}\r\n\t}\r\n}"
                     },
-                    "url": "{{BaseURL}}/OpportunityUpdate",
+                    "url": "{{BaseURL}}/Update",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "read opp",
+                  "id": "15a55298-0334-40fa-b9fe-03ab13f44a34",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"configuration\": {\r\n        \"drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    },\r\n    \"opportunity\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {},\r\n            \"top\": 10\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"Key\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"AbEntry\": 1,\r\n                \"ContactKey\": 1,\r\n                \"Contact\": 1,\r\n                \"Objective\": 1,\r\n                \"Description\": 1,\r\n                \"Status\": 1,\r\n                \"Cost\": 1,\r\n                \"ActualRevenue\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"CloseDate\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"Leader\": 1,\r\n                \"SalesTeam\": 1,\r\n                \"NextAction\": 1,\r\n                \"SalesProcessSetupKey\": 1,\r\n                \"SalesProcessSetup\": 1,\r\n                \"SalesStageSetupKey\": 1,\r\n                \"SalesStageSetup\": 1,\r\n                \"SalesProcessKey\": 1,\r\n                \"SalesProcess\": 1,\r\n                \"CurrentSalesStageKey\": 1,\r\n                \"CurrentSalesStage\": 1,\r\n                \"CurrentSalesStageAge\": 1,\r\n                \"PartnerKeys\": 1,\r\n                \"PartnerInfo\": 1,\r\n                \"CompetitorInfo\": 1,\r\n                \"Comment\": 1,\r\n                \"Reason\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Age\": 1,\r\n                \"CampaignKey\": 1,\r\n                \"Campaign\": 1,\r\n                \"Category\": 1,\r\n                \"Product\": 1,\r\n                \"Rating\": 1,\r\n                \"RevenueType\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -2321,7 +2713,7 @@
                       "mode": "raw",
                       "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\"\r\n\t\t}\r\n\t}\r\n}"
                     },
-                    "url": "{{BaseURL}}/OpportunityDelete",
+                    "url": "{{BaseURL}}/Delete",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -2343,7 +2735,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n            },\r\n            top: 333\r\n        },\r\n         scope: {\r\n             fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                abEntry:{\r\n                    key: 1,\r\n                    displayValue: 1,\r\n                    lastModifyDate: 1\r\n                },\r\n                lastModifyDate: 1\r\n             }\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"lastModifyDate\": \"DESC\" }\r\n            ]\r\n         }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n            },\r\n            top: 3\r\n        },\r\n         scope: {\r\n             fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                abEntry:{\r\n                    key: 1,\r\n                    displayValue: 1,\r\n                    lastModifyDate: 1\r\n                },\r\n                lastModifyDate: 1\r\n             }\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"lastModifyDate\": \"DESC\" }\r\n            ]\r\n         }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
                     },
                     "url": "{{BaseURL}}/OpportunityRead",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -2846,7 +3238,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IUserSearcher\": \"Maximizer.Model.Access.Sql.UserSearcher\"\r\n        }\r\n    },\r\n    \"User\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Udf/$TYPEID(54)\": {\r\n                    \"$RANGE\": [\r\n                        \"$OFFSET(Y-50,$NOW())\",\r\n                        \"$NOW()\"\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Password\": 1,\r\n                \"AccessType\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,               \r\n                \"address/city\": 1,                \r\n                \"Email/Address\": 1,\r\n                \"Udf/$NAME(Spouse's Name)\": 1,\r\n                \"Udf/$TYPEID(54)\":1\r\n            }\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n    \"Token\": \"{{Token}}\",\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IUserSearcher\": \"Maximizer.Model.Access.Sql.UserSearcher\"\r\n        }\r\n    },\r\n    \"User\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 10\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Key/Uid\": 1,\r\n                \"Password\": 1,\r\n                \"AccessType\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"Address/City\": 1,\r\n                \"Email/Address\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2863,7 +3260,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"User\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n            \"Key\":{\r\n               \"$EQ\":\"VXNlcglEQlJPV04=\"\r\n            }\r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Password\":1,\r\n            \"AccessType\":1,\r\n             \"Phone1\":{\r\n               \"Default\":1,\r\n               \"Number\":1,\r\n               \"Description\":1,\r\n               \"Extension\":1,\r\n               \"DisplayValue\":1\r\n            },\r\n            \"Phone1/Number\":1,\r\n           \"address\": {\r\n                    \"city\": 1\r\n                },\r\n                \"address/city\": 1,\r\n                 \"Email\":{\r\n               \"Address\":1,\r\n               \"Description\":1,\r\n               \"Default\":1,\r\n               \"DisplayValue\":1\r\n            },\r\n            \"Email/Address\": 1,\r\n            \"FirstName\":1,\r\n            \"LastName\":1,\r\n            \"DisplayName\":1,\r\n            \"Disabled\":1,\r\n            \"Roles\":{\r\n               \"Administrator\":1,\r\n               \"SalesManager\":1,\r\n               \"SalesRepresentative\":1,\r\n               \"CustomerServiceManager\":1,\r\n               \"CustomerServiceRepresentative\":1,\r\n               \"KnowledgeBaseApprover\":1\r\n            },\r\n            \"Permissions\":{\r\n               \"AccountSetup\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"UserDefinedFieldSetup\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"AddressBook\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"AltAddress\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"CustomerService\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Opportunity\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"UserDefinedFields\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Notes\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Documents\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"KnowledgeBase\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Campaign\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"ActionPlanLibrary\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"CompanyLibrary\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Quota\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"Dashboard\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"ProductSetup\":{\r\n                  \"Create\":1,\r\n                  \"Read\":1,\r\n                  \"Update\":1,\r\n                  \"Delete\":1\r\n               },\r\n               \"interactionLog\": {\r\n                        \"Read\": 1,\r\n                        \"Create\": 1,                        \r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    }\r\n            },\r\n            \"Privileges\":{\r\n               \"GlobalEdit\":1,\r\n               \"PublicEntries\":1,\r\n               \"PrivateEntries\":1,\r\n               \"Import\":1,\r\n               \"Export\":1,\r\n               \"SyncContacts\":1,\r\n               \"ModifySystemTables\":1,\r\n               \"ModifyNoteProperties\":1,\r\n               \"ModifyEmailTemplates\":1,\r\n               \"ModifyKeyFields\":1,\r\n               \"BypassUserDetailPermissions\":1,\r\n               \"BypassEntryPermissions\":1,\r\n               \"BypassNotePermissions\":1,\r\n               \"ManageCurrencies\":1,\r\n               \"AccessAuditLog\":1\r\n            }\r\n         }\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Token\": \"{{Token}}\",\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IUserSearcher\": \"Maximizer.Model.Access.Sql.UserSearcher\"\r\n        }\r\n    },\r\n    \"User\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 10\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Password\": 1,\r\n                \"MrMs\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"DisplayName\": 1,\r\n                \"Salutation\": 1,\r\n                \"CompanyName\": 1,\r\n                \"Position\": 1,\r\n                \"Department\": 1,\r\n                \"Division\": 1,\r\n                \"ReportsTo\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Address\": {\r\n                    \"AddressLine1\": 1,\r\n                    \"AddressLine2\": 1,\r\n                    \"City\": 1,\r\n                    \"Country\": 1,\r\n                    \"StateProvince\": 1,\r\n                    \"ZipCode\": 1\r\n                },\r\n                \"Phone1\": {\r\n                    \"Number\": 1,\r\n                    \"Extension\": 1,\r\n                    \"Default\": 1\r\n                },\r\n                \"Phone2\": {\r\n                    \"Number\": 1,\r\n                    \"Extension\": 1,\r\n                    \"Default\": 1\r\n                },\r\n                \"Phone3\": {\r\n                    \"Number\": 1,\r\n                    \"Extension\": 1,\r\n                    \"Default\": 1\r\n                },\r\n                \"Phone4\": {\r\n                    \"Number\": 1,\r\n                    \"Extension\": 1,\r\n                    \"Default\": 1\r\n                },\r\n                \"Email1\": {\r\n                    \"Address\": 1,\r\n                    \"Default\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Email2\": {\r\n                    \"Address\": 1,\r\n                    \"Default\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"Email3\": {\r\n                    \"Address\": 1,\r\n                    \"Default\": 1,\r\n                    \"Description\": 1\r\n                },\r\n                \"AccessType\": 1,\r\n                \"Disabled\": 1,\r\n                \"Roles\": {\r\n                    \"Administrator\": 1,\r\n                    \"SalesManager\": 1,\r\n                    \"SalesRepresentative\": 1,\r\n                    \"CustomerServiceManager\": 1,\r\n                    \"CustomerServiceRepresentative\": 1,\r\n                    \"KnowledgeBaseApprover\": 1\r\n                },\r\n                \"Permissions\": {\r\n                    \"AccountSetup\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"UserDefinedFieldSetup\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"AddressBook\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"AltAddress\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"CustomerService\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Opportunity\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"UserDefinedFields\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Notes\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Documents\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"KnowledgeBase\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Campaign\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"ActionPlanLibrary\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"CompanyLibrary\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Quota\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"Dashboard\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"ProductSetup\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    },\r\n                    \"interactionLog\": {\r\n                        \"Read\": 1,\r\n                        \"Create\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    }\r\n                },\r\n                \"Privileges\": {\r\n                    \"GlobalEdit\": 1,\r\n                    \"PublicEntries\": 1,\r\n                    \"PrivateEntries\": 1,\r\n                    \"Import\": 1,\r\n                    \"Export\": 1,\r\n                    \"SyncContacts\": 1,\r\n                    \"ModifySystemTables\": 1,\r\n                    \"ModifyNoteProperties\": 1,\r\n                    \"ModifyEmailTemplates\": 1,\r\n                    \"ModifyKeyFields\": 1,\r\n                    \"BypassUserDetailPermissions\": 1,\r\n                    \"BypassEntryPermissions\": 1,\r\n                    \"BypassNotePermissions\": 1,\r\n                    \"ManageCurrencies\": 1,\r\n                    \"AccessAuditLog\": 1\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2893,56 +3295,396 @@
           "id": "9d8741bf-17e8-424e-900f-779e7528fbf5"
         },
         {
-          "name": "SecGroup",
+          "name": "User Defined Fields - Schema Definition",
           "item": [
             {
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "get security groups",
-                  "id": "6210350e-f53a-43a9-90fa-70e4d84148f6",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n      },\r\n      top: 5\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        displayValue: 1\r\n      }\r\n    }\r\n  }\r\n}"
+                  "name": "Udf Schema Definition for Table Items",
+                  "item": [
+                    {
+                      "name": "Udf Table Items - Read",
+                      "id": "86df3569-68c6-4497-9b93-2219654e9093",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    // use the object which the Udf belongs/applies to\r\n    // and also the actual Udf type (using Udf/$TYPE(<id>))\r\n    // or name (using Udf/$NAME(<name>) to read the items\r\n    \"abEntry\": {\r\n        \"fieldOptions\": {\r\n            \"Udf/$NAME(My Table Udf)\": [\r\n                {\r\n                    \"key\": 1,\r\n                    \"name\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read"
+                      },
+                      "response": []
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
+                    {
+                      "name": "Udf Table Items - Add",
+                      "id": "c924a35f-7195-4518-aefd-48822900bfad",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    // use the object which the Udf belongs/applies to\r\n    // and also the actual Udf type (using Udf/$TYPE(<id>))\r\n    // or name (using Udf/$NAME(<name>) to make changes to items.\r\n    // note: key: null is added here just for convenience, so we\r\n    // can retrieve the code that is automatically generated for\r\n    // the new item(s) being added\r\n    \"abEntry\": {\r\n        \"fieldOptions\": {\r\n            \"Udf/$NAME(My Table Udf)\": [\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"newitem1\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"newitem2\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"newitem3\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Udf Table Items - Change",
+                      "id": "d4029d11-8a6a-4c1d-b184-8cb3d5253ca3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    // use the object which the Udf belongs/applies to\r\n    // and also the actual Udf type (using Udf/$TYPE(<id>))\r\n    // or name (using Udf/$NAME(<name>) to make changes to items.\r\n    \"abEntry\": {\r\n        \"fieldOptions\": {\r\n            \"Udf/$NAME(My Table Udf)\": [\r\n                {\r\n                    \"key\": \"1\",\r\n                    \"name\": \"updateditem1\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": \"2\",\r\n                    \"name\": \"updateditem2\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": \"3\",\r\n                    \"name\": \"updateditem3\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"options\": {\r\n            \"modify\": true // modify existing items, must specify key\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Udf Table Items - Replace",
+                      "id": "58a9257c-7232-493a-aedc-f27ba77970ad",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    // use the object which the Udf belongs/applies to\r\n    // and also the actual Udf type (using Udf/$TYPE(<id>))\r\n    // or name (using Udf/$NAME(<name>) to make changes to items.\r\n    // note: key: null is added here just for convenience, so we\r\n    // can retrieve the code that is automatically generated for\r\n    // the new item(s) being added\r\n    // note: any existing Udf table item will be deleted when\r\n    // replaced, this will also cause the deletion of ALL values\r\n    // associated with the replaced items\r\n    \"abEntry\": {\r\n        \"fieldOptions\": {\r\n            \"Udf/$NAME(My Table Udf)\": [\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"replaceditem1\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"replaceditem2\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                },\r\n                {\r\n                    \"key\": null,\r\n                    \"name\": \"replaceditem3\",\r\n                    \"requestedBy\": {\r\n                        \"uid\": \"MASTER\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"options\": {\r\n            \"replace\": true // delete all existing items and replace with the new ones defined here\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Udf Table Items - Remove",
+                      "id": "f4e141dd-2f1b-450a-abff-0d3b78673354",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    // use the object which the Udf belongs/applies to\r\n    // and also the actual Udf type (using Udf/$TYPE(<id>))\r\n    // or name (using Udf/$NAME(<name>) to remove items.\r\n    // note: removing Udf table items also removes ALL values\r\n    // associated with it\r\n    \"abEntry\": {\r\n        \"fieldOptions\": {\r\n            \"Udf/$NAME(My Table Udf)\": [\r\n                { \"key\": \"1\" },\r\n                { \"key\": \"2\" },\r\n                { \"key\": \"3\" }\r\n            ]\r\n        },\r\n        \"options\": {\r\n            \"remove\": true // remove existing items, must specify key\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "986dd780-cd92-4df3-a920-44e61286b51e"
                 },
                 {
-                  "name": "get members of security group",
-                  "id": "ffe77c93-41b4-49aa-91cf-e5720bef548b",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$EQ\": \"R3JvdXAJLkFDQ1RORzAw\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        memberKeys: [\r\n          {\r\n            key: 1,\r\n            displayValue: 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}"
+                  "name": "Create Udf Schema Definition by Type",
+                  "item": [
+                    {
+                      "name": "Create Udf - AlphaNumeric",
+                      "id": "fe1c485c-6f60-43a0-b67a-d93b323a823f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"StringField\",\r\n            \"name\": \"My AlphaNumeric Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"maxLength\": 254\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
                     },
-                    "url": "{{BaseURL}}/UserRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
+                    {
+                      "name": "Create Udf - Date",
+                      "id": "17878ca3-844c-472f-b0e8-26e1a4654ed0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"DateTimeField\",\r\n            \"name\": \"My Date Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf - Numeric",
+                      "id": "3084ab3d-a28e-4383-9233-034cba483fa5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"NumericField\",\r\n            \"name\": \"My Numeric Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"decimalPlaces\": 3\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf - YesNo",
+                      "id": "054ea7d1-2335-469e-8321-ff471d2acffc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"EnumField<StringItem>\",\r\n            \"name\": \"My YesNo Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"multiSelect\": false,\r\n                \"yesNo\": true\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf - Table (without items)",
+                      "id": "3683cd45-d363-4bb3-8c1e-4083ae1de31c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"EnumField<StringItem>\",\r\n            \"name\": \"My Table Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"multiSelect\": true\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "81e1c18b-b4d5-4f74-8a33-74ac7c1f989f"
+                },
+                {
+                  "name": "Work with Udf Folders",
+                  "item": [
+                    {
+                      "name": "Read Udf Folder",
+                      "id": "974a1ff7-a2f2-4b96-8b90-beeaa2a9d525",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"folder\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"appliesTo\": {\r\n                    \"$IN\": [\r\n                        \"Company\", \"Individual\", \"Contact\"\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"key\": {\r\n                    \"id\": 1,\r\n                    \"type\": 1,\r\n                    \"value\": 1\r\n                },\r\n                \"name\": 1,\r\n                \"path\": 1,\r\n                \"parentFolderKey\": {\r\n                    \"id\": 1,\r\n                    \"value\": 1\r\n                },\r\n                \"creator\": {\r\n                    \"key\": 1,\r\n                    \"uid\": 1,\r\n                    \"displayValue\": 1\r\n                },\r\n                \"creationDate\": {\r\n                    \"value\": 1,\r\n                    \"displayValue\": 1\r\n                },\r\n                \"inactive\": 1\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"FolderObject\": \"1.0\"\r\n    },\r\n    \"configuration\": {\r\n        \"drivers\": {\r\n            \"IFolderSearcher\": \"Maximizer.Model.Access.Sql.FolderSearcher\"\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf Folder",
+                      "id": "70e039a5-29d3-4d46-9e0e-6156d2a1a57a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"folder\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"name\": \"My Udf Folder\",\r\n            \"parentKey\": \"VWRmU2V0dXAJMA==\" // root folder\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"FolderObject\": \"1.0\"\r\n    },\r\n    \"configuration\": {\r\n        \"drivers\": {\r\n            \"IFolderAccess\": \"Maximizer.Model.Access.Sql.FolderAccess\"\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf Definition under specific Folder",
+                      "id": "573f56dc-86fe-44a6-8508-b08e855f958c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"StringField\",\r\n            \"name\": \"My AlphaNumeric Udf\",\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            // FolderKey to put the new Udf. Will be created\r\n            // under Root folder if not specified.\r\n            \"folder\": \"VWRmU2V0dXAJOA==\",\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"maxLength\": 254\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "d931372d-5fe9-45f1-9dce-20ef9b0f4678"
+                },
+                {
+                  "name": "Create Formula Udf Schema Definition",
+                  "item": [
+                    {
+                      "name": "Create Udf - Formula AlphaNumeric",
+                      "id": "23e94969-a8a3-4fed-b680-c16feee450e6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"StringField\",\r\n            \"name\": \"My AlphaNumeric Formula Udf\",\r\n            \"appliesTo\": [\r\n                \"Lead\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"formula\": \"[MrMs] + \\\" \\\" + [FirstName] + \\\" \\\" + [LastName]\",\r\n                \"maxLength\": 254\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf - Formula Date",
+                      "id": "6cea50b2-dbb2-4941-bd7f-161441527166",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"DateTimeField\",\r\n            \"name\": \"My Date Formula Udf\",\r\n            \"appliesTo\": [\r\n                \"Lead\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"formula\": \"[CreationDate].AddYears(-1)\"\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create Udf - Formula Numeric",
+                      "id": "3000daa4-ded9-436c-afbf-a978475ab7c0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"type\": \"NumericField\",\r\n            \"name\": \"My Numeric Formula Udf\",\r\n            \"appliesTo\": [\r\n                \"Lead\"\r\n            ],\r\n            \"inactive\": false,\r\n            \"attributes\": {\r\n                \"formula\": \"[Udf/$NAME(No. of Employees)] * 2\",\r\n                \"decimalPlaces\": 3\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "162cf48e-f19d-4562-8347-79cdab21fa72"
                 }
               ],
-              "id": "0ed5b85c-4e68-4a0b-8b7f-500a7f33babf"
+              "id": "5d77cc74-f262-46bc-95ba-5235176edd81"
             },
             {
               "name": "MetaData",
               "item": [
                 {
-                  "name": "Read SecGroup metadata (simple)",
-                  "id": "0d3d3244-36f8-4c10-a80f-a406d11b5da7",
+                  "name": "Read Udf Schema Defination metadata (simple)",
+                  "id": "b9ccf27b-2ecd-441c-9522-58f68497e59c",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2951,15 +3693,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: 1\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
+                      "raw": "{\r\n    \"$metadata\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$TREE\": \"/schema\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"fields\": 1\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
                 {
-                  "name": "Read SecGroup metadata (more)",
-                  "id": "01193b1d-6953-4073-95e2-3e312ba2de49",
+                  "name": "Read Udf Schema Defination metadata (more)",
+                  "id": "6a0969a2-5770-4927-af4f-8a66144157af",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2968,21 +3715,26 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        \"Key\": 1,\r\n        \"Alias\": 1,\r\n        \"Type\": 1,\r\n        \"Name\": 1,\r\n        \"AppliesTo\": 1,\r\n        \"Sortable\": 1,\r\n        \"Queryable\": 1,\r\n        \"Mandatory\": 1,\r\n        \"Attributes\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
+                      "raw": "{\r\n    \"$metadata\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$TREE\": \"/schema\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"key\": 1,\r\n                \"alias\": 1,\r\n                \"type\": 1,\r\n                \"name\": 1,\r\n                \"appliesTo\": 1,\r\n                \"sortable\": 1,\r\n                \"queryable\": 1,\r\n                \"mandatory\": 1,\r\n                \"attributes\": 1,\r\n                \"displayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 }
               ],
-              "id": "25efb5e3-f7cf-4672-b421-14ff95c9599b"
+              "id": "cb45ae6e-baec-424d-8d95-3aa16f4ea043"
             },
             {
-              "name": "SecGroup CRUD",
+              "name": "User Defined Fields Schema Definition CRUD",
               "item": [
                 {
-                  "name": "Secgroup-Read",
-                  "id": "2a95f251-605b-4a9a-bfb3-62de1a16a5db",
+                  "name": "Udf Schema Definition - Read",
+                  "id": "3ed901f5-ffd1-44a0-8225-201adfb1420b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2991,15 +3743,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupSearcher\": \"Maximizer.Model.Access.Sql.SecGroupSearcher\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Criteria\": {\r\n      \"SearchQuery\": {\r\n        \"CreationDate\": {\r\n          \"$GE\": \"2005-09-15T10:20:45\"\r\n        }\r\n      }\r\n    },\r\n    \"Scope\": {\r\n      \"Fields\": {\r\n        \"Key\": 1,\r\n        \"Name\": 1,\r\n        \"Creator\": 1,\r\n        \"CreationDate\": 1,\r\n        \"MemberKeys\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  }\r\n}\r\n"
+                      "raw": "{\r\n    \"schema\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    // change based on object you want to \r\n                    // retrieve Udf from\r\n                    \"$EQ\": \"/AbEntry/Udf/$TYPEID(15)\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"key\": 1,\r\n                \"appliesTo\": 1,\r\n                \"folder\": 1,\r\n                \"creator\": {\r\n                    \"uid\": 1,\r\n                    \"value\": 1,\r\n                    \"displayValue\": 1\r\n                },\r\n                \"creationDate\": 1,\r\n                \"requestedBy\": {\r\n                    \"uid\": 1,\r\n                    \"value\": 1,\r\n                    \"displayValue\": 1\r\n                },\r\n                \"inactive\": 1,\r\n                \"mandatory\": 1,\r\n                \"formula\": 1,\r\n                \"alias\": 1,\r\n                \"type\": 1,\r\n                \"name\": 1,\r\n                \"nullable\": 1,\r\n                \"readOnly\": 1,\r\n                \"attributes\": 1,\r\n                \"queryable\": 1,\r\n                \"sortable\": 1,\r\n                \"hasOption\": 1,\r\n                \"secAccess\": {\r\n                    \"read\": [\r\n                        {\r\n                            \"uid\": 1,\r\n                            \"displayValue\": 1\r\n                        }\r\n                    ],\r\n                    \"write\": [\r\n                        {\r\n                            \"uid\": 1,\r\n                            \"displayValue\": 1\r\n                        }\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
                 {
-                  "name": "SecGroup-Update",
-                  "id": "1c565e2c-096a-4673-929c-0d591f6d73ac",
+                  "name": "Udf Schema Definition - Create",
+                  "id": "0f8f37dc-4b7b-457b-b8ea-b6b8e0ffa302",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -3008,32 +3765,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\",\r\n      \"Name\": \"Company Announcement Authors updated\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2004-01-14T04:19:23\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglKTkFQT0xJ\",\r\n        \"VXNlcglNQVNURVI=\"\r\n      ]\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Update"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "SecGroup-Create",
-                  "id": "3763d428-ced3-432b-ac32-2695b077ea30",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": null,\r\n      \"Name\": \"Accounting1 Test\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2022-05-26\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglNQVNURVI=\",\r\n        \"VXNlcglNQ09SRUxM\",\r\n        \"VXNlcglNR1JBSEFN\"\r\n      ]\r\n    }\r\n  }\r\n}"
+                      "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": null,\r\n            \"appliesTo\": [\r\n                \"Company\", \"Individual\", \"Contact\"\r\n            ],\r\n            \"name\": \"My AlphaNumeric Udf\",\r\n            \"inactive\": false,\r\n            \"type\": \"StringField\",\r\n            \"attributes\": {\r\n                \"maxLength\": 254\r\n            },\r\n            \"requestedBy\": {\r\n                \"uid\": \"MASTER\"\r\n            },\r\n            \"secAccess\": {\r\n                \"write\": [\r\n                    { \"uid\": \"MASTER\" }\r\n                ],\r\n                \"read\": [\r\n                    { \"uid\": \"*\" }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
                 {
-                  "name": "SecGroup-Delete",
-                  "id": "c5a59312-c597-4f27-9920-da75a48ea38f",
+                  "name": "Udf Schema Definition - Update",
+                  "id": "8c4173b0-41f1-49c0-bc63-00ce402daa6c",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -3042,17 +3787,44 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\"\r\n    }\r\n  }\r\n}"
+                      "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": \"/AbEntry/Udf/$TYPEID(9)\",\r\n            \"name\": \"My AlphaNumeric Udf Updated\"\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Udf Schema Definition - Delete",
+                  "id": "1c799f4f-fefd-41f2-b4cb-d86e35501479",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"schema\": {\r\n        \"data\": {\r\n            \"key\": \"/AbEntry/Udf/$TYPEID(10)\"\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete"
                   },
                   "response": []
                 }
               ],
-              "id": "faed5e32-a7af-4725-a69c-d62ddc9bdf31"
+              "id": "9f7dc860-8062-4b82-b8af-7d16bcc41a15"
             }
           ],
-          "id": "982e80ae-824a-42a7-aae2-ccd77fa8107e"
+          "id": "365e8d91-24e4-4128-9c64-c5c9d4d34d11"
         },
         {
           "name": "SalesTeam",
@@ -3277,6 +4049,168 @@
             }
           ],
           "id": "df58a0aa-5e0c-4628-9579-91a6c3f7fd49"
+        },
+        {
+          "name": "SecGroup",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "get security groups",
+                  "id": "6210350e-f53a-43a9-90fa-70e4d84148f6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n      },\r\n      top: 5\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        displayValue: 1\r\n      }\r\n    }\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "get members of security group",
+                  "id": "ffe77c93-41b4-49aa-91cf-e5720bef548b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$EQ\": \"R3JvdXAJLkFDQ1RORzAw\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        memberKeys: [\r\n          {\r\n            key: 1,\r\n            displayValue: 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "0ed5b85c-4e68-4a0b-8b7f-500a7f33babf"
+            },
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read SecGroup metadata (simple)",
+                  "id": "0d3d3244-36f8-4c10-a80f-a406d11b5da7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: 1\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read SecGroup metadata (more)",
+                  "id": "01193b1d-6953-4073-95e2-3e312ba2de49",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        \"Key\": 1,\r\n        \"Alias\": 1,\r\n        \"Type\": 1,\r\n        \"Name\": 1,\r\n        \"AppliesTo\": 1,\r\n        \"Sortable\": 1,\r\n        \"Queryable\": 1,\r\n        \"Mandatory\": 1,\r\n        \"Attributes\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "25efb5e3-f7cf-4672-b421-14ff95c9599b"
+            },
+            {
+              "name": "SecGroup CRUD",
+              "item": [
+                {
+                  "name": "Secgroup-Read",
+                  "id": "2a95f251-605b-4a9a-bfb3-62de1a16a5db",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupSearcher\": \"Maximizer.Model.Access.Sql.SecGroupSearcher\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Criteria\": {\r\n      \"SearchQuery\": {\r\n        \"CreationDate\": {\r\n          \"$GE\": \"2005-09-15T10:20:45\"\r\n        }\r\n      }\r\n    },\r\n    \"Scope\": {\r\n      \"Fields\": {\r\n        \"Key\": 1,\r\n        \"Name\": 1,\r\n        \"Creator\": 1,\r\n        \"CreationDate\": 1,\r\n        \"MemberKeys\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  }\r\n}\r\n"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SecGroup-Update",
+                  "id": "1c565e2c-096a-4673-929c-0d591f6d73ac",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\",\r\n      \"Name\": \"Company Announcement Authors updated\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2004-01-14T04:19:23\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglKTkFQT0xJ\",\r\n        \"VXNlcglNQVNURVI=\"\r\n      ]\r\n    }\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SecGroup-Create",
+                  "id": "3763d428-ced3-432b-ac32-2695b077ea30",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": null,\r\n      \"Name\": \"Accounting1 Test\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2022-05-26\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglNQVNURVI=\",\r\n        \"VXNlcglNQ09SRUxM\",\r\n        \"VXNlcglNR1JBSEFN\"\r\n      ]\r\n    }\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SecGroup-Delete",
+                  "id": "c5a59312-c597-4f27-9920-da75a48ea38f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\"\r\n    }\r\n  }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "faed5e32-a7af-4725-a69c-d62ddc9bdf31"
+            }
+          ],
+          "id": "982e80ae-824a-42a7-aae2-ccd77fa8107e"
         },
         {
           "name": "Territory",
@@ -3519,7 +4453,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n    addressBook:{\r\n        udbid: 1,\r\n        database: 1,\r\n        displayValue: 1\r\n    },\r\n    user: {\r\n        key: {\r\n            value: 1,\r\n            uid: 1\r\n        },\r\n        displayName: 1\r\n    },\r\n}",
+                  "raw": "{\r\n    addressBook:{\r\n        udbid: 1,\r\n        database: 1,\r\n        displayValue: 1,\r\n        workspaceId: 1\r\n    },\r\n    user: {\r\n        key: {\r\n            value: 1,\r\n            uid: 1\r\n        },\r\n        displayName: 1\r\n    },\r\n}",
                   "options": {
                     "raw": {
                       "language": "text"
@@ -3644,7 +4578,7 @@
                 "header": [],
                 "body": {
                   "mode": "raw",
-                  "raw": "{\r\n\t\"current\":{\r\n\t\t\"displayValue\":1,\r\n\t\t\"major\":1,\r\n\t\t\"minor\":1,\r\n\t\t\"beta\":1\r\n\t},\r\n\t\"supported\":[\r\n\t\t{\r\n\t\t\t\"displayValue\":1\r\n\t\t}\r\n\t]\r\n}"
+                  "raw": "{\r\n     token: \"{{Token}}\",\r\n\t\"current\":{\r\n\t\t\"displayValue\":1,\r\n\t\t\"major\":1,\r\n\t\t\"minor\":1,\r\n\t\t\"beta\":1\r\n\t},\r\n\t\"supported\":[\r\n\t\t{\r\n\t\t\t\"displayValue\":1\r\n\t\t}\r\n\t]\r\n}"
                 },
                 "url": "{{BaseURL}}/GetVersionInfo",
                 "description": "Use the `GetSystemInfo` method to get information about the system, including the current API version and the versions of API components.\n\nNOTE: The `GetSystemInfo` method is un-authenticated, so you don't need to supply a token when calling it."
@@ -3701,7 +4635,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\", // empty for on-prem\n\tappKey: \"{{AppKey}}\" // empty for on-prem\n}"
+          "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\",\n\tappKey: \"{{AppKey}}\"\n}"
         },
         "url": "{{BaseURL}}/Authenticate"
       },
