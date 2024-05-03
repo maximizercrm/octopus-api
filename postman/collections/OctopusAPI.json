@@ -1722,7 +1722,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"StartDate\":{\r\n                    \"$EQ\":\"$THISWEEK()\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"StartDate\":{\r\n                    \"$EQ\": \"$THISWEEK()\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -1768,7 +1768,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tappointment: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"abEntries/Key\":{\r\n                    \"$IN\":\"Q29udGFjdAlERU1PXzVDCTE=\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n                startDate: 1,\r\n                endDate: 1,\r\n                subject: 1,\r\n                abEntries:[\r\n                    { displayValue: 1 }\r\n                ],\r\n                with:{\r\n                    displayValue: 1\r\n                }\r\n\t\t\t}\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"AbEntries/Key\": {\r\n                    \"$IN\": \"Q29udGFjdAlERU1PXzVDCTE=\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1,\r\n                \"AbEntries\" :[\r\n                    { \"DisplayValue\": 1 }\r\n                ],\r\n                \"With\" :{\r\n                    \"DisplayValue\": 1\r\n                }\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1786,7 +1791,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tappointment: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                withKey:{\r\n                    \"$EQ\":\"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\"\r\n                }\r\n\t\t\t},\r\n            top: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n                startDate: 1,\r\n                endDate: 1,\r\n                subject: 1,\r\n                abEntries:[\r\n                    { displayValue: 1 }\r\n                ],\r\n                with:{\r\n                    displayValue: 1\r\n                }\r\n\t\t\t}\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"WithKey\": {\r\n                    \"$EQ\":\"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\"\r\n                }\r\n\t\t\t},\r\n            \"Top\": 3\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1,\r\n                \"AbEntries\" :[\r\n                    { \"DisplayValue\": 1 }\r\n                ],\r\n                \"With\" :{\r\n                    \"DisplayValue\": 1\r\n                }\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
