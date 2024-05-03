@@ -1652,7 +1652,7 @@
               "name": "Metadata",
               "item": [
                 {
-                  "name": "read appointment schema (simple)",
+                  "name": "Read Appointment schema (simple)",
                   "id": "e2e0b74b-1ee6-446c-bb52-03b385239b02",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1670,7 +1670,7 @@
                   "response": []
                 },
                 {
-                  "name": "read appointment schema (more)",
+                  "name": "Read Appointment schema (more)",
                   "id": "291aee61-5fe6-4f6b-b7d0-34fb88627dc4",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1688,7 +1688,7 @@
                   "response": []
                 },
                 {
-                  "name": "read appointment interaction category options",
+                  "name": "Read Appointment interaction category options",
                   "id": "04a8d3e3-a863-46fc-b93a-3dd0204eb624",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1712,7 +1712,7 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "get appt scheduled for this week",
+                  "name": "Get Appt scheduled for this week",
                   "id": "254ba177-f6fe-4083-b887-b6264147fece",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1735,7 +1735,7 @@
                   "response": []
                 },
                 {
-                  "name": "get appt scheduled for specific date range",
+                  "name": "Get Appt scheduled for specific date range",
                   "id": "77b3d9cf-56b8-43a9-b6c8-b412606bbcbb",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1758,7 +1758,7 @@
                   "response": []
                 },
                 {
-                  "name": "get appt associated with abentry",
+                  "name": "Get Appt associated with AbEntry",
                   "id": "38f4e3f4-b39d-4315-a4f4-79f58c52f900",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1781,7 +1781,7 @@
                   "response": []
                 },
                 {
-                  "name": "get appt associated with opportunity",
+                  "name": "Get Appt associated with Opportunity",
                   "id": "888202af-535f-4a8f-a38a-6decdaa0e4ef",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1804,7 +1804,7 @@
                   "response": []
                 },
                 {
-                  "name": "Appointment-Update With Criteria",
+                  "name": "Appointment-Update using criteria (Batch)",
                   "id": "b9bb3c5e-7dc5-4ed0-824b-0a36c80bb363",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1826,7 +1826,7 @@
                   "response": []
                 },
                 {
-                  "name": "Appointment-Delete With Criteria",
+                  "name": "Appointment-Delete using criteria (Batch)",
                   "id": "342b2ce1-6abc-4d47-87a0-4a0b2deead6e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
