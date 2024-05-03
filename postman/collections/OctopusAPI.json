@@ -1712,7 +1712,7 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Get Appt scheduled for this week",
+                  "name": "Get Appointment scheduled for this week",
                   "id": "254ba177-f6fe-4083-b887-b6264147fece",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1735,7 +1735,7 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appt scheduled for specific date range",
+                  "name": "Get Appointment scheduled for specific date range",
                   "id": "77b3d9cf-56b8-43a9-b6c8-b412606bbcbb",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1758,7 +1758,7 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appt associated with AbEntry",
+                  "name": "Get Appointment associated with AbEntry",
                   "id": "38f4e3f4-b39d-4315-a4f4-79f58c52f900",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1781,7 +1781,7 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appt associated with Opportunity",
+                  "name": "Get Appointment associated with Opportunity",
                   "id": "888202af-535f-4a8f-a38a-6decdaa0e4ef",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
