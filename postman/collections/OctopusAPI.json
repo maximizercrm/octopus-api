@@ -1722,7 +1722,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tappointment: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                startDate:{\r\n                    \"$EQ\":\"$THISWEEK()\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n                startDate: 1,\r\n                endDate: 1,\r\n                subject: 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"StartDate\":{\r\n                    \"$EQ\":\"$THISWEEK()\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1740,7 +1745,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tappointment: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                startDate:{\r\n                    \"$RANGE\":[\"2019-10-14\", \"2019-10-21\"]\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n                startDate: 1,\r\n                endDate: 1,\r\n                subject: 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n                \"StartDate\":{\r\n                    \"$RANGE\":[\"2019-10-14\", \"2019-10-21\"]\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Subject\": 1\r\n\t\t\t}\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -1842,7 +1852,7 @@
                       "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IApptSearcher\": \"Maximizer.Model.Access.Sql.ApptSearcher\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"RecurringPatternObject\": \"1.0\"\r\n    },\r\n    \"Appointment\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"StartDate\": {\r\n                            \"$GT\": \"2022-12-01T20:29:39\"\r\n                        },\r\n                        \"EndDate\": {\r\n                            \"$LT\": \"2122-12-01T20:29:39\"\r\n                        },\r\n\r\n                                \"Users/Item/Key\": {\r\n                                    \"$IN\": [\r\n                                        {\r\n                                            \"UID\": \"MASTER\"\r\n                                        }\r\n                                    ]\r\n                                }                 \r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"SecStatus\" : {\r\n                    \"CanRead\" : 1,\r\n                    \"CanUpdate\" : 1\r\n                },\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Organizer\": {\r\n                    \"Key\": 1,\r\n                    \"Uid\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Private\": 1,\r\n                \"Priority\": 1,\r\n                \"Users\": {\r\n                    \"key\": {\r\n                        \"Key\": 1,\r\n                        \"Uid\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"displayname\": 1,\r\n                    \"email\": 1,\r\n                    \"alarm\": 1,\r\n                    \"rsvp\": 1,\r\n                    \"reminder\": 1\r\n                },\r\n                \"AbEntries\": {\r\n                    \"displayvalue\": 1,\r\n                    \"email\": 1\r\n                },\r\n                \"Leads\": {\r\n                    \"displayvalue\": 1,\r\n                    \"email\": 1\r\n                },\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Key\": {\r\n                        \"UID\": 1\r\n                    },\r\n                    \"Name\": 1\r\n                },\r\n                \"RecurringPattern\": {\r\n                    \"Key\": 1,\r\n                    \"StartDate\": 1,\r\n                    \"EndDate\": 1,\r\n                    \"Frequency\": 1,\r\n                    \"Occurence\": 1,\r\n                    \"DayOfWeek\": 1,\r\n                    \"SkipWeekend\": 1,\r\n                    \"MoveToWeekday\": 1\r\n                },\r\n                \"LastModifyDate\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
-                          "language": "text"
+                          "language": "json"
                         }
                       }
                     },
@@ -1861,7 +1871,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Compatibility\": {\r\n        \"RecurringPatternObject\": \"1.0\"\r\n    },\r\n    \"Appointment.1\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"outlook daily every day\",\r\n            \"StartDate\": \"2023-12-13T05:00:00Z\",\r\n            \"EndDate\": \"2023-12-13T05:30:00Z\",\r\n            \"Private\": false,\r\n            \"Priority\": \"MED\",\r\n            \"Users\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Key\": \"VXNlcglNQVNURVI=\",\r\n                        \"Uid\": \"MASTER\",\r\n                        \"DisplayValue\": \"Micheal Boone\"\r\n                    },\r\n                    \"Displayname\": null,\r\n                    \"Email\": null,\r\n                    \"Rsvp\": 0,\r\n                    \"Alarm\": \"2023-12-12T04:45:00Z\"\r\n                }\r\n            ],\r\n            \"Description\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n<meta name=\\\"ProgId\\\" content=\\\"Word.Document\\\">\\r\\n<meta name=\\\"Generator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<meta name=\\\"Originator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<style>\\r\\n<!--\\r\\n@font-face\\r\\n\\t{font-family:\\\"Cambria Math\\\"}\\r\\n@font-face\\r\\n\\t{font-family:Calibri}\\r\\np.MsoNormal, li.MsoNormal, div.MsoNormal\\r\\n\\t{margin:0in;\\r\\n\\tfont-size:11.0pt;\\r\\n\\tfont-family:\\\"Calibri\\\",sans-serif}\\r\\na:link, span.MsoHyperlink\\r\\n\\t{color:#0563C1;\\r\\n\\ttext-decoration:underline}\\r\\na:visited, span.MsoHyperlinkFollowed\\r\\n\\t{color:#954F72;\\r\\n\\ttext-decoration:underline}\\r\\nspan.EmailStyle17\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif;\\r\\n\\tcolor:windowtext}\\r\\n.MsoChpDefault\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif}\\r\\n@page WordSection1\\r\\n\\t{margin:1.0in 1.0in 1.0in 1.0in}\\r\\ndiv.WordSection1\\r\\n\\t{}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body lang=\\\"EN-US\\\" link=\\\"#0563C1\\\" vlink=\\\"#954F72\\\" style=\\\"word-wrap:break-word\\\">\\r\\n<div class=\\\"WordSection1\\\">\\r\\n<p class=\\\"MsoNormal\\\">&nbsp;</p>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n-- Attendees synced from Outlook Start --\\r\\nClark Lu (clarklu@maxlabcloud.ca) Response:None\\r\\n-- Attendees synced from Outlook End --\\r\\n\",\r\n            \"Location\": {\r\n                \"Name\": \"\",\r\n                \"Key\": {\r\n                    \"Uid\": \"L@FREEFORM\"\r\n                }\r\n            },\r\n            \"RecurringPattern\": {\r\n                \"Key\": \"1811163204\",\r\n                \"StartDate\": \"2023-12-11\",\r\n                \"EndDate\": \"2023-12-13\",\r\n                \"Frequency\": 0,\r\n                \"Occurence\": 0,\r\n                \"DayOfWeek\": [0],\r\n                \"SkipWeekend\": false,\r\n                \"MoveToWeekday\": false\r\n            }\r\n        }\r\n    }\r\n}"
+                      "raw": "{\r\n    \"Compatibility\": {\r\n        \"RecurringPatternObject\": \"1.0\"\r\n    },\r\n    \"Appointment.1\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"outlook daily every day\",\r\n            \"StartDate\": \"2023-12-13T05:00:00Z\",\r\n            \"EndDate\": \"2023-12-13T05:30:00Z\",\r\n            \"Private\": false,\r\n            \"Priority\": \"MED\",\r\n            \"Users\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Key\": \"VXNlcglNQVNURVI=\",\r\n                        \"Uid\": \"MASTER\",\r\n                        \"DisplayValue\": \"Micheal Boone\"\r\n                    },\r\n                    \"Displayname\": null,\r\n                    \"Email\": null,\r\n                    \"Rsvp\": 0,\r\n                    \"Alarm\": \"2023-12-12T04:45:00Z\"\r\n                }\r\n            ],\r\n            \"Description\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n<meta name=\\\"ProgId\\\" content=\\\"Word.Document\\\">\\r\\n<meta name=\\\"Generator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<meta name=\\\"Originator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<style>\\r\\n<!--\\r\\n@font-face\\r\\n\\t{font-family:\\\"Cambria Math\\\"}\\r\\n@font-face\\r\\n\\t{font-family:Calibri}\\r\\np.MsoNormal, li.MsoNormal, div.MsoNormal\\r\\n\\t{margin:0in;\\r\\n\\tfont-size:11.0pt;\\r\\n\\tfont-family:\\\"Calibri\\\",sans-serif}\\r\\na:link, span.MsoHyperlink\\r\\n\\t{color:#0563C1;\\r\\n\\ttext-decoration:underline}\\r\\na:visited, span.MsoHyperlinkFollowed\\r\\n\\t{color:#954F72;\\r\\n\\ttext-decoration:underline}\\r\\nspan.EmailStyle17\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif;\\r\\n\\tcolor:windowtext}\\r\\n.MsoChpDefault\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif}\\r\\n@page WordSection1\\r\\n\\t{margin:1.0in 1.0in 1.0in 1.0in}\\r\\ndiv.WordSection1\\r\\n\\t{}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body lang=\\\"EN-US\\\" link=\\\"#0563C1\\\" vlink=\\\"#954F72\\\" style=\\\"word-wrap:break-word\\\">\\r\\n<div class=\\\"WordSection1\\\">\\r\\n<p class=\\\"MsoNormal\\\">&nbsp;</p>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n-- Attendees synced from Outlook Start --\\r\\nClark Lu (clarklu@maxlabcloud.ca) Response:None\\r\\n-- Attendees synced from Outlook End --\\r\\n\",\r\n            \"Location\": {\r\n                \"Name\": \"\",\r\n                \"Key\": {\r\n                    \"Uid\": \"L@FREEFORM\"\r\n                }\r\n            },\r\n            \"RecurringPattern\": {\r\n                \"Key\": \"1811163204\",\r\n                \"StartDate\": \"2023-12-11\",\r\n                \"EndDate\": \"2023-12-13\",\r\n                \"Frequency\": 0,\r\n                \"Occurence\": 0,\r\n                \"DayOfWeek\": [0],\r\n                \"SkipWeekend\": false,\r\n                \"MoveToWeekday\": false\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
@@ -1878,7 +1893,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Appointment\":{\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\",\r\n         \"Subject\":\"Test Data \",\r\n         \"Description\":\"Test new car1234\",\r\n         \"StartDate\": \"2022-01-15\",\r\n         \"EndDate\":\"2022-01-16\",\r\n         \"Result\": [\r\n          \"4\"   \r\n        ] \r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n   \"Appointment\":{\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\",\r\n         \"Subject\":\"Test Data \",\r\n         \"Description\":\"Test new car1234\",\r\n         \"StartDate\": \"2022-01-15\",\r\n         \"EndDate\":\"2022-01-16\",\r\n         \"Result\": [\r\n          \"4\"   \r\n        ] \r\n      }\r\n   }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
@@ -1895,7 +1915,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{ \r\n   \"Appointment\":{\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{ \r\n   \"Appointment\":{\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\"\r\n      }\r\n   }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete"
                   },
