@@ -1782,6 +1782,45 @@
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
+                },
+                {
+                  "name": "Appointment-Update With Criteria",
+                  "id": "b9bb3c5e-7dc5-4ed0-824b-0a36c80bb363",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Appointment.1\":{\r\n    \"Criteria\": {\r\n        \"SearchQuery\": {\r\n            \"$AND\": [ \r\n                {\r\n                \"Users/Item/Key\": {\r\n                    \"$IN\": [\r\n                        {\r\n                            \"UID\": \"MASTER\"\r\n                        }\r\n                    ]\r\n                }\r\n              }\r\n            ]\r\n        }\r\n      },\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjQwNTAxMDAwMTkxMzE5NzE2NTMxUAkwCU1BU1RFUg==\",\r\n         \"Subject\":\"Test Data JC\",\r\n         \"Description\":\"Test new car1234\",\r\n         \"StartDate\": \"2022-01-15\",\r\n         \"EndDate\":\"2022-01-16\",\r\n         \"Result\": [\r\n          \"4\"\r\n        ]\r\n      }\r\n   }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Appointment-Delete With Criteria",
+                  "id": "342b2ce1-6abc-4d47-87a0-4a0b2deead6e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{ \r\n   \"Appointment\":{\r\n      \"Data\":{\r\n         \"Key\":\"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\"\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
                 }
               ],
               "id": "6296f3de-2bbe-4541-8d08-440def574897"
