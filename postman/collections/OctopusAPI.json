@@ -1948,6 +1948,234 @@
           "id": "a5fac692-430b-490c-9ec3-b476616ead74"
         },
         {
+          "name": "Case",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Case - Phrase Search",
+                  "id": "ffc66b61-1d20-47be-a8ca-4003a8c69d66",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"CaseNumber\": 1,\r\n                \"AbEntry\": {\r\n                    \"DisplayValue\": 1,\r\n                    \"Phone1\": 1,\r\n                    \"Phone2\": 1,\r\n                    \"Phone3\": 1,\r\n                    \"Phone4\": 1,\r\n                    \"Email1\": 1,\r\n                    \"Email2\": 1,\r\n                    \"Email3\": 1,\r\n                    \"Address/DisplayValue\": 1\r\n                },\r\n                \"Contact\": {\r\n                    \"DisplayValue\": 1,\r\n                    \"Phone1\": 1,\r\n                    \"Phone2\": 1,\r\n                    \"Phone3\": 1,\r\n                    \"Phone4\": 1,\r\n                    \"Email1\": 1,\r\n                    \"Email2\": 1,\r\n                    \"Email3\": 1,\r\n                    \"Address/DisplayValue\": 1\r\n                },\r\n                \"Subject\": 1,\r\n                \"Description\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"test\"\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"LastModifyDate\": \"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICaseSearcher\": \"Maximizer.Model.Access.Sql.CaseSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Case - Overdue FollowUp",
+                  "id": "f57c989d-691c-4cba-a9d9-1035a0a1b124",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"CaseNumber\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"Subject\": 1,\r\n                \"FollowUpDate\": 1,\r\n                \"Overdue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Overdue\": {\r\n                    \"$EQ\": true\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICaseSearcher\": \"Maximizer.Model.Access.Sql.CaseSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "53bc5a9f-29a8-4beb-ba77-46e65bd04292"
+            },
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read Case metadata (simple)",
+                  "id": "6f297c04-e542-4807-9b4f-df43523d1e9d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Case\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Case metadata (more)",
+                  "id": "0a5e8c47-6699-4fd0-b26f-226139f4676c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Case\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "bb0903b5-d2e8-4f79-9547-ae4aea93a645"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "Read Case FieldOptions",
+                  "id": "00c5ec6e-fece-473a-a499-e17a45f1355a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"FieldOptions\": {\r\n            \"Subject\": 1,\r\n            \"AssignedTo\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Priority\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Severity\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"ResolvedBy\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Owner\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"ModifiedBy\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Creator\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Type\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Reason\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Origin\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Queue\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Group\": [\r\n                        {\r\n                            \"Value\": 1,\r\n                            \"DisplayValue\": 1\r\n                        }\r\n                    ]\r\n                }\r\n            ],\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Product\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "d317712f-66b1-476d-9609-91e9b8b5fb7c"
+            },
+            {
+              "name": "Case CRUD",
+              "item": [
+                {
+                  "name": "Case - Read",
+                  "id": "05806483-929a-4795-a660-d6252e052e26",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"CaseNumber\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"AbEntryKey\": {\r\n                    \"Id\": 1,\r\n                    \"Number\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"ContactKey\": {\r\n                    \"Id\": 1,\r\n                    \"Number\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"AssignedTo\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Priority\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Severity\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"ResolvedDate\": 1,\r\n                \"ResolvedBy\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Owner\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"FollowUpDate\": 1,\r\n                \"Overdue\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"ModifiedBy\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"CreationDate\": 1,\r\n                \"Creator\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Age\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Reason\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Origin\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Queue\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Status\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Category\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Product\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICaseSearcher\": \"Maximizer.Model.Access.Sql.CaseSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Case - Create",
+                  "id": "af4cd7e6-6124-459f-bc8a-bb43b9682db7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Data\": {\r\n            \"Key\": null, // will be generated automatically\r\n            \"CaseNumber\": null, // will be generated automatically\r\n            \"Subject\": \"Case Subject From Postman\", // mandatory\r\n            \"Description\": \"Case Description From Postman\", // mandatory\r\n            \"Product\": [ // mandatory\r\n                \"1\", // Accessories - see FieldOptions\r\n                \"2\" // Products - see FieldOptions\r\n            ],\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTA=\", // mandatory (Company or Individual)\r\n            \"ContactKey\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTI=\", // optional (Contact, must be from the same company specified in AbEntryKey)\r\n            \"AssignedTo\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"Owner\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"Type\": \"1\", // Question - see FieldOptions\r\n            \"Reason\": \"4\", // Existing Problem - see FieldOptions\r\n            \"Origin\": \"3\", // Email - see FieldOptions\r\n            \"Queue\": \"2\", // Priority - see FieldOptions\r\n            \"Status\": \"57998\", // Assigned - see FieldOptions\r\n            \"Priority\": 57900, // Low - see FieldOptions\r\n            \"Severity\": 57900 // Low - see FieldOptions\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Case - Update",
+                  "id": "c0c2799d-03f1-4cdc-9b7d-4e385dcc3f33",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q1NDYXNlCTI0MDUyMjI1MTUxMDI1NDUxMDAwNFMJMA==\", // mandatory\r\n            \"Subject\": \"Case Subject From Postman Updated\",\r\n            \"Description\": \"Case Description From Postman Updated\",\r\n            \"Priority\": 57902, // High - see FieldOptions\r\n            \"Severity\": 57901 // Medium - see FieldOptions\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Case - Delete",
+                  "id": "32c36c92-0661-4c8a-bfad-ef9375d9fd58",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Case\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q1NDYXNlCTI0MDUyMjI1MTUxMDI1NDUxMDAwNFMJMA==\" // mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "764c535e-b121-4c19-ae9e-6289d9d65529"
+            }
+          ],
+          "id": "b0700d88-d370-4d4a-a808-10c2884a28f9"
+        },
+        {
           "name": "CurrencyRate",
           "item": [
             {
