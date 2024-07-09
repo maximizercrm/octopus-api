@@ -4690,40 +4690,6 @@
             }
           ],
           "id": "1aed2310-79d6-42e9-9cdb-88fed2898f16"
-        },
-        {
-          "name": "Interaction",
-          "item": [
-            {
-              "name": "Interaction CRUD",
-              "item": [
-                {
-                  "name": "Create",
-                  "id": "1db3a769-75da-45b7-b081-f11c83901518",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IInteractionAccess\": \"Maximizer.Model.Access.Sql.InteractionAccess\"\r\n        }\r\n    },\r\n    \"Interaction\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"Test Source\",\r\n            \"Subject\": \"Create Interaction\",\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2024-01-01\",\r\n            \"EndDate\": \"2024-01-10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"Direction\": 1,\r\n            \"With\": \"Q1NDYXNlCTIzMTIyMTAwMDAwMDAwMjU5NjYxMzBTCTA=\",\r\n            \"Duration\": 240,\r\n            \"Result\": [\r\n                \"1\"\r\n            ],\r\n            \"Category\": [\r\n                \"2\"\r\n            ]\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Create"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "4dfe7927-776d-4fe9-a4c2-093592db745c"
-            }
-          ],
-          "id": "59c4521f-e111-4ecd-80a4-536633bceedb"
         }
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25"
