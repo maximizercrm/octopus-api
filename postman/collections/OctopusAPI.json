@@ -5564,6 +5564,62 @@
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
     },
     {
+      "name": "TestNewRahul",
+      "item": [
+        {
+          "name": "authenticate Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if(!pm.environment.get(\"Database\")) {",
+                  "    console.log(\"The Database environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"UID\")) {",
+                  "    console.log(\"The UID environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"Password\")) {",
+                  "    console.log(\"The Password environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "921c206a-ada4-43fe-8836-318a92b110c4"
+              }
+            }
+          ],
+          "id": "6cc47023-63f6-4c2e-92e8-ffaf4dbbaec7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\",\n\tappKey: \"{{AppKey}}\"\n}"
+            },
+            "url": "{{BaseURL}}/Authenticate"
+          },
+          "response": []
+        }
+      ],
+      "id": "dba5dba5-2ebe-49da-a83b-55a41360ef1b"
+    },
+    {
       "name": "authenticate",
       "event": [
         {
