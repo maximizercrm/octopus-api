@@ -695,11 +695,12 @@
                     {
                       "listen": "test",
                       "script": {
+                        "id": "45251c6e-ac7f-454c-a550-4b3c50485ff2",
                         "exec": [
                           ""
                         ],
                         "type": "text/javascript",
-                        "id": "45251c6e-ac7f-454c-a550-4b3c50485ff2"
+                        "packages": {}
                       }
                     }
                   ],
@@ -719,7 +720,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
+                    "url": "{{BaseURL}}/OctopusRead",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
