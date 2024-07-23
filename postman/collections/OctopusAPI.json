@@ -7,6 +7,768 @@
   },
   "item": [
     {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Authentication in CRM Live",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if(!pm.environment.get(\"Database\")) {",
+                  "    console.log(\"The Database environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"UID\")) {",
+                  "    console.log(\"The UID environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"Password\")) {",
+                  "    console.log(\"The Password environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "921c206a-ada4-43fe-8836-318a92b110c4"
+              }
+            }
+          ],
+          "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\",\n    \"VendorId\": \"{{VendorId}}\",\n    \"AppKey\": \"{{AppKey}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/Authenticate",
+            "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
+          },
+          "response": []
+        },
+        {
+          "name": "Authentication on-premise",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "921c206a-ada4-43fe-8836-318a92b110c4",
+                "exec": [
+                  "if(!pm.environment.get(\"Database\")) {",
+                  "    console.log(\"The Database environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"UID\")) {",
+                  "    console.log(\"The UID environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"Password\")) {",
+                  "    console.log(\"The Password environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "d24fb931-6c21-4206-8b8f-839833048943",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/Authenticate",
+            "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request."
+          },
+          "response": []
+        },
+        {
+          "name": "Token Validation",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if(!pm.environment.get(\"Token\")) {",
+                  "    console.log(\"The Token environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
+              }
+            }
+          ],
+          "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"token\": \"{{Token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/TokenValid"
+          },
+          "response": []
+        }
+      ],
+      "id": "764c7d84-8183-4608-b276-a9b2d8638b68",
+      "description": "Octopus API uses a token-based authentication system. A token is an encrypted string which identifies both the user and Maximizer Address Book for which the token is generated. Every method is exposed by Maximizer.Web.Data requires a valid token to be passed as a parameter in order to validate the user making the request.\n\n## Token expiration\n\nTokens are stored on the server and remain valid for 10 minutes from the time they are generated. However, once a token is used in a request, its expiry time is refreshed and is updated to 10 minutes after the time of the request. You can keep a token alive by refreshing it up to a maximum of 24 hours, at which point the token will expire automatically.\n\nOnce a token has expired, any requests made with that token will fail. To prevent a method call from failing, you should check to see if a token is still valid with the TokenValid method before you use it in a request. In general, you should request a new token before each action or operation that you perform using Octopus API to avoid any problems with expired tokens."
+    },
+    {
+      "name": "Query Syntax",
+      "item": [
+        {
+          "name": "query",
+          "item": [
+            {
+              "name": "$AND / $OR",
+              "id": "0a5ece04-7500-40f3-b105-0209e6bea0d8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\t\"$AND\": [\r\n                    {\r\n\t\t\t\t\t\t\"type\": {\r\n\t\t\t\t\t\t\t\"$EQ\": \"Company\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"$OR\": [\r\n                            {\r\n\t\t\t\t\t\t\t\tcompanyName: {\r\n\t\t\t\t\t\t\t\t\t\"$LIKE\": \"del%\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tcompanyName: {\r\n\t\t\t\t\t\t\t\t\t\"$LIKE\": \"dup%\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\ttype: 1,\r\n\t\t\t\tcompanyName: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$PHRASE",
+              "id": "4051c468-8c0f-46c3-9018-806c48bb2aed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$PHRASE\":\"access -steven address:maple\"\r\n\t\t\t},\r\n\t\t\ttop: 33\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n                address: {\r\n                    displayValue: 1\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$EXISTS",
+              "id": "f97adc26-af45-49f2-b862-950ca5f51efd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"abEntry.HasOpp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EXISTS(OpportunityObject)\": \"abEntryKey\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n \t\"abEntry.HasAbandonedOpp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EXISTS(OpportunityObject)\":{\r\n                        field: \"abEntryKey\",\r\n                        query:{\r\n                            status:{\r\n                                \"$EQ\":5\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n    opportunity:{\r\n        criteria:{\r\n            searchQuery:{\r\n                status: {\r\n                    \"$EQ\":5\r\n                }\r\n            }\r\n        },\r\n        scope:{\r\n            fields:{\r\n                objective: 1,\r\n                status: {\r\n                    value: 1,\r\n                    displayValue: 1,\r\n                },\r\n                abEntry:{\r\n                    displayValue: 1\r\n                }\r\n            }\r\n        }\r\n    },\t\r\n    configuration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\",\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "b973e566-95d0-4dc0-b6e1-32d1f8b0a021"
+        },
+        {
+          "name": "bulk",
+          "item": [
+            {
+              "name": "read",
+              "id": "94411f16-fbf0-4d91-965d-80272dfad85f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\t\"abEntry.cmp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n\t},\r\n\t\"abEntry.ind\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"type\": {\r\n                    \"$EQ\": \"Individual\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "2c1971fc-8917-4dff-9c15-904fe9feedd8"
+        },
+        {
+          "name": "paging",
+          "item": [
+            {
+              "name": "read, 1st page",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "062374d2-5ffa-479e-b934-53497b53ce5d"
+                  }
+                }
+              ],
+              "id": "4aba22e2-ec43-4da3-ac1c-a921214072a0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: null,\r\n            pageSize: 3,\r\n            fields:[\r\n                { lastModifyDate: \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/AbEntryRead",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "read, next page",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "7d77f3ca-34a5-428b-8bf1-ad54be1005da"
+                  }
+                }
+              ],
+              "id": "908208f5-87de-433c-be16-7236f46a7b33",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: \"Mw==\",\r\n            pageSize: 3,\r\n            fields:[\r\n                { lastModifyDate: \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/AbEntryRead",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "read, 1st page, default order",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "f24723e0-949e-4e99-9391-64d316076509"
+                  }
+                }
+              ],
+              "id": "664a7405-8cc8-41aa-a21c-7ed9d4d88398",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                 type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: null,\r\n            pageSize: 9\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/AbEntryRead",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "aa483dd9-ebff-4afb-82f4-7545e64c1bb2"
+        },
+        {
+          "name": "scope",
+          "item": [
+            {
+              "name": "view",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "482982ba-ec64-4ee2-b669-6a3f1dee9598"
+                  }
+                }
+              ],
+              "id": "9f47908b-8cfb-4b33-9320-ac25d98d4d0a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tcolumns: {\r\n\t\t\t\t0: \"person: {{firstName}}, {{lastName}} from: {{companyName}}\",\r\n                1: \"{%IF {{starred}} == false%}cold{%ELSE%}hot!{%ENDIF%}\",\r\n                2: \"created on {{creationDate/displayValue}} by {{creator/displayValue}}\",\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                { \"starred\" : \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "details",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "0fc49c07-b985-4e62-98b4-239c192cfc7c"
+                  }
+                }
+              ],
+              "id": "25c67773-9429-4a2c-8bb8-c8546ed58551",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 1\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\ttypes: {\r\n\t\t\t\t\"*\": 1\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "details, with $metadata",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "fb20d762-ec78-49cb-aeeb-98d0fd0e8d2d"
+                  }
+                }
+              ],
+              "id": "bb757c38-abc9-4b1d-b518-938d82fa544c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 1\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\ttypes: {\r\n                \"EnumField<StringItem>\": {\r\n                    \"$metadata\": {\r\n                        key: 1,\r\n                        name: 1,\r\n                        assignable: 1,\r\n                        attributes: 1\r\n                    },\r\n                    items:[\r\n                        {\r\n                            key: 1,\r\n                            displayValue: 1\r\n                        }\r\n                    ]\r\n                },\r\n\t\t\t\t\"*\": {\r\n                    \"$metadata\": {\r\n                        key: 1,\r\n                        type: 1,\r\n                        name: 1,\r\n                        assignable: 1,\r\n                        attributes: 1\r\n                    },\r\n                    displayValue: 1\r\n                }\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "fa34d8f8-94dc-4df3-a761-f4eb63311700"
+        },
+        {
+          "name": "group by",
+          "item": [
+            {
+              "name": "$COUNT",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "b87689a2-1282-4681-9e26-bb6d2fbc13b2"
+                  }
+                }
+              ],
+              "id": "fc4f9b23-4922-4b14-9652-34a0e91626c6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n \t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                type: 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n\t\t},\r\n        groupBy:{\r\n            fields:[\r\n                \"type\"\r\n            ]\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"$COUNT(type)\": \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$SUM",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "9f56bc21-ba29-4417-bee2-c22029cafb2d"
+                  }
+                }
+              ],
+              "id": "b4117377-1bf5-4ac6-9c65-9e58777f6f84",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                status:{\r\n                    \"$IN\": [2, 3, 4]\r\n                }\r\n            }\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"status/displayValue\": 1,\r\n                \"$MIN(corporateRevenue)\": 1,\r\n                \"$MAX(corporateRevenue)\": 1,\r\n                \"$AVG(corporateRevenue)\": 1,\r\n                \"$SUM(corporateRevenue)/displayValue\": 1,\r\n                \"$COUNT()\": 1,\r\n            }\r\n\t\t},\r\n        groupBy:{\r\n            fields:[\r\n                \"status\"\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "67c98299-43d2-4dc1-99ca-7ddaa15f1320"
+        },
+        {
+          "name": "funclets",
+          "item": [
+            {
+              "name": "$LEFT",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "691b7cae-cacd-4280-810e-3dbbbef949d2"
+                  }
+                }
+              ],
+              "id": "10a97eb5-5578-4dbf-a3ca-858927dcbc7e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tnote: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$LEFT(text, 16)\": 1,\r\n                \"$RIGHT(text, 16)\": 1,\r\n                \"$LENGTH(text)\": 1,\r\n                text: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"INoteSearcher\": \"Maximizer.Model.Access.Sql.NoteSearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$TO",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "3a4df7a5-cede-46e9-bbdf-4d3cc3f49580"
+                  }
+                }
+              ],
+              "id": "e2f7f423-b308-45ae-8afa-589cfb3c3625",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                address:{\r\n                    \"$TOUPPER(country)\": 1,\r\n                    \"$TOLOWER(country)\": 1,\r\n                    country: 1\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$DISTANCE",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "0c4e8900-de0e-4d15-878c-2114cc8ac263"
+                  }
+                }
+              ],
+              "id": "19e891a6-7f53-4fcf-805c-9459a77f21a0",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$DISTANCE(address/location, 49.25769:-122.82818)\": {\r\n                    \"$LE\":1000000\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1,\r\n                address:{\r\n                    displayValue: 1,\r\n                    location: {\r\n                        latitude: 1,\r\n                        longitude: 1\r\n                    },\r\n                    \"$DISTANCE(location, 49.25769:-122.82818)\": 1\r\n                }\r\n\t\t\t},\r\n            orderBy:{\r\n                fields:[\r\n                    { \"$DISTANCE(location, 49.25769:-122.82818)\": \"DESC\" }\r\n                ]\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$COUNT",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "ba10c042-9b22-4c94-967a-df82b8df4721"
+                  }
+                }
+              ],
+              "id": "4ac9a51d-11d9-4032-9b72-417bbecc9576",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Company\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$COUNT()\": 1\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$FORMAT",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "3e625a61-2a75-4e8a-8ea8-229f775b78c7"
+                  }
+                }
+              ],
+              "id": "a6d38b82-f341-4987-98ca-8f62e5810a4a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$FORMAT({id}:{number}, Key)\": 1,\r\n                \"$FORMAT(YYYY-MM, creationDate)\": 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$TOSTRING",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "4ed8c8d0-dc43-4244-9c4e-a2b802f79b76"
+                  }
+                }
+              ],
+              "id": "ff372744-93b3-45ed-b952-5ce1bf78a191",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$TOSTRING(status)\": 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$YEAR",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "21d1679b-23bc-4854-aa56-04682d6b8d28"
+                  }
+                }
+              ],
+              "id": "e27d602a-cf63-4c3a-89b4-fb9eedec3a60",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\tnote: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$YEAR(dateTime)\": 1,\r\n                \"$MONTH(dateTime)\": 1,\r\n                \"$WEEKOFYEAR(dateTime)\": 1,\r\n                \"$DAYOFWEEK(dateTime)\": 1,\r\n                \"$DAY(dateTime)\": 1,\r\n                dateTime: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"INoteSearcher\": \"Maximizer.Model.Access.Sql.NoteSearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            },
+            {
+              "name": "$FISCAL",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "f48f6c94-9e74-40b3-a710-104f58dca012"
+                  }
+                }
+              ],
+              "id": "849274c0-f9fa-4bc4-a4b8-3d2364af482b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$FISCALYEAR(closeDate)\":{\r\n                    \"$EQ\":2022\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$FISCALYEAR(closeDate)\": 1,\r\n                \"$YEAR(closeDate)\": 1,\r\n                \"$FISCALQUARTER(closeDate)\": 1,\r\n                closeDate: 1\r\n\t\t\t}\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                \"$FISCALQUARTER(closeDate)\",\r\n                \"closeDate\"\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
+                },
+                "url": "{{BaseURL}}/Read",
+                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+              },
+              "response": []
+            }
+          ],
+          "id": "b84d8639-685e-4e6c-93ba-3b971d8ac55a"
+        }
+      ],
+      "id": "b9da4a20-8157-4272-be56-76c9bfd0468e",
+      "description": "All Octopus API requests are JSON objects. With the exception of the authentication and system information methods, all share a common structure.\n\n# Requests\n\n## Authentication Token\n\nWith the exception of the Authenticate and GetSystemInfo methods, all Octopus API methods require that a valid token be passed in the request. If no token is supplied, the request will fail with an error.\n\nThe authentication token is passed as a header \"Authorization.\"\n\n## Entity\n\nThe top-level object in most requests is the entity being passed in the request. In the example below, since this is an AbEntryRead request, the entity that is passed is an AbEntry entity.\n\nThe contents of the AbEntry entity object will vary depending on the method being called.\n\nThe authentication and system information methods do not follow this basic structure, as they do not require an entity object to be supplied. The request structure for these methods varies depending on the method. See the Authentication Methods section and System Methods section for details about the requests for these methods.\n\n### AbEntryRead Request Example\n\n``` json\n{\n  \"AbEntry\":{\n    \"Scope\":{\n      \"Fields\":{\n        \"Key\":1,\n        \"CompanyName\":1\n      }\n    },\n    \"Criteria\":{\n      \"SearchQuery\":{\n        \"$LIKE\":{\n          \"CompanyName\":\"A%\"\n        }\n      }\n    },\n    \"Options\":{}\n  }\n}\n\n ```\n\n### AbEntry Create Request Example\n\n``` json\n{\n  \"AbEntry\":{\n    \"Data\":{\n      \"Key\":null,\n      \"Type\":\"Company\",\n      \"CompanyName\":\"ABC Wine Shop\"\n    }\n  }\n}\n\n ```\n\n# Responses\n\n## Code\n\nAll Octopus API methods return an integer Code to indicate if the request was successful or if it failed.\n\nA Code value of 0 indicates that the request was successful. A negative Code value indicates that an error occurred when processing the request.\n\nStartFragment\n\n## Data\n\nIf the request is successful, all Octopus API methods return a Data object which contains the results of the request.\n\nFor entity methods, the Data object is nested inside the root level entity object corresponding to the method being called.\n\nThe contents of the Data object vary depending on the method being called.\n\nStartFragment\n\n## Msg\n\nThe Msg property, if present is an array of strings that contain additional informaiton about the request or the response.\n\nFor example, the Msg property may contain information about errors or request failures, or about the status of the API itself.\n\n- If the request fails for any reason, all Octopus API methods return a Msg array containing information about the error that has occurred to help with troubleshooting.\n    \n- If the entity or method that is called is still in a beta or testing release state, the Msg array will contain a message indicating that the method should not be used in a production environment.\n    \n\n### Authenticate Success Example\n\n``` json\n{\n  \"Code\":0,\n  \"Data\":{\n    \"Token\":\"<token>\"\n  }\n}\n\n ```\n\n### AbEntryRead Success Example\n\n``` json\n{\n  \"Code\":0,\n  \"AbEntry\":{\n    \"Data\":[\n      {\n        \"Key\":\"Q29udGFjdAkwMDEwMDIwMDA2MTMwNjM2NzExNTZDCTU=\",\n        \"CompanyName\":\"ABC Wine Shop\"\n      },\n      {\n        \"Key\":\"Q29udGFjdAkzNzI2NjIwMDA3MQkx\",\n        \"CompanyName\":\"Ansley Wine Merchants\"\n      }\n    ]\n  }\n}\n\n ```\n\n### Error Example\n\n``` json\n{\n  \"Code\":-1,\n  \"Msg\":[\n    \"The given key is of a type not supported by the target object.(DONOTUPDATE)\"\n  ]\n}\n\n ```"
+    },
+    {
       "name": "Objects",
       "item": [
         {
@@ -33,8 +795,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
@@ -56,8 +817,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
@@ -79,8 +839,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
@@ -124,8 +883,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -159,8 +917,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -182,8 +939,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -205,8 +961,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -240,8 +995,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -263,8 +1017,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -286,8 +1039,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -309,8 +1061,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -344,8 +1095,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -367,8 +1117,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -390,8 +1139,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/DocumentDownload/RG9jdW1lbnQJMzcwMDUzNzMz",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                    "url": "{{BaseURL}}/DocumentDownload/RG9jdW1lbnQJMzcwMDUzNzMz"
                   },
                   "response": []
                 },
@@ -413,8 +1161,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 }
@@ -464,8 +1211,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -487,8 +1233,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 }
@@ -516,8 +1261,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -539,8 +1283,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -562,8 +1305,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -585,8 +1327,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -608,8 +1349,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -631,8 +1371,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 }
@@ -684,8 +1423,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
@@ -720,8 +1458,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -767,8 +1504,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Update",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Update"
                   },
                   "response": []
                 },
@@ -814,8 +1550,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Delete",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                    "url": "{{BaseURL}}/Delete"
                   },
                   "response": []
                 }
@@ -1379,6 +2114,160 @@
             }
           ],
           "id": "a5fac692-430b-490c-9ec3-b476616ead74"
+        },
+        {
+          "name": "Campaign",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read Campaign metadata (simple)",
+                  "id": "ce588881-f362-4a2f-8834-f57754657daf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Campaign\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Campaign metadata (more)",
+                  "id": "9bdc2016-632f-4c8c-bec3-a0abe2465249",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Campaign\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\":1,\r\n                \"Queryable\":1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Campaign FieldOption",
+                  "id": "c004ca77-0507-4df3-a6b8-d78a319e71e7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Campaign\":{\r\n      \"FieldOptions\":{\r\n         \"Status\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Type\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(34)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(42)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(42)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(44)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(97)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(100)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(60025)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(60028)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ]\r\n\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "59f39cf5-d575-45a0-bf44-3ce3df931731"
+            },
+            {
+              "name": "Campaign CRUD",
+              "item": [
+                {
+                  "name": "Campaign-Read_Phrase",
+                  "id": "68b267cd-cbc3-4470-9ee2-b86d9f8d14ff",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignSearcher\": \"Maximizer.Model.Access.Sql.CampaignSearcher\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Criteria\":{\r\n       \"SearchQuery\":{            \r\n            \"$PHRASE\":\"Email Campaign - Test updated\"         \r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Status\":1,\r\n            \"Name\":1,\r\n            \"Type\":1,\r\n            \"Description\":1,\r\n            \"Cost\":1,\r\n            \"ForecastRevenue\":1,\r\n            \"ActualRevenue\":1,\r\n            \"StartDate\":1,\r\n            \"EndDate\":1,\r\n            \"Creator\":1,\r\n            \"CreationDate\":1,\r\n            \"ModifiedBy\":1,\r\n            \"LastModifyDate\":1,            \r\n            \"SecStatus\":{\r\n               \"CanRead\":1,\r\n               \"CanUpdate\":1,\r\n               \"CanDelete\":1\r\n            },\r\n            \"Udf/$TYPEID(1)\":1,\r\n            \"Udf/$TYPEID(34)\":1,\r\n            \"Udf/$TYPEID(42)\":1,\r\n            \"Udf/$TYPEID(44)\":1,\r\n            \"Udf/$TYPEID(97)\":1,\r\n            \"Udf/$TYPEID(99)\":1,\r\n            \"Udf/$TYPEID(100)\":1\r\n\r\n         }\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Campaign-Read",
+                  "id": "c51d1519-862d-4671-8935-204f479c0f73",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignSearcher\": \"Maximizer.Model.Access.Sql.CampaignSearcher\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Criteria\":{\r\n       \"SearchQuery\":{\r\n            \"Key\":{\r\n               \"$EQ\":\"Q2FtcGFpZ24JMjIwODAyMDAyMzYwNzcyMjM4MTY5TQkw\"\r\n            }\r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Status\":1,\r\n            \"Name\":1,\r\n            \"Type\":1,\r\n            \"Description\":1,\r\n            \"Cost\":1,\r\n            \"ForecastRevenue\":1,\r\n            \"ActualRevenue\":1,\r\n            \"StartDate\":1,\r\n            \"EndDate\":1,\r\n            \"Creator\":1,\r\n            \"CreationDate\":1,\r\n            \"ModifiedBy\":1,\r\n            \"LastModifyDate\":1,            \r\n            \"SecStatus\":{\r\n               \"CanRead\":1,\r\n               \"CanUpdate\":1,\r\n               \"CanDelete\":1\r\n            },\r\n            \"Udf/$TYPEID(1)\":1,\r\n            \"Udf/$TYPEID(34)\":1,\r\n            \"Udf/$TYPEID(42)\":1,\r\n            \"Udf/$TYPEID(44)\":1,\r\n            \"Udf/$TYPEID(97)\":1,\r\n            \"Udf/$TYPEID(99)\":1,\r\n            \"Udf/$TYPEID(100)\":1\r\n\r\n         }\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Campaign-Create",
+                  "id": "a29f2c35-2bda-45d9-af10-80f2bda8cc09",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"Status\": 6,\r\n        \"Name\": \"Email Campaign - Test_New\",\r\n        \"Type\": 15,\r\n        \"Description\": \"Test Description\",\r\n        \"Cost\": 1500.0,\r\n        \"ForecastRevenue\": 7000.0,\r\n        \"ActualRevenue\": 0.0,\r\n        \"StartDate\": \"2022-01-01\",\r\n        \"EndDate\": \"2022-03-31\",\r\n        \"Creator\": \"VXNlcglNQVNURVI=\",\r\n        \"CreationDate\": \"2022-01-21\",\r\n        \"Udf/$TYPEID(1)\": \"Test UDF\"\r\n          \r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Campaign-Update",
+                  "id": "95e8cfaa-952f-49a5-bd35-1b9b03c52e9a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\": \"Q2FtcGFpZ24JMjIwNzEzMDAyMTAwNzcyMjM4MTY5TQkw\",\r\n      \"Status\": 6,\r\n      \"Name\": \"Email Campaign - Test updated\",\r\n      \"Type\": 15,\r\n      \"Description\": \"Test Description updated\",\r\n      \"Cost\": 100.0,\r\n      \"ForecastRevenue\": 700.0,\r\n      \"ActualRevenue\": 0.0,\r\n      \"StartDate\": \"2022-01-01\",\r\n      \"EndDate\": \"2022-03-31\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2022-01-21T00:00:00\",\r\n      \"ModifiedBy\": \"VXNlcglNQVNURVI=\",\r\n        \"LastModifyDate\": \"2022-01-22\",\r\n      \"Udf/$TYPEID(1)\": \"Test UDF updated\"\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Canpaign-Delete",
+                  "id": "7ecb7c07-c9dc-4715-9c2f-1f9095844446",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q2FtcGFpZ24JMjIwNzEzMDAyMTAwNzcyMjM4MTY5TQkw\"\r\n      }\r\n   }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "9602a638-8ae6-4d0f-86cd-a2cb518904f6"
+            }
+          ],
+          "id": "23469cd4-396a-4d0b-9f4b-9623eab529b8"
         },
         {
           "name": "Case",
@@ -2937,6 +3826,40 @@
             }
           ],
           "id": "d2d35890-f8af-4160-bd1e-34b0b1b72406"
+        },
+        {
+          "name": "Note",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read Notes based on OpportunityKey, LeadKey & ContactKey",
+                  "id": "bcf30222-e23a-451a-be05-6752bab8fc33",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Opportunitykey, AbEntryKey, LeadKey\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"ParentKey\": 1,\r\n                \"Parent\": {\r\n                    \"EntityType\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"SecStatus\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "2e7b7777-8313-4fd6-baa9-2e32e7665467"
+            }
+          ],
+          "id": "1aed2310-79d6-42e9-9cdb-88fed2898f16"
         },
         {
           "name": "Opportunity",
@@ -4695,637 +5618,9 @@
             }
           ],
           "id": "cb49744c-cb6d-4f09-bd50-ecf14ea66043"
-        },
-        {
-          "name": "Note",
-          "item": [
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "Read Notes based on OpportunityKey, LeadKey & ContactKey",
-                  "id": "bcf30222-e23a-451a-be05-6752bab8fc33",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Note\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Opportunitykey, AbEntryKey, LeadKey\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"ParentKey\": 1,\r\n                \"Parent\": {\r\n                    \"EntityType\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"SecStatus\": 1\r\n            }\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "2e7b7777-8313-4fd6-baa9-2e32e7665467"
-            }
-          ],
-          "id": "1aed2310-79d6-42e9-9cdb-88fed2898f16"
         }
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25"
-    },
-    {
-      "name": "Syntax",
-      "item": [
-        {
-          "name": "query",
-          "item": [
-            {
-              "name": "$AND / $OR",
-              "id": "0a5ece04-7500-40f3-b105-0209e6bea0d8",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\t\"$AND\": [\r\n                    {\r\n\t\t\t\t\t\t\"type\": {\r\n\t\t\t\t\t\t\t\"$EQ\": \"Company\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"$OR\": [\r\n                            {\r\n\t\t\t\t\t\t\t\tcompanyName: {\r\n\t\t\t\t\t\t\t\t\t\"$LIKE\": \"del%\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\tcompanyName: {\r\n\t\t\t\t\t\t\t\t\t\"$LIKE\": \"dup%\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t]\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\ttype: 1,\r\n\t\t\t\tcompanyName: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$PHRASE",
-              "id": "4051c468-8c0f-46c3-9018-806c48bb2aed",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$PHRASE\":\"access -steven address:maple\"\r\n\t\t\t},\r\n\t\t\ttop: 33\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n                address: {\r\n                    displayValue: 1\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$EXISTS",
-              "id": "f97adc26-af45-49f2-b862-950ca5f51efd",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\t\"abEntry.HasOpp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EXISTS(OpportunityObject)\": \"abEntryKey\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n \t\"abEntry.HasAbandonedOpp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EXISTS(OpportunityObject)\":{\r\n                        field: \"abEntryKey\",\r\n                        query:{\r\n                            status:{\r\n                                \"$EQ\":5\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n    opportunity:{\r\n        criteria:{\r\n            searchQuery:{\r\n                status: {\r\n                    \"$EQ\":5\r\n                }\r\n            }\r\n        },\r\n        scope:{\r\n            fields:{\r\n                objective: 1,\r\n                status: {\r\n                    value: 1,\r\n                    displayValue: 1,\r\n                },\r\n                abEntry:{\r\n                    displayValue: 1\r\n                }\r\n            }\r\n        }\r\n    },\t\r\n    configuration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\",\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "b973e566-95d0-4dc0-b6e1-32d1f8b0a021"
-        },
-        {
-          "name": "bulk",
-          "item": [
-            {
-              "name": "read",
-              "id": "94411f16-fbf0-4d91-965d-80272dfad85f",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\t\"abEntry.cmp\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n\t},\r\n\t\"abEntry.ind\": {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"type\": {\r\n                    \"$EQ\": \"Individual\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "2c1971fc-8917-4dff-9c15-904fe9feedd8"
-        },
-        {
-          "name": "paging",
-          "item": [
-            {
-              "name": "read, 1st page",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "062374d2-5ffa-479e-b934-53497b53ce5d"
-                  }
-                }
-              ],
-              "id": "4aba22e2-ec43-4da3-ac1c-a921214072a0",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: null,\r\n            pageSize: 3,\r\n            fields:[\r\n                { lastModifyDate: \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/AbEntryRead",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "read, next page",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "7d77f3ca-34a5-428b-8bf1-ad54be1005da"
-                  }
-                }
-              ],
-              "id": "908208f5-87de-433c-be16-7236f46a7b33",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: \"Mw==\",\r\n            pageSize: 3,\r\n            fields:[\r\n                { lastModifyDate: \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/AbEntryRead",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "read, 1st page, default order",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "f24723e0-949e-4e99-9391-64d316076509"
-                  }
-                }
-              ],
-              "id": "664a7405-8cc8-41aa-a21c-7ed9d4d88398",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                 type: {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            pageKey: null,\r\n            pageSize: 9\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/AbEntryRead",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "aa483dd9-ebff-4afb-82f4-7545e64c1bb2"
-        },
-        {
-          "name": "scope",
-          "item": [
-            {
-              "name": "view",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "482982ba-ec64-4ee2-b669-6a3f1dee9598"
-                  }
-                }
-              ],
-              "id": "9f47908b-8cfb-4b33-9320-ac25d98d4d0a",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tcolumns: {\r\n\t\t\t\t0: \"person: {{firstName}}, {{lastName}} from: {{companyName}}\",\r\n                1: \"{%IF {{starred}} == false%}cold{%ELSE%}hot!{%ENDIF%}\",\r\n                2: \"created on {{creationDate/displayValue}} by {{creator/displayValue}}\",\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                { \"starred\" : \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "details",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "0fc49c07-b985-4e62-98b4-239c192cfc7c"
-                  }
-                }
-              ],
-              "id": "25c67773-9429-4a2c-8bb8-c8546ed58551",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 1\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\ttypes: {\r\n\t\t\t\t\"*\": 1\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "details, with $metadata",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "fb20d762-ec78-49cb-aeeb-98d0fd0e8d2d"
-                  }
-                }
-              ],
-              "id": "bb757c38-abc9-4b1d-b518-938d82fa544c",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Contact\"\r\n                }\r\n            },\r\n\t\t\ttop: 1\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\ttypes: {\r\n                \"EnumField<StringItem>\": {\r\n                    \"$metadata\": {\r\n                        key: 1,\r\n                        name: 1,\r\n                        assignable: 1,\r\n                        attributes: 1\r\n                    },\r\n                    items:[\r\n                        {\r\n                            key: 1,\r\n                            displayValue: 1\r\n                        }\r\n                    ]\r\n                },\r\n\t\t\t\t\"*\": {\r\n                    \"$metadata\": {\r\n                        key: 1,\r\n                        type: 1,\r\n                        name: 1,\r\n                        assignable: 1,\r\n                        attributes: 1\r\n                    },\r\n                    displayValue: 1\r\n                }\r\n            },\r\n            fields: {\r\n                key: 1,\r\n            }\r\n\t\t}\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "fa34d8f8-94dc-4df3-a761-f4eb63311700"
-        },
-        {
-          "name": "group by",
-          "item": [
-            {
-              "name": "$COUNT",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "b87689a2-1282-4681-9e26-bb6d2fbc13b2"
-                  }
-                }
-              ],
-              "id": "fc4f9b23-4922-4b14-9652-34a0e91626c6",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n \t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                type: 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n\t\t},\r\n        groupBy:{\r\n            fields:[\r\n                \"type\"\r\n            ]\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"$COUNT(type)\": \"DESC\" }\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$SUM",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "9f56bc21-ba29-4417-bee2-c22029cafb2d"
-                  }
-                }
-              ],
-              "id": "b4117377-1bf5-4ac6-9c65-9e58777f6f84",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                status:{\r\n                    \"$IN\": [2, 3, 4]\r\n                }\r\n            }\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"status/displayValue\": 1,\r\n                \"$MIN(corporateRevenue)\": 1,\r\n                \"$MAX(corporateRevenue)\": 1,\r\n                \"$AVG(corporateRevenue)\": 1,\r\n                \"$SUM(corporateRevenue)/displayValue\": 1,\r\n                \"$COUNT()\": 1,\r\n            }\r\n\t\t},\r\n        groupBy:{\r\n            fields:[\r\n                \"status\"\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "67c98299-43d2-4dc1-99ca-7ddaa15f1320"
-        },
-        {
-          "name": "funclets",
-          "item": [
-            {
-              "name": "$LEFT",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "691b7cae-cacd-4280-810e-3dbbbef949d2"
-                  }
-                }
-              ],
-              "id": "10a97eb5-5578-4dbf-a3ca-858927dcbc7e",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tnote: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$LEFT(text, 16)\": 1,\r\n                \"$RIGHT(text, 16)\": 1,\r\n                \"$LENGTH(text)\": 1,\r\n                text: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"INoteSearcher\": \"Maximizer.Model.Access.Sql.NoteSearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$TO",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "3a4df7a5-cede-46e9-bbdf-4d3cc3f49580"
-                  }
-                }
-              ],
-              "id": "e2f7f423-b308-45ae-8afa-589cfb3c3625",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                address:{\r\n                    \"$TOUPPER(country)\": 1,\r\n                    \"$TOLOWER(country)\": 1,\r\n                    country: 1\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$DISTANCE",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "0c4e8900-de0e-4d15-878c-2114cc8ac263"
-                  }
-                }
-              ],
-              "id": "19e891a6-7f53-4fcf-805c-9459a77f21a0",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$DISTANCE(address/location, 49.25769:-122.82818)\": {\r\n                    \"$LE\":1000000\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                displayValue: 1,\r\n                address:{\r\n                    displayValue: 1,\r\n                    location: {\r\n                        latitude: 1,\r\n                        longitude: 1\r\n                    },\r\n                    \"$DISTANCE(location, 49.25769:-122.82818)\": 1\r\n                }\r\n\t\t\t},\r\n            orderBy:{\r\n                fields:[\r\n                    { \"$DISTANCE(location, 49.25769:-122.82818)\": \"DESC\" }\r\n                ]\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$COUNT",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "ba10c042-9b22-4c94-967a-df82b8df4721"
-                  }
-                }
-              ],
-              "id": "4ac9a51d-11d9-4032-9b72-417bbecc9576",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type:{\r\n                    \"$EQ\":\"Company\"\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$COUNT()\": 1\r\n            }\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$FORMAT",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "3e625a61-2a75-4e8a-8ea8-229f775b78c7"
-                  }
-                }
-              ],
-              "id": "a6d38b82-f341-4987-98ca-8f62e5810a4a",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tabEntry: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$FORMAT({id}:{number}, Key)\": 1,\r\n                \"$FORMAT(YYYY-MM, creationDate)\": 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$TOSTRING",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "4ed8c8d0-dc43-4244-9c4e-a2b802f79b76"
-                  }
-                }
-              ],
-              "id": "ff372744-93b3-45ed-b952-5ce1bf78a191",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$TOSTRING(status)\": 1,\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$YEAR",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "21d1679b-23bc-4854-aa56-04682d6b8d28"
-                  }
-                }
-              ],
-              "id": "e27d602a-cf63-4c3a-89b4-fb9eedec3a60",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\tnote: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$YEAR(dateTime)\": 1,\r\n                \"$MONTH(dateTime)\": 1,\r\n                \"$WEEKOFYEAR(dateTime)\": 1,\r\n                \"$DAYOFWEEK(dateTime)\": 1,\r\n                \"$DAY(dateTime)\": 1,\r\n                dateTime: 1\r\n\t\t\t}\r\n\t\t},\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"INoteSearcher\": \"Maximizer.Model.Access.Sql.NoteSearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            },
-            {
-              "name": "$FISCAL",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "f48f6c94-9e74-40b3-a710-104f58dca012"
-                  }
-                }
-              ],
-              "id": "849274c0-f9fa-4bc4-a4b8-3d2364af482b",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n\topportunity: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                \"$FISCALYEAR(closeDate)\":{\r\n                    \"$EQ\":2022\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$FISCALYEAR(closeDate)\": 1,\r\n                \"$YEAR(closeDate)\": 1,\r\n                \"$FISCALQUARTER(closeDate)\": 1,\r\n                closeDate: 1\r\n\t\t\t}\r\n\t\t},\r\n        orderBy:{\r\n            fields:[\r\n                \"$FISCALQUARTER(closeDate)\",\r\n                \"closeDate\"\r\n            ]\r\n        }\r\n\t},\r\n\tconfiguration: {\r\n\t\tdrivers: {\r\n\t\t\t\"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n\t\t}\r\n\t}\r\n}"
-                },
-                "url": "{{BaseURL}}/Read",
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": []
-            }
-          ],
-          "id": "b84d8639-685e-4e6c-93ba-3b971d8ac55a"
-        }
-      ],
-      "id": "b9da4a20-8157-4272-be56-76c9bfd0468e"
     },
     {
       "name": "Advanced",
@@ -5563,97 +5858,6 @@
         }
       ],
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
-    },
-    {
-      "name": "authenticate",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "if(!pm.environment.get(\"Database\")) {",
-              "    console.log(\"The Database environment variable is required.\");",
-              "}",
-              "if(!pm.environment.get(\"UID\")) {",
-              "    console.log(\"The UID environment variable is required.\");",
-              "}",
-              "if(!pm.environment.get(\"Password\")) {",
-              "    console.log(\"The Password environment variable is required.\");",
-              "}"
-            ],
-            "type": "text/javascript",
-            "id": "921c206a-ada4-43fe-8836-318a92b110c4"
-          }
-        }
-      ],
-      "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "auth": {
-          "type": "noauth"
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\tdatabase: \"{{Database}}\",\n\tuid: \"{{UID}}\",\n\tpassword: \"{{Password}}\",\n\tvendorId: \"{{VendorId}}\",\n\tappKey: \"{{AppKey}}\"\n}"
-        },
-        "url": "{{BaseURL}}/Authenticate"
-      },
-      "response": []
-    },
-    {
-      "name": "validate token",
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              "if(!pm.environment.get(\"Token\")) {",
-              "    console.log(\"The Token environment variable is required.\");",
-              "}"
-            ],
-            "type": "text/javascript",
-            "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
-          }
-        }
-      ],
-      "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
-      "protocolProfileBehavior": {
-        "disableBodyPruning": true
-      },
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\ttoken: \"{{Token}}\"\n}"
-        },
-        "url": "{{BaseURL}}/TokenValid"
-      },
-      "response": []
     }
   ],
   "auth": {
