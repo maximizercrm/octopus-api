@@ -10,62 +10,6 @@
       "name": "Authentication",
       "item": [
         {
-          "name": "Authentication in CRM Live",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if(!pm.environment.get(\"Database\")) {",
-                  "    console.log(\"The Database environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"UID\")) {",
-                  "    console.log(\"The UID environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"Password\")) {",
-                  "    console.log(\"The Password environment variable is required.\");",
-                  "}"
-                ],
-                "type": "text/javascript",
-                "id": "921c206a-ada4-43fe-8836-318a92b110c4"
-              }
-            }
-          ],
-          "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\",\n    \"VendorId\": \"{{VendorId}}\",\n    \"AppKey\": \"{{AppKey}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{BaseURL}}/Authenticate",
-            "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
-          },
-          "response": []
-        },
-        {
           "name": "Authentication on-premise",
           "event": [
             {
@@ -120,52 +64,6 @@
             },
             "url": "{{BaseURL}}/Authenticate",
             "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request."
-          },
-          "response": []
-        },
-        {
-          "name": "Token Validation",
-          "event": [
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if(!pm.environment.get(\"Token\")) {",
-                  "    console.log(\"The Token environment variable is required.\");",
-                  "}"
-                ],
-                "type": "text/javascript",
-                "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
-              }
-            }
-          ],
-          "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"token\": \"{{Token}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{BaseURL}}/TokenValid"
           },
           "response": []
         }
@@ -5858,6 +5756,173 @@
         }
       ],
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Authentication in CRM Live",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if(!pm.environment.get(\"Database\")) {",
+                  "    console.log(\"The Database environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"UID\")) {",
+                  "    console.log(\"The UID environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"Password\")) {",
+                  "    console.log(\"The Password environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "921c206a-ada4-43fe-8836-318a92b110c4"
+              }
+            }
+          ],
+          "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\",\n    \"VendorId\": \"{{VendorId}}\",\n    \"AppKey\": \"{{AppKey}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/Authenticate",
+            "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
+          },
+          "response": []
+        },
+        {
+          "name": "Authentication on-premise",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "921c206a-ada4-43fe-8836-318a92b110c4",
+                "exec": [
+                  "if(!pm.environment.get(\"Database\")) {",
+                  "    console.log(\"The Database environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"UID\")) {",
+                  "    console.log(\"The UID environment variable is required.\");",
+                  "}",
+                  "if(!pm.environment.get(\"Password\")) {",
+                  "    console.log(\"The Password environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "id": "23f8f085-e35b-47eb-8764-1f1fe04cb186",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/Authenticate",
+            "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request."
+          },
+          "response": []
+        },
+        {
+          "name": "Token Validation",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if(!pm.environment.get(\"Token\")) {",
+                  "    console.log(\"The Token environment variable is required.\");",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
+              }
+            }
+          ],
+          "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"token\": \"{{Token}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{BaseURL}}/TokenValid"
+          },
+          "response": []
+        }
+      ],
+      "id": "d7752c26-4eea-4efe-a331-f1e0efc74f6e",
+      "description": "Octopus API uses a token-based authentication system. A token is an encrypted string which identifies both the user and Maximizer Address Book for which the token is generated. Every method is exposed by Maximizer.Web.Data requires a valid token to be passed as a parameter in order to validate the user making the request.\n\n## Token expiration\n\nTokens are stored on the server and remain valid for 10 minutes from the time they are generated. However, once a token is used in a request, its expiry time is refreshed and is updated to 10 minutes after the time of the request. You can keep a token alive by refreshing it up to a maximum of 24 hours, at which point the token will expire automatically.\n\nOnce a token has expired, any requests made with that token will fail. To prevent a method call from failing, you should check to see if a token is still valid with the TokenValid method before you use it in a request. In general, you should request a new token before each action or operation that you perform using Octopus API to avoid any problems with expired tokens."
     }
   ],
   "auth": {
