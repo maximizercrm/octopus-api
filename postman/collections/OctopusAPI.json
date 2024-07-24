@@ -1848,70 +1848,10 @@
           "name": "Appointment",
           "item": [
             {
-              "name": "Metadata",
-              "item": [
-                {
-                  "name": "Read Appointment schema (simple)",
-                  "id": "e2e0b74b-1ee6-446c-bb52-03b385239b02",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Appointment\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n        }\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/SchemaRead",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Appointment schema (more)",
-                  "id": "291aee61-5fe6-4f6b-b7d0-34fb88627dc4",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Appointment\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/SchemaRead",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Appointment interaction category options",
-                  "id": "04a8d3e3-a863-46fc-b93a-3dd0204eb624",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tappointment: {\r\n\t\tfieldOptions: {\r\n\t\t\tInteractionCategory: [{\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1\r\n\t\t\t}]\r\n\t\t}\r\n\t}\r\n}\r\n"
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "b61a58ac-af05-4ae4-93ed-bd98961a50e5"
-            },
-            {
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Get Appointment scheduled for this week",
+                  "name": "Read - Appointments scheduled for this week",
                   "id": "254ba177-f6fe-4083-b887-b6264147fece",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1921,7 +1861,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"StartDate\": {\r\n\t\t\t\t\t\"$EQ\": \"$THISWEEK()\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\"Subject\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Organizer\": {\r\n                    \"Uid\": 1\r\n                },\r\n                \"Users\": [ // Set of users added to the appointment\r\n                    {\r\n                        \"DisplayName\": 1\r\n                    }\r\n                ],\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Name\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"StartDate\": {\r\n                    \"$EQ\": \"$THISWEEK()\" // Funclet to simplify search for current week\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -1934,7 +1874,7 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appointment scheduled for specific date range",
+                  "name": "Read - Appointments scheduled for specific date range",
                   "id": "77b3d9cf-56b8-43a9-b6c8-b412606bbcbb",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1944,7 +1884,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"StartDate\": {\r\n\t\t\t\t\t\"$RANGE\": [\r\n\t\t\t\t\t\t\"2019-10-14\",\r\n\t\t\t\t\t\t\"2019-10-21\"\r\n\t\t\t\t\t]\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\"Subject\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Organizer\": {\r\n                    \"Uid\": 1\r\n                },\r\n                \"Users\": [ // Set of users added to the appointment\r\n                    {\r\n                        \"DisplayName\": 1\r\n                    }\r\n                ],\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Name\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"StartDate\": {\r\n                    \"$RANGE\": [ // Date range to search for \r\n                        \"2019-10-14\",\r\n                        \"2019-10-21\"\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -1957,7 +1897,7 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appointment associated with AbEntry",
+                  "name": "Read - Appointments with AbEntry as attendee",
                   "id": "38f4e3f4-b39d-4315-a4f4-79f58c52f900",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1967,7 +1907,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"AbEntries/Key\": {\r\n\t\t\t\t\t\"$IN\": \"Q29udGFjdAlERU1PXzVDCTE=\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\"Subject\": 1,\r\n\t\t\t\t\"AbEntries\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"With\": {\r\n\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                // Set of AbEntries that are attendees to the appointment\r\n                \"AbEntries\": [\r\n                    {\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // filter all Appointments having these AbEntry Keys as attendees\r\n                \"AbEntries/Key\": {\r\n                    \"$IN\": [\r\n                        \"QWJFbnRyeQlERU1PXzFDCTA=\",\r\n                        \"QWJFbnRyeQlERU1PXzJDCTA=\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -1980,7 +1920,30 @@
                   "response": []
                 },
                 {
-                  "name": "Get Appointment associated with Opportunity",
+                  "name": "Read - Appointments with Lead as attendee",
+                  "id": "ebc1751b-2c48-4d96-b3de-926c17b60ad0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                // Set of Leads that are attendees to the appointment\r\n                \"Leads\": [\r\n                    {\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // filter all Appointments having these Lead Keys as attendees\r\n                \"Leads/Key\": {\r\n                    \"$IN\": [\r\n                        \"TGVhZAkyNDA0MjQwMDAwMDAwMDM5Mjc2OTVMRQkw\",\r\n                        \"TGVhZAkyNDA0MDgwMDAwMDAwMDM4OTc3NDlMRQkw\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Appointments associated with Opportunity",
                   "id": "888202af-535f-4a8f-a38a-6decdaa0e4ef",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -1990,7 +1953,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"WithKey\": {\r\n\t\t\t\t\t\"$EQ\": \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"Top\": 3\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\"Subject\": 1,\r\n\t\t\t\t\"AbEntries\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t\t}\r\n\t\t\t\t],\r\n\t\t\t\t\"With\": {\r\n\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                // Associated Opportunity\r\n                \"With\": {\r\n                    \"Opportunity\": {\r\n                        \"Key\": 1,\r\n                        \"Objective\": 1\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"WithKey\": {\r\n                    // Filter all appointments related to a specific Opportunity\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMQkw\" \r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -2003,8 +1966,8 @@
                   "response": []
                 },
                 {
-                  "name": "Appointment-Update using criteria (Batch)",
-                  "id": "b9bb3c5e-7dc5-4ed0-824b-0a36c80bb363",
+                  "name": "Read - Appointments using $PHRASE operator",
+                  "id": "def947a0-fafd-441e-8214-3c8fb66caf43",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2013,20 +1976,21 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment.1\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"$AND\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"Users/Item/Key\": {\r\n\t\t\t\t\t\t\t\"$IN\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"UID\": \"MASTER\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Data\": {\r\n\t\t\t\"Key\": \"QXBwb2ludG1lbnQJMjQwNTAxMDAwMTkxMzE5NzE2NTMxUAkwCU1BU1RFUg==\",\r\n\t\t\t\"Subject\": \"Test Data JC\",\r\n\t\t\t\"Description\": \"Test new car1234\",\r\n\t\t\t\"StartDate\": \"2022-01-15\",\r\n\t\t\t\"EndDate\": \"2022-01-16\",\r\n\t\t\t\"Result\": [\r\n\t\t\t\t\"4\"\r\n\t\t\t]\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Id\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            //$PHRASE operator works on Subject and Description property\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Product\"\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Update"
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
                 },
                 {
-                  "name": "Appointment-Delete using criteria (Batch)",
-                  "id": "342b2ce1-6abc-4d47-87a0-4a0b2deead6e",
+                  "name": "Create - Appointments with AbEntry as attendee",
+                  "id": "bea8d910-db9e-48e0-baa1-0b5cb1fc1a1b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -2035,57 +1999,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"$AND\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"Users/Item/Key\": {\r\n\t\t\t\t\t\t\t\"$IN\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"UID\": \"MASTER\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Delete"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "6296f3de-2bbe-4541-8d08-440def574897"
-            },
-            {
-              "name": "Appointment-CRUD",
-              "item": [
-                {
-                  "name": "Appointment-Read",
-                  "id": "0adf17b9-cb28-493e-a675-1c0c0fdea808",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\t\"Configuration\": {\r\n\t\t\"Drivers\": {\r\n\t\t\t\"IApptSearcher\": \"Maximizer.Model.Access.Sql.ApptSearcher\"\r\n\t\t}\r\n\t},\r\n\t\"Compatibility\": {\r\n\t\t\"RecurringPatternObject\": \"1.0\"\r\n\t},\r\n\t\"Appointment\": {\r\n\t\t\"Criteria\": {\r\n\t\t\t\"SearchQuery\": {\r\n\t\t\t\t\"$AND\": [\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\t\"StartDate\": {\r\n\t\t\t\t\t\t\t\"$GT\": \"2022-12-01T20:29:39\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"EndDate\": {\r\n\t\t\t\t\t\t\t\"$LT\": \"2122-12-01T20:29:39\"\r\n\t\t\t\t\t\t},\r\n\t\t\t\t\t\t\"Users/Item/Key\": {\r\n\t\t\t\t\t\t\t\"$IN\": [\r\n\t\t\t\t\t\t\t\t{\r\n\t\t\t\t\t\t\t\t\t\"UID\": \"MASTER\"\r\n\t\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"Scope\": {\r\n\t\t\t\"Fields\": {\r\n\t\t\t\t\"SecStatus\": {\r\n\t\t\t\t\t\"CanRead\": 1,\r\n\t\t\t\t\t\"CanUpdate\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\"Subject\": 1,\r\n\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\"Organizer\": {\r\n\t\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\t\"Uid\": 1,\r\n\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"Private\": 1,\r\n\t\t\t\t\"Priority\": 1,\r\n\t\t\t\t\"Users\": {\r\n\t\t\t\t\t\"Key\": {\r\n\t\t\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\t\t\"Uid\": 1,\r\n\t\t\t\t\t\t\"DisplayValue\": 1\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"DisplayName\": 1,\r\n\t\t\t\t\t\"Email\": 1,\r\n\t\t\t\t\t\"Alarm\": 1,\r\n\t\t\t\t\t\"Rsvp\": 1,\r\n\t\t\t\t\t\"Reminder\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"AbEntries\": {\r\n\t\t\t\t\t\"DisplayValue\": 1,\r\n\t\t\t\t\t\"Email\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"Leads\": {\r\n\t\t\t\t\t\"DisplayValue\": 1,\r\n\t\t\t\t\t\"Email\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"Description\": 1,\r\n\t\t\t\t\"Location\": {\r\n\t\t\t\t\t\"Key\": {\r\n\t\t\t\t\t\t\"UID\": 1\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"Name\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"RecurringPattern\": {\r\n\t\t\t\t\t\"Key\": 1,\r\n\t\t\t\t\t\"StartDate\": 1,\r\n\t\t\t\t\t\"EndDate\": 1,\r\n\t\t\t\t\t\"Frequency\": 1,\r\n\t\t\t\t\t\"Occurence\": 1,\r\n\t\t\t\t\t\"DayOfWeek\": 1,\r\n\t\t\t\t\t\"SkipWeekend\": 1,\r\n\t\t\t\t\t\"MoveToWeekday\": 1\r\n\t\t\t\t},\r\n\t\t\t\t\"LastModifyDate\": 1,\r\n\t\t\t\t\"CreationDate\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Appointment-Create",
-                  "id": "7e2a193a-8985-4fe4-8910-772f5f58b13d",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\t\"Compatibility\": {\r\n\t\t\"RecurringPatternObject\": \"1.0\"\r\n\t},\r\n\t\"Appointment.1\": {\r\n\t\t\"Data\": {\r\n\t\t\t\"Key\": null,\r\n\t\t\t\"Subject\": \"outlook daily every day\",\r\n\t\t\t\"StartDate\": \"2023-12-13T05:00:00Z\",\r\n\t\t\t\"EndDate\": \"2023-12-13T05:30:00Z\",\r\n\t\t\t\"Private\": false,\r\n\t\t\t\"Priority\": \"MED\",\r\n\t\t\t\"Users\": [\r\n\t\t\t\t{\r\n\t\t\t\t\t\"Key\": {\r\n\t\t\t\t\t\t\"Key\": \"VXNlcglNQVNURVI=\",\r\n\t\t\t\t\t\t\"Uid\": \"MASTER\",\r\n\t\t\t\t\t\t\"DisplayValue\": \"Micheal Boone\"\r\n\t\t\t\t\t},\r\n\t\t\t\t\t\"Displayname\": null,\r\n\t\t\t\t\t\"Email\": null,\r\n\t\t\t\t\t\"Rsvp\": 0,\r\n\t\t\t\t\t\"Alarm\": \"2023-12-12T04:45:00Z\"\r\n\t\t\t\t}\r\n\t\t\t],\r\n\t\t\t\"Description\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n<meta name=\\\"ProgId\\\" content=\\\"Word.Document\\\">\\r\\n<meta name=\\\"Generator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<meta name=\\\"Originator\\\" content=\\\"Microsoft Word 15\\\">\\r\\n<style>\\r\\n<!--\\r\\n@font-face\\r\\n\\t{font-family:\\\"Cambria Math\\\"}\\r\\n@font-face\\r\\n\\t{font-family:Calibri}\\r\\np.MsoNormal, li.MsoNormal, div.MsoNormal\\r\\n\\t{margin:0in;\\r\\n\\tfont-size:11.0pt;\\r\\n\\tfont-family:\\\"Calibri\\\",sans-serif}\\r\\na:link, span.MsoHyperlink\\r\\n\\t{color:#0563C1;\\r\\n\\ttext-decoration:underline}\\r\\na:visited, span.MsoHyperlinkFollowed\\r\\n\\t{color:#954F72;\\r\\n\\ttext-decoration:underline}\\r\\nspan.EmailStyle17\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif;\\r\\n\\tcolor:windowtext}\\r\\n.MsoChpDefault\\r\\n\\t{font-family:\\\"Calibri\\\",sans-serif}\\r\\n@page WordSection1\\r\\n\\t{margin:1.0in 1.0in 1.0in 1.0in}\\r\\ndiv.WordSection1\\r\\n\\t{}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body lang=\\\"EN-US\\\" link=\\\"#0563C1\\\" vlink=\\\"#954F72\\\" style=\\\"word-wrap:break-word\\\">\\r\\n<div class=\\\"WordSection1\\\">\\r\\n<p class=\\\"MsoNormal\\\">&nbsp;</p>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n-- Attendees synced from Outlook Start --\\r\\nClark Lu (clarklu@maxlabcloud.ca) Response:None\\r\\n-- Attendees synced from Outlook End --\\r\\n\",\r\n\t\t\t\"Location\": {\r\n\t\t\t\t\"Name\": \"\",\r\n\t\t\t\t\"Key\": {\r\n\t\t\t\t\t\"Uid\": \"L@FREEFORM\"\r\n\t\t\t\t}\r\n\t\t\t},\r\n\t\t\t\"RecurringPattern\": {\r\n\t\t\t\t\"Key\": \"1811163204\",\r\n\t\t\t\t\"StartDate\": \"2023-12-11\",\r\n\t\t\t\t\"EndDate\": \"2023-12-13\",\r\n\t\t\t\t\"Frequency\": 0,\r\n\t\t\t\t\"Occurence\": 0,\r\n\t\t\t\t\"DayOfWeek\": [\r\n\t\t\t\t\t0\r\n\t\t\t\t],\r\n\t\t\t\t\"SkipWeekend\": false,\r\n\t\t\t\t\"MoveToWeekday\": false\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"Business Opportunity\",\r\n            \"StartDate\": \"2024-07-22T05:00:00Z\", // Mandatory\r\n            \"EndDate\": \"2024-07-22T05:30:00Z\",\r\n            // Provide all AbEntry keys you want to add as attendees to the Appointment\r\n            \"AbEntries\": [\r\n                \"QWJFbnRyeQlERU1PXzFDCTA=\",\r\n                \"QWJFbnRyeQlERU1PXzJDCTA=\"\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -2097,7 +2011,182 @@
                   "response": []
                 },
                 {
-                  "name": "Appointment-Update",
+                  "name": "Create - Appointments with Lead as attendee",
+                  "id": "45f5906b-a1a8-4a43-9f53-fc53ae70dadf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"Business Opportunity\",\r\n            \"StartDate\": \"2024-07-22T05:00:00Z\", // Mandatory\r\n            \"EndDate\": \"2024-07-22T05:30:00Z\",\r\n            // Provide all Lead keys you want to add as attendees to the Appointment\r\n            \"Leads\": [\r\n                \"TGVhZAkyNDA0MjQwMDAwMDAwMDM5Mjc2OTVMRQkw\",\r\n                \"TGVhZAkyNDA0MDgwMDAwMDAwMDM4OTc3NDlMRQkw\"\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create - Appointments associated with Opportunity",
+                  "id": "88c90473-1b66-4d80-91b5-a3a3d95185df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"Business Opportunity\",\r\n            \"StartDate\": \"2024-07-22T05:00:00Z\", // Mandatory\r\n            \"EndDate\": \"2024-07-22T05:30:00Z\",\r\n            // WithKey can refer to Opportunity, Case and Campaign\r\n            \"WithKey\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMQkw\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "6296f3de-2bbe-4541-8d08-440def574897"
+            },
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read Appointment metadata (simple)",
+                  "id": "e2e0b74b-1ee6-446c-bb52-03b385239b02",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Appointment\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Appointment metadata (more)",
+                  "id": "291aee61-5fe6-4f6b-b7d0-34fb88627dc4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Appointment\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "b61a58ac-af05-4ae4-93ed-bd98961a50e5"
+            },
+            {
+              "name": "Field Options",
+              "item": [
+                {
+                  "name": "Read Appointment FieldOptions",
+                  "id": "04a8d3e3-a863-46fc-b93a-3dd0204eb624",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"FieldOptions\": {\r\n            \"InteractionCategory\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Subject\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Priority\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Users\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            // Does NOT include \"free form\" locations\r\n            \"Location\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Resources\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Result\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Product\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "a30ce81d-5763-487d-b1e1-66c17add1430"
+            },
+            {
+              "name": "Appointment CRUD",
+              "item": [
+                {
+                  "name": "Read - Appointment",
+                  "id": "0adf17b9-cb28-493e-a675-1c0c0fdea808",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Private\": 1,\r\n                \"Organizer\": {\r\n                    \"Uid\": 1\r\n                },\r\n                \"Users\": [ // Set of users added to the appointment\r\n                    {\r\n                        \"DisplayName\": 1\r\n                    }\r\n                ],\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Key\": 1,\r\n                    \"Name\": 1\r\n                },\r\n                \"Resources\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"Name\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create - Appointment",
+                  "id": "7e2a193a-8985-4fe4-8910-772f5f58b13d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Subject\": \"Business Opportunity\",\r\n            \"StartDate\": \"2024-07-22T05:00:00Z\", // Mandatory\r\n            \"EndDate\": \"2024-07-22T05:30:00Z\",\r\n            \"Users\": [ // Set of users added to the appointment\r\n                \"VXNlcglNQVNURVI=\"\r\n            ],\r\n            \"Private\": true,\r\n            \"Description\": \"Call to discuss proposal for new business\",\r\n            // To create a \"free form\" location dynamically: use \"Key\" = \"L@FREEFORM\" and provide a name\r\n            // Or use any pre-defined location created through the Administrator module (option \"Locations and Resources\")\r\n            \"Location\": { \r\n                \"Name\": \"Meeting Room 1\",\r\n                \"Key\": {\r\n                    \"Uid\": \"L@FREEFORM\"\r\n                }\r\n            },\r\n            // Or use any pre-defined resource created through the Administrator module (option \"Locations and Resources\")\r\n            \"Resources\": [\r\n                \"UmVzb3VyY2UJUkVTREZMVDE=\",\r\n                \"UmVzb3VyY2UJUkVTREZMVDI=\"\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Appointment",
                   "id": "a4cb8e55-ad50-4298-b7bf-e0407c48d160",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -2107,7 +2196,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Data\": {\r\n\t\t\t\"Key\": \"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\",\r\n\t\t\t\"Subject\": \"Test Data \",\r\n\t\t\t\"Description\": \"Test new car1234\",\r\n\t\t\t\"StartDate\": \"2022-01-15\",\r\n\t\t\t\"EndDate\": \"2022-01-16\",\r\n\t\t\t\"Result\": [\r\n\t\t\t\t\"4\"\r\n\t\t\t]\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": \"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\",  // Mandatory\r\n            \"Subject\": \"Economy Updates\",\r\n            \"Description\": \"Discussion about updates in economy outlooks\",\r\n            \"StartDate\": \"2022-01-15\",\r\n            \"EndDate\": \"2022-01-16\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -2119,7 +2208,7 @@
                   "response": []
                 },
                 {
-                  "name": "Appointment-Delete",
+                  "name": "Delete - Appointment",
                   "id": "d6ead017-5cb1-48c4-afd0-71783c89963a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -2129,7 +2218,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\t\"Appointment\": {\r\n\t\t\"Data\": {\r\n\t\t\t\"Key\": \"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\"\r\n\t\t}\r\n\t}\r\n}",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Data\": {\r\n            \"Key\": \"QXBwb2ludG1lbnQJMjIwNzEzMDAyNTgwNzcyMjM4MTY5UAkwCUpOQVBPTEk=\" // Mandatory\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -2144,7 +2233,8 @@
               "id": "733d7ddf-7b35-4c15-b0ca-274d00455667"
             }
           ],
-          "id": "a5fac692-430b-490c-9ec3-b476616ead74"
+          "id": "a5fac692-430b-490c-9ec3-b476616ead74",
+          "description": "Appointment allows users to manage calendar appointments in Maximizer CRM. See below some considerations for Appointments:\n\n- Appointments can have different types of attendees:\n    \n    - Users/Groups\n        \n    - AbEntries\n        \n    - Leads\n        \n- Appointments can be associated with different entries (using With/WithKey):\n    \n    - Opportunity\n        \n    - Case\n        \n    - Campaign\n        \n- Locations (for example, meeting room) and Resources (for example, Projector) can also be associated to an Appointment. They can be configured in Administrator module, option \"Locations ad Resources\" and the possible values curently set are available through FieldOptions.\n    \n    - Specifically about Locations, there is a concept of \"Free Form Location\", which can be created for a specific Appointment. By using a special Key (L@FREEFORM), you can specify a location name when creating an Appointment. That location will be available only within that particular Appointment.\n        \n- Appointments can be marked as Private (details are hidden for all users expect the owner). This is pretty similar to the behavior of a private Appointment you create in Microsoft Outlook.\n    \n- For now, there is no support for Recurring Appointments. Even though the product supports recurring appointments, the latest Octopus API version only supports one-time appointments.\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
         },
         {
           "name": "Campaign",
