@@ -4667,7 +4667,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EQ\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJteHB1Z2E3Yjc3OTdxbDJwZTMzeCJ9.538V27B9IB4ro9WCspKsCVtRPYeIXIjE0f0aQlkqMV0\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                userKey: { uid: 1 },\r\n                status: 1,\r\n                displayValue: 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EQ\": \"<TOKEN>\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                userKey: { uid: 1 },\r\n                status: 1,\r\n                displayValue: 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
