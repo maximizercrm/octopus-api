@@ -2391,6 +2391,135 @@
           "id": "23469cd4-396a-4d0b-9f4b-9623eab529b8"
         },
         {
+          "name": "CampaignSubscriber",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read CampaignSubscriber metadata (simple)",
+                  "id": "0964e720-eac2-4d34-b005-0ee25280dd7a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/CampaignSubscriber\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read CampaignSubscriber metadata (more)",
+                  "id": "fb791295-4757-4fa2-b642-a2cc0345c1f0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/CampaignSubscriber\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "d0a6636e-e9c0-47b7-9dab-25b905519e75"
+            },
+            {
+              "name": "CampaignSubscriber CRUD",
+              "item": [
+                {
+                  "name": "Read - CampaignSubscriber",
+                  "id": "0391913d-dae6-4818-b126-500892199d11",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"CampaignSubscriber\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1, // AbEntryKey of the subscriber\r\n                \"ParentKey\": 1, // CampaignKey the AbEntry is subscribed to\r\n                \"StartDate\": 1, // Date subscription started\r\n                \"NextDate\": 1,\r\n                // Status of the subscriber\r\n                // New = 1\r\n                // InProgress = 2\r\n                // Complete = 3\r\n                // Retry = 4\r\n                // Unsubscribed = 5\r\n                // SuspendedByFatalErr = 6\r\n                // SuspendedManually = 16\r\n                // Failed = 99\r\n                // TestNew = 7\r\n                // TestInProgress = 102\r\n                // TestComplete = 8\r\n                // TestRetry = 103\r\n                // TestSuspendedManually = 9\r\n                // TestUnsubscribed = 105\r\n                // TestFailed = 100\r\n                \"Status\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create - CampaignSubscriber",
+                  "id": "380f1e90-26ab-421d-a89b-ccd576004faf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"CampaignSubscriber\": {\r\n        \"Data\": {\r\n            // AbEntryKey to subscribe\r\n            \"Key\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\", // Mandatory\r\n            // CampaignKey to subscribe the AbEntry to\r\n            \"ParentKey\": \"Q2FtcGFpZ24JMjQwNzI0MDAwMDAwMzMxMzcwNDYxME0JMA==\", // Mandatory\r\n            \"StartDate\": \"2024-07-26T00:00:00\", // Date subscription started (use current date)\r\n            \"NextDate\": \"2024-07-26T00:00:00\", // Use same StartDate\r\n            // Status of the subscriber\r\n            // New = 1\r\n            // InProgress = 2\r\n            // Complete = 3\r\n            // Retry = 4\r\n            // Unsubscribed = 5\r\n            // SuspendedByFatalErr = 6\r\n            // SuspendedManually = 16\r\n            // Failed = 99\r\n            // TestNew = 7\r\n            // TestInProgress = 102\r\n            // TestComplete = 8\r\n            // TestRetry = 103\r\n            // TestSuspendedManually = 9\r\n            // TestUnsubscribed = 105\r\n            // TestFailed = 100\r\n            \"Status\": 1 // Use 1 for new entries\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - CampaignSubscriber",
+                  "id": "e8c7c8c0-a42b-4a4d-8dd8-2ad9f40852ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "// This will remove one entry based on the AbEntry - Campaign pair\r\n{\r\n    \"CampaignSubscriber\": {\r\n        \"Data\": {\r\n            // AbEntryKey of the subscriber\r\n            \"Key\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\", // Mandatory\r\n            // CampaignKey the AbEntry is subscribed to\r\n            \"ParentKey\": \"Q2FtcGFpZ24JMjQwNzI0MDAwMDAwMzMxMzcwNDYxME0JMA==\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "81823b43-2e0f-464f-9996-6ff397c6ca86"
+            }
+          ],
+          "id": "91927126-2d83-4f6b-bd0e-a254d1e675c3",
+          "description": "CampaignSubscriber allows users to add subscribers to existing campaigns. See below some considerations for CampaignSubscriber :\n\n- This specific object does not have a Key for each entry, its identified by the combination of both subscriber (AbEntryKey) and campaign (CampaignKey).\n    \n- The field Key correspond to the subscriber (AbEntryKey).\n    \n- The field ParentKey correspond to the campaign (CampaignKey).\n    \n- There are multiple status available for a subscriber (for newly created subscribers we use new)\n    \n    - New = 1\n        \n    - InProgress = 2\n        \n    - Complete = 3\n        \n    - Retry = 4\n        \n    - Unsubscribed = 5\n        \n    - SuspendedByFatalErr = 6\n        \n    - SuspendedManually = 16\n        \n    - Failed = 99\n        \n    - TestNew = 7\n        \n    - TestInProgress = 102\n        \n    - TestComplete = 8\n        \n    - TestRetry = 103\n        \n    - TestSuspendedManually = 9\n        \n    - TestUnsubscribed = 105\n        \n    - TestFailed = 100\n        \n\nThis object is currently in beta version but basic funtionality has been tested and is working properly, any feedback is appreciated.\n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
+        },
+        {
           "name": "Case",
           "item": [
             {
@@ -2886,6 +3015,135 @@
             }
           ],
           "id": "87456c45-7fba-47fe-8b74-d475c2436e94"
+        },
+        {
+          "name": "FavoriteList",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read FavoriteList metadata (simple)",
+                  "id": "78d266a0-cb1d-4914-af7d-723b0492904d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/FavoriteList\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read FavoriteList metadata (more)",
+                  "id": "e34e74a1-81d6-4df8-82b8-9bec7614e8dd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/FavoriteList\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "f00e0117-3bf4-4c44-b604-794bddcd1360"
+            },
+            {
+              "name": "FavoriteList CRUD",
+              "item": [
+                {
+                  "name": "Read - FavoriteList",
+                  "id": "7766c110-462b-4d1b-871c-cdc2f3e999ef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                // Type of entities included in the favorite list\r\n                // AbEntry = 1\r\n                // Opportunity = 2\r\n                // Case = 5\r\n                // Lead = 19\r\n                \"EntityType\": 1,\r\n                // Entity Keys based on EntityType defined.\r\n                // Example, If EntityType = 1 then all MemberKeys will be AbEntry Keys\r\n                \"MemberKeys\": [\r\n                    1\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListSearcher\": \"Maximizer.Model.Access.Sql.FavoriteListSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create - FavoriteList",
+                  "id": "92509016-e4f9-4e7e-8d95-9171e83d314c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Favorite List 1\",\r\n            \"Description\": \"This is the Favorite List 1 containing elements of type EntityType\",\r\n            // Type of entities included in the favorite list\r\n            // AbEntry = 1\r\n            // Opportunity = 2\r\n            // Case = 5\r\n            // Lead = 19\r\n            \"EntityType\": 1,\r\n            // Entity Keys based on EntityType defined.\r\n            // Example, If EntityType = 1 then all MemberKeys should be AbEntry Keys\r\n            \"MemberKeys\": [\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTI=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTM=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTQ=\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListAccess\": \"Maximizer.Model.Access.Sql.FavoriteListAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - FavoriteList",
+                  "id": "fa310fd1-3165-4cd3-b352-bc22a13c9273",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Data\": {\r\n            \"Key\": \"RmF2b3JpdGVMaXN0CTMJMg==\" // Mandatory\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListAccess\": \"Maximizer.Model.Access.Sql.FavoriteListAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "f2b6e031-cb48-4637-9b8c-fd8b15cdf765"
+            }
+          ],
+          "id": "36619626-0ae4-4c44-bdd7-cd0cb7293ac0",
+          "description": "FavoriteList allows users to manage favorites list which are specific groups of different entities. See below some considerations for FavoriteList:\n\n- The field Entity Type defines the type of entities contained in the favorite list. A favorite list can have only one single type of entity, accepted ones are:\n    \n    - AbEntry = 1\n        \n    - Opportunity = 2\n        \n    - Case = 5\n        \n    - Lead = 19\n        \n- MemberKeys field is an array of keys depending on the entity type selected. For example, if EntityType = 1 then all MemberKeys will be AbEntry Keys.\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
         },
         {
           "name": "InteractionLog",
