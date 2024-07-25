@@ -4561,193 +4561,10 @@
           "name": "Personal Access Token",
           "item": [
             {
-              "name": "Metadata",
-              "item": [
-                {
-                  "name": "read PAT metadata (simple)",
-                  "id": "654fc88a-5ac1-46f2-9eb6-f839bc5283fb",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/PersonalAccessToken\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/SchemaRead",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "read PAT metadata (more)",
-                  "id": "b8fbdb94-ec2a-4142-b4a0-2ca39e39d878",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/PersonalAccessToken\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/SchemaRead",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "read PAT field options (ToDo)",
-                  "id": "c4764427-7631-4de3-ad2e-e3cc467fdb60",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    PersonalAccessToken: {\r\n        fieldOptions: {\r\n            status: [\r\n                {\r\n                    displayValue:1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "82dea0a8-fa9d-442d-97de-551aba751d69"
-            },
-            {
-              "name": "CRUD",
-              "item": [
-                {
-                  "name": "create PAT",
-                  "event": [
-                    {
-                      "listen": "test",
-                      "script": {
-                        "exec": [
-                          "var jsonData = pm.response.json();\r",
-                          "if(jsonData && jsonData.abEntry && jsonData.abEntry.Data) {   \r",
-                          "    pm.environment.set(\"AbEntryKey\", jsonData.abEntry.Data.key);\r",
-                          "}"
-                        ],
-                        "type": "text/javascript",
-                        "id": "014e9622-a4e3-446f-a490-928b8f3ffec7"
-                      }
-                    }
-                  ],
-                  "id": "0920452a-516e-46e3-98f7-1d09941d80b6",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    personalAccessToken: {\r\n        data: {\r\n            \"Key\": null,\r\n            \"Name\": \"MAX's postman samples\",\r\n            \"ExpirationDate\": \"2023-12-31\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Create",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "read PAT",
-                  "id": "41f49c9a-67cb-4160-9e56-39cd819df2fe",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key: {\r\n                    \"$EQ\": \"<TOKEN>\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                userKey: { uid: 1 },\r\n                status: 1,\r\n                displayValue: 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "update PAT",
-                  "event": [
-                    {
-                      "listen": "test",
-                      "script": {
-                        "exec": [
-                          "var jsonData = pm.response.json();\r",
-                          "if(jsonData && jsonData.abEntry && jsonData.abEntry.Data) {   \r",
-                          "    pm.environment.set(\"AbEntryKey\", jsonData.abEntry.Data.key);\r",
-                          "}"
-                        ],
-                        "type": "text/javascript",
-                        "id": "148bc0da-818b-4d56-be82-a2fe6cd09532"
-                      }
-                    }
-                  ],
-                  "id": "309e5142-5b41-45cb-9305-c68d81ecc654",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tdata: {\r\n\t\t\tkey: \"ToDo:personal_access_token\",\r\n            name: \"new name\",\r\n\t\t\tstatus: 2\r\n\t\t}\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Update",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "delete PAT",
-                  "event": [
-                    {
-                      "listen": "test",
-                      "script": {
-                        "exec": [
-                          "var jsonData = pm.response.json();\r",
-                          "if(jsonData && jsonData.AbEntry && jsonData.AbEntry.Data) {   \r",
-                          "    pm.environment.set(\"CompanyKey\", jsonData.AbEntry.Data.Key);\r",
-                          "}"
-                        ],
-                        "type": "text/javascript",
-                        "id": "176049b5-2960-47c5-8aac-839d39c25d4e"
-                      }
-                    }
-                  ],
-                  "id": "0f142bfc-14d2-4be0-a47c-58f3d1274fab",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tdata: {\r\n\t\t\tkey: \"ToDo:personal_access_token\"\r\n        }\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Delete",
-                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "44efc785-f9ae-46fc-a733-1bddae2c4f0d"
-            },
-            {
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "get all my PAT's",
+                  "name": "Read - Get all my PAT",
                   "id": "7d565718-463f-4987-8b86-8116cbe65688",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4757,7 +4574,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                \"status/displayValue\": 1,\r\n                name: 1,\r\n                expirationDate: 1,\r\n                revokeDate: 1\r\n            }\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Status\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Name\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            // By default, even if no search criteria is provided, only the PAT related to the user executing the request will be retrieved\r\n            \"SearchQuery\": {}\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
@@ -4765,7 +4587,7 @@
                   "response": []
                 },
                 {
-                  "name": "revoke PAT",
+                  "name": "Update - Revoke PAT",
                   "id": "b8f0964c-0c13-48bb-880c-c0da9b8fbf3f",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4775,9 +4597,53 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tpersonalAccessToken: {\r\n\t\tdata: {\r\n\t\t\tkey: \"ToDo:personal_access_token\",\r\n\t\t\tstatus: 2\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\",\r\n            \"Status\": 2 // Status = Revoked\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/Read",
+                    "url": "{{BaseURL}}/Update",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Change Expiration of PAT",
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "id": "1a536b45-cbca-48e7-92b8-a4e95de0fb31",
+                        "exec": [
+                          "var moment = require('moment');\r",
+                          "\r",
+                          "// Update PAT expiration to 10 days from now\r",
+                          "pm.environment.set('updatedExpirationDate', moment().add(\"day\", 10).format((\"YYYY-MM-DD\")));"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "id": "b872badc-8447-4b19-b92c-5a6600f3ead1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\",\r\n            \"ExpirationDate\": \"{{updatedExpirationDate}}\" // set to 10 days from now\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -4806,9 +4672,252 @@
                   }
                 }
               ]
+            },
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read PAT metadata (simple)",
+                  "id": "654fc88a-5ac1-46f2-9eb6-f839bc5283fb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/PersonalAccessToken\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read PAT metadata (more)",
+                  "id": "b8fbdb94-ec2a-4142-b4a0-2ca39e39d878",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/PersonalAccessToken\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "82dea0a8-fa9d-442d-97de-551aba751d69"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "Read PAT FieldOptions - Status",
+                  "id": "6a88d434-0548-46af-a1e7-7e79d842b443",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    // Applicable to all those properties which have \"HasOption\": true\r\n    \"PersonalAccessToken\": {\r\n        \"FieldOptions\": {\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "64362b89-de55-49ce-9f97-731ab4e38b70"
+            },
+            {
+              "name": "PAT CRUD",
+              "item": [
+                {
+                  "name": "Create - PAT",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "014e9622-a4e3-446f-a490-928b8f3ffec7",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    },
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "id": "9a5def4f-eb60-4762-9a6c-398bd7c5b7d4",
+                        "exec": [
+                          "var moment = require('moment');\r",
+                          "\r",
+                          "// Create PAT with expiration 7 days from now\r",
+                          "pm.environment.set('expirationDate', moment().add(\"day\", 7).format((\"YYYY-MM-DD\")));"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "id": "0920452a-516e-46e3-98f7-1d09941d80b6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"PAT From Postman\",\r\n            \"ExpirationDate\": \"{{expirationDate}}\" // set to 7 days from now\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create",
+                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - PAT",
+                  "id": "41f49c9a-67cb-4160-9e56-39cd819df2fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"UserKey\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Name\": 1,\r\n                \"Status\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"personal_access_token\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - PAT",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "148bc0da-818b-4d56-be82-a2fe6cd09532",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    },
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "id": "5b5f0486-8f8c-4729-a4b6-7cdc34b70aab",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "id": "309e5142-5b41-45cb-9305-c68d81ecc654",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\",\r\n            \"Name\": \"Updated PAT From Postman\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update",
+                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - PAT",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "id": "176049b5-2960-47c5-8aac-839d39c25d4e",
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {}
+                      }
+                    }
+                  ],
+                  "id": "0f142bfc-14d2-4be0-a47c-58f3d1274fab",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete",
+                    "description": "Use the `AbEntryCreate` method to create a new Address Book entry in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "44efc785-f9ae-46fc-a733-1bddae2c4f0d"
             }
           ],
-          "id": "b0014298-95bc-4918-a81c-bf1a2874d235"
+          "id": "b0014298-95bc-4918-a81c-bf1a2874d235",
+          "description": "Personal Access Token (a.k.a. PAT) allows users to manage tokens that are issued for a specific user of Maximizer CRM. The PAT is a great alternative for authentication, rather than providing raw credentials (user + password). This increases security as, in case of a possible leak, PATs can be easily revoked (and the credentials will still be secured).\n\nSee below some considerations for Personal Access Tokens:\n\n- Any active Maximizer CRM user can create PAT for their User IDs\n    \n- There is no limit on the number of PAT one can create\n    \n- The ExpirationDate must be set to a future date (can't be in the past). We suggest to use a reasonable expiration date (for example, 3 to 6 months) and to avoid creating PAT with long expiration dates\n    \n- PAT can be revoked at any time\n    \n- For all possible PAT status available, check \"FieldOptions\" section, there is a request to retrieve this information\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
         },
         {
           "name": "SalesTeam",
