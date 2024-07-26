@@ -1750,28 +1750,6 @@
               "name": "Address CRUD",
               "item": [
                 {
-                  "name": "Read - Address",
-                  "id": "836e9298-a2d5-462c-86a2-6e037f04cbad",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Address\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Value\": 1,\r\n                    \"ID\": 1,\r\n                    \"Number\": 1,\r\n                    \"EntityType\": 1\r\n                },\r\n                \"Description\": 1,\r\n                \"AddressLine1\": 1,\r\n                \"AddressLine2\": 1,\r\n                \"City\": 1,\r\n                \"Country\": 1,\r\n                \"StateProvince\": 1,\r\n                \"ZipCode\": 1,\r\n                \"Default\": 1,\r\n                \"ParentKey\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            // SearchQuery is mandatory when using Legacy Driver\r\n            \"SearchQuery\": {\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\" // for ParentKey\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAddressSearcher\": \"Maximizer.Model.Access.Sql.AddressSearcher\"\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
                   "name": "Create - Address",
                   "id": "456dd8cb-6808-47d6-9ed8-5eb58dfc1f10",
                   "protocolProfileBehavior": {
@@ -1790,6 +1768,28 @@
                       }
                     },
                     "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Address",
+                  "id": "836e9298-a2d5-462c-86a2-6e037f04cbad",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Address\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Value\": 1,\r\n                    \"ID\": 1,\r\n                    \"Number\": 1,\r\n                    \"EntityType\": 1\r\n                },\r\n                \"Description\": 1,\r\n                \"AddressLine1\": 1,\r\n                \"AddressLine2\": 1,\r\n                \"City\": 1,\r\n                \"Country\": 1,\r\n                \"StateProvince\": 1,\r\n                \"ZipCode\": 1,\r\n                \"Default\": 1,\r\n                \"ParentKey\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            // SearchQuery is mandatory when using Legacy Driver\r\n            \"SearchQuery\": {\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\" // for ParentKey\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAddressSearcher\": \"Maximizer.Model.Access.Sql.AddressSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -2142,28 +2142,6 @@
               "name": "Appointment CRUD",
               "item": [
                 {
-                  "name": "Read - Appointment",
-                  "id": "0adf17b9-cb28-493e-a675-1c0c0fdea808",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Private\": 1,\r\n                \"Organizer\": {\r\n                    \"Uid\": 1\r\n                },\r\n                \"Users\": [ // Set of users added to the appointment\r\n                    {\r\n                        \"DisplayName\": 1\r\n                    }\r\n                ],\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Key\": 1,\r\n                    \"Name\": 1\r\n                },\r\n                \"Resources\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"Name\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
                   "name": "Create - Appointment",
                   "id": "7e2a193a-8985-4fe4-8910-772f5f58b13d",
                   "protocolProfileBehavior": {
@@ -2182,6 +2160,28 @@
                       }
                     },
                     "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Appointment",
+                  "id": "0adf17b9-cb28-493e-a675-1c0c0fdea808",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Appointment\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Private\": 1,\r\n                \"Organizer\": {\r\n                    \"Uid\": 1\r\n                },\r\n                \"Users\": [ // Set of users added to the appointment\r\n                    {\r\n                        \"DisplayName\": 1\r\n                    }\r\n                ],\r\n                \"Description\": 1,\r\n                \"Location\": {\r\n                    \"Key\": 1,\r\n                    \"Name\": 1\r\n                },\r\n                \"Resources\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"Name\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -2240,6 +2240,34 @@
           "name": "Campaign",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read - Campaign using $PHRASE operator",
+                  "id": "68b267cd-cbc3-4470-9ee2-b86d9f8d14ff",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Status\": 1,\r\n                \"Name\": 1,\r\n                \"Type\": 1,\r\n                \"Description\": 1,\r\n                \"Cost\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"ActualRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"email campaign\" //$PHRASE operator will search on Name and Description properties\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "7956f2f9-51a8-4d71-af78-a37aab778b8f"
+            },
+            {
               "name": "MetaData",
               "item": [
                 {
@@ -2253,7 +2281,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Campaign\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Campaign\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2270,24 +2303,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Campaign\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\":1,\r\n                \"Queryable\":1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Campaign FieldOption",
-                  "id": "c004ca77-0507-4df3-a6b8-d78a319e71e7",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n   \"Campaign\":{\r\n      \"FieldOptions\":{\r\n         \"Status\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Type\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(34)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(42)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(42)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(44)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(97)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(100)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n         \"Udf/$TYPEID(60025)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ],\r\n          \"Udf/$TYPEID(60028)\":[\r\n            {\r\n               \"Key\":1,\r\n               \"DisplayValue\":1,\r\n                \r\n            }\r\n         ]\r\n\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"HasOption\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Campaign\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -2297,44 +2318,60 @@
               "id": "59f39cf5-d575-45a0-bf44-3ce3df931731"
             },
             {
+              "name": "Field Options",
+              "item": [
+                {
+                  "name": "Read Campaign FieldOptions - Status",
+                  "id": "c004ca77-0507-4df3-a6b8-d78a319e71e7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"FieldOptions\": {\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Campaign FieldOptions - Type",
+                  "id": "31079416-a647-4904-90ae-244c3d40f0e3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"FieldOptions\": {\r\n            \"Type\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "1fae131a-677a-4635-a671-d785d7a3a230"
+            },
+            {
               "name": "Campaign CRUD",
               "item": [
                 {
-                  "name": "Campaign-Read_Phrase",
-                  "id": "68b267cd-cbc3-4470-9ee2-b86d9f8d14ff",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignSearcher\": \"Maximizer.Model.Access.Sql.CampaignSearcher\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Criteria\":{\r\n       \"SearchQuery\":{            \r\n            \"$PHRASE\":\"Email Campaign - Test updated\"         \r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Status\":1,\r\n            \"Name\":1,\r\n            \"Type\":1,\r\n            \"Description\":1,\r\n            \"Cost\":1,\r\n            \"ForecastRevenue\":1,\r\n            \"ActualRevenue\":1,\r\n            \"StartDate\":1,\r\n            \"EndDate\":1,\r\n            \"Creator\":1,\r\n            \"CreationDate\":1,\r\n            \"ModifiedBy\":1,\r\n            \"LastModifyDate\":1,            \r\n            \"SecStatus\":{\r\n               \"CanRead\":1,\r\n               \"CanUpdate\":1,\r\n               \"CanDelete\":1\r\n            },\r\n            \"Udf/$TYPEID(1)\":1,\r\n            \"Udf/$TYPEID(34)\":1,\r\n            \"Udf/$TYPEID(42)\":1,\r\n            \"Udf/$TYPEID(44)\":1,\r\n            \"Udf/$TYPEID(97)\":1,\r\n            \"Udf/$TYPEID(99)\":1,\r\n            \"Udf/$TYPEID(100)\":1\r\n\r\n         }\r\n      }\r\n   }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Campaign-Read",
-                  "id": "c51d1519-862d-4671-8935-204f479c0f73",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignSearcher\": \"Maximizer.Model.Access.Sql.CampaignSearcher\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Criteria\":{\r\n       \"SearchQuery\":{\r\n            \"Key\":{\r\n               \"$EQ\":\"Q2FtcGFpZ24JMjIwODAyMDAyMzYwNzcyMjM4MTY5TQkw\"\r\n            }\r\n         }\r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Status\":1,\r\n            \"Name\":1,\r\n            \"Type\":1,\r\n            \"Description\":1,\r\n            \"Cost\":1,\r\n            \"ForecastRevenue\":1,\r\n            \"ActualRevenue\":1,\r\n            \"StartDate\":1,\r\n            \"EndDate\":1,\r\n            \"Creator\":1,\r\n            \"CreationDate\":1,\r\n            \"ModifiedBy\":1,\r\n            \"LastModifyDate\":1,            \r\n            \"SecStatus\":{\r\n               \"CanRead\":1,\r\n               \"CanUpdate\":1,\r\n               \"CanDelete\":1\r\n            },\r\n            \"Udf/$TYPEID(1)\":1,\r\n            \"Udf/$TYPEID(34)\":1,\r\n            \"Udf/$TYPEID(42)\":1,\r\n            \"Udf/$TYPEID(44)\":1,\r\n            \"Udf/$TYPEID(97)\":1,\r\n            \"Udf/$TYPEID(99)\":1,\r\n            \"Udf/$TYPEID(100)\":1\r\n\r\n         }\r\n      }\r\n   }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Campaign-Create",
+                  "name": "Create - Campaign",
                   "id": "a29f2c35-2bda-45d9-af10-80f2bda8cc09",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -2344,14 +2381,41 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"Status\": 6,\r\n        \"Name\": \"Email Campaign - Test_New\",\r\n        \"Type\": 15,\r\n        \"Description\": \"Test Description\",\r\n        \"Cost\": 1500.0,\r\n        \"ForecastRevenue\": 7000.0,\r\n        \"ActualRevenue\": 0.0,\r\n        \"StartDate\": \"2022-01-01\",\r\n        \"EndDate\": \"2022-03-31\",\r\n        \"Creator\": \"VXNlcglNQVNURVI=\",\r\n        \"CreationDate\": \"2022-01-21\",\r\n        \"Udf/$TYPEID(1)\": \"Test UDF\"\r\n          \r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Email Campaign For Renewals\",\r\n            // Statuses supported\r\n            // 0: \"New\"\r\n            // 2: \"In progress\"\r\n            // 3: \"Completed\"\r\n            // 5: \"Abandoned\"\r\n            // 6: \"Suspended\"\r\n            \"Status\": 0,\r\n            // Type of Campaigns supported\r\n            // 10: \"Fixed-Date Automated Campaign\"\r\n            // 15: \"Ongoing Automated Campaign\"\r\n            // 25: \"Campaign\"\r\n            \"Type\": 15,\r\n            \"Description\": \"This is a campaign to send automated emails related to subscription renewals\",\r\n            \"Cost\": 1500.0,\r\n            \"ForecastRevenue\": 7000.0,\r\n            \"ActualRevenue\": 0.0,\r\n            \"StartDate\": \"2022-01-01\",\r\n            \"EndDate\": \"2022-03-31\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
                 {
-                  "name": "Campaign-Update",
+                  "name": "Read - Campaign",
+                  "id": "c51d1519-862d-4671-8935-204f479c0f73",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Status\": {\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Name\": 1,\r\n                \"Type\": {\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Description\": 1,\r\n                \"Cost\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"ActualRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Campaign",
                   "id": "95e8cfaa-952f-49a5-bd35-1b9b03c52e9a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -2361,14 +2425,19 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\": \"Q2FtcGFpZ24JMjIwNzEzMDAyMTAwNzcyMjM4MTY5TQkw\",\r\n      \"Status\": 6,\r\n      \"Name\": \"Email Campaign - Test updated\",\r\n      \"Type\": 15,\r\n      \"Description\": \"Test Description updated\",\r\n      \"Cost\": 100.0,\r\n      \"ForecastRevenue\": 700.0,\r\n      \"ActualRevenue\": 0.0,\r\n      \"StartDate\": \"2022-01-01\",\r\n      \"EndDate\": \"2022-03-31\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2022-01-21T00:00:00\",\r\n      \"ModifiedBy\": \"VXNlcglNQVNURVI=\",\r\n        \"LastModifyDate\": \"2022-01-22\",\r\n      \"Udf/$TYPEID(1)\": \"Test UDF updated\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q2FtcGFpZ24JMjQwNzI0MDAwMDAwMzMxMzcwNDYxME0JMA==\", // Mandatory\r\n            \"Name\": \"SMS campaign for renewals\",\r\n            // Statuses supported\r\n            // 0: \"New\"\r\n            // 2: \"In progress\"\r\n            // 3: \"Completed\"\r\n            // 5: \"Abandoned\"\r\n            // 6: \"Suspended\"\r\n            \"Status\": 2,\r\n            // Type of Campaigns supported\r\n            // 10: \"Fixed-Date Automated Campaign\"\r\n            // 15: \"Ongoing Automated Campaign\"\r\n            // 25: \"Campaign\"\r\n            \"Type\": 15,\r\n            \"Description\": \"Campaign for sending recurring SMS\",\r\n            \"Cost\": 100.0,\r\n            \"ForecastRevenue\": 700.0,\r\n            \"ActualRevenue\": 800.0,\r\n            \"StartDate\": \"2023-01-01\",\r\n            \"EndDate\": \"2023-03-31\"            \r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
                   "response": []
                 },
                 {
-                  "name": "Canpaign-Delete",
+                  "name": "Delete - Campaign",
                   "id": "7ecb7c07-c9dc-4715-9c2f-1f9095844446",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -2378,7 +2447,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ICampaignAccess\": \"Maximizer.Model.Access.Sql.CampaignAccess\"\r\n        }\r\n    },\r\n   \"Campaign\":{\r\n      \"Data\":{\r\n         \"Key\":\"Q2FtcGFpZ24JMjIwNzEzMDAyMTAwNzcyMjM4MTY5TQkw\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Campaign\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q2FtcGFpZ24JMjIwNzEzMDAyMTAwNzcyMjM4MTY5TQkw\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete"
                   },
@@ -2388,7 +2462,8 @@
               "id": "9602a638-8ae6-4d0f-86cd-a2cb518904f6"
             }
           ],
-          "id": "23469cd4-396a-4d0b-9f4b-9623eab529b8"
+          "id": "23469cd4-396a-4d0b-9f4b-9623eab529b8",
+          "description": "Campaign allows users to manage marketing campaigns in Maximizer CRM. See below some considerations for Campaign:\n\n- A campaign can have one of below available status\n    \n    - New = 0\n        \n    - In Progress = 2\n        \n    - Completed = 3\n        \n    - Abandoned = 5\n        \n    - Suspended = 6\n        \n- A campaign can be of one of below types\n    \n    - Fixed-Date Automated Campaign = 10\n        \n    - Ongoing Automated Campaign = 15\n        \n    - Campaign = 25\n        \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
         },
         {
           "name": "CampaignSubscriber",
