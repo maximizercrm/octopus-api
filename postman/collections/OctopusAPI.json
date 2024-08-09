@@ -2990,6 +2990,135 @@
           "description": "Case allows users to manage customer service Cases in Maximizer CRM. See below some considerations for Case:\n\n- An automatic value for CaseNumber property will be generated every time a case is created.\n    \n- Cases can be assigned to Company or individuals using the property AbEntryKey, also can be tied to an specific contact using the property ContactKey.\n    \n- There are several properties for Case (ex. Type, Reason, Origin) that have multiple available value options, check FieldOptions collections to identify those possible values."
         },
         {
+          "name": "ColumnSetup",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read ColumnSetup metadata (simple)",
+                  "id": "a2198d3d-ab24-47ee-9e36-a4b713742677",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/ColumnSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read ColumnSetup metadata (more)",
+                  "id": "fb038817-f252-4089-91af-90c8e366ebfd",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/ColumnSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "c0089c25-217f-4f64-a9eb-c098e1880e1a"
+            },
+            {
+              "name": "ColumnSetup CRUD",
+              "item": [
+                {
+                  "name": "Read - ColumnSetup",
+                  "id": "9e24814c-fccd-43cd-b747-6867bca65dc5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"ColumnSetup\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                // Entity that the ColumnSetup belongs to, supported values are\r\n                // 1 = AddressBook \r\n                // 2 = Opportunity\r\n                // 5 = CustomerService \r\n                // 19 = Lead \r\n                // 10003 = Interaction \r\n                // 10015 = Activity\r\n                \"EntityType\": 1,\r\n                // Columns included in the column setup\r\n                \"Columns\": [\r\n                    {\r\n                        \"ID\": 1,\r\n                        \"Header\": 1, // Header assigned to the column\r\n                        \"Template\": 1, // Field from defined EntityType that will be shown in this column\r\n                        \"Width\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"EntityType\": {\r\n                    \"$EQ\": 19 // Entity type needs to be specified\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - ColumnSetup",
+                  "id": "22b626d2-dda1-4741-9be2-110ef0be2bdb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"ColumnSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29sdW1uU2V0dXAJNDUzOQkwCTI=\", // Mandatory\r\n            \"Name\": \"My View\",\r\n            // Columns to include in the column setup\r\n            \"Columns\": [\r\n                {\r\n                    \"ID\": \"C0\", // Mandatory\r\n                    \"Header\": \"Company\", // Mandatory\r\n                    \"Template\": \"{{CompanyName}}\", // Mandatory, Needs to be valid field from EntityType already assigned to the column setup\r\n                    \"Width\": 150 // Mandatory\r\n                },\r\n                {\r\n                    \"ID\": \"C1\",\r\n                    \"Header\": \"Phone 1\",\r\n                    \"Template\": \"{{Phone1/Number}}\",\r\n                    \"Width\": 150\r\n                },\r\n                {\r\n                    \"ID\": \"C2\",\r\n                    \"Header\": \"Status\",\r\n                    \"Template\": \"{{Status}}\",\r\n                    \"Width\": 150\r\n                },\r\n                {\r\n                    \"ID\": \"C4\",\r\n                    \"Header\": \"Email\",\r\n                    \"Template\": \"{{Email/Address}}\",\r\n                    \"Width\": 150\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - ColumnSetup",
+                  "id": "3c84c5c7-4695-4928-b47c-0f79d5a97736",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"ColumnSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29sdW1uU2V0dXAJNDUzOQkwCTI=\" //Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "9519f586-5160-402e-89cd-f9b99e37e548"
+            }
+          ],
+          "id": "efbd0906-d7dd-45a1-a541-8ed267e6425c",
+          "description": "ColumnSetup allows users to manage setups of columns available in the different modules in Maximizer CRM.\n\nA ColumnSetup contains three main elements, Name, EntityType and Columns. See below some considerations for those elements:\n\n- \"Name\" is the property user will use to identify such ColumnSetup in Maximizer CRM UI.\n    \n- All column setups belong to one and only one specific \"EntityType\", the supported entities are:\n    \n    - 1 = AddressBook\n        \n    - 2 = Opportunity\n        \n    - 5 = CustomerService\n        \n    - 19 = Lead\n        \n    - 10003 = Interaction\n        \n    - 10015 = Activity\n        \n- As an example of how EntityType works, a ColumnSetup created using EntityType = 2 (Opportunity) will be available to use in opportunitites module in Maximizer CRM.\n    \n- \"Columns\" element is an array of columns containing the different properties (from selected EntityType) user wants to show in the UI. The properties that can be set up for each column are:\n    \n    - ID: identification for the column, usually we follow standard of C0, C1, C2...\n        \n    - Header: title the column will have in the UI.\n        \n    - Template: field from defined EntityType that will be shown in this column. Need to be enclosed by double curly brackets, ex. {{Objective}}.\n        \n    - Width: width of the column in the UI.\n        \n\nFor now ColumnSetup only allows users to read, delete or update existing ColumnSetups."
+        },
+        {
           "name": "CurrencyRate",
           "item": [
             {
