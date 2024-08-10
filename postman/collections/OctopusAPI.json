@@ -4,9 +4,9 @@
     "name": "Octopus API",
     "description": "## Quick Start\n\n##### Step 1: Fork the collection using the \"Run in Postman\" button\n\n<img src=\"https://run.pstmn.io/button.svg\">\n\n##### Step 2: Make your API call against your Maximizer CRM instance\n\nBefore making API calls against your Maximizer CRM instance, you should decide what integrations you want to create. It will help you understand what type of access you need.\n\nTo get access to OctopusAPI, please follow the guide: [https://developer.maximizer.com/docs/api-access](https://developer.maximizer.com/docs/api-access)\n\nIn the Postman \"Environments\" you can find 3 environment examples for this collection:  \n1\\. Octopus API (api.maximizer.com) PAT - example with PAT token.\n\n2\\. Octopus API (api.maximizer.com) - example with AppKey and VendorId\n\n3\\. Octopus API (on-premise) - example for on-premise\n\n##### Step 3: Read the documentation and get familiar with Postman examples\n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api](https://developer.maximizer.com/v2/reference/octopus-api)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "updatedAt": "2024-08-10T00:56:17.000Z",
+    "updatedAt": "2024-08-10T01:47:22.000Z",
     "createdAt": "2024-04-11T19:00:12.000Z",
-    "lastUpdatedBy": "34024038",
+    "lastUpdatedBy": "34250118",
     "uid": "34024038-2fb6b864-57a0-404e-96fc-76fb9f783685"
   },
   "item": [
@@ -15,194 +15,184 @@
       "item": [
         {
           "name": "Authentication in CRM Live",
-          "event": [
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if(!pm.environment.get(\"Database\")) {",
-                  "    console.log(\"The Database environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"UID\")) {",
-                  "    console.log(\"The UID environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"Password\")) {",
-                  "    console.log(\"The Password environment variable is required.\");",
-                  "}"
-                ],
-                "type": "text/javascript",
-                "id": "921c206a-ada4-43fe-8836-318a92b110c4"
-              }
+              "name": "Authentication in CRM Live",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6"
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "if(!pm.environment.get(\"Database\")) {",
+                      "    console.log(\"The Database environment variable is required.\");",
+                      "}",
+                      "if(!pm.environment.get(\"UID\")) {",
+                      "    console.log(\"The UID environment variable is required.\");",
+                      "}",
+                      "if(!pm.environment.get(\"Password\")) {",
+                      "    console.log(\"The Password environment variable is required.\");",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "id": "921c206a-ada4-43fe-8836-318a92b110c4"
+                  }
+                }
+              ],
+              "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\",\n    \"VendorId\": \"{{VendorId}}\",\n    \"AppKey\": \"{{AppKey}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BaseURL}}/Authenticate",
+                  "host": [
+                    "{{BaseURL}}"
+                  ],
+                  "path": [
+                    "Authenticate"
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "34024038-072e66e1-e053-4d82-8847-fe77ac8a3d64"
             }
           ],
-          "id": "072e66e1-e053-4d82-8847-fe77ac8a3d64",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\",\n    \"VendorId\": \"{{VendorId}}\",\n    \"AppKey\": \"{{AppKey}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BaseURL}}/Authenticate",
-              "host": [
-                "{{BaseURL}}"
-              ],
-              "path": [
-                "Authenticate"
-              ]
-            },
-            "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
-          },
-          "response": [],
-          "uid": "34024038-072e66e1-e053-4d82-8847-fe77ac8a3d64"
+          "id": "2ef80c54-5968-42e8-908c-de0e98f00790",
+          "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2.",
+          "uid": "34024038-2ef80c54-5968-42e8-908c-de0e98f00790"
         },
         {
           "name": "Authentication on-premise",
-          "event": [
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6",
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "id": "921c206a-ada4-43fe-8836-318a92b110c4",
-                "exec": [
-                  "if(!pm.environment.get(\"Database\")) {",
-                  "    console.log(\"The Database environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"UID\")) {",
-                  "    console.log(\"The UID environment variable is required.\");",
-                  "}",
-                  "if(!pm.environment.get(\"Password\")) {",
-                  "    console.log(\"The Password environment variable is required.\");",
-                  "}"
-                ],
-                "type": "text/javascript",
-                "packages": {}
-              }
+              "name": "Authentication on-premise",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "5cb49d24-723f-4fe0-88c2-052fe25abbf6",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "921c206a-ada4-43fe-8836-318a92b110c4",
+                    "exec": [
+                      "if(!pm.environment.get(\"Database\")) {",
+                      "    console.log(\"The Database environment variable is required.\");",
+                      "}",
+                      "if(!pm.environment.get(\"UID\")) {",
+                      "    console.log(\"The UID environment variable is required.\");",
+                      "}",
+                      "if(!pm.environment.get(\"Password\")) {",
+                      "    console.log(\"The Password environment variable is required.\");",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "id": "23f8f085-e35b-47eb-8764-1f1fe04cb186",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "<BaseURL>/Authenticate",
+                  "host": [
+                    "<BaseURL>"
+                  ],
+                  "path": [
+                    "Authenticate"
+                  ]
+                }
+              },
+              "response": [],
+              "uid": "34024038-23f8f085-e35b-47eb-8764-1f1fe04cb186"
             }
           ],
-          "id": "23f8f085-e35b-47eb-8764-1f1fe04cb186",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"Database\": \"{{Database}}\",\n    \"UID\": \"{{UID}}\",\n    \"Password\": \"{{Password}}\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "<BaseURL>/Authenticate",
-              "host": [
-                "<BaseURL>"
-              ],
-              "path": [
-                "Authenticate"
-              ]
-            },
-            "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request."
-          },
-          "response": [],
-          "uid": "34024038-23f8f085-e35b-47eb-8764-1f1fe04cb186"
+          "id": "5e54a051-322a-4791-8254-4f9ba8e74834",
+          "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request.",
+          "uid": "34024038-5e54a051-322a-4791-8254-4f9ba8e74834"
         },
         {
           "name": "Token Validation",
-          "event": [
+          "item": [
             {
-              "listen": "prerequest",
-              "script": {
-                "exec": [
-                  "if(!pm.environment.get(\"Token\")) {",
-                  "    console.log(\"The Token environment variable is required.\");",
-                  "}"
-                ],
-                "type": "text/javascript",
-                "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
-              }
-            },
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript",
-                "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
-              }
-            }
-          ],
-          "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{BaseURL}}/TokenValid",
-              "host": [
-                "{{BaseURL}}"
-              ],
-              "path": [
-                "TokenValid"
-              ]
-            },
-            "description": "The endpoint returns the following response if the provided token is valid:\n\n``` json\n{\n  \"Code\": 0\n}\n\n ```"
-          },
-          "response": [
-            {
-              "id": "cea0ce88-5518-4d7c-9496-076d3507801e",
               "name": "Token Validation",
-              "originalRequest": {
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "if(!pm.environment.get(\"Token\")) {",
+                      "    console.log(\"The Token environment variable is required.\");",
+                      "}"
+                    ],
+                    "type": "text/javascript",
+                    "id": "e7b3d427-ce37-4460-9622-ceb541ca58fd"
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "id": "e4d91ac5-06e7-401b-b962-4d42492ac28f"
+                  }
+                }
+              ],
+              "id": "a2f42276-3203-46d5-b18f-901b2eeb6b01",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
                 "header": [],
                 "body": {
@@ -224,25 +214,56 @@
                   ]
                 }
               },
-              "_postman_previewlanguage": "json",
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json",
-                  "description": ""
+                  "id": "cea0ce88-5518-4d7c-9496-076d3507801e",
+                  "name": "Token Validation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/TokenValid",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "TokenValid"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": ""
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n    \"Code\": 0\n}",
+                  "uid": "34024038-cea0ce88-5518-4d7c-9496-076d3507801e"
                 }
               ],
-              "cookie": [],
-              "responseTime": null,
-              "body": "{\n    \"Code\": 0\n}",
-              "uid": "34024038-cea0ce88-5518-4d7c-9496-076d3507801e"
+              "uid": "34024038-a2f42276-3203-46d5-b18f-901b2eeb6b01"
             }
           ],
-          "uid": "34024038-a2f42276-3203-46d5-b18f-901b2eeb6b01"
+          "id": "a0ec4289-3802-4f38-a3fb-fe1da0c5b621",
+          "description": "# Token expiration\n\nTokens are stored on the server and remain valid for 10 minutes from the time they are generated. However, once a token is used in a request, its expiry time is refreshed and is updated to 10 minutes after the time of the request. You can keep a token alive by refreshing it up to a maximum of 24 hours, at which point the token will expire automatically.\n\nOnce a token has expired, any requests made with that token will fail. To prevent a method call from failing, you should check to see if a token is still valid with the TokenValid method before you use it in a request. In general, you should request a new token before each action or operation that you perform using Octopus API to avoid any problems with expired tokens.\n\n# Token validation\n\nThe endpoint returns the following response if the provided token is valid:\n\n``` json\n{\n  \"Code\": 0\n}\n\n ```",
+          "uid": "34024038-a0ec4289-3802-4f38-a3fb-fe1da0c5b621"
         }
       ],
       "id": "d7752c26-4eea-4efe-a331-f1e0efc74f6e",
-      "description": "Octopus API uses a token-based authentication system. A token is an encrypted string which identifies both the user and Maximizer Address Book for which the token is generated. Every method is exposed by Octopus API requires a valid token to be passed as a parameter in order to validate the user making the request.\n\n# Token expiration\n\nTokens are stored on the server and remain valid for 10 minutes from the time they are generated. However, once a token is used in a request, its expiry time is refreshed and is updated to 10 minutes after the time of the request. You can keep a token alive by refreshing it up to a maximum of 24 hours, at which point the token will expire automatically.\n\nOnce a token has expired, any requests made with that token will fail. To prevent a method call from failing, you should check to see if a token is still valid with the TokenValid method before you use it in a request. In general, you should request a new token before each action or operation that you perform using Octopus API to avoid any problems with expired tokens.",
+      "description": "Octopus API uses a token-based authentication system. A token is an encrypted string which identifies both the user and Maximizer Address Book for which the token is generated. Every method is exposed by Octopus API requires a valid token to be passed as a parameter in order to validate the user making the request.\n\n# Authentication",
       "uid": "34024038-d7752c26-4eea-4efe-a331-f1e0efc74f6e"
     },
     {
@@ -376,14 +397,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "The `$AND` operator combines one or more operands with a logical `AND`, meaning that all of the supplied operands must be true in order for a record to match the criteria. The `$AND` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$AND` operator, thus allowing you to create complex nested conditional searches."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-a9ab716f-922a-460a-900d-2ba50f0b6c19"
                         }
                       ],
                       "id": "6b52f628-15e3-4e17-b4a5-8f63d97578e9",
+                      "description": "The `$AND` operator combines one or more operands with a logical `AND`, meaning that all of the supplied operands must be true in order for a record to match the criteria. The `$AND` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$AND` operator, thus allowing you to create complex nested conditional searches.",
                       "uid": "34024038-6b52f628-15e3-4e17-b4a5-8f63d97578e9"
                     },
                     {
@@ -415,18 +436,18 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "The `$OR` operator combines one or more operands with a logical `OR`, meaning that any records for which one or more of the supplied operands are true will match the criteria. The `$OR` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$OR` operator, thus allowing you to create complex nested conditional searches."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-0a5ece04-7500-40f3-b105-0209e6bea0d8"
                         }
                       ],
                       "id": "779daaeb-6dce-474e-be4d-e592d090da3d",
+                      "description": "The `$OR` operator combines one or more operands with a logical `OR`, meaning that any records for which one or more of the supplied operands are true will match the criteria. The `$OR` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$OR` operator, thus allowing you to create complex nested conditional searches.",
                       "uid": "34024038-779daaeb-6dce-474e-be4d-e592d090da3d"
                     },
                     {
-                      "name": "$AND and $OR",
+                      "name": "$AND and $OR combined",
                       "item": [
                         {
                           "name": "$AND and $OR - Return a list of companies with a specific CompanyName",
@@ -500,8 +521,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$EQ` operator is used for doing exact comparisons against the value in a field. When an $EQ operator is included in a search, only those entries with a value that exactly matches the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-383f5ffa-efd7-4af7-9c28-2f31cd62b3f5"
@@ -532,15 +552,85 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NE` operator is used for doing exact comparisons against the value in a field. When the $NE operator is included in a search, any entries that do not exactly match the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-2a07aa91-68a3-4230-90ee-ae0922d16d1b"
                         }
                       ],
                       "id": "1a31e902-bff2-475f-8182-e822c19d66e9",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$EQ` and `$NE` operators are used for doing exact comparisons against the value in a field. When an `$EQ` operator is included in a search, only those entries with a value that exactly matches the supplied value for the specified field will be returned. Conversely, when the `$NE` operator is included in a search, any entries that do not exactly match the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-1a31e902-bff2-475f-8182-e822c19d66e9"
+                    },
+                    {
+                      "name": "$GE and $LE",
+                      "item": [
+                        {
+                          "name": "$GE (greater than or equal) - Get 10 companies with last contact after January 2024",
+                          "id": "e1c47da2-a45d-490f-be60-70930a0160e4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$GE\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            }
+                          },
+                          "response": [],
+                          "uid": "34024038-e1c47da2-a45d-490f-be60-70930a0160e4"
+                        },
+                        {
+                          "name": "$LT (lower than or equal) - Get 10 companies with last contact before January 2024",
+                          "id": "6621b118-7367-4a6a-96b6-3a3acc21a27f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$LE\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            }
+                          },
+                          "response": [],
+                          "uid": "34024038-6621b118-7367-4a6a-96b6-3a3acc21a27f"
+                        }
+                      ],
+                      "id": "ad1c1973-3812-4761-8f37-7ab872647317",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$GE` operator is used for doing searches for values that are greater than or equal to the specified value, and the `$LE` operator is used for doing searches for values that are less than or equal to the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
+                      "uid": "34024038-ad1c1973-3812-4761-8f37-7ab872647317"
                     },
                     {
                       "name": "$GT and $LT",
@@ -571,8 +661,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$GT` operator is used for doing searches for values that are larger than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-f0d796ac-8d92-4284-87d4-c1b8119c2d08"
@@ -603,14 +692,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\n`$LT` operator is used for doing searches for values that are smaller than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-c4105ed4-3784-4aa5-a6e0-f8ecd41c8d8e"
                         }
                       ],
                       "id": "bcf97eaa-803d-4aa5-9eb4-69cfedf38550",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$GT` operator is used for doing searches for values that are larger than the specified value, and the `$LT` operator is used for doing searches for values that are smaller than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-bcf97eaa-803d-4aa5-9eb4-69cfedf38550"
                     },
                     {
@@ -642,8 +731,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$IN` operator returns entries where any of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-f24fd2ca-9c24-47fc-b081-1465334e6986"
@@ -674,8 +762,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NIN` operator returns entries where none of the specified entries match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-5ec57314-d604-4680-b925-64975cc5e368"
@@ -706,14 +793,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$ALL` operator returns entries where all of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-82816e51-7cad-4260-a773-1db3f92412ff"
                         }
                       ],
                       "id": "a07aa08a-2e81-4ebd-8494-514bfbc324f8",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$IN`, `$NIN`, and `$ALL` operators are used for doing searches on tablevalued fields. The `$IN` operator will return entries where any of the specified values match, the `$NIN` operator will return entries where none of the specified entries match, and the `$ALL` operator will only return entries where all of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-a07aa08a-2e81-4ebd-8494-514bfbc324f8"
                     },
                     {
@@ -745,8 +832,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$LIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$LIKE` operator is similar to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-59d485d0-6f54-4b91-8e17-e485dc6e0e70"
@@ -777,14 +863,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NLIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$NLIKE` operator is opposite to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-52f337ef-3307-45ce-973b-f6d5f7a76da1"
                         }
                       ],
                       "id": "f430f829-7cf8-429c-90d7-af5d78e71d17",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$LIKE` and `$NLIKE` operators are used for doing wildcard comparisons against string-valued fields. The function of the `$LIKE` operator is similar to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operators accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-f430f829-7cf8-429c-90d7-af5d78e71d17"
                     },
                     {
@@ -816,14 +902,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.4\n    \n\nThe `$PHRASE` operator is a special unary comparison operator that accepts only a search phrase and searches for the supplied phrase within a fixed set of fields.\n\nThe functionality of the `$PHRASE` operator is identical to the quick search bar in Maximizer Web Access. When you use the `$PHRASE` operator, any AbEntry objects with a matching FirstName, LastName, or CompanyName value are returned.\n\nThe `$PHRASE` operator also matches partial names that start with the search phrase. For example, searching for the name “John” would retrieve entries named “John Adams”, “Samantha Johnston”, and “Johnson Brothers Co”.\n\nYou can also use the `$PHRASE` operator to search for AbEntry objects by email address or phone number. If you supply all or part of an email address containing an `@` symbol as the operand for the `$PHRASE` operator, all AbEntry objects with a matching email address are returned. Similarly, if you supply all or part of a numeric phone number as the operand, all AbEntry objects with a matching phone number are returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-3db97d21-ebee-4950-9d6c-236820677943"
                         }
                       ],
                       "id": "384898fb-9dbb-44ba-8373-885667356469",
+                      "description": "- Available Since API Version – 2.4\n    \n\nThe `$PHRASE` operator is a special unary comparison operator that accepts only a search phrase and searches for the supplied phrase within a fixed set of fields.\n\nThe functionality of the `$PHRASE` operator is identical to the quick search bar in Maximizer Web Access. When you use the `$PHRASE` operator, any AbEntry objects with a matching FirstName, LastName, or CompanyName value are returned.\n\nThe `$PHRASE` operator also matches partial names that start with the search phrase. For example, searching for the name “John” would retrieve entries named “John Adams”, “Samantha Johnston”, and “Johnson Brothers Co”.\n\nYou can also use the `$PHRASE` operator to search for AbEntry objects by email address or phone number. If you supply all or part of an email address containing an `@` symbol as the operand for the `$PHRASE` operator, all AbEntry objects with a matching email address are returned. Similarly, if you supply all or part of a numeric phone number as the operand, all AbEntry objects with a matching phone number are returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-384898fb-9dbb-44ba-8373-885667356469"
                     },
                     {
@@ -855,8 +941,7 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$RANGE` operator is used for doing searches for values that fall within a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-d2b19395-47f2-4232-8e56-942f0f207aef"
@@ -887,14 +972,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NRANGE` operator is used for doing searches for values that fall outside a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-b215397e-31e5-43e3-842c-68df97d675a0"
                         }
                       ],
                       "id": "ea9041be-d540-42ee-9806-8716c62c5ae7",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$RANGE` and `$NRANGE` operators are used for doing searches for values that fall within or outside a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field.",
                       "uid": "34024038-ea9041be-d540-42ee-9806-8716c62c5ae7"
                     }
                   ],
@@ -934,14 +1019,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NOW()` function may be used to search for DateTime values relative to the current time. When included in a search query, it evaluates to the current date and time."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-44d852ec-53a2-46d6-a274-e4c4b8453421"
                         }
                       ],
                       "id": "fb4552d4-536f-42ef-8af1-67af9ae68646",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$NOW()` function may be used to search for DateTime values relative to the current time. When included in a search query, it evaluates to the current date and time.",
                       "uid": "34024038-fb4552d4-536f-42ef-8af1-67af9ae68646"
                     },
                     {
@@ -973,14 +1058,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$TODAY()` function may be used to search for DateTime values relative to the current day. When included in a search query, it evaluates to a date range spanning the current day from 00:00:00 in the morning to 23:59:59 at night."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-c3faf9f9-4ca3-4ced-994c-ad94bb192164"
                         }
                       ],
                       "id": "9eb61015-ac3f-4cce-a76c-979aa6799d89",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$TODAY()` function may be used to search for DateTime values relative to the current day. When included in a search query, it evaluates to a date range spanning the current day from 00:00:00 in the morning to 23:59:59 at night.",
                       "uid": "34024038-9eb61015-ac3f-4cce-a76c-979aa6799d89"
                     },
                     {
@@ -1012,14 +1097,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISWEEK()` function may be used to search for DateTime values relative to the current week. When included in a search query, it evaluates to a date range including the first and last days of the current calendar week."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-6fc792c9-a330-4d29-83b2-3262363fbaf6"
                         }
                       ],
                       "id": "9db77f44-e8e4-4b26-9c4f-b3bafe915a5b",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISWEEK()` function may be used to search for DateTime values relative to the current week. When included in a search query, it evaluates to a date range including the first and last days of the current calendar week.",
                       "uid": "34024038-9db77f44-e8e4-4b26-9c4f-b3bafe915a5b"
                     },
                     {
@@ -1051,14 +1136,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISMONTH()` function may be used to search for DateTime values relative to the current month. When included in a search query, it evaluates to a date range including the first and last days of the current calendar month."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-fb4b47f9-b5a2-4d5c-acfd-abd4115ca349"
                         }
                       ],
                       "id": "4285ac54-d6ce-4c73-a22d-d01b51ec9510",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISMONTH()` function may be used to search for DateTime values relative to the current month. When included in a search query, it evaluates to a date range including the first and last days of the current calendar month.",
                       "uid": "34024038-4285ac54-d6ce-4c73-a22d-d01b51ec9510"
                     },
                     {
@@ -1090,14 +1175,14 @@
                               "path": [
                                 "Read"
                               ]
-                            },
-                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISYEAR()` function may be used to search for DateTime values relative to the current year. When included in a search query, it evaluates to a date range including the first and last days of the current calendar year."
+                            }
                           },
                           "response": [],
                           "uid": "34024038-99a05215-e385-418f-8a04-25aec9440bea"
                         }
                       ],
                       "id": "c8392cde-5b4c-4c1c-a113-12d2984a7603",
+                      "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISYEAR()` function may be used to search for DateTime values relative to the current year. When included in a search query, it evaluates to a date range including the first and last days of the current calendar year.",
                       "uid": "34024038-c8392cde-5b4c-4c1c-a113-12d2984a7603"
                     }
                   ],
