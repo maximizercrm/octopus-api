@@ -4,9 +4,9 @@
     "name": "Octopus API",
     "description": "## Quick Start\n\n##### Step 1: Fork the collection using the \"Run in Postman\" button\n\n<img src=\"https://run.pstmn.io/button.svg\">\n\n##### Step 2: Make your API call against your Maximizer CRM instance\n\nBefore making API calls against your Maximizer CRM instance, you should decide what integrations you want to create. It will help you understand what type of access you need.\n\nTo get access to OctopusAPI, please follow the guide: [https://developer.maximizer.com/docs/api-access](https://developer.maximizer.com/docs/api-access)\n\nIn the Postman \"Environments\" you can find 3 environment examples for this collection:  \n1\\. Octopus API (api.maximizer.com) PAT - example with PAT token.\n\n2\\. Octopus API (api.maximizer.com) - example with AppKey and VendorId\n\n3\\. Octopus API (on-premise) - example for on-premise\n\n##### Step 3: Read the documentation and get familiar with Postman examples\n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api](https://developer.maximizer.com/v2/reference/octopus-api)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "updatedAt": "2024-08-09T22:02:30.000Z",
+    "updatedAt": "2024-08-10T00:56:17.000Z",
     "createdAt": "2024-04-11T19:00:12.000Z",
-    "lastUpdatedBy": "34250118",
+    "lastUpdatedBy": "34024038",
     "uid": "34024038-2fb6b864-57a0-404e-96fc-76fb9f783685"
   },
   "item": [
@@ -348,99 +348,120 @@
                   "name": "Logical Operators",
                   "item": [
                     {
-                      "name": "$AND - Return a list of contacts with a specific name",
-                      "id": "a9ab716f-922a-460a-900d-2ba50f0b6c19",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Contact\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"$PHRASE\": \"Name: Johnson\"\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "The `$AND` operator combines one or more operands with a logical `AND`, meaning that all of the supplied operands must be true in order for a record to match the criteria. The `$AND` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$AND` operator, thus allowing you to create complex nested conditional searches."
-                      },
-                      "response": [],
-                      "uid": "34024038-a9ab716f-922a-460a-900d-2ba50f0b6c19"
-                    },
-                    {
-                      "name": "$OR - Return a list of contacts and individuals",
-                      "id": "0a5ece04-7500-40f3-b105-0209e6bea0d8",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"Type\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$OR\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Contact\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Individual\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "The `$OR` operator combines one or more operands with a logical `OR`, meaning that any records for which one or more of the supplied operands are true will match the criteria. The `$OR` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$OR` operator, thus allowing you to create complex nested conditional searches."
-                      },
-                      "response": [],
-                      "uid": "34024038-0a5ece04-7500-40f3-b105-0209e6bea0d8"
-                    },
-                    {
-                      "name": "$AND and $OR - Return a list of companies with a specific CompanyName",
-                      "id": "ac22e285-1204-4c7d-8bce-3be45f2c8de3",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"$OR\": [\r\n                            {\r\n                                \"CompanyName\": {\r\n                                    \"$LIKE\": \"del%\"\r\n                                }\r\n                            },\r\n                            {\r\n                                \"CompanyName\": {\r\n                                    \"$LIKE\": \"dup%\"\r\n                                }\r\n                            }\r\n                        ]\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
+                      "name": "$AND",
+                      "item": [
+                        {
+                          "name": "$AND - Return a list of contacts with a specific name",
+                          "id": "a9ab716f-922a-460a-900d-2ba50f0b6c19",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Contact\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"$PHRASE\": \"Name: Johnson\"\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "The `$AND` operator combines one or more operands with a logical `AND`, meaning that all of the supplied operands must be true in order for a record to match the criteria. The `$AND` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$AND` operator, thus allowing you to create complex nested conditional searches."
+                          },
+                          "response": [],
+                          "uid": "34024038-a9ab716f-922a-460a-900d-2ba50f0b6c19"
                         }
-                      },
-                      "response": [],
-                      "uid": "34024038-ac22e285-1204-4c7d-8bce-3be45f2c8de3"
+                      ],
+                      "id": "6b52f628-15e3-4e17-b4a5-8f63d97578e9",
+                      "uid": "34024038-6b52f628-15e3-4e17-b4a5-8f63d97578e9"
+                    },
+                    {
+                      "name": "$OR",
+                      "item": [
+                        {
+                          "name": "$OR - Return a list of contacts and individuals",
+                          "id": "0a5ece04-7500-40f3-b105-0209e6bea0d8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"Type\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$OR\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Contact\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Individual\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "The `$OR` operator combines one or more operands with a logical `OR`, meaning that any records for which one or more of the supplied operands are true will match the criteria. The `$OR` operator will accept an array containing any combination of comparison or logical operators as operands, including another `$OR` operator, thus allowing you to create complex nested conditional searches."
+                          },
+                          "response": [],
+                          "uid": "34024038-0a5ece04-7500-40f3-b105-0209e6bea0d8"
+                        }
+                      ],
+                      "id": "779daaeb-6dce-474e-be4d-e592d090da3d",
+                      "uid": "34024038-779daaeb-6dce-474e-be4d-e592d090da3d"
+                    },
+                    {
+                      "name": "$AND and $OR",
+                      "item": [
+                        {
+                          "name": "$AND and $OR - Return a list of companies with a specific CompanyName",
+                          "id": "ac22e285-1204-4c7d-8bce-3be45f2c8de3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"$OR\": [\r\n                            {\r\n                                \"CompanyName\": {\r\n                                    \"$LIKE\": \"del%\"\r\n                                }\r\n                            },\r\n                            {\r\n                                \"CompanyName\": {\r\n                                    \"$LIKE\": \"dup%\"\r\n                                }\r\n                            }\r\n                        ]\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            }
+                          },
+                          "response": [],
+                          "uid": "34024038-ac22e285-1204-4c7d-8bce-3be45f2c8de3"
+                        }
+                      ],
+                      "id": "dcb022fe-2fd7-4f9c-911d-cdb038385932",
+                      "uid": "34024038-dcb022fe-2fd7-4f9c-911d-cdb038385932"
                     }
                   ],
                   "id": "8eabbb51-3ef5-449e-b956-e180a76ae255",
@@ -451,388 +472,430 @@
                   "name": "Comparison Operators",
                   "item": [
                     {
-                      "name": "$EQ (equal) - Get 10 companies",
-                      "id": "383f5ffa-efd7-4af7-9c28-2f31cd62b3f5",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
+                      "name": "$EQ and $NE",
+                      "item": [
+                        {
+                          "name": "$EQ (equal) - Get 10 companies",
+                          "id": "383f5ffa-efd7-4af7-9c28-2f31cd62b3f5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$EQ` operator is used for doing exact comparisons against the value in a field. When an $EQ operator is included in a search, only those entries with a value that exactly matches the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-383f5ffa-efd7-4af7-9c28-2f31cd62b3f5"
                         },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$EQ` operator is used for doing exact comparisons against the value in a field. When an $EQ operator is included in a search, only those entries with a value that exactly matches the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-383f5ffa-efd7-4af7-9c28-2f31cd62b3f5"
+                        {
+                          "name": "$NE (not equal) - Get 10 contacts or individuals",
+                          "id": "2a07aa91-68a3-4230-90ee-ae0922d16d1b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$NE\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    }\r\n    // Not available in the SQL driver yet\r\n    // \"Configuration\": {\r\n    //     \"Drivers\": {\r\n    //         \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n    //     }\r\n    // }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NE` operator is used for doing exact comparisons against the value in a field. When the $NE operator is included in a search, any entries that do not exactly match the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-2a07aa91-68a3-4230-90ee-ae0922d16d1b"
+                        }
+                      ],
+                      "id": "1a31e902-bff2-475f-8182-e822c19d66e9",
+                      "uid": "34024038-1a31e902-bff2-475f-8182-e822c19d66e9"
                     },
                     {
-                      "name": "$NE (not equal) - Get 10 contacts or individuals",
-                      "id": "2a07aa91-68a3-4230-90ee-ae0922d16d1b",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$NE\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    }\r\n    // Not available in the SQL driver yet\r\n    // \"Configuration\": {\r\n    //     \"Drivers\": {\r\n    //         \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n    //     }\r\n    // }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
+                      "name": "$GT and $LT",
+                      "item": [
+                        {
+                          "name": "$GT (greater than) - Get 10 companies with last contact after January 2024",
+                          "id": "f0d796ac-8d92-4284-87d4-c1b8119c2d08",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$GT\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$GT` operator is used for doing searches for values that are larger than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-f0d796ac-8d92-4284-87d4-c1b8119c2d08"
                         },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$NE` operator is used for doing exact comparisons against the value in a field. When the $NE operator is included in a search, any entries that do not exactly match the supplied value for the specified field will be returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-2a07aa91-68a3-4230-90ee-ae0922d16d1b"
+                        {
+                          "name": "$LT (lower than) - Get 10 companies with last contact before January 2024",
+                          "id": "c4105ed4-3784-4aa5-a6e0-f8ecd41c8d8e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$LT\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\n`$LT` operator is used for doing searches for values that are smaller than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-c4105ed4-3784-4aa5-a6e0-f8ecd41c8d8e"
+                        }
+                      ],
+                      "id": "bcf97eaa-803d-4aa5-9eb4-69cfedf38550",
+                      "uid": "34024038-bcf97eaa-803d-4aa5-9eb4-69cfedf38550"
                     },
                     {
-                      "name": "$GT (greater than) - Get 10 companies with last contact after January 2024",
-                      "id": "f0d796ac-8d92-4284-87d4-c1b8119c2d08",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$GT\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
+                      "name": "$IN, $NIN and $ALL",
+                      "item": [
+                        {
+                          "name": "$IN (in) - Get 10 contacts or individuals",
+                          "id": "f24fd2ca-9c24-47fc-b081-1465334e6986",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$IN\": [\"Contact\", \"Individual\"]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$IN` operator returns entries where any of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-f24fd2ca-9c24-47fc-b081-1465334e6986"
                         },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
+                        {
+                          "name": "$NIN (not in) - Get 10 companies, except 2 specified",
+                          "id": "5ec57314-d604-4680-b925-64975cc5e368",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CompanyName\": {\r\n                    \"$NIN\": [\"New World\", \"Maximizer\"]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NIN` operator returns entries where none of the specified entries match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-5ec57314-d604-4680-b925-64975cc5e368"
                         },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$GT` operator is used for doing searches for values that are larger than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-f0d796ac-8d92-4284-87d4-c1b8119c2d08"
+                        {
+                          "name": "$ALL (all) - Get 10 abentries where a table UDF contains provided values",
+                          "id": "82816e51-7cad-4260-a773-1db3f92412ff",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Udf/$NAME(Table UDF)\": {\r\n                    \"$ALL\": [\r\n                        \"1\",\r\n                        \"3\",\r\n                        \"5\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$ALL` operator returns entries where all of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-82816e51-7cad-4260-a773-1db3f92412ff"
+                        }
+                      ],
+                      "id": "a07aa08a-2e81-4ebd-8494-514bfbc324f8",
+                      "uid": "34024038-a07aa08a-2e81-4ebd-8494-514bfbc324f8"
                     },
                     {
-                      "name": "$LT (lower than) - Get 10 companies with last contact before January 2024",
-                      "id": "c4105ed4-3784-4aa5-a6e0-f8ecd41c8d8e",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$LT\": \"2024-01-01T00:00:00\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
+                      "name": "$LIKE and $NLIKE",
+                      "item": [
+                        {
+                          "name": "$LIKE (search by a substring) - Search for a contact with name Steve or Steven",
+                          "id": "59d485d0-6f54-4b91-8e17-e485dc6e0e70",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"FirstName\": {\r\n                    \"$LIKE\": \"Steve%\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$LIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$LIKE` operator is similar to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-59d485d0-6f54-4b91-8e17-e485dc6e0e70"
                         },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\n`$LT` operator is used for doing searches for values that are smaller than the specified value.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-c4105ed4-3784-4aa5-a6e0-f8ecd41c8d8e"
+                        {
+                          "name": "$NLIKE (search by a substring) - Search for a contact with name is not Steve",
+                          "id": "52f337ef-3307-45ce-973b-f6d5f7a76da1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"FirstName\": {\r\n                    \"$NLIKE\": \"Steve%\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NLIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$NLIKE` operator is opposite to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-52f337ef-3307-45ce-973b-f6d5f7a76da1"
+                        }
+                      ],
+                      "id": "f430f829-7cf8-429c-90d7-af5d78e71d17",
+                      "uid": "34024038-f430f829-7cf8-429c-90d7-af5d78e71d17"
                     },
                     {
-                      "name": "$IN (in) - Get 10 contacts or individuals",
-                      "id": "f24fd2ca-9c24-47fc-b081-1465334e6986",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$IN\": [\"Contact\", \"Individual\"]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$IN` operator returns entries where any of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-f24fd2ca-9c24-47fc-b081-1465334e6986"
+                      "name": "$PHRASE",
+                      "item": [
+                        {
+                          "name": "$PHRASE (search) - Retrieve 10 abentries for which the FirstName, LastName, or CompanyName field starts with the phrase \"John\"",
+                          "id": "3db97d21-ebee-4950-9d6c-236820677943",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\":\"John\"\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.4\n    \n\nThe `$PHRASE` operator is a special unary comparison operator that accepts only a search phrase and searches for the supplied phrase within a fixed set of fields.\n\nThe functionality of the `$PHRASE` operator is identical to the quick search bar in Maximizer Web Access. When you use the `$PHRASE` operator, any AbEntry objects with a matching FirstName, LastName, or CompanyName value are returned.\n\nThe `$PHRASE` operator also matches partial names that start with the search phrase. For example, searching for the name “John” would retrieve entries named “John Adams”, “Samantha Johnston”, and “Johnson Brothers Co”.\n\nYou can also use the `$PHRASE` operator to search for AbEntry objects by email address or phone number. If you supply all or part of an email address containing an `@` symbol as the operand for the `$PHRASE` operator, all AbEntry objects with a matching email address are returned. Similarly, if you supply all or part of a numeric phone number as the operand, all AbEntry objects with a matching phone number are returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-3db97d21-ebee-4950-9d6c-236820677943"
+                        }
+                      ],
+                      "id": "384898fb-9dbb-44ba-8373-885667356469",
+                      "uid": "34024038-384898fb-9dbb-44ba-8373-885667356469"
                     },
                     {
-                      "name": "$NIN (not in) - Get 10 companies, except 2 specified",
-                      "id": "5ec57314-d604-4680-b925-64975cc5e368",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CompanyName\": {\r\n                    \"$NIN\": [\"New World\", \"Maximizer\"]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
+                      "name": "$RANGE and $NRANGE",
+                      "item": [
+                        {
+                          "name": "$RANGE (search in the range) - Get 10 companies with the last contact in January 2024",
+                          "id": "d2b19395-47f2-4232-8e56-942f0f207aef",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$RANGE\": [\r\n                                \"2024-01-01T00:00:00\",\r\n                                \"2024-01-31T23:59:59\"\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$RANGE` operator is used for doing searches for values that fall within a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-d2b19395-47f2-4232-8e56-942f0f207aef"
                         },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$NIN` operator returns entries where none of the specified entries match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-5ec57314-d604-4680-b925-64975cc5e368"
-                    },
-                    {
-                      "name": "$ALL (all) - Get 10 abentries where a table UDF contains provided values",
-                      "id": "82816e51-7cad-4260-a773-1db3f92412ff",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Udf/$NAME(Table UDF)\": {\r\n                    \"$ALL\": [\r\n                        \"1\",\r\n                        \"3\",\r\n                        \"5\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$ALL` operator returns entries where all of the specified values match.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-82816e51-7cad-4260-a773-1db3f92412ff"
-                    },
-                    {
-                      "name": "$LIKE (search by a substring) - Search for a contact with name Steve or Steven",
-                      "id": "59d485d0-6f54-4b91-8e17-e485dc6e0e70",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"FirstName\": {\r\n                    \"$LIKE\": \"Steve%\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$LIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$LIKE` operator is similar to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-59d485d0-6f54-4b91-8e17-e485dc6e0e70"
-                    },
-                    {
-                      "name": "$NLIKE (search by a substring) - Search for a contact with name is not Steve",
-                      "id": "52f337ef-3307-45ce-973b-f6d5f7a76da1",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"FirstName\": {\r\n                    \"$NLIKE\": \"Steve%\"\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$NLIKE` operator is used for doing wildcard comparisons against string-valued fields. The function of the `$NLIKE` operator is opposite to that of the \"LIKE\" operator in a SQL query, and similar wildcards are used.\n\nThe operator accepts the following wildcards:\n\n- **`%`** - Matches any sequence of zero or more characters.\n    \n- **`_`** - Matches any single character.\n    \n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-52f337ef-3307-45ce-973b-f6d5f7a76da1"
-                    },
-                    {
-                      "name": "$PHRASE (search) - Retrieve 10 abentries for which the FirstName, LastName, or CompanyName field starts with the phrase \"John\"",
-                      "id": "3db97d21-ebee-4950-9d6c-236820677943",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\":\"John\"\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.4\n    \n\nThe `$PHRASE` operator is a special unary comparison operator that accepts only a search phrase and searches for the supplied phrase within a fixed set of fields.\n\nThe functionality of the `$PHRASE` operator is identical to the quick search bar in Maximizer Web Access. When you use the `$PHRASE` operator, any AbEntry objects with a matching FirstName, LastName, or CompanyName value are returned.\n\nThe `$PHRASE` operator also matches partial names that start with the search phrase. For example, searching for the name “John” would retrieve entries named “John Adams”, “Samantha Johnston”, and “Johnson Brothers Co”.\n\nYou can also use the `$PHRASE` operator to search for AbEntry objects by email address or phone number. If you supply all or part of an email address containing an `@` symbol as the operand for the `$PHRASE` operator, all AbEntry objects with a matching email address are returned. Similarly, if you supply all or part of a numeric phone number as the operand, all AbEntry objects with a matching phone number are returned.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-3db97d21-ebee-4950-9d6c-236820677943"
-                    },
-                    {
-                      "name": "$RANGE (search in the range) - Get 10 companies with the last contact in January 2024",
-                      "id": "d2b19395-47f2-4232-8e56-942f0f207aef",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$RANGE\": [\r\n                                \"2024-01-01T00:00:00\",\r\n                                \"2024-01-31T23:59:59\"\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$RANGE` operator is used for doing searches for values that fall within a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-d2b19395-47f2-4232-8e56-942f0f207aef"
-                    },
-                    {
-                      "name": "$NRANGE (search outside of the range) - Get 10 companies with the last contact NOT in January 2024 Copy",
-                      "id": "b215397e-31e5-43e3-842c-68df97d675a0",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$NRANGE\": [\r\n                                \"2024-01-01T00:00:00\",\r\n                                \"2024-01-31T23:59:59\"\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$NRANGE` operator is used for doing searches for values that fall outside a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
-                      },
-                      "response": [],
-                      "uid": "34024038-b215397e-31e5-43e3-842c-68df97d675a0"
+                        {
+                          "name": "$NRANGE (search outside of the range) - Get 10 companies with the last contact NOT in January 2024 Copy",
+                          "id": "b215397e-31e5-43e3-842c-68df97d675a0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"LastContactDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"LastContactDate\": {\r\n                            \"$NRANGE\": [\r\n                                \"2024-01-01T00:00:00\",\r\n                                \"2024-01-31T23:59:59\"\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NRANGE` operator is used for doing searches for values that fall outside a specified range in numeric or date fields.\n\nCertain entity types may contain some fields that do not support all available search operators. If you try to search on a field using an unsupported operator, the response will contain an error message indicating that the operator is unsupported for that field."
+                          },
+                          "response": [],
+                          "uid": "34024038-b215397e-31e5-43e3-842c-68df97d675a0"
+                        }
+                      ],
+                      "id": "ea9041be-d540-42ee-9806-8716c62c5ae7",
+                      "uid": "34024038-ea9041be-d540-42ee-9806-8716c62c5ae7"
                     }
                   ],
                   "id": "8c562d03-d4cf-4e57-8a90-823972038aff",
@@ -843,164 +906,199 @@
                   "name": "DateTime Operators",
                   "item": [
                     {
-                      "name": "$NOW() - Get 10 companies created before the current time",
-                      "id": "44d852ec-53a2-46d6-a274-e4c4b8453421",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$NOW()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$NOW()` function may be used to search for DateTime values relative to the current time. When included in a search query, it evaluates to the current date and time."
-                      },
-                      "response": [],
-                      "uid": "34024038-44d852ec-53a2-46d6-a274-e4c4b8453421"
+                      "name": "$NOW()",
+                      "item": [
+                        {
+                          "name": "$NOW() - Get 10 companies created before the current time",
+                          "id": "44d852ec-53a2-46d6-a274-e4c4b8453421",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$NOW()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$NOW()` function may be used to search for DateTime values relative to the current time. When included in a search query, it evaluates to the current date and time."
+                          },
+                          "response": [],
+                          "uid": "34024038-44d852ec-53a2-46d6-a274-e4c4b8453421"
+                        }
+                      ],
+                      "id": "fb4552d4-536f-42ef-8af1-67af9ae68646",
+                      "uid": "34024038-fb4552d4-536f-42ef-8af1-67af9ae68646"
                     },
                     {
-                      "name": "$TODAY() - Get 10 companies created before today",
-                      "id": "c3faf9f9-4ca3-4ced-994c-ad94bb192164",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$TODAY()` function may be used to search for DateTime values relative to the current day. When included in a search query, it evaluates to a date range spanning the current day from 00:00:00 in the morning to 23:59:59 at night."
-                      },
-                      "response": [],
-                      "uid": "34024038-c3faf9f9-4ca3-4ced-994c-ad94bb192164"
+                      "name": "$TODAY()",
+                      "item": [
+                        {
+                          "name": "$TODAY() - Get 10 companies created before today",
+                          "id": "c3faf9f9-4ca3-4ced-994c-ad94bb192164",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$TODAY()` function may be used to search for DateTime values relative to the current day. When included in a search query, it evaluates to a date range spanning the current day from 00:00:00 in the morning to 23:59:59 at night."
+                          },
+                          "response": [],
+                          "uid": "34024038-c3faf9f9-4ca3-4ced-994c-ad94bb192164"
+                        }
+                      ],
+                      "id": "9eb61015-ac3f-4cce-a76c-979aa6799d89",
+                      "uid": "34024038-9eb61015-ac3f-4cce-a76c-979aa6799d89"
                     },
                     {
-                      "name": "$THISWEEK() - Get 10 companies created before the current week",
-                      "id": "6fc792c9-a330-4d29-83b2-3262363fbaf6",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISWEEK()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISWEEK()` function may be used to search for DateTime values relative to the current week. When included in a search query, it evaluates to a date range including the first and last days of the current calendar week."
-                      },
-                      "response": [],
-                      "uid": "34024038-6fc792c9-a330-4d29-83b2-3262363fbaf6"
+                      "name": "$THISWEEK()",
+                      "item": [
+                        {
+                          "name": "$THISWEEK() - Get 10 companies created before the current week",
+                          "id": "6fc792c9-a330-4d29-83b2-3262363fbaf6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISWEEK()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISWEEK()` function may be used to search for DateTime values relative to the current week. When included in a search query, it evaluates to a date range including the first and last days of the current calendar week."
+                          },
+                          "response": [],
+                          "uid": "34024038-6fc792c9-a330-4d29-83b2-3262363fbaf6"
+                        }
+                      ],
+                      "id": "9db77f44-e8e4-4b26-9c4f-b3bafe915a5b",
+                      "uid": "34024038-9db77f44-e8e4-4b26-9c4f-b3bafe915a5b"
                     },
                     {
-                      "name": "$THISMONTH() - Get 10 companies created before the current month",
-                      "id": "fb4b47f9-b5a2-4d5c-acfd-abd4115ca349",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISMONTH()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISMONTH()` function may be used to search for DateTime values relative to the current month. When included in a search query, it evaluates to a date range including the first and last days of the current calendar month."
-                      },
-                      "response": [],
-                      "uid": "34024038-fb4b47f9-b5a2-4d5c-acfd-abd4115ca349"
+                      "name": "$THISMONTH()",
+                      "item": [
+                        {
+                          "name": "$THISMONTH() - Get 10 companies created before the current month",
+                          "id": "fb4b47f9-b5a2-4d5c-acfd-abd4115ca349",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISMONTH()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISMONTH()` function may be used to search for DateTime values relative to the current month. When included in a search query, it evaluates to a date range including the first and last days of the current calendar month."
+                          },
+                          "response": [],
+                          "uid": "34024038-fb4b47f9-b5a2-4d5c-acfd-abd4115ca349"
+                        }
+                      ],
+                      "id": "4285ac54-d6ce-4c73-a22d-d01b51ec9510",
+                      "uid": "34024038-4285ac54-d6ce-4c73-a22d-d01b51ec9510"
                     },
                     {
-                      "name": "$THISYEAR() - Get 10 companies created before the current year",
-                      "id": "99a05215-e385-418f-8a04-25aec9440bea",
-                      "protocolProfileBehavior": {
-                        "disableBodyPruning": true
-                      },
-                      "request": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISYEAR()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                          "options": {
-                            "raw": {
-                              "language": "json"
-                            }
-                          }
-                        },
-                        "url": {
-                          "raw": "{{BaseURL}}/Read",
-                          "host": [
-                            "{{BaseURL}}"
-                          ],
-                          "path": [
-                            "Read"
-                          ]
-                        },
-                        "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISYEAR()` function may be used to search for DateTime values relative to the current year. When included in a search query, it evaluates to a date range including the first and last days of the current calendar year."
-                      },
-                      "response": [],
-                      "uid": "34024038-99a05215-e385-418f-8a04-25aec9440bea"
+                      "name": "$THISYEAR()",
+                      "item": [
+                        {
+                          "name": "$THISYEAR() - Get 10 companies created before the current year",
+                          "id": "99a05215-e385-418f-8a04-25aec9440bea",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$LT\": \"$THISYEAR()\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{BaseURL}}/Read",
+                              "host": [
+                                "{{BaseURL}}"
+                              ],
+                              "path": [
+                                "Read"
+                              ]
+                            },
+                            "description": "- Available Since API Version – 2.7\n    \n\nThe `$THISYEAR()` function may be used to search for DateTime values relative to the current year. When included in a search query, it evaluates to a date range including the first and last days of the current calendar year."
+                          },
+                          "response": [],
+                          "uid": "34024038-99a05215-e385-418f-8a04-25aec9440bea"
+                        }
+                      ],
+                      "id": "c8392cde-5b4c-4c1c-a113-12d2984a7603",
+                      "uid": "34024038-c8392cde-5b4c-4c1c-a113-12d2984a7603"
                     }
                   ],
                   "id": "e56a0e07-1602-427a-8f28-2de7c7fd07f2",
@@ -1229,224 +1327,231 @@
           "name": "GroupBy",
           "item": [
             {
-              "name": "$COUNT - Return a number of AbEntries grouped by type",
-              "event": [
+              "name": "Examples",
+              "item": [
                 {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "b87689a2-1282-4681-9e26-bb6d2fbc13b2"
-                  }
+                  "name": "$COUNT - Return a number of AbEntries grouped by type",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "id": "b87689a2-1282-4681-9e26-bb6d2fbc13b2"
+                      }
+                    }
+                  ],
+                  "id": "fc4f9b23-4922-4b14-9652-34a0e91626c6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Type\": 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"type\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-fc4f9b23-4922-4b14-9652-34a0e91626c6"
+                },
+                {
+                  "name": "$COUNT - Return an ordered number of AbEntries grouped by type",
+                  "id": "a4bb7214-b474-41a4-8d38-0b4d8971efff",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Type\": 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"type\"\r\n            ]\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"$COUNT(type)\": \"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-a4bb7214-b474-41a4-8d38-0b4d8971efff"
+                },
+                {
+                  "name": "$MIN - Corporate revenue for Won and Lost opportunities Copy",
+                  "id": "0af61e20-15ed-464e-8a94-e9dbaff1319e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$MIN(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-0af61e20-15ed-464e-8a94-e9dbaff1319e"
+                },
+                {
+                  "name": "$MAX - Corporate revenue for Won and Lost opportunities",
+                  "id": "2288c318-6681-48d9-ad0a-c64fba696175",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$MAX(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-2288c318-6681-48d9-ad0a-c64fba696175"
+                },
+                {
+                  "name": "$AVG - Corporate revenue for Won and Lost opportunities",
+                  "id": "d598aa0e-f172-40b6-849a-3d9bede76eb0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$AVG(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-d598aa0e-f172-40b6-849a-3d9bede76eb0"
+                },
+                {
+                  "name": "$SUM - Corporate revenue for Won and Lost opportunities",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "id": "9f56bc21-ba29-4417-bee2-c22029cafb2d"
+                      }
+                    }
+                  ],
+                  "id": "b4117377-1bf5-4ac6-9c65-9e58777f6f84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$SUM(CorporateRevenue)/DisplayValue\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Read",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Read"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [],
+                  "uid": "34024038-b4117377-1bf5-4ac6-9c65-9e58777f6f84"
                 }
               ],
-              "id": "fc4f9b23-4922-4b14-9652-34a0e91626c6",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Type\": 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"type\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-fc4f9b23-4922-4b14-9652-34a0e91626c6"
-            },
-            {
-              "name": "$COUNT - Return an ordered number of AbEntries grouped by type",
-              "id": "a4bb7214-b474-41a4-8d38-0b4d8971efff",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Type\": 1,\r\n                \"$COUNT(type)\": 1\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"type\"\r\n            ]\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"$COUNT(type)\": \"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-a4bb7214-b474-41a4-8d38-0b4d8971efff"
-            },
-            {
-              "name": "$MIN - Corporate revenue for Won and Lost opportunities Copy",
-              "id": "0af61e20-15ed-464e-8a94-e9dbaff1319e",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$MIN(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-0af61e20-15ed-464e-8a94-e9dbaff1319e"
-            },
-            {
-              "name": "$MAX - Corporate revenue for Won and Lost opportunities",
-              "id": "2288c318-6681-48d9-ad0a-c64fba696175",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$MAX(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-2288c318-6681-48d9-ad0a-c64fba696175"
-            },
-            {
-              "name": "$AVG - Corporate revenue for Won and Lost opportunities",
-              "id": "d598aa0e-f172-40b6-849a-3d9bede76eb0",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$AVG(CorporateRevenue)\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-d598aa0e-f172-40b6-849a-3d9bede76eb0"
-            },
-            {
-              "name": "$SUM - Corporate revenue for Won and Lost opportunities",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "9f56bc21-ba29-4417-bee2-c22029cafb2d"
-                  }
-                }
-              ],
-              "id": "b4117377-1bf5-4ac6-9c65-9e58777f6f84",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Status/DisplayValue\": 1,\r\n                \"$SUM(CorporateRevenue)/DisplayValue\": 1,\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$IN\": [\r\n                        3,\r\n                        4\r\n                    ]\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"Status\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{BaseURL}}/Read",
-                  "host": [
-                    "{{BaseURL}}"
-                  ],
-                  "path": [
-                    "Read"
-                  ]
-                },
-                "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-              },
-              "response": [],
-              "uid": "34024038-b4117377-1bf5-4ac6-9c65-9e58777f6f84"
+              "id": "64517d70-936f-43fb-be3f-695ebc91a877",
+              "uid": "34024038-64517d70-936f-43fb-be3f-695ebc91a877"
             }
           ],
           "id": "67c98299-43d2-4dc1-99ca-7ddaa15f1320",
-          "description": "The `GroupBy` statement groups rows that have the same values into summary rows, like \"find the number of customers in each country\".\n\nThe `GroupBy` statement is often used with aggregate functions (`$COUNT()`, `$MAX()`, `$MIN()`, `$SUM()`, `$AVG()`) to group the result-set by one or more columns.",
+          "description": "The `GroupBy` statement groups rows that have the same values into summary rows, like \"find the number of customers in each country\".\n\nThe `GroupBy` statement is often used with aggregate functions (`$COUNT()`, `$MAX()`, `$MIN()`, `$SUM()`, `$AVG()`) to group the result-set by one or more columns.\n\nThe general format for `GroupBy` statement is as follows:\n\n``` json\n{\n    \"GroupBy\": {\n        \"Fields\": [\n            \"{FieldKey1}\", \n            \"{FieldKey2}\"\n        ]\n    }\n}\n\n ```\n\nHere, `{FieldKey}` is the name of the object field, such as \"LastName\" or \"CompanyName\".",
           "uid": "34024038-67c98299-43d2-4dc1-99ca-7ddaa15f1320"
         },
         {
@@ -1660,12 +1765,12 @@
             }
           ],
           "id": "461b4f70-8993-4895-9838-230722067089",
-          "description": "The `OrderBy` keyword is used to sort the result-set in ascending or descending order and includes pagination.",
+          "description": "The `OrderBy` keyword is used to sort the result-set in ascending or descending order and includes pagination.\n\nThe general format for `OrderBy` statement is as follows:\n\n``` json\n{\n    \"OrderBy\": {\n        \"Fields\": [\n            {\n                \"{FieldKey1}\": \"ASC\"\n            },\n            {         \n                \"{FieldKey2}\": \"DESC\"\n            }\n        ],\n        \"PageKey\": \"{PageKey}\",\n        \"PageSize\": 10,\n    }\n}\n\n ```\n\nHere, `{FieldKey}` are the names of the object field, such as \"LastName\" or \"CompanyName.\" `{PageKey}` is key to the desired page (Octopus API returns the key of the next page in the response). `{PageSize}` is a number of records on each page.",
           "uid": "34024038-461b4f70-8993-4895-9838-230722067089"
         }
       ],
       "id": "b9da4a20-8157-4272-be56-76c9bfd0468e",
-      "description": "This section outlines the v2 search query syntax. Search query syntax v2 was added in API version 2.7. If you use a previous API version, refer to the [documentation for the v1 search query syntax](https://legacydocs.developer.maximizer.com/documentation/maximizerwebdata-search-query-syntax-v1).\n\n# Requests\n\n## Authentication Token\n\nWith the exception of the Authenticate and GetSystemInfo methods, all Octopus API methods require that a valid token be passed in the request. If no token is supplied, the request will fail with an error.\n\nThe authentication token must be passed as a header - \"Authorization\" with the specified type `Bearer`. For example:\n\n`Authorization: Bearer`\n\nFor more details, please check the **Authentication** section.\n\n## Entity\n\nThe top-level object in most requests is the entity being passed in the request. In the example below, since this is an AbEntry read request, the entity that is passed is an AbEntry entity.\n\nThe contents of the AbEntry entity object will vary depending on the method being called.\n\n### AbEntry read request example\n\n``` json\n{\n  \"AbEntry\": {\n    \"Scope\": {\n      \"Fields\": {\n        \"Key\": 1,\n        \"Type\": 1,\n        \"CompanyName\":1\n      }\n    },\n    \"Criteria\": {\n      \"SearchQuery\": {\n        \"$LIKE\": {\n          \"CompanyName\": \"A%\"\n        }\n      }\n    }\n  }\n}\n\n ```\n\n# Responses\n\n## Code\n\nAll Octopus API methods return an integer Code to indicate if the request was successful or if it failed.\n\nA Code value of `0` indicates that the request was successful. A negative Code value indicates that an error occurred when processing the request.\n\n## Data\n\nIf the request is successful, all Octopus API methods return a Data object which contains the results of the request.\n\nFor entity methods, the Data object is nested inside the root-level entity object corresponding to the method being called.\n\nThe contents of the Data object vary depending on the method being used.\n\n## Msg\n\nThe Msg property, if present is an array of strings that contain additional informaiton about the request or the response.\n\nFor example, the Msg property may contain information about errors or request failures, or about the status of the API itself.\n\n- If the request fails for any reason, all Octopus API methods return a Msg array containing information about the error that has occurred to help with troubleshooting.\n    \n- If the entity or method that is called is still in a beta or testing release state, the Msg array will contain a message indicating that the method should not be used in a production environment.\n    \n\n### AbEntry read response example\n\n``` json\n{\n  \"Code\":0,\n  \"AbEntry\":{\n    \"Data\":[\n      {\n        \"Key\":\"Q29udGFjdAkwMDEwMDIwMDA2MTMwNjM2NzExNTZDCTU=\",\n        \"Type\": \"Company\",\n        \"CompanyName\":\"ABC Wine Shop\"\n      },\n      {\n        \"Key\":\"Q29udGFjdAkzNzI2NjIwMDA3MQkx\",\n        \"Type\": \"Company\",\n        \"CompanyName\":\"Ansley Wine Merchants\"\n      }\n    ]\n  }\n}\n\n ```\n\n### Error example\n\n``` json\n{\n  \"Code\":-1,\n  \"Msg\":[\n    \"The given key is of a type not supported by the target object.(DONOTUPDATE)\"\n  ]\n}\n\n ```",
+      "description": "This section outlines the v2 search query syntax. Search query syntax v2 was added in API version 2.7. If you use a previous API version, refer to the [documentation for the v1 search query syntax](https://legacydocs.developer.maximizer.com/documentation/maximizerwebdata-search-query-syntax-v1).\n\n# Making Read Requests\n\n## Authentication\n\nWith the exception of the Authenticate and GetSystemInfo methods, all Octopus API methods require that a valid token be passed in the request. If no token is supplied, the request will fail with an error.\n\nThe authentication token must be passed as a header - \"Authorization\" with the specified type `Bearer`. For example:\n\n`Authorization: Bearer {USER_ACCESS_TOKEN}`\n\nFor more details, please check the **Authentication** section.\n\n## Request structure\n\nHere is an example of a request to visualize possible parameters.\n\n``` json\n{\n  \"AbEntry\": { // AbEntry is the object name\n    \"Scope\": { // Scope\n      \"Fields\": {\n        \"Key\": 1,\n        \"Type\": 1,\n        \"CompanyName\":1\n      }\n    },\n    \"Criteria\": { // Criteria\n      \"SearchQuery\": {\n        \"$LIKE\": {\n          \"CompanyName\": \"A%\"\n        }\n      },\n      \"Top\": 1\n    },\n    \"GroupBy\": { // GroupBy (optional)\n        \"Fields\": []\n    },\n    \"OrderBy\": { // OrderBy (optional)\n        \"PageKey\": null,\n        \"PageSize\": 10,\n        \"Fields\": [\n            {\n                \"CreationDate\": \"ASC\"\n            }\n        ]\n     }\n  },\n  \"Compatibility\": { // Compatibility (optional)\n     \"AbEntryKey\": \"2.0\"\n  },\n  \"Configuration\": { // Configuration (optional)\n      \"Drivers\": {\n          \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\n      }\n  }\n}\n\n ```\n\nThe top-level object in most requests is the object name being passed in the request. In the example above, since this is an AbEntry read request, the entity that is passed is an AbEntry entity.\n\nIn the following sections, you will find more details about each part.\n\n# Responses\n\n## Code\n\nAll Octopus API methods return an integer Code to indicate if the request was successful or if it failed.\n\nA Code value of `0` indicates that the request was successful. A negative Code value indicates that an error occurred when processing the request.\n\n## Data\n\nIf the request is successful, all Octopus API methods return a Data object which contains the results of the request.\n\nFor entity methods, the Data object is nested inside the root-level entity object corresponding to the method being called.\n\nThe contents of the Data object vary depending on the method being used.\n\n## Msg\n\nThe Msg property, if present is an array of strings that contain additional informaiton about the request or the response.\n\nFor example, the Msg property may contain information about errors or request failures, or about the status of the API itself.\n\n- If the request fails for any reason, all Octopus API methods return a Msg array containing information about the error that has occurred to help with troubleshooting.\n    \n- If the entity or method that is called is still in a beta or testing release state, the Msg array will contain a message indicating that the method should not be used in a production environment.\n    \n\n### AbEntry read response example\n\n``` json\n{\n  \"Code\":0,\n  \"AbEntry\":{\n    \"Data\":[\n      {\n        \"Key\":\"Q29udGFjdAkwMDEwMDIwMDA2MTMwNjM2NzExNTZDCTU=\",\n        \"Type\": \"Company\",\n        \"CompanyName\":\"ABC Wine Shop\"\n      },\n      {\n        \"Key\":\"Q29udGFjdAkzNzI2NjIwMDA3MQkx\",\n        \"Type\": \"Company\",\n        \"CompanyName\":\"Ansley Wine Merchants\"\n      }\n    ]\n  }\n}\n\n ```\n\n### Error example\n\n``` json\n{\n  \"Code\":-1,\n  \"Msg\":[\n    \"The given key is of a type not supported by the target object.(DONOTUPDATE)\"\n  ]\n}\n\n ```",
       "uid": "34024038-b9da4a20-8157-4272-be56-76c9bfd0468e"
     },
     {
