@@ -1507,42 +1507,7 @@
         },
         {
           "name": "UidObject",
-          "item": [
-            {
-              "name": "Scope - Return a list of contacts with names Copy",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript",
-                    "id": "482982ba-ec64-4ee2-b669-6a3f1dee9598"
-                  }
-                }
-              ],
-              "id": "a29d0dc7-4e4e-47e0-a9e0-5a4a44dfb3ca",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            // Check the list of the available fields by using Metadata for the AbEntry object\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"FirstName\": 1,\r\n                \"LastName\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Contact\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{BaseURL}}/Read"
-              },
-              "response": []
-            }
-          ],
+          "item": [],
           "id": "86862fb3-b9b3-4393-9c55-15957408d684",
           "description": "- Available Since API Version – 2.0\n    \n\nThe UidObject type is used to represent users within other fields and entities in Octopus API. UidObject objects contain the following properties:\n\n- **Key** - The Key of the UidObject. It may also be used as the Key for the corresponding User entity.\n    \n- **DisplayName** - A StringField containing the user’s display name.\n    \n\n## Basic Read Request\n\nThe following example illustrates the syntax for a request for the default value of a UidObject in a Read method call.\n\n### Request\n\n```\n{\n  \"Creator\":1\n}\n\n ```\n\n### Response\n\n```\n{\n  \"Creator\":\"VXNlcglNQVNURVI=\"\n}\n\n ```\n\n## Detailed Read Request\n\nThe following example illustrates the syntax for a request for all properties of a UidObject in a Read method call.\n\n### Request\n\n```\n{\n  \"Creator\":{\n    \"Key\":1,\n    \"DisplayName\":1\n  }\n}\n\n ```\n\n### Response\n\n```\n{\n  \"Creator\":{\n    \"Key\":\"VXNlcglKTkFQT0xJ\",\n    \"DisplayName\":\"Joe Napoli\"\n  }\n}\n\n ```\n\n## Create/Update Request\n\nThe following example illustrates the syntax for including a UidObject in a Create or Update method call. In this example, the UidObject is represented by the Key passed in the \"Write\" array of the \"SecAccess\" object.\n\n### Request\n\n```\n{\n  \"SecAccess\":{\n    \"Write\":[\n      \"VXNlcglNQVNURVI=\"\n    ]\n  }\n}\n\n ```\n\n### Response\n\n```\n{\n  \"SecAccess\":{\n    \"Write\":[\n      \"VXNlcglNQVNURVI=\"\n    ]\n  }\n}\n\n ```"
         }
