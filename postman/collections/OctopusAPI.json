@@ -1407,6 +1407,200 @@
       "description": "This section outlines the v2 search query syntax. Search query syntax v2 was added in API version 2.7. If you use a previous API version, refer to the [documentation for the v1 search query syntax](https://legacydocs.developer.maximizer.com/documentation/maximizerwebdata-search-query-syntax-v1).\n\n# Making Read Requests\n\n## Authentication\n\nWith the exception of the Authenticate and GetSystemInfo methods, all Octopus API methods require that a valid token be passed in the request. If no token is supplied, the request will fail with an error.\n\nThe authentication token must be passed as a header - \"Authorization\" with the specified type `Bearer`. For example:\n\n`Authorization: Bearer {USER_ACCESS_TOKEN}`\n\nFor more details, please check the **Authentication** section.\n\n## Request structure\n\nHere is an example of a request to visualize possible parameters.\n\n``` json\n{\n  \"AbEntry\": { // AbEntry is the object name\n    \"Scope\": { // Scope\n      \"Fields\": {\n        \"Key\": 1,\n        \"Type\": 1,\n        \"CompanyName\":1\n      }\n    },\n    \"Criteria\": { // Criteria\n      \"SearchQuery\": {\n        \"CompanyName\": {\n          \"$LIKE\": \"A%\"\n        }\n      },\n      \"Top\": 1\n    },\n    \"GroupBy\": { // GroupBy (optional)\n        \"Fields\": []\n    },\n    \"OrderBy\": { // OrderBy (optional)\n        \"PageKey\": null,\n        \"PageSize\": 10,\n        \"Fields\": [\n            {\n                \"CreationDate\": \"ASC\"\n            }\n        ]\n     }\n  },\n  \"Compatibility\": { // Compatibility (optional)\n     \"AbEntryKey\": \"2.0\"\n  },\n  \"Configuration\": { // Configuration (optional)\n      \"Drivers\": {\n          \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\n      }\n  }\n}\n\n ```\n\nThe top-level object in most requests is the object name being passed in the request. In the example above, since this is an AbEntry read request, the entity that is passed is an AbEntry entity.\n\nIn the following sections, you will find more details about each part.\n\n# Responses\n\n## Code\n\nAll Octopus API methods return an integer Code to indicate if the request was successful or if it failed.\n\nA Code value of `0` indicates that the request was successful. A negative Code value indicates that an error occurred when processing the request.\n\n## Data\n\nIf the request is successful, all Octopus API methods return a Data object which contains the results of the request.\n\nFor entity methods, the Data object is nested inside the root-level entity object corresponding to the method being called.\n\nThe contents of the Data object vary depending on the method being used.\n\n## Msg\n\nThe Msg property, if present is an array of strings that contain additional informaiton about the request or the response.\n\nFor example, the Msg property may contain information about errors or request failures, or about the status of the API itself.\n\n- If the request fails for any reason, all Octopus API methods return a Msg array containing information about the error that has occurred to help with troubleshooting.\n    \n- If the entity or method that is called is still in a beta or testing release state, the Msg array will contain a message indicating that the method should not be used in a production environment.\n    \n\n### AbEntry read response example\n\n``` json\n{\n  \"Code\": 0,\n  \"AbEntry\": {\n       \"Data\": [\n           {\n               \"Key\":\"Q29udGFjdAkwMDEwMDIwMDA2MTMwNjM2NzExNTZDCTU=\",\n               \"Type\": \"Company\",\n               \"CompanyName\":\"ABC Wine Shop\"\n           },\n           {\n               \"Key\":\"Q29udGFjdAkzNzI2NjIwMDA3MQkx\",\n               \"Type\": \"Company\",\n               \"CompanyName\":\"Ansley Wine Merchants\"\n           }\n       ]\n   }\n}\n\n ```\n\n### Error example\n\n``` json\n{\n  \"Code\": -1,\n  \"Msg\": [\n    \"The given key is of a type not supported by the target object.(DONOTUPDATE)\"\n  ]\n}\n\n ```"
     },
     {
+      "name": "Write Query Syntax",
+      "item": [
+        {
+          "name": "Create a record",
+          "item": [
+            {
+              "name": "Create a company",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "7dfc48a5-5638-475e-b096-d5cf27299781",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "81aeedc2-2f91-454d-8d85-77f04f5d650c",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "id": "ac3bb2c5-a201-4432-89cd-b944ecc57f32",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Type\": \"Company\",\r\n            \"CompanyName\": \"E. Brown Enterprise\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{BaseURL}}/Create"
+              },
+              "response": [
+                {
+                  "id": "aed8b793-9f89-4cdc-92a2-248f7b9ded6d",
+                  "name": "Create a company",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Type\": \"Company\",\r\n            \"CompanyName\": \"E. Brown Enterprise\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n    \"Code\": 0,\n    \"AbEntry\": {\n        \"Data\": {\n            \"Key\": \"Q29tcGFueQkyNDA4MTMyNTIwMTMzNTMzNjAwNzhDCTA=\",\n            \"Type\": \"Company\",\n            \"CompanyName\": \"E. Brown Enterprise\"\n        }\n    }\n}"
+                }
+              ]
+            }
+          ],
+          "id": "27dbd945-7875-4d4d-a831-af7a16c5cfcf"
+        },
+        {
+          "name": "Update a record",
+          "item": [
+            {
+              "name": "Update a companys website",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "e22eea74-392e-4d2c-af25-ef95a32fde8a",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "b1a21b5e-3217-4f0c-ab02-e49ae6a0ccb6",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "id": "851630f0-2163-4dec-895e-854eb84015be",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29tcGFueQkyNDA4MTMyNTIwMTMzNTMzNjAwNzhDCTA=\", // Mandatory\r\n            \"WebSite\": \"http://www.newsiteupdated.com\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{BaseURL}}/Update"
+              },
+              "response": []
+            }
+          ],
+          "id": "74ac0df8-a71e-4701-9426-a0051d3fdfc5"
+        },
+        {
+          "name": "Delete a record",
+          "item": [
+            {
+              "name": "Delete a company",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "84ca7bc0-d607-4338-b7ec-98b45f4727f5",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "id": "e6716fe5-7a37-4de8-b09a-3884f03a8bfb",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "id": "11ebc404-d926-4d42-8d15-19d05a165277",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"AbEntry\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29tcGFueQkyNDA4MTMyNTIwMTMzNTMzNjAwNzhDCTA=\" // Mandatory\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": "{{BaseURL}}/Delete"
+              },
+              "response": []
+            }
+          ],
+          "id": "2287ce6a-5f05-4c66-8eda-412b3b41c780"
+        }
+      ],
+      "id": "f1b4594f-273b-4ead-b2cf-83103aa171c2",
+      "description": "# Making Write Requests\n\n## Authentication\n\nWith the exception of the Authenticate and GetSystemInfo methods, all Octopus API methods require that a valid token be passed in the request. If no token is supplied, the request will fail with an error.\n\nThe authentication token must be passed as a header - \"Authorization\" with the specified type `Bearer`. For example:\n\n`Authorization: Bearer {USER_ACCESS_TOKEN}`\n\nFor more details, please check the **Authentication** section.\n\n## Request structure\n\nHere is an example of an Update request to visualize possible parameters.\n\n``` json\n{\n    \"AbEntry\": {\n        \"Data\": {\n            \"Key\": \"Q29tcGFueQkyNDA4MTMyNTIwMTMzNTMzNjAwNzhDCTA=\", \n            \"WebSite\": \"http://www.newsiteupdated.com\"\n        }\n    },\n    \"Compatibility\": { // optional\n    }\n}\n\n ```\n\nThe top-level object in most requests is the object name being passed in the request. In the example above, since this is an AbEntry read request, the entity that is passed is an AbEntry entity.\n\nIn the following sections, you will find more details.\n\n# Responses\n\n## Code\n\nAll Octopus API methods return an integer Code to indicate if the request was successful or if it failed.\n\nA Code value of `0` indicates that the request was successful. A negative Code value indicates that an error occurred when processing the request.\n\n## Data\n\nIf the request is successful, all Octopus API methods return a Data object which contains the results of the request.\n\nFor entity methods, the Data object is nested inside the root-level entity object corresponding to the method being called.\n\nThe contents of the Data object vary depending on the method being used.\n\n## Msg\n\nThe Msg property, if present is an array of strings that contain additional informaiton about the request or the response.\n\nFor example, the Msg property may contain information about errors or request failures, or about the status of the API itself.\n\n- If the request fails for any reason, all Octopus API methods return a Msg array containing information about the error that has occurred to help with troubleshooting.\n    \n- If the entity or method that is called is still in a beta or testing release state, the Msg array will contain a message indicating that the method should not be used in a production environment.\n    \n\n### AbEntry update response example\n\n``` json\n{\n    \"Code\": 0,\n    \"AbEntry\": {\n        \"Data\": {\n            \"Key\": \"Q29tcGFueQkyNDA4MTMyNTIwMTMzNTMzNjAwNzhDCTA=\",\n            \"Type\": \"Company\",\n            \"CompanyName\": \"E. Brown Enterprise\"\n        }\n    }\n}\n\n ```\n\n### Error example\n\n``` json\n{\n  \"Code\": -1,\n  \"Msg\": [\n    \"The given key is of a type not supported by the target object.(DONOTUPDATE)\"\n  ]\n}\n\n ```"
+    },
+    {
       "name": "Field and Object Types",
       "item": [
         {
