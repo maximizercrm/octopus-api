@@ -4343,6 +4343,97 @@
           "name": "Document",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Document - Create a document in Maximizer (Step 1 - Upload Binary)",
+                  "id": "3b9df489-d71d-4783-a01a-9e5e31788989",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "file",
+                      "file": {
+                        "src": ""
+                      }
+                    },
+                    "url": "{{BaseURL}}/BinaryUpload"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Document - Create a document in Maximizer (Step 2 - Create document entry)",
+                  "id": "bde118e0-3f06-4b7f-9cfd-7936573d4d6f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Description\": \"This is an .xlsx document created from Postman\",\r\n            // At first, load the binary and use BinaryDataId returned here\r\n            \"BinaryDataId\": \"6bed8c90-d8e6-4f5e-8ab3-3afc3e5a44c7\", // After File creation the binary won't be available to use anymore\r\n            \"Ext\": \".xlsx\", // Should be the same as binary data loaded\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            \"Type\": 1,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey, CaseKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Document - Create a document in Maximizer (Step 2b - Create document entry and keep binary)",
+                  "id": "406acb39-cb5d-4d8b-9f29-380b5351149a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Description\": \"This is an .xlsx document created from Postman\",\r\n            // At first, load the binary and use BinaryDataId returned here\r\n            \"BinaryDataId\": \"6bed8c90-d8e6-4f5e-8ab3-3afc3e5a44c7\",\r\n            \"Ext\": \".xlsx\", // Should be the same as binary data loaded\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            \"Type\": 1,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey, CaseKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        },\r\n        \"Options\": {\r\n            \"BinaryFileCleanup\": false // Use this option to keep the binary available for other Document creations\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Document - Download Binary",
+                  "id": "bd9c0c88-afbb-4dce-a938-0340bc2e925e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": \"RG9jdW1lbnQJNDMxMjQyNzg2\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/BinaryDownload"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "01211255-5352-40bf-902f-7d3920ec37fa"
+            },
+            {
               "name": "MetaData",
               "item": [
                 {
@@ -4356,7 +4447,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Document\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Document\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -4373,29 +4469,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"schema\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$TREE\": \"/Document\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"HasOption\": 1\r\n            }\r\n        }\r\n    },\r\n    \"compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Document FieldOptions",
-                  "id": "9cf52da0-a536-488e-b65d-c83802b8c548",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"document\": {\r\n        \"fieldOptions\": {\r\n            \"creator\": [\r\n                {\r\n                    \"key\": 1,\r\n                    \"uid\": 1,\r\n                    \"displayValue\": 1\r\n                }\r\n            ],\r\n            \"category\": [\r\n                {\r\n                    \"key\": 1,\r\n                    \"displayValue\": 1\r\n                }\r\n            ],\r\n            \"type\": [\r\n                {\r\n                    \"key\": 1,\r\n                    \"displayValue\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"data\": {\r\n            \"parentKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"HasOption\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Document\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4410,11 +4484,11 @@
               "id": "50ac62ed-65ca-4ef7-b5af-2defe79f511a"
             },
             {
-              "name": "Document CRUD",
+              "name": "FileldOptions",
               "item": [
                 {
-                  "name": "Document - Create Attachment",
-                  "id": "3b9df489-d71d-4783-a01a-9e5e31788989",
+                  "name": "Read Document FieldOptions - Category",
+                  "id": "501c9687-e8bc-4e6b-96b5-37866fb3517b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -4422,17 +4496,26 @@
                     "method": "POST",
                     "header": [],
                     "body": {
-                      "mode": "file",
-                      "file": {
-                        "src": ""
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"FieldOptions\": {\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Data\": {\r\n            // Currently supported Entity Types:\r\n            // 1 = AbEntry\r\n            // 2 = Opportunity\r\n            // 5 = Case\r\n            \"ParentKey\": {\r\n                \"EntityType\": 1\r\n            }\r\n        },\r\n        \"Compatibility\": {\r\n            \"SchemaObject\": \"1.0\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
                       }
                     },
-                    "url": "{{BaseURL}}/AttachmentCreate"
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
-                },
+                }
+              ],
+              "id": "3572c7a7-98d2-4950-9f70-f9cbf32f5a60"
+            },
+            {
+              "name": "Document CRUD",
+              "item": [
                 {
-                  "name": "Document - Create",
+                  "name": "Create - Document",
                   "id": "2b0b3bbf-52e0-43ea-91fb-096af5eb2f51",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4442,7 +4525,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Ext\": \".xlsx\",\r\n            \"Size\": 38324,\r\n            // At first, create an attachment and use its AttachmentId here\r\n            \"AttachmentId\": \"7ca83da2-0b51-4f1f-8138-a6d91fb2b508\",\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            \"Type\": 1,\r\n            \"Description\": \"New File\",\r\n            // ParentKey can be OpportunityKey, AbEntryKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Description\": \"This is an .xlsx document created from Postman\",\r\n            // At first, load the binary and use BinaryDataId returned here\r\n            \"BinaryDataId\": \"6bed8c90-d8e6-4f5e-8ab3-3afc3e5a44c7\", // After File creation the binary won't be available to use anymore\r\n            \"Ext\": \".xlsx\", // Should be the same as binary data loaded\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            \"Type\": 1,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey, CaseKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4454,7 +4537,7 @@
                   "response": []
                 },
                 {
-                  "name": "Document - Read",
+                  "name": "Read - Document",
                   "id": "b91226bc-d96b-44c9-aaa2-042ae40f4add",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4464,7 +4547,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentSearcher\": \"Maximizer.Model.Access.Sql.DocumentSearcher\"\r\n        }\r\n    },\r\n    \"Document\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DateTime\": 1,\r\n                \"Creator\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                \"Ext\": 1,\r\n                \"Type\": 1,\r\n                \"Size\": 1,\r\n                \"ParentKey\": 1,\r\n                \"Category\": 1,\r\n                \"SecAccess\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                \"Ext\": 1,\r\n                \"Type\": 1,\r\n                \"Size\": 1,\r\n                \"ParentKey\": 1,\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n     \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentSearcher\": \"Maximizer.Model.Access.Sql.DocumentSearcher\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4477,37 +4560,10 @@
                 }
               ],
               "id": "fec3a96b-23dc-4ce1-a44a-a1bb3697ea3d"
-            },
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "Download Document",
-                  "id": "bd9c0c88-afbb-4dce-a938-0340bc2e925e",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"document\": {\r\n        \"data\": {\r\n            \"key\": \"{{DocumentKey}}\"\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/BinaryDownload"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "01211255-5352-40bf-902f-7d3920ec37fa"
             }
           ],
-          "id": "87456c45-7fba-47fe-8b74-d475c2436e94"
+          "id": "87456c45-7fba-47fe-8b74-d475c2436e94",
+          "description": "Document allows users to manage external files and attachments in Maximizer CRM.\n\nA Document is a reference to identify a Binary (file) previously loaded and stored in Maximizer CRM. See below some considerations for Document object:\n\n- Documents are ssociated to Maximizer entities (AbEntry, Opportunity, Case, etc) using the ParentKey property.\n    \n- An special endpoint to load binaries needs to be used, see examples in How To's section for specific details about that one.\n    \n- When Binaries are loaded those are stored in a swap area. When a Document is created using a Binary the temporary file will be deleted from the swap area and it won't be available to use it to create any other Document.\n    \n- To use a Binary for multiple Documents the option \"BinaryFileCleanup\" needs to be specified, see How To's section for specific details about that one."
         },
         {
           "name": "FavoriteList",
