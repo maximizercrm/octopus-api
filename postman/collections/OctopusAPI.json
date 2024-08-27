@@ -1496,7 +1496,7 @@
           "name": "Update a record",
           "item": [
             {
-              "name": "Update a companys website",
+              "name": "Update a company website",
               "event": [
                 {
                   "listen": "test",
