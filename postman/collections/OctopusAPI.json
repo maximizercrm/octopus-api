@@ -7679,6 +7679,29 @@
                   "response": []
                 },
                 {
+                  "name": "Read - Lead permissions for current user",
+                  "id": "a19be1ae-bb49-4c2a-bfe2-7e8e64ec1e12",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"User\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Email\": 1,\r\n                \"Permissions\": {\r\n                    \"Lead\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"$CURRENTUSER()\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/UserRead",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
                   "name": "set interaction log permissions",
                   "id": "42bdb1a8-67eb-442b-b928-74f6f255cd25",
                   "protocolProfileBehavior": {
@@ -7690,6 +7713,29 @@
                     "body": {
                       "mode": "raw",
                       "raw": "{\r\n\tuser: {\r\n\t\tdata: {\r\n            key: \"VXNlcglEQlJPV04=\",\r\n            permissions: {\r\n                interactionLog: {\r\n                    create: true,\r\n                    read: true,\r\n                    update: true,\r\n                    delete: false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+                    },
+                    "url": "{{BaseURL}}/UserUpdate",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Lead permissions for user",
+                  "id": "ed84d016-84d5-4d93-b350-cf3e16bbf642",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"User\": {\r\n        \"Data\": {\r\n            \"Key\": \"VXNlcglNQVNURVI=\",\r\n            \"Permissions\": {\r\n                \"Lead\": {\r\n                    \"Create\": true,\r\n                    \"Read\": true,\r\n                    \"Update\": true,\r\n                    \"Delete\": false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/UserUpdate",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
