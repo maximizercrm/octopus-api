@@ -7696,7 +7696,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/UserRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
