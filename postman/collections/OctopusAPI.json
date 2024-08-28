@@ -7730,14 +7730,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"User\": {\r\n        \"Data\": {\r\n            \"Key\": \"VXNlcglNQVNURVI=\",\r\n            \"Permissions\": {\r\n                \"Lead\": {\r\n                    \"Create\": true,\r\n                    \"Read\": true,\r\n                    \"Update\": true,\r\n                    \"Delete\": false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"User\": {\r\n        \"Data\": {\r\n            \"Key\": \"VXNlcglNQVNURVI=\", // Set key of user you want to update the permissions to here\r\n            \"Permissions\": {\r\n                \"Lead\": {\r\n                    \"Create\": true,\r\n                    \"Read\": true,\r\n                    \"Update\": true,\r\n                    \"Delete\": true\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/UserUpdate",
+                    "url": "{{BaseURL}}/Update",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
