@@ -4346,7 +4346,7 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Document - Create a document in Maximizer (Step 1 - Upload Binary)",
+                  "name": "Create a document in Maximizer (Step 1 - Upload Binary)",
                   "id": "3b9df489-d71d-4783-a01a-9e5e31788989",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4362,10 +4362,37 @@
                     },
                     "url": "{{BaseURL}}/BinaryUpload"
                   },
-                  "response": []
+                  "response": [
+                    {
+                      "id": "465db59f-e793-49b1-9ff4-5061781587ce",
+                      "name": "Response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": "{{BaseURL}}/BinaryUpload"
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json",
+                          "description": ""
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "// When POST to BinaryUpload endpoint, the body provided must be the actual binary file.\n// The binary file will be uploaded to a swap area and you are provided with a BinaryDataId identifier.\n// You can use the BinaryDataId to reference this binary when creating the actual Document later on.\n{\n    \"Code\": 0,\n    \"BinaryData\": {\n        \"Data\": {\n            \"Size\": 14493,\n            \"BinaryDataId\": \"429e276b-4e5f-44b0-ae37-064565eac287\"\n        }\n    }\n}"
+                    }
+                  ]
                 },
                 {
-                  "name": "Document - Create a document in Maximizer (Step 2 - Create document entry)",
+                  "name": "Create a document in Maximizer (Step 2 - Create document entry)",
                   "id": "bde118e0-3f06-4b7f-9cfd-7936573d4d6f",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4387,7 +4414,7 @@
                   "response": []
                 },
                 {
-                  "name": "Document - Create a document in Maximizer (Step 2b - Create document entry and keep binary)",
+                  "name": "Create a document in Maximizer (Step 2b - Create document entry and keep binary)",
                   "id": "406acb39-cb5d-4d8b-9f29-380b5351149a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -4409,13 +4436,13 @@
                   "response": []
                 },
                 {
-                  "name": "Document - Download Binary",
+                  "name": "Download Binary",
                   "id": "bd9c0c88-afbb-4dce-a938-0340bc2e925e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
                   "request": {
-                    "method": "POST",
+                    "method": "GET",
                     "header": [],
                     "body": {
                       "mode": "raw",
@@ -4426,7 +4453,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/BinaryDownload"
+                    "url": "{{BaseURL}}/BinaryDownload/document-key-here"
                   },
                   "response": []
                 }
@@ -4434,7 +4461,7 @@
               "id": "01211255-5352-40bf-902f-7d3920ec37fa"
             },
             {
-              "name": "MetaData",
+              "name": "Metadata",
               "item": [
                 {
                   "name": "Read Document metadata (simple)",
@@ -4525,7 +4552,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Description\": \"This is an .xlsx document created from Postman\",\r\n            // At first, load the binary and use BinaryDataId returned here\r\n            \"BinaryDataId\": \"6bed8c90-d8e6-4f5e-8ab3-3afc3e5a44c7\", // After File creation the binary won't be available to use anymore\r\n            \"Ext\": \".xlsx\", // Should be the same as binary data loaded\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            \"Type\": 1,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey, CaseKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Document\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Created Document From Postman\",\r\n            \"Description\": \"This is an .xlsx document created from Postman\",\r\n            // At first, load the binary and use BinaryDataId returned here\r\n            \"BinaryDataId\": \"6bed8c90-d8e6-4f5e-8ab3-3afc3e5a44c7\", // After File creation the binary won't be available to use anymore\r\n            \"Ext\": \".xlsx\", // Should be the same as binary data loaded\r\n            // Type could be one of the following:\r\n            // 1 = MaximizerDocuments, \r\n            // 3 = Emails, \r\n            // 7 = Others, \r\n            // 8 = LinkedDocuments, \r\n            // 12 = HyperlinkDocuments\r\n            // Please check \"FieldOptions\" folder for details on how to retrieve the options for this field\r\n            \"Type\": 1,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey, CaseKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IDocumentAccess\": \"Maximizer.Model.Access.Sql.DocumentAccess\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4563,7 +4590,513 @@
             }
           ],
           "id": "87456c45-7fba-47fe-8b74-d475c2436e94",
-          "description": "Document allows users to manage external files and attachments in Maximizer CRM.\n\nA Document is a reference to identify a Binary (file) previously loaded and stored in Maximizer CRM. See below some considerations for Document object:\n\n- Documents are ssociated to Maximizer entities (AbEntry, Opportunity, Case, etc) using the ParentKey property.\n    \n- An special endpoint to load binaries needs to be used, see examples in How To's section for specific details about that one.\n    \n- When Binaries are loaded those are stored in a swap area. When a Document is created using a Binary the temporary file will be deleted from the swap area and it won't be available to use it to create any other Document.\n    \n- To use a Binary for multiple Documents the option \"BinaryFileCleanup\" needs to be specified, see How To's section for specific details about that one."
+          "description": "Document allows users to manage files associated with objects in Maximizer CRM.\n\nA Document is a reference to identify a binary (file) previously loaded and stored in Maximizer CRM. See below some considerations for Document object:\n\n- Documents are associated to Maximizer objects (AbEntry, Opportunity, Case, etc) through the ParentKey property.\n    \n- A special endpoint to load binaries has to be used. See examples in the HowTo's section for specific details.\n    \n- When binaries are loaded, they are stored in a swap area. When a Document is created using the BinaryDataId (a.k.a. AttachmentId) reference, the default behavior is for the temporary file to be deleted from the swap area. It won't be available for further usage.\n    \n- To override this behavior (and use the very same binary file for creating multiple Documents), the option \"BinaryFileCleanup\" needs to be specified when creating a document. See examples in the HowTo's section for specific details."
+        },
+        {
+          "name": "DocumentLibrary",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Entry Type = 4 (Note)",
+                  "item": [
+                    {
+                      "name": "Create a DocumentLibrary Note in Maximizer (Step 1 - Upload Binary)",
+                      "id": "6fdb55af-b53a-41db-b98c-b3b6de2f2522",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": "{{BaseURL}}/BinaryUpload"
+                      },
+                      "response": [
+                        {
+                          "id": "1017c2c4-bf7f-4d5f-8bca-e074d32f8c5e",
+                          "name": "Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "file",
+                              "file": {}
+                            },
+                            "url": "{{BaseURL}}/BinaryUpload"
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "// When POST to BinaryUpload endpoint, the body provided must be the actual binary file (in this case, it must be a textfile with the actual Note content).\n// The binary file will be uploaded to a swap area and you are provided with a BinaryDataId identifier.\n// You can use the BinaryDataId to reference this binary when creating the actual Document later on.\n{\n    \"Code\": 0,\n    \"BinaryData\": {\n        \"Data\": {\n            \"Size\": 14493,\n            \"BinaryDataId\": \"429e276b-4e5f-44b0-ae37-064565eac287\"\n        }\n    }\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Note in Maximizer (Step 2 - Create the actual entry)",
+                      "id": "183a1e24-702c-43c8-8605-79d173922069",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary - Note\",\r\n            \"Description\": \"This is a test for creating a Note entry\",\r\n            \"Type\": 4, // Note\r\n            \"BinaryDataId\": \"7cb1e05d-7841-4bd8-9f40-d2fe1cb7caae\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Note in Maximizer (Step 2b - Create the actual entry and keep binary)",
+                      "id": "344e0151-aed9-431a-97d7-020338c3a5e1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary - Note\",\r\n            \"Description\": \"This is a test for creating a Note entry\",\r\n            \"Type\": 4, // Note\r\n            \"BinaryDataId\": \"7cb1e05d-7841-4bd8-9f40-d2fe1cb7caae\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        },\r\n        \"Options\": {\r\n            \"BinaryFileCleanup\": false // Use this option to keep the binary available for other DocumentLibrary entry creations\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Download DocumentLibrary Note Binary",
+                      "id": "5b496fb8-8ff7-46e2-ac90-709f2af453b4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{BaseURL}}/BinaryDownload/document-key-here"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "0f7ff692-9f19-418b-abc5-7317c282c012"
+                },
+                {
+                  "name": "Entry Type = 8 (Document)",
+                  "item": [
+                    {
+                      "name": "Create a DocumentLibrary Document in Maximizer (Step 1 - Upload Binary)",
+                      "id": "c543ae00-aa27-49ef-a4d5-fbb21ce99fe1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": "{{BaseURL}}/BinaryUpload"
+                      },
+                      "response": [
+                        {
+                          "id": "1d8c0899-ca7c-4cb7-8eae-b0f9fbdcd181",
+                          "name": "Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "file",
+                              "file": {}
+                            },
+                            "url": "{{BaseURL}}/BinaryUpload"
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "// When POST to BinaryUpload endpoint, the body provided must be the actual binary file.\n// The binary file will be uploaded to a swap area and you are provided with a BinaryDataId identifier.\n// You can use the BinaryDataId to reference this binary when creating the actual Document later on.\n{\n    \"Code\": 0,\n    \"BinaryData\": {\n        \"Data\": {\n            \"Size\": 14493,\n            \"BinaryDataId\": \"429e276b-4e5f-44b0-ae37-064565eac287\"\n        }\n    }\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Document in Maximizer (Step 2 - Create the actual entry)",
+                      "id": "0bd1f6ac-4841-4527-a8a9-15299446b186",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary Entry - Document\",\r\n            \"Description\": \"This is a test for creating a Document entry\",\r\n            \"Ext\": \"xlsx\",\r\n            \"Type\": 8, // Document\r\n            \"BinaryDataId\": \"42df48aa-aeaf-4d24-ad58-281c5e15668c\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Document in Maximizer (Step 2b - Create the actual entry and keep binary)",
+                      "id": "2271e4c9-6d65-4cff-957a-5a3264bcaac5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary Entry\",\r\n            \"Description\": \"\",\r\n            \"Ext\": \"xlsx\",\r\n            \"Type\": 8, // Document\r\n            \"BinaryDataId\": \"8fc30b91-807e-4fbb-bf0a-4e57a237256c\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        },\r\n        \"Options\": {\r\n            \"BinaryFileCleanup\": false // Use this option to keep the binary available for other DocumentLibrary entry creations\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Download DocumentLibrary Document Binary",
+                      "id": "45149d55-a05e-411c-a59c-de25961f836b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{BaseURL}}/BinaryDownload/document-key-here"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "e8744b5b-d060-45ec-8772-800a1d4bcea5"
+                },
+                {
+                  "name": "Entry Type = 16 (Hyperlink)",
+                  "item": [
+                    {
+                      "name": "Create a DocumentLibrary Hyperlink in Maximizer (Step 1 - Upload Binary)",
+                      "id": "8640d770-7da9-4aee-95b9-5b74d507c903",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": "{{BaseURL}}/BinaryUpload"
+                      },
+                      "response": [
+                        {
+                          "id": "7ac4b7df-5630-45c6-8184-134b3c4f1009",
+                          "name": "Response",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "file",
+                              "file": {}
+                            },
+                            "url": "{{BaseURL}}/BinaryUpload"
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json",
+                              "description": ""
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "// When POST to BinaryUpload endpoint, the body provided must be the actual binary file (in this case, it must be a textfile with the actual Hyperlink URL).\n// The binary file will be uploaded to a swap area and you are provided with a BinaryDataId identifier.\n// You can use the BinaryDataId to reference this binary when creating the actual Document later on.\n{\n    \"Code\": 0,\n    \"BinaryData\": {\n        \"Data\": {\n            \"Size\": 14493,\n            \"BinaryDataId\": \"429e276b-4e5f-44b0-ae37-064565eac287\"\n        }\n    }\n}"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Hyperlink in Maximizer (Step 2 - Create the actual entry)",
+                      "id": "36e0554f-d539-4dde-91d0-36b15d4831d5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary Entry - Hyperlink\",\r\n            \"Description\": \"This is a test for creating a Hyperlink entry\",\r\n            \"Type\": 16, // Hyperlink\r\n            \"BinaryDataId\": \"aace2d2c-87dc-47b3-8ad3-d41587b8828e\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Create a DocumentLibrary Hyperlink in Maximizer (Step 2b - Create the actual entry and keep binary)",
+                      "id": "d33f7537-f3f6-4683-8d2e-3eded6120e54",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary Entry - Hyperlink\",\r\n            \"Description\": \"This is a test for creating a Hyperlink entry\",\r\n            \"Type\": 16, // Hyperlink\r\n            \"BinaryDataId\": \"aace2d2c-87dc-47b3-8ad3-d41587b8828e\",\r\n            \"FolderKey\": null // will be created in the root folder\r\n        },\r\n        \"Options\": {\r\n            \"BinaryFileCleanup\": false // Use this option to keep the binary available for other DocumentLibrary entry creations\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Create"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Download DocumentLibrary Hyperlink Binary",
+                      "id": "3aa4ad20-c73c-4a44-80b7-bb118ae2d393",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": "{{BaseURL}}/BinaryDownload/document-key-here"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "c4adca54-18e4-40e1-8bf5-0c85ce41101a"
+                }
+              ],
+              "id": "a7806b28-0c10-46f3-99a2-6c98ef355c8a"
+            },
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read DocumentLibrary metadata (simple)",
+                  "id": "f9e7e7ae-edb8-4e6f-bb51-d5aa63aa709b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/DocumentLibrary\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read DocumentLibrary metadata (more)",
+                  "id": "1a69ae83-b0e2-49b5-b815-a360043df0c0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/DocumentLibrary\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "692d8bc2-e294-450e-aada-aa5aeddcfbd3"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "Read DocumentLibrary FieldOptions - Type",
+                  "id": "d6505736-1caf-4b64-94d0-51b39f58bae4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"FieldOptions\": {\r\n            \"Type\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "89ac964e-7ac1-4109-a619-169b09851bcb"
+            },
+            {
+              "name": "DocumentLibrary CRUD",
+              "item": [
+                {
+                  "name": "Create - DocumentLibrary",
+                  "id": "fc7f2eae-d6b2-4e38-a52d-79c82d2ee97b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Test DocumentLibrary Entry\", // Mandatory\r\n            \"Description\": \"\",\r\n            \"Ext\": \".xslx\", // Mandatory for Type = 8 (Document)\r\n            // Type could be one of the following:\r\n            // 4 = Note, \r\n            // 8 = Document, \r\n            // 16 = Hyperlink\r\n            // Please check \"FieldOptions\" folder for details on how to retrieve the options for this field\r\n            \"Type\": 1, // Mandatory\r\n            // At first, upload a binary file to Octopus and use the resulting BinaryDataId (a.k.a. AttachmentId) here. For more details on how to do that, please check \"Document/HowTo's\" for samples\r\n            \"BinaryDataId\": \"06f15cf2-42e5-4669-8473-e3af5ac229e7\", // Mandatory\r\n            // The folder must exist to be used here. For more details on how to create a DocumentLibrary folder, check the \"HowTo's\" section for the \"Folder\" object. This is an optional field and the document will be created in the root of DocumentLibrary if no specific folder is provided\r\n            \"FolderKey\": \"RG9jRm9sZGVyCTc3MjIzODUxOQ==\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - DocumentLibrary",
+                  "id": "770f5fa1-dd7c-4527-9bcf-013b448ce128",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                \"Ext\": 1,\r\n                \"Type\": 1,\r\n                \"Size\": 1,\r\n                \"BinaryDataId\": 1,\r\n                \"FolderKey\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"LastModifiedDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - DocumentLibrary",
+                  "id": "548d9a92-34ca-4438-b02e-42dfccd99902",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "// When updating DocumentLibrary, the following fields CANNOT be changed:\r\n// - Type\r\n// - Ext\r\n// - BinaryDataId (a.k.a. AttachmentId)\r\n{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": \"RG9jdW1lbnRMaWJyYXJ5CTE1MjAxODA0NDM=\", // Mandatory\r\n            \"Name\": \"Name Updated\",\r\n            \"Description\": \"Test Document Updated\",\r\n            // In case you want to change the folder where the document is stored, provide the FolderKey where you want the document \"moved\" to (folder MUST exist). If you want to move the document to the root of the DocumentLibrary, simply use FolderKey: null\r\n            \"FolderKey\": \"RG9jRm9sZGVyCTc3MjIzODUxOQ==\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - DocumentLibrary",
+                  "id": "b44e7626-a275-4046-99fb-17f28e757813",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"DocumentLibrary\": {\r\n        \"Data\": {\r\n            \"Key\": \"RG9jdW1lbnRMaWJyYXJ5CTE1MjAxODA0NDM=\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "80364ee0-95ce-4412-9fdc-d42ad773bd5e"
+            }
+          ],
+          "id": "69ac52c5-f5e5-440f-835b-19d48445e144",
+          "description": "DocumentLibrary allows users to manage files under the \"Company Library\" module in Maximizer CRM.\n\nA DocumentLibrary entry is a reference to identify a binary (file) previously loaded and stored in Maximizer CRM. See below some considerations for DocumentLibrary object:\n\n- Currently we can create three types of entries using DocumentLibrary:\n    \n    - Document (binary file)\n        \n    - Note (compound document file)\n        \n    - Hyperlink\n        \n- Differently from regular Documents (that are always associated with a specific AbEntry or Opportunity or Case, for example), DocumentLibrary entries are general purpose information hierarchically organized in folders.\n    \n- Independently of what DocumentLibrary type of entry we are creating, the process depends on an extra step to upload the content as a \"binary\" file.\n    \n    - When creating a Note (Type = 4), the binary file must be in a Microsoft Compound Document File format (a.k.a. OLE Structured Storage). For more details about this format, please refer to [[MS-CFB]: Compound File Binary File Format | Microsoft Learn](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/53989ce4-7b05-4f8d-829b-d08d6148375b?redirectedfrom=MSDN).\n        \n    - When creating a Document (Type = 8), the binary file is the actual binary representation of that file (whatever file type it is).\n        \n    - When creating a Hyperlink (Type = 16), the binary file must contain the textual representation of that hyperlink. In other words, it should be a textfile containing the actual URL.\n        \n- To upload the binary file, a special endpoint has to be used. See examples in the HowTo's section for specific details.\n    \n- When binary files are loaded, they are stored in a swap area. When a DocumentLibrary entry is created using the BinaryDataId (a.k.a. AttachmentId) reference, the default behavior is for the temporary file to be deleted from the swap area. It won't be available for further usage.\n    \n- To override this behavior (and use the very same binary file for creating multiple DocumentLibrary entries), the option \"BinaryFileCleanup\" needs to be specified when creating the entry. See examples in the HowTo's section for specific details."
         },
         {
           "name": "FavoriteList",
@@ -4693,6 +5226,301 @@
           ],
           "id": "36619626-0ae4-4c44-bdd7-cd0cb7293ac0",
           "description": "FavoriteList allows users to manage favorites list which are specific groups of different entities. See below some considerations for FavoriteList:\n\n- The field Entity Type defines the type of entities contained in the favorite list. A favorite list can have only one single type of entity, accepted ones are:\n    \n    - AbEntry = 1\n        \n    - Opportunity = 2\n        \n    - Case = 5\n        \n    - Lead = 19\n        \n- MemberKeys field is an array of keys depending on the entity type selected. For example, if EntityType = 1 then all MemberKeys will be AbEntry Keys.\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
+        },
+        {
+          "name": "Folder",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Create Udf Folder - AbEntry",
+                  "id": "ad262dbf-0781-4f3b-80ea-722613a218be",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AppliesTo\": [\r\n                \"AbEntry\"\r\n            ],\r\n            \"Name\": \"My AbEntry Udf Folder\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create Udf Folder - Lead",
+                  "id": "afa75dd6-4374-4982-bf14-2bd3277e9355",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AppliesTo\": [\r\n                \"Lead\"\r\n            ],\r\n            \"Name\": \"My Lead Udf Folder\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create Udf Folder - Opportunity",
+                  "id": "ff581d45-e76c-49d2-afd1-8317168b7ad5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AppliesTo\": [\r\n                \"Opportunity\"\r\n            ],\r\n            \"Name\": \"My Opportunity Udf Folder\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create Udf Folder - Campaign",
+                  "id": "d254caa4-d0f1-48dd-ad7f-6f204b107eb2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AppliesTo\": [\r\n                \"Campaign\"\r\n            ],\r\n            \"Name\": \"My Campaign Udf Folder\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create Udf Folder - Case",
+                  "id": "c4eeeccc-40b4-42b1-93a1-b68283596ade",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AppliesTo\": [\r\n                \"Case\"\r\n            ],\r\n            \"Name\": \"My Case Udf Folder\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "f0ce9b7e-f5e8-42bc-8919-b3f4228e278a"
+            },
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read Folder metadata (simple)",
+                  "id": "865b0010-506f-4535-a786-5f3913dd23b9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Folder\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Folder metadata (more)",
+                  "id": "86230d65-77e6-4b44-aacb-60d360507489",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Folder\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "46a31ebb-a0c5-4301-b6fc-f5c3dfab4da8"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "Read Folder FieldOptions - AppliesTo",
+                  "id": "7253e900-df78-43e1-975c-845618f7ddf6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"FieldOptions\": {\r\n            \"AppliesTo\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "ddd9c7dc-4b6f-4e5c-81b8-34c407b81a99"
+            },
+            {
+              "name": "Folder CRUD",
+              "item": [
+                {
+                  "name": "Create - Folder",
+                  "id": "f9fa4af1-b170-4a66-afc2-f0a5b437f7ba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            // Folders can be one of two types:\r\n            // - Udf folder => used to organize Udfs created under a specific entity (AbEntry, Opportunity, Case, etc)\r\n            // - DocumentLibrary folder => used to organize documents on the DocumentLibrary module (general use documents, not tied to any object)\r\n            // When creating a folder for DocumentLibrary, that's the only value that should be specified in the AppliesTo field.\r\n            // When creating a Udf folder, you should specify the entity type under which the new Udf folder will be created.\r\n            \"AppliesTo\": [\r\n                \"DocumentLibrary\"\r\n            ], // Mandatory\r\n            \"Name\": \"My Test Folder\", // Mandatory\r\n            // The parent folder must exist to be used here. This is an optional field and the folder will be created in the root of the folder tree if no parent folder is provided. If you every need to reference the \"root\" folder, the key value will ALWAYS be this: Um9vdEZvbGRlcgkw\r\n            \"ParentFolderKey\": \"Um9vdEZvbGRlcgkw\", // Mandatory\r\n            \"Inactive\": false\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Folder",
+                  "id": "5c95f1c7-f1de-478a-942e-ca065ed17dd2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Name\": 1,\r\n                \"Path\": 1,\r\n                \"ParentFolderKey\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"Inactive\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Folder",
+                  "id": "d53c6cb1-ea30-4f7a-bfe6-a52aa3ae79a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            \"Key\": \"RG9jRm9sZGVyCTMwNDk3MjA0OA==\", // Mandatory\r\n            \"Name\": \"My Test Folder Updated\",\r\n            // In case you want to change the parent folder, provide the ParentFolderKey where you want the folder \"moved\" to (folder MUST exist). If you want to move the folder to the root of folder, use this fixed value: Um9vdEZvbGRlcgkw\r\n            \"ParentFolderKey\": \"Um9vdEZvbGRlcgkw\",\r\n            \"Inactive\": true\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - Folder",
+                  "id": "a42b2dee-28cb-453f-9d5f-e8f08fdd352f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Folder\": {\r\n        \"Data\": {\r\n            // Constraint: to delete a folder, it MUST be empty. Trying to delete a folder that is not empty will result in an error.\r\n            \"Key\": \"RG9jRm9sZGVyCTMwNDk3MjA0OA==\" // Mandatory\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "17da799d-ce02-492a-a3f3-836f61d30c3a"
+            }
+          ],
+          "id": "c230f2d9-b306-4912-9da9-c75ca5e61cba",
+          "description": "Folder object allows users to manage folders for both Udfs (organizing Udfs under each tab related to AbEntry/Lead, Opportunity, Campaign and Case) and Company Library module (general use documents, notes and hyperlinks).\n\nIMPORTANT: the Folder object is currently using the beta version by default (0.x). Which means, if you send payloads without setting the compatibility, you will use the functionality of FolderObject = 0.x. That version supports only Udf folders, and for that reason, we strongly suggest to always use compatibility with FolderObject = 1.x, which supports both Udf and DocumentLibrary folder types. Saying that, make sure to always include the following section in any payload:\n\n``` json\n\"Compatibility\": {\n    \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\n}\n\n ```\n\nThe solution is pretty similar for both Udf and Company Library folders, which only a few differences in terms of validation/required fields. See below some considerations for the Folder object:\n\n- Udf folders are created using the following values in the AppliesTo field:\n    \n    - AbEntry (applies for all types - Contact, Company and Individual)\n        \n    - Company\n        \n    - Contact\n        \n    - Individual\n        \n    - Opportunity\n        \n    - Case\n        \n    - Campaign\n        \n    - Lead\n        \n- Company Library folders are created using the \"DocumentLibrary\" value (alone) in the AppliesTo field.\n    \n- The concept of \"parent\" folder applies in both cases: we can create folders within folders. To do that, simply provide the parent folder you want to create the new folder under in the ParentKey field.\n    \n- The concept or \"root\" folder also applies in both cases: it's the top level folder in which everything is created (it's the \"parent\" of all folders and entries added to it). There is a very special key that represents \"root\" folder:\n    \n    **Um9vdEZvbGRlcgkw**\n    \n    This is a fixed value that represents \"RootFolder 0\" (meaning the Id = 0 of a given folder). You can safely use this fixed value whenever you need to reference the \"root\" folder.\n    \n- We can only delete folders that are completely empty. If you try to delete a folder that is associated with at least one file (in case of the Company Library module) or one Udf (in case of the Udf folder), you will receive an error."
         },
         {
           "name": "InteractionLog",
