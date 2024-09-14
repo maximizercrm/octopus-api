@@ -5300,6 +5300,91 @@
           "description": "EmailProfile allows users to manage opt-in settings for different email types in Maximizer CRM.\n\nWhen an email is going to be sent, system will check all the existing Email Profiles ensuring emails are sent only to recipients who have provided consent for such email type.\n\nSee some details about EmailProfile below:\n\n- EmailProfiles are created per email address, those will apply when sending emails to any AbEntry having this email address as primary.\n    \n- Both EmailType and Comment are configurable fields with multiple options, check FieldOptions to see available ones."
         },
         {
+          "name": "EmailSignature",
+          "item": [
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read EmailSignature metadata (simple)",
+                  "id": "3bbdbd51-3876-4218-a3e2-7fe7b8178700",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/EmailSignature\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read EmailSignature metadata (more)",
+                  "id": "a0b64fca-509a-4d3b-ae83-5ca1b3c702ae",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"HasOption\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/EmailSignature\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "3d06dacc-e8ef-49da-83eb-ffe344159965"
+            },
+            {
+              "name": "EmailSignature CRUD",
+              "item": [
+                {
+                  "name": "EmailSignature - Read",
+                  "id": "b35347a3-9ada-4223-bb67-ae3c33f92576",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"EmailSignature\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Signature\": 1, // HTML of the signature including binaries if those are part of the signature\r\n                \"DisplayValue\": 1 // Will always be ¨Email Signature for User: xxxx¨ being xxxx the userId\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"sSearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"VXNlcglEQlJPV04=\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "7278a4f7-f46a-44eb-9d0f-5604d40989da"
+            }
+          ],
+          "id": "662cec6c-c364-474f-9a8b-50c7c487874c",
+          "description": "**NOTE:** Currently, the API only supports the read operation.\n\nEmailSignature allows users to retrieve email signatures created in Maximizer CRM.\n\nSignatures can be created or updated within Maximizer CRM and are stored as HTML. The Read endpoint enables users to obtain this HTML, including any embedded binaries, through the \"Signature\" property of the object.\n\nThe security for this object has a specific behavior, as outlined below:\n\n- Users with \"God Flag\" permission (Access Rights > Privileges > Modify other users' private entries) can read all signatures.\n    \n- Users with privilege \"Modify other users' general information\" (\"Access Rights > Privileges > Modify other users' general information\") can also read all signatures.\n    \n- All other users can only read their own signature."
+        },
+        {
           "name": "FavoriteList",
           "item": [
             {
