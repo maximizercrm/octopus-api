@@ -6019,7 +6019,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"InteractionLog\":{\r\n      \"Data\":{\r\n         \"Key\":\"SW50ZXJhY3Rpb25Mb2cJMjIwNzEzMDAwMDQwNzcyMjM4MTY5SUwJMA==\",\r\n         \"Source\":\"source update\",\r\n         \"Subject\":\"Subject Update\",\r\n         \"Type\":\"60001\",\r\n         \"StartDate\":\"2018-01-20T10:01:01\",\r\n         \"EndDate\":\"2018-01-20T10:20:10\",\r\n         \"User\":{\"uid\":\"JNAPOLI\"},\r\n         \"Result\":null,\r\n        \"Direction\":2\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": \"SW50ZXJhY3Rpb25Mb2cJMjQwOTIwMDAwMDAwMDAxMTU2Nzk5SUwJMA==\",\r\n            \"Source\": \"Test Phone Call Interaction Updated\",\r\n            \"Subject\": \"This is am updated test interaction representing a phone call\",\r\n            \"Result\": [\r\n                \"11\"\r\n            ],\r\n            \"Category\": [\r\n                \"2\"\r\n            ],\r\n            \"Direction\": 2\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
