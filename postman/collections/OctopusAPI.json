@@ -6070,7 +6070,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"InteractionLog\":{\r\n      \"FieldOptions\":{\r\n          \"Type\":[\r\n            {\r\n                \"Key\":1,\r\n                \"Value\": 1,\r\n                \"Name\":1,\r\n                \"DisplayValue\":1,\r\n                \"Icon\":1,\r\n                \"BiDirectional\":1,\r\n                \"External\":1\r\n            }\r\n        ]\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"FieldOptions\": {\r\n            \"Type\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"Value\": 1,\r\n                    \"Name\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                }\r\n            ],\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ],\r\n            \"Result\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
