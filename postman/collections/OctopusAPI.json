@@ -5997,7 +5997,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"InteractionLog\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"Source\":\"604-600-1234\",\r\n         \"Subject\":\"Test interactionlog to test for opp by sub\",\r\n         \"Description\":\"Test interactionlog to test for opp by desc \",\r\n         \"Type\":\"60001\",\r\n         \"StartDate\":\"2018-01-20T10:00:01\",\r\n         \"EndDate\":\"2018-01-20T10:10:10\",\r\n         \"User\":\"$CURRENTUSER()\",\r\n         \"LeadKey\":\"TGVhZAkyMjAyMTcwMDAwNzA3NzIyMzgxNjlMRQkw\",\r\n         \"WithKey\":\"T3Bwb3J0dW5pdHkJMjIwMzI0MDAyMTgwNzcyMjM4MTY5Twkw\",\r\n         \"Result\":\"60001\",\r\n         \"Direction\":1\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"604-600-1234\",\r\n            \"Subject\": \"Test Phone Call Interaction\",\r\n            \"Description\": \"This is a test interaction representing a phone call\",\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2018-01-20T10:00:01\",\r\n            \"EndDate\": \"2018-01-20T10:10:10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"LeadKey\": \"TGVhZAkyMzA5MTEwMDAwMTEzMTk3MTY1MzFMRQkw\",\r\n            \"WithKey\": \"T3Bwb3J0dW5pdHkJMjQwNTI4MjUwOTE4NTU1MTUwMDAyTwkw\",\r\n            \"Result\": [\r\n                \"10\"\r\n            ],\r\n            \"Direction\": 1,\r\n            \"Duration\": 123,\r\n            \"Data\": \"Data related to this entry\",\r\n            \"Category\": [\r\n                \"1\"\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
