@@ -7196,7 +7196,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\",\r\n\t\t\tstatus: 3,\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjQwOTE5MDAwMDAwMDA5NzkyMDQ3ME8JMA==\",\r\n            \"Objective\": \"Test Objective Updated\",\r\n            \"Description\": \"Test Description Updated\",\r\n            \"Status\": 3,\r\n            \"Cost\": 1111.11,\r\n            \"ForecastRevenue\": 2222.22,\r\n            \"Leader\": {\r\n                \"Uid\": \"MAX\"\r\n            },\r\n            \"NextAction\": \"Contact prospect\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTI0Nzk5ODAwMDdHCTA=\",\r\n            \"Comment\": \"Test Comment Updated\",\r\n            \"Reason\": 293887012,\r\n            \"Category\": [\r\n                \"2\"\r\n            ],\r\n            \"Product\": [\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [\r\n                \"57999\" // Confident\r\n            ],\r\n            \"RevenueType\": \"60002\" // Existing Business\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
