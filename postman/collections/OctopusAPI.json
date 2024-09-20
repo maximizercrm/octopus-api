@@ -7242,7 +7242,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\"\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjQwOTE5MDAwMDAwMDA5NzkyMDQ3ME8JMA==\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
