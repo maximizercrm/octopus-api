@@ -69,7 +69,7 @@
             }
           ],
           "id": "2ef80c54-5968-42e8-908c-de0e98f00790",
-          "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
+          "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended for Integrations. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
         },
         {
           "name": "Authentication on-premise",
@@ -133,7 +133,7 @@
             }
           ],
           "id": "5e54a051-322a-4791-8254-4f9ba8e74834",
-          "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request."
+          "description": "Octopus API tokens may be requested using the Authenticate method by passing a user's Maximizer username and password. If you are using Windows authentication, you may omit the user id and password in the request.\n\nWhen requesting a token you must also specify which Address Book you want to generate the token for by including the Database name for your Address Book in the authentication request.\n\nIn general, direct authentication via Octopus API is not recommended for Integrations. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
         },
         {
           "name": "Token Validation",
