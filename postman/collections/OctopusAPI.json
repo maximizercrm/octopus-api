@@ -69,7 +69,7 @@
             }
           ],
           "id": "2ef80c54-5968-42e8-908c-de0e98f00790",
-          "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended for Integrations. Instead, you are encouraged to use the [Maxmizer.Web.Authentication API](https://legacydocs.developer.maximizer.com/doc/maximizerwebauthentication) to obtain tokens for the Maximizer.Web.Data API using OAuth 2."
+          "description": "When calling the Authenticate method in a CRM Live account, you must also identify your app to the API by including your VendorId and AppKey in your request, in addition to the database name, username, and password. If these additional parameters are omitted, the authentication will fail.\n\nIn general, direct authentication via Octopus API is not recommended for Integrations. Instead, you are encouraged to use OAuth2 to obtain tokens for the Maximizer.Web.Data API. Please contact integration@maximizer.com and ask for registering OAuth2. You need to inform your VendorId and the Redirect Url you want the OAuth2 process to return to. For more details on how the OAuth2 Authorization Flow works, please refer to [OAuth 2.0 — OAuth.](https://oauth.net/2/)"
         },
         {
           "name": "Authentication on-premise",
