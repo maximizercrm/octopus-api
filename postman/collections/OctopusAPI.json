@@ -7713,173 +7713,6 @@
           "id": "76b1bf2c-3008-429c-9c5c-6424099d5e14"
         },
         {
-          "name": "SecGroup",
-          "item": [
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "get security groups",
-                  "id": "bc286e85-00fc-4604-899b-808483441a4b",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n      },\r\n      top: 5\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        displayValue: 1\r\n      }\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get members of security group",
-                  "id": "48176073-4c7b-4d8f-aea8-2c229a7acc1f",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  secGroup: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$EQ\": \"R3JvdXAJLkFDQ1RORzAw\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        key: 1,\r\n        memberKeys: [\r\n          {\r\n            key: 1,\r\n            displayValue: 1\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "7b44cb7d-6127-43e0-a2bd-86769d1d745d"
-            },
-            {
-              "name": "MetaData",
-              "item": [
-                {
-                  "name": "Read SecGroup metadata (simple)",
-                  "id": "ea0f4cb6-2170-4572-a1ec-60fba7ba6ee7",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: 1\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read SecGroup metadata (more)",
-                  "id": "40e60678-ea66-4688-af51-773c9a2f1ba3",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  schema: {\r\n    criteria: {\r\n      searchQuery: {\r\n        key: {\r\n          \"$TREE\": \"/SecGroup\"\r\n        }\r\n      }\r\n    },\r\n    scope: {\r\n      fields: {\r\n        \"Key\": 1,\r\n        \"Alias\": 1,\r\n        \"Type\": 1,\r\n        \"Name\": 1,\r\n        \"AppliesTo\": 1,\r\n        \"Sortable\": 1,\r\n        \"Queryable\": 1,\r\n        \"Mandatory\": 1,\r\n        \"Attributes\": 1,\r\n        \"DisplayValue\": 1\r\n      }\r\n    }\r\n  },\r\n  compatibility: {\r\n    \"SchemaObject\": \"1.0\"\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "3ec944cf-228b-4a11-8a4f-2f846e49f724"
-            },
-            {
-              "name": "SecGroup CRUD",
-              "item": [
-                {
-                  "name": "Secgroup-Read",
-                  "id": "f9c15012-3147-44d3-95f2-f6e7442a97be",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ISecGroupSearcher\": \"Maximizer.Model.Access.Sql.SecGroupSearcher\"\r\n        }\r\n    },\r\n    \"SecGroup\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CreationDate\": {\r\n                    \"$GE\": \"2005-09-15T10:20:45\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"MemberKeys\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "SecGroup-Update",
-                  "id": "e946497d-9a83-45e1-8cbb-5acea8b8ef6e",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\",\r\n      \"Name\": \"Company Announcement Authors updated\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2004-01-14T04:19:23\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglKTkFQT0xJ\",\r\n        \"VXNlcglNQVNURVI=\"\r\n      ]\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Update"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "SecGroup-Create",
-                  "id": "112904f9-f365-487a-9a01-323c8e121aa3",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": null,\r\n      \"Name\": \"Accounting1 Test\",\r\n      \"Creator\": \"VXNlcglNQVNURVI=\",\r\n      \"CreationDate\": \"2022-05-26\",\r\n      \"MemberKeys\": [\r\n        \"VXNlcglNQVNURVI=\",\r\n        \"VXNlcglNQ09SRUxM\",\r\n        \"VXNlcglNR1JBSEFN\"\r\n      ]\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Create"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "SecGroup-Delete",
-                  "id": "422f59d2-4560-4e45-8c7c-66b0632d4ee3",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n  \"Configuration\": {\r\n    \"Drivers\": {\r\n      \"ISecGroupAccess\": \"Maximizer.Model.Access.Sql.SecGroupAccess\"\r\n    }\r\n  },\r\n  \"SecGroup\": {\r\n    \"Data\": {\r\n      \"Key\": \"R3JvdXAJLkFVMS4uLjAw\"\r\n    }\r\n  }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Delete"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "59263a1e-742d-4638-bb63-775f57a1285f"
-            }
-          ],
-          "id": "66da302a-1ae4-413c-af51-a57c3135331e"
-        },
-        {
           "name": "Task",
           "item": [
             {
@@ -8300,6 +8133,94 @@
               "name": "HowTo's",
               "item": [
                 {
+                  "name": "User/Permission",
+                  "item": [
+                    {
+                      "name": "get interaction log permissions",
+                      "id": "0eeaaedf-b768-4625-8526-a33624486d76",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n\tuser: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key:{\r\n                    \"$EQ\":\"$CURRENTUSER()\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1,\r\n                permissions:{\r\n                    interactionLog: {\r\n                        create: 1,\r\n                        read: 1,\r\n                        update: 1,\r\n                        delete: 1\r\n                    }\r\n                }\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+                        },
+                        "url": "{{BaseURL}}/UserRead",
+                        "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Read - Lead permissions for current user",
+                      "id": "a19be1ae-bb49-4c2a-bfe2-7e8e64ec1e12",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"User\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Email\": 1,\r\n                \"Permissions\": {\r\n                    \"Lead\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"$CURRENTUSER()\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read",
+                        "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "set interaction log permissions",
+                      "id": "42bdb1a8-67eb-442b-b928-74f6f255cd25",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n\tuser: {\r\n\t\tdata: {\r\n            key: \"VXNlcglEQlJPV04=\",\r\n            permissions: {\r\n                interactionLog: {\r\n                    create: true,\r\n                    read: true,\r\n                    update: true,\r\n                    delete: false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
+                        },
+                        "url": "{{BaseURL}}/UserUpdate",
+                        "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "Update - Lead permissions for user",
+                      "id": "ed84d016-84d5-4d93-b350-cf3e16bbf642",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"User\": {\r\n        \"Data\": {\r\n            \"Key\": \"VXNlcglNQVNURVI=\", // Set key of user you want to update the permissions to here\r\n            \"Permissions\": {\r\n                \"Lead\": {\r\n                    \"Create\": true,\r\n                    \"Read\": true,\r\n                    \"Update\": true,\r\n                    \"Delete\": true\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update",
+                        "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "a7ffc9b0-a3ff-4791-8489-dd1f6806c906"
+                },
+                {
                   "name": "Read - Get user details",
                   "id": "83324908-ff79-463c-a33c-0392f16c7470",
                   "protocolProfileBehavior": {
@@ -8516,100 +8437,6 @@
             }
           ],
           "id": "dd04ab12-18f2-4c10-ac44-5723d5fd1db0"
-        },
-        {
-          "name": "User/Permission",
-          "item": [
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "get interaction log permissions",
-                  "id": "0eeaaedf-b768-4625-8526-a33624486d76",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tuser: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                key:{\r\n                    \"$EQ\":\"$CURRENTUSER()\"\r\n                }\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1,\r\n                permissions:{\r\n                    interactionLog: {\r\n                        create: 1,\r\n                        read: 1,\r\n                        update: 1,\r\n                        delete: 1\r\n                    }\r\n                }\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/UserRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read - Lead permissions for current user",
-                  "id": "a19be1ae-bb49-4c2a-bfe2-7e8e64ec1e12",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"User\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Email\": 1,\r\n                \"Permissions\": {\r\n                    \"Lead\": {\r\n                        \"Create\": 1,\r\n                        \"Read\": 1,\r\n                        \"Update\": 1,\r\n                        \"Delete\": 1\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"$CURRENTUSER()\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "set interaction log permissions",
-                  "id": "42bdb1a8-67eb-442b-b928-74f6f255cd25",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tuser: {\r\n\t\tdata: {\r\n            key: \"VXNlcglEQlJPV04=\",\r\n            permissions: {\r\n                interactionLog: {\r\n                    create: true,\r\n                    read: true,\r\n                    update: true,\r\n                    delete: false\r\n                }\r\n            }\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/UserUpdate",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Update - Lead permissions for user",
-                  "id": "ed84d016-84d5-4d93-b350-cf3e16bbf642",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"User\": {\r\n        \"Data\": {\r\n            \"Key\": \"VXNlcglNQVNURVI=\", // Set key of user you want to update the permissions to here\r\n            \"Permissions\": {\r\n                \"Lead\": {\r\n                    \"Create\": true,\r\n                    \"Read\": true,\r\n                    \"Update\": true,\r\n                    \"Delete\": true\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Update",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "a7ffc9b0-a3ff-4791-8489-dd1f6806c906"
-            }
-          ],
-          "id": "df873e67-675f-4211-a944-810404e4bc65"
         },
         {
           "name": "User Defined Fields - Schema Definition",
