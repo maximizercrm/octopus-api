@@ -5165,7 +5165,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"EmailProfile\": {\r\n        \"FieldOptions\": {\r\n            \"EmailType\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Options\": {\r\n            // Possible values:\r\n            //\r\n            // true => list EmailTypes marked with the option \"Permission from email recipients required\"\r\n            // false => list EmailTypes marked with the option \"Permission from email recipients not required\"\r\n            // \r\n            // To list all possible values, use \"null\" or simply remove this option from the payload\r\n            \"RecipientPermissionRequired\": true\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"EmailProfile\": {\r\n        \"FieldOptions\": {\r\n            \"EmailType\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Options\": {\r\n            //\r\n            // Possible values:\r\n            //\r\n            // true => list EmailTypes marked with the option \"Permission from email recipients required\"\r\n            //\r\n            // false => list EmailTypes marked with the option \"Permission from email recipients not required\"\r\n            // \r\n            // To list all possible values, use \"null\" or simply remove this option from the payload\r\n            //\r\n            \"RecipientPermissionRequired\": true\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
