@@ -5155,6 +5155,28 @@
               "name": "FavoriteList CRUD",
               "item": [
                 {
+                  "name": "Create - FavoriteList",
+                  "id": "92509016-e4f9-4e7e-8d95-9171e83d314c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Favorite List 1\",\r\n            \"Description\": \"This is the Favorite List 1 containing elements of type EntityType\",\r\n            // Type of entities included in the favorite list\r\n            // AbEntry = 1\r\n            // Opportunity = 2\r\n            // Case = 5\r\n            // Lead = 19\r\n            \"EntityType\": 1,\r\n            // Entity Keys based on EntityType defined.\r\n            // Example, If EntityType = 1 then all MemberKeys should be AbEntry Keys\r\n            \"MemberKeys\": [\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTI=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTM=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTQ=\"\r\n            ]\r\n        }\r\n    },\r\n    // Required for full support of above mentioned entity types\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListAccess\": \"Maximizer.Model.Access.Sql.FavoriteListAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
                   "name": "Read - FavoriteList",
                   "id": "7766c110-462b-4d1b-871c-cdc2f3e999ef",
                   "protocolProfileBehavior": {
@@ -5165,7 +5187,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                // Type of entities included in the favorite list\r\n                // AbEntry = 1\r\n                // Opportunity = 2\r\n                // Case = 5\r\n                // Lead = 19\r\n                \"EntityType\": 1,\r\n                // Entity Keys based on EntityType defined.\r\n                // Example, If EntityType = 1 then all MemberKeys will be AbEntry Keys\r\n                \"MemberKeys\": [\r\n                    1\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListSearcher\": \"Maximizer.Model.Access.Sql.FavoriteListSearcher\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"Description\": 1,\r\n                // Type of entities included in the favorite list\r\n                // AbEntry = 1\r\n                // Opportunity = 2\r\n                // Case = 5\r\n                // Lead = 19\r\n                \"EntityType\": 1,\r\n                // Entity Keys based on EntityType defined.\r\n                // Example, If EntityType = 1 then all MemberKeys will be AbEntry Keys\r\n                \"MemberKeys\": [\r\n                    1\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    // Required for full support of above mentioned entity types\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListSearcher\": \"Maximizer.Model.Access.Sql.FavoriteListSearcher\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -5177,8 +5199,8 @@
                   "response": []
                 },
                 {
-                  "name": "Create - FavoriteList",
-                  "id": "92509016-e4f9-4e7e-8d95-9171e83d314c",
+                  "name": "Update - FavoriteList",
+                  "id": "96afb262-c344-4f1e-86ee-29d04e6d101e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -5187,14 +5209,14 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"FavoriteList\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"Favorite List 1\",\r\n            \"Description\": \"This is the Favorite List 1 containing elements of type EntityType\",\r\n            // Type of entities included in the favorite list\r\n            // AbEntry = 1\r\n            // Opportunity = 2\r\n            // Case = 5\r\n            // Lead = 19\r\n            \"EntityType\": 1,\r\n            // Entity Keys based on EntityType defined.\r\n            // Example, If EntityType = 1 then all MemberKeys should be AbEntry Keys\r\n            \"MemberKeys\": [\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTI=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTM=\",\r\n                \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTQ=\"\r\n            ]\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListAccess\": \"Maximizer.Model.Access.Sql.FavoriteListAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "//\r\n{\r\n    \"FavoriteList\": {\r\n        \"Data\": {\r\n            \"Key\": \"RmF2b3JpdGVMaXN0CTIwMjkwNTAxOQ==\", // Mandatory\r\n            \"Name\": \"New name for Favorite list\",\r\n            \"Description\": \"FavoriteList Description Update2 Lead212\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IFavoriteListAccess\": \"Maximizer.Model.Access.Sql.FavoriteListAccess\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create"
+                    "url": "{{BaseURL}}/Update"
                   },
                   "response": []
                 },
@@ -5225,7 +5247,7 @@
             }
           ],
           "id": "36619626-0ae4-4c44-bdd7-cd0cb7293ac0",
-          "description": "FavoriteList allows users to manage favorites list which are specific groups of different entities. See below some considerations for FavoriteList:\n\n- The field Entity Type defines the type of entities contained in the favorite list. A favorite list can have only one single type of entity, accepted ones are:\n    \n    - AbEntry = 1\n        \n    - Opportunity = 2\n        \n    - Case = 5\n        \n    - Lead = 19\n        \n- MemberKeys field is an array of keys depending on the entity type selected. For example, if EntityType = 1 then all MemberKeys will be AbEntry Keys.\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
+          "description": "FavoriteList allows users to manage favorites list which are specific groups of different entities. See below some considerations for FavoriteList:\n\n- The field Entity Type defines the type of entities contained in the favorite list. A favorite list can have only one single type of entity, accepted ones are:\n    \n    - AbEntry = 1\n        \n    - Opportunity = 2\n        \n    - Case = 5\n        \n    - Lead = 19\n        \n- MemberKeys field is an array of keys depending on the entity type selected. For example, if EntityType = 1 then all MemberKeys will be AbEntry Keys."
         },
         {
           "name": "Folder",
