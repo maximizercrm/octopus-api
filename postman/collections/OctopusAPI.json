@@ -5551,7 +5551,7 @@
               "name": "Metadata",
               "item": [
                 {
-                  "name": "read InteractionLog schema (simple)",
+                  "name": "Read InteractionLog metadata (simple)",
                   "id": "a3548ae7-0932-417f-a13b-8b344032dd8e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5561,15 +5561,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/InteractionLog\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n        }\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/InteractionLog\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/SchemaRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
                   "response": []
                 },
                 {
-                  "name": "read InteractionLog schema (more)",
+                  "name": "Read InteractionLog metadata (more)",
                   "id": "2bd4a36d-4f88-416b-b0d8-f30292a86e2f",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5579,28 +5584,15 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/InteractionLog\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/SchemaRead",
-                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "read InteractionLog type options",
-                  "id": "34b6534b-496a-4e9c-9e1b-a20e6ad71698",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\tinteractionLog: {\r\n\t\tfieldOptions: {\r\n\t\t\ttype: [{\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1\r\n\t\t\t}]\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/InteractionLog\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                    "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
                   "response": []
                 }
@@ -5611,7 +5603,7 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "get last 3 phone call logs for abentry",
+                  "name": "Get last 3 phone call logs for Abentry",
                   "id": "d553e0ac-84b1-4ea3-9cd7-18fe076a3338",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5621,7 +5613,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tinteractionLog: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\t\"$AND\": [\r\n                    {\r\n\t\t\t\t\t\ttype: {\r\n\t\t\t\t\t\t\t\"$IN\": [\r\n\t\t\t\t\t\t\t\t\"60001\"\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\tabEntryKey: {\r\n\t\t\t\t\t\t\t\"$EQ\": \"QWJFbnRyeQlERU1PXzVDCTE=\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t},\r\n\t\t\ttop: 3\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n\t\t\t\tkey: 1,\r\n\t\t\t\t\"type/displayvalue\": 1,\r\n\t\t\t\tdescription: 1,\r\n\t\t\t\tsubject: 1,\r\n\t\t\t\tstartDate: 1,\r\n\t\t\t\tduration: 1,\r\n\t\t\t\t\"user/displayValue\": 1,\r\n\t\t\t\t\"abEntry/displayValue\": 1\r\n\t\t\t}\r\n\t\t},\r\n\t\torderBy: {\r\n\t\t\tfields: [{\r\n\t\t\t\t\"StartDate\": \"DESC\"\r\n\t\t\t}]\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"Description\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"Duration\": 1,\r\n                \"User\": 1,\r\n                \"AbEntry\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$IN\": [\r\n                                \"60001\"\r\n                            ]\r\n                        }\r\n                    },\r\n                    {\r\n                        \"AbEntryKey\": {\r\n                            \"$EQ\": \"QWJFbnRyeQlERU1PXzVDCTE=\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"StartDate\": \"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -5629,7 +5626,7 @@
                   "response": []
                 },
                 {
-                  "name": "get total phone call logs for opportunity",
+                  "name": "Get total phone call logs for Opportunity",
                   "id": "3e047996-86d0-4379-b718-28bbab98c66b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5639,7 +5636,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tinteractionLog: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\t\"$AND\": [\r\n                    {\r\n\t\t\t\t\t\ttype: {\r\n\t\t\t\t\t\t\t\"$IN\": [\r\n\t\t\t\t\t\t\t\t\"60001\"\r\n\t\t\t\t\t\t\t]\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t},\r\n\t\t\t\t\t{\r\n\t\t\t\t\t\twithKey: {\r\n\t\t\t\t\t\t\t\"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fNwkw\"\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t]\r\n\t\t\t}\r\n        },\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$COUNT()\": 1,\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"Description\": 1,\r\n                \"Subject\": 1,\r\n                \"StartDate\": 1,\r\n                \"Duration\": 1,\r\n                \"User\": 1,\r\n                \"AbEntry\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$IN\": [\r\n                                \"60001\"\r\n                            ]\r\n                        }\r\n                    },\r\n                    {\r\n                        \"WithKey\": {\r\n                            \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fNwkw\"\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"StartDate\": \"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -5647,7 +5649,7 @@
                   "response": []
                 },
                 {
-                  "name": "get total phone call duration for opportunities",
+                  "name": "Get total phone call duration for Opportunities",
                   "id": "adf01404-2053-44eb-bf92-58c351ab7cd4",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5657,7 +5659,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tinteractionLog: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$IN\": [\r\n                        \"60001\"\r\n                    ]\r\n                }\r\n\t\t\t}\r\n        },\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$SUM(Duration)\": 1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$SUM(Duration)\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$IN\": [\r\n                                \"60001\"\r\n                            ]\r\n                        }\r\n                    },\r\n                    {\r\n                        \"WithKey\": {\r\n                            \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fNwkw\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -5665,7 +5672,7 @@
                   "response": []
                 },
                 {
-                  "name": "get total number of phone call logs",
+                  "name": "Get total number of phone call logs",
                   "id": "60ad0753-0428-4f88-8a48-13d19f72e471",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -5675,7 +5682,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tinteractionLog: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n                type: {\r\n                    \"$IN\": [\r\n                        \"60001\"\r\n                    ]\r\n                }\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                \"$COUNT()\":1\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n}\r\n"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$COUNT()\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$IN\": [\r\n                        \"60001\"\r\n                    ]\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
@@ -5689,6 +5701,28 @@
               "name": "InteractionLog CRUD",
               "item": [
                 {
+                  "name": "InteractionLog-Read",
+                  "id": "641afa30-15da-4484-ba91-376414adadd3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"User\": 1,\r\n                \"Source\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"AbEntry\": {\r\n                    \"Key\": 1\r\n                },\r\n                \"Lead\": {\r\n                    \"Key\": 1\r\n                },\r\n                \"WithKey\": {\r\n                    \"Key\": 1\r\n                },\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Data\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Test\"\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
                   "name": "IntractionLog-CreateWithAbEntryKey",
                   "id": "805b39be-5a78-43c5-8660-ac6450773390",
                   "protocolProfileBehavior": {
@@ -5699,7 +5733,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"InteractionLog\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"Source\":\"604-600-1234\",\r\n         \"Subject\":\"New Intractionlog to test subject\",\r\n         \"Description\":\"New Intractionlog to test desc\",\r\n         \"Type\":\"60001\",\r\n         \"StartDate\":\"2018-01-20T10:00:01\",\r\n         \"EndDate\":\"2018-01-20T10:10:10\",\r\n         \"User\":\"$CURRENTUSER()\",\r\n         \"AbEntryKey\":\"Q29tcGFueQkyMjA3MTMyNTAzMDMwNTg2NzAwMDVDCTA=\",\r\n         \"Result\":\"60001\",\r\n         \"Direction\":1\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"604-600-1234\",\r\n            \"Subject\": \"New Intractionlog to test subject\",\r\n            \"Description\": \"New Intractionlog to test desc\",\r\n            // \"60006 - Chat\",\"60002 - Email\", \"60001 - Call\", \"60005 - SMS\"\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2018-01-20T10:00:01\",\r\n            \"EndDate\": \"2018-01-20T10:10:10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"AbEntryKey\": \"Q29tcGFueQkyMjA3MTMyNTAzMDMwNTg2NzAwMDVDCTA=\",\r\n            \"Result\": \"60001\",\r\n            \"Direction\": 1\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
@@ -5716,7 +5755,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"InteractionLog\":{\r\n      \"Data\":{\r\n         \"Key\":null,\r\n         \"Source\":\"604-600-1234\",\r\n         \"Subject\":\"Test Lead phrase search\",\r\n         \"Description\":\" \",\r\n         \"Type\":\"60001\",\r\n         \"StartDate\":\"2018-01-20T10:00:01\",\r\n         \"EndDate\":\"2018-01-20T10:10:10\",\r\n         \"User\":\"$CURRENTUSER()\",\r\n         \"LeadKey\":\"TGVhZAkyMjA3MTMwMDAwODA3NzIyMzgxNjlMRQkw\",\r\n         \"Result\":\"60001\",\r\n         \"Direction\":1\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"604-600-1234\",\r\n            \"Subject\": \"Test Lead phrase search\",\r\n            \"Description\": \" \",\r\n            // \"60006 - Chat\",\"60002 - Email\", \"60001 - Call\", \"60005 - SMS\"\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2018-01-20T10:00:01\",\r\n            \"EndDate\": \"2018-01-20T10:10:10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"LeadKey\": \"TGVhZAkyMjA3MTMwMDAwODA3NzIyMzgxNjlMRQkw\",\r\n            \"Result\": \"60001\",\r\n            \"Direction\": 1\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
@@ -5733,7 +5777,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"604-600-1234\",\r\n            \"Subject\": \"Test Phone Call Interaction\",\r\n            \"Description\": \"This is a test interaction representing a phone call\",\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2018-01-20T10:00:01\",\r\n            \"EndDate\": \"2018-01-20T10:10:10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"LeadKey\": \"TGVhZAkyMzA5MTEwMDAwMTEzMTk3MTY1MzFMRQkw\",\r\n            \"WithKey\": \"T3Bwb3J0dW5pdHkJMjQwNTI4MjUwOTE4NTU1MTUwMDAyTwkw\",\r\n            \"Result\": [\r\n                \"10\"\r\n            ],\r\n            \"Direction\": 1,\r\n            \"Duration\": 123,\r\n            \"Data\": \"Data related to this entry\",\r\n            \"Category\": [\r\n                \"1\"\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Source\": \"604-600-1234\",\r\n            \"Subject\": \"Test Phone Call Interaction\",\r\n            \"Description\": \"This is a test interaction representing a phone call\",\r\n            // \"60006 - Chat\",\"60002 - Email\", \"60001 - Call\", \"60005 - SMS\"\r\n            \"Type\": \"60001\",\r\n            \"StartDate\": \"2018-01-20T10:00:01\",\r\n            \"EndDate\": \"2018-01-20T10:10:10\",\r\n            \"User\": \"$CURRENTUSER()\",\r\n            \"LeadKey\": \"TGVhZAkyMzA5MTEwMDAwMTEzMTk3MTY1MzFMRQkw\",\r\n            \"WithKey\": \"T3Bwb3J0dW5pdHkJMjQwNTI4MjUwOTE4NTU1MTUwMDAyTwkw\",\r\n            \"Result\": [\r\n                \"10\"\r\n            ],\r\n            \"Direction\": 1,\r\n            \"Category\": [\r\n                \"1\"\r\n            ]\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -5755,7 +5799,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            \"Key\": \"SW50ZXJhY3Rpb25Mb2cJMjQwOTIwMDAwMDAwMDAxMTU2Nzk5SUwJMA==\",\r\n            \"Source\": \"Test Phone Call Interaction Updated\",\r\n            \"Subject\": \"This is am updated test interaction representing a phone call\",\r\n            \"Result\": [\r\n                \"11\"\r\n            ],\r\n            \"Category\": [\r\n                \"2\"\r\n            ],\r\n            \"Direction\": 2\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            // InteractionLog Key to be updated\r\n            \"Key\": \"SW50ZXJhY3Rpb25Mb2cJMjQwOTIwMDAwMDAwMDAxMTU2Nzk5SUwJMA==\",\r\n            \"Source\": \"Test Phone Call Interaction Updated\",\r\n            \"Subject\": \"This is am updated test interaction representing a phone call\",\r\n            \"Result\": [\r\n                \"11\"\r\n            ],\r\n            \"Category\": [\r\n                \"2\"\r\n            ],\r\n            \"Direction\": 2\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -5777,34 +5821,23 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"InteractionLog\":{  \r\n      \"Data\":{  \r\n         \"Key\":\"SW50ZXJhY3Rpb25Mb2cJMjIwNzEzMDAwMDQwNzcyMjM4MTY5SUwJMA==\"\r\n      }\r\n   }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Delete"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "InteractionLog-Read",
-                  "id": "641afa30-15da-4484-ba91-376414adadd3",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IInteractionLogSearcher\": \"Maximizer.Model.Access.Sql.InteractionLogSearcher\"\r\n        }\r\n    },\r\n    \"InteractionLog\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Test\"\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"User\": 1,\r\n                \"Source\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Lead\": {\r\n                    \"FirstName\": 1,\r\n                    \"LastName\": 1\r\n                },\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Data\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"InteractionLog\": {\r\n        \"Data\": {\r\n            // InteractionLog Key to be deleted\r\n            \"Key\": \"SW50ZXJhY3Rpb25Mb2cJMjIwNzEzMDAwMDQwNzcyMjM4MTY5SUwJMA==\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Read"
+                    "url": "{{BaseURL}}/Delete"
                   },
                   "response": []
-                },
+                }
+              ],
+              "id": "2146eb09-f650-4c35-9e80-a63dd1588cd5"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
                 {
                   "name": "InteractionLog-FieldOptions",
                   "id": "abf38fef-5c9b-425a-bf04-43b2aad9aa2e",
@@ -5828,10 +5861,11 @@
                   "response": []
                 }
               ],
-              "id": "2146eb09-f650-4c35-9e80-a63dd1588cd5"
+              "id": "1721ee83-7133-4c02-8d79-8cf37761ca65"
             }
           ],
-          "id": "a26ea55f-deea-4ba4-8802-c08128531855"
+          "id": "a26ea55f-deea-4ba4-8802-c08128531855",
+          "description": "InteractionLogs are associated with Address Book entries, Leads and Opportunities. These can be of type Email, Call, Chat or SMS"
         },
         {
           "name": "KeyFieldList",
