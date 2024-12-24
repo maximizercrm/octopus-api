@@ -7943,6 +7943,411 @@
           "name": "Task",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Create -  Task For Lead",
+                  "id": "f1742a1a-2d6e-4e2e-8745-24fe7e8701ef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            // Key of the lead the Task will be associated to\r\n            \"LeadKey\": \"TGVhZAkyNDEyMTkwMDAwMDAxNjQwMzc5MDJMRQkw\",\r\n            // Could be \"Call\", \"Send Email\", \"Follow-up\". Check fieldOptions for more\r\n            \"Activity\": \"Call\",\r\n            // Check fieldoptions\r\n            \"Category\": [\r\n                \"1\"\r\n            ],\r\n            // Check fieldoptions\r\n            \"Result\": [\r\n                \"2\"\r\n            ],\r\n            \"Completed\": false,\r\n            \"AssignedTo\": {\r\n                \"UID\": \"MASTER\"\r\n            },\r\n            // Could be HI, LOW or MED. Check fieldOptions\r\n            \"Priority\": \"LOW\",\r\n            \"DateTime\": \"2025-01-01\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create -  Task For Campaign",
+                  "id": "4478bac0-a618-4b42-89a1-c8c3bdc2e298",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            // Associate Task to a Campaign\r\n            \"WithKey\": \"Q2FtcGFpZ24JMjQxMjE3MDAwMDAwMzk3NDYyNTc0ME0JMA==\",\r\n            // Could be \"Call\", \"Send Email\", \"Follow-up\". Check fieldOptions for more\r\n            \"Activity\": \"Call\",\r\n            // Check fieldoptions\r\n            \"Category\": [\r\n                \"1\"\r\n            ],\r\n            // Check fieldoptions\r\n            \"Result\": [\r\n                \"2\"\r\n            ],\r\n            \"Completed\": true,\r\n            \"AssignedTo\": {\r\n                \"UID\": \"MASTER\"\r\n            },\r\n            // Could be HI, LOW or MED. Check fieldOptions\r\n            \"Priority\": \"LOW\",\r\n            \"DateTime\": \"2025-01-01\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Create -  Task For Opportunity",
+                  "id": "1bbbda98-ce57-4080-aee9-eb3e8d1644d1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            // Associate Task to a Opportunity\r\n            \"WithKey\": \"T3Bwb3J0dW5pdHkJMjQxMjE3MjUxMjM0MTg5NjEwMDMxTwkw\",\r\n            // AbEntryKey should be provided when creating a task for opportunity\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyNDEyMTcyNTEyMzIwNTUyNTAwMjVDCTA=\",\r\n            // Could be \"Call\", \"Send Email\", \"Follow-up\". Check fieldOptions for more\r\n            \"Activity\": \"Call\",\r\n            // Check fieldoptions\r\n            \"Category\": [\r\n                \"1\"\r\n            ],\r\n            // Check fieldoptions\r\n            \"Result\": [\r\n                \"2\"\r\n            ],\r\n            \"Completed\": true,\r\n            \"AssignedTo\": {\r\n                \"UID\": \"MASTER\"\r\n            },\r\n            // Could be HI, LOW or MED. Check fieldOptions\r\n            \"Priority\": \"LOW\",\r\n            \"DateTime\": \"2025-01-01\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Count Overdue Tasks By Contact",
+                  "id": "dc0a2435-fd1c-4e41-92b5-825122724d7c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$COUNT(Key)\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Completed\": {\r\n                            \"$EQ\": false\r\n                        }\r\n                    },\r\n                    {\r\n                        // Key of the contact to search tasks for\r\n                        \"AbEntryKey\": {\r\n                            \"$EQ\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\"\r\n                        }\r\n                    },\r\n                    {\r\n                        // All tasks with date Lower Than Today\r\n                        \"DateTime\": {\r\n                            \"$LT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    // Required for using $LT operator\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITaskSearcher\": \"Maximizer.Model.Access.Sql.TaskSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - List of Overdue Tasks By Contact",
+                  "id": "ea1a7aab-ab31-4ecc-9b7c-ea1b21b53125",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Creator\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"DateTime\": 1,\r\n                \"Priority\": 1,\r\n                \"Completed\": 1,\r\n                \"Activity\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"LeadKey\": 1,\r\n                \"WithKey\": 1,\r\n                \"Result\": 1,\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Completed\": {\r\n                            \"$EQ\": false\r\n                        }\r\n                    },\r\n                    {\r\n                        // Key of the contact to search tasks for\r\n                        \"AbEntryKey\": {\r\n                            \"$EQ\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\"\r\n                        }\r\n                    },\r\n                    {\r\n                        // All tasks with date Lower Than Today\r\n                        \"DateTime\": {\r\n                            \"$LT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": {\r\n                \"DataTime\": \"DESC\"\r\n            }\r\n        }\r\n    },\r\n    // Required for using $LT operator\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITaskSearcher\": \"Maximizer.Model.Access.Sql.TaskSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Count Upcoming Tasks By Contact",
+                  "id": "2b0fb51d-9370-4cfc-955b-41027c3e6808",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$COUNT(Key)\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Completed\": {\r\n                            \"$EQ\": false\r\n                        }\r\n                    },\r\n                    {\r\n                        // Key of the contact to search tasks for\r\n                        \"AbEntryKey\": {\r\n                            \"$EQ\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\"\r\n                        }\r\n                    },\r\n                    {\r\n                        // All tasks with date Greater Than Today\r\n                        \"DateTime\": {\r\n                            \"$GT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    // Required for using $GT operator\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITaskSearcher\": \"Maximizer.Model.Access.Sql.TaskSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - List of Upcoming Tasks By Contact",
+                  "id": "b1ac42a8-e271-4bbc-b35e-546024ef7472",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Creator\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"DateTime\": 1,\r\n                \"Priority\": 1,\r\n                \"Completed\": 1,\r\n                \"Activity\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"LeadKey\": 1,\r\n                \"WithKey\": 1,\r\n                \"Result\": 1,\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Completed\": {\r\n                            \"$EQ\": false\r\n                        }\r\n                    },\r\n                    {\r\n                        // Key of the contact to search tasks for\r\n                        \"AbEntryKey\": {\r\n                            \"$EQ\": \"QWJFbnRyeQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\"\r\n                        }\r\n                    },\r\n                    {\r\n                        // All tasks with date Greater Than Today\r\n                        \"DateTime\": {\r\n                            \"$GT\": \"$TODAY()\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": {\r\n                \"DataTime\": \"ASC\"\r\n            }\r\n        }\r\n    },\r\n    // Required for using $GT operator\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITaskSearcher\": \"Maximizer.Model.Access.Sql.TaskSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "6b0760c6-b162-47ee-a945-a92c8389a509"
+            },
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read Task metadata (simple)",
+                  "id": "3ee3f7ca-4e9c-47a2-acba-40e7927088da",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Task\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Task metadata (more)",
+                  "id": "80ad31d7-2484-4ff1-8960-ef13f91e4a84",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Task\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "e8eea6de-f6b5-41a1-89f1-c33831c8fdee"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "Read Task FieldOptions - Priority",
+                  "id": "7bd0346c-2a79-4740-98c3-7978609cfdf6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"FieldOptions\": {\r\n            \"Priority\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Task FieldOptions - Activity",
+                  "id": "d36ffe7a-0c5d-44f9-a486-b7cf8e7bcd72",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"FieldOptions\": {\r\n            \"Activity\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Task FieldOptions - Result",
+                  "id": "2b733032-aa0a-4ab0-8051-bf9a01396d67",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"FieldOptions\": {\r\n            \"Result\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Task FieldOptions - Category",
+                  "id": "8173bc20-c538-4b19-bb28-9501f10018f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"FieldOptions\": {\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "3f88dbe4-efe6-429e-8de1-f5172dc0da87"
+            },
+            {
+              "name": "Task CRUD",
+              "item": [
+                {
+                  "name": "Create - Task",
+                  "id": "faa20250-601d-449b-99e0-211c25a1a51b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            // Task associated to an AbEntry\r\n            \"AbEntryKey\": \"Q29udGFjdAkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\",\r\n            \"DateTime\": \"2025-01-01\",\r\n            \"Alarm\": \"2025-01-01\",\r\n            \"SnoozeUntil\": \"2025-01-01\",\r\n            // Check field options to see Priority available options\r\n            \"Priority\": \"Hi\",\r\n            \"Completed\": false,\r\n            // Check field options to see Category available options\r\n            \"Category\": [\r\n                \"1\"\r\n            ],\r\n            // Check field options to see Result available options\r\n            \"Result\": [\r\n                \"2\"\r\n            ],\r\n            // Check field options to see Activity available options\r\n            \"Activity\": \"Call\",\r\n            // Used to assign the task to the particular user\r\n            \"AssignedTo\": {\r\n                \"UID\": \"MASTER\"\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Task",
+                  "id": "e1a27255-ad35-4b11-b62a-9f124e464fc7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"DateTime\": 1,\r\n                \"Alarm\": 1,\r\n                \"SnoozeUntil\": 1,\r\n                \"Priority\": 1,\r\n                \"Completed\": 1,\r\n                \"Activity\": 1,\r\n                \"CreationDate\": 1,\r\n                \"WithKey\": 1,\r\n                \"LeadKey\": 1,\r\n                \"AbEntryKey\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    // Required for using Top in Criteria\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITaskSearcher\": \"Maximizer.Model.Access.Sql.TaskSearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Task",
+                  "id": "5b1f6c58-1b1a-4b03-9df2-af98f717b8fb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            \"Key\": \"VGFzawkzNQ==\", // Mandatory\r\n            \"DateTime\": \"2025-01-01\",\r\n            \"SnoozeUntil\": \"2025-01-01\",\r\n            \"Priority\": \"Hi\",\r\n            \"Completed\": true,\r\n            \"IconType\": 1,\r\n            \"Activity\": \"Test Task Phrase search Updated\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - Task",
+                  "id": "ae0892f3-bb42-4559-98a2-a37abc6ccf96",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Task\": {\r\n        \"Data\": {\r\n            \"Key\": \"VGFzawkzNQ==\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "2af1eab8-199d-4af5-b5d1-edb64a0191fa"
+            }
+          ],
+          "id": "23c00ff3-3ded-4442-8406-51d1414c17b1",
+          "description": "Task object allows users to manage Tasks associated with various entities in Maximizer CRM.\n\nA Task is a scheduled action, assigned to a user to manage customer interactions and track progress. Tasks can be associated with Opportunities, Campaigns, Cases, AbEntries or Leads.\n\nBelow are some considerations for Tasks:\n\n- Some fields like Priority, Category, Result or Activity can be customized and have multiple available options. Check the field options to see the available ones.\n    \n- To tie a Task to an AbEntry, set the AbEntryKey field with the key of the related AbEntry.\n    \n- To tie a Task to a Lead, set the LeadKey field with the key of the related Lead.\n    \n- To tie a Task to an Opportunity, set the WithKey field with the key of the related Opportunity. Additionally, ensure that either AbEntryKey or LeadKey is set, depending on whether the Opportunity is tied to an AbEntry or a Lead.\n    \n- To tie a Task to a Case or Campaign, set the WithKey field with the key of the related Case or Campaign as applicable."
+        },
+        {
+          "name": "Task",
+          "item": [
+            {
               "name": "MetaData",
               "item": [
                 {
