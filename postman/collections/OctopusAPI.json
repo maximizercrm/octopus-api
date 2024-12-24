@@ -6746,6 +6746,34 @@
           "name": "Note",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read - Notes that belong to specific parent",
+                  "id": "bcf30222-e23a-451a-be05-6752bab8fc33",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"ParentKey\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Key from Opportunity, Lead, AbEntry, Case or Campaign\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "2e7b7777-8313-4fd6-baa9-2e32e7665467"
+            },
+            {
               "name": "MetaData",
               "item": [
                 {
@@ -6759,7 +6787,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Note\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Note\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -6776,24 +6809,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Note\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\":1,\r\n                \"Queryable\":1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Note FieldOptions",
-                  "id": "b1b0d384-d82f-4427-a295-93e4346b6513",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Note\": {\r\n        \"FieldOptions\": {\r\n            \"Category\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            },\r\n            \"Type\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Data\": {\r\n            // ParentKey needed for Category, as each entity has its own category definition\r\n            \"ParentKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Note\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -6808,11 +6824,11 @@
               "id": "9b587263-d518-40dd-8c1e-fa01436d7ef7"
             },
             {
-              "name": "Note CRUD",
+              "name": "FieldOptions",
               "item": [
                 {
-                  "name": "Note - Create",
-                  "id": "cfdf20bd-5e04-4555-867e-1382d0087908",
+                  "name": "Read Note FieldOptions - Category",
+                  "id": "b1b0d384-d82f-4427-a295-93e4346b6513",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -6821,26 +6837,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Note\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            // ParentKey can be OpportunityKey, AbEntryKey, LeadKey\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\",\r\n            \"DateTime\": \"2018-04-20T11:12:13\",\r\n            \"Type\": {\r\n                // 0 = Manual, \r\n                // 1 = Mailouts, \r\n                // 2 = OutgoingCalls, \r\n                // 3 = TimedNote, \r\n                // 4 = TransferLog, \r\n                // 5 = CompletedTask, \r\n                // 6 = ScheduledTask, \r\n                // 7 = Email, \r\n                // 8 = Opportunity, \r\n                // 9 = History, \r\n                // 10 = ReassignTask, \r\n                // 11 = Other, \r\n                // 12 = CustomerService, \r\n                // 13 = Accounting, \r\n                // 14 = IncomingCalls\r\n                \"Key\": 0\r\n            },\r\n            \"Category\": \"Comment\",\r\n            \"RichText\": \"<div>NoteRichText</div>\",\r\n            // Instead of RichText you can use\r\n            // \"Text\": \"Plain text\"\r\n            \"Creator\": {\r\n                \"UID\": \"MASTER\"\r\n            },\r\n            \"Important\": true\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"INoteAccess\": \"Maximizer.Model.Access.Sql.NoteAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"FieldOptions\": {\r\n            \"Category\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Data\": {\r\n            // ParentKey needed for Category, as each entity has its own category definition\r\n            // For this example below key is for AbEntry so response will be for categories of notes for AbEntry only\r\n            \"ParentKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/Create"
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
-                }
-              ],
-              "id": "870a63d3-6a87-4f91-9462-02ba977339c4"
-            },
-            {
-              "name": "HowTo's",
-              "item": [
+                },
                 {
-                  "name": "Read Notes based on OpportunityKey, LeadKey & ContactKey",
-                  "id": "bcf30222-e23a-451a-be05-6752bab8fc33",
+                  "name": "Read Note FieldOptions - Type",
+                  "id": "2a9b1acc-8c31-47be-94c2-7ef3652ce28c",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -6849,7 +6859,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Note\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Opportunitykey, AbEntryKey, LeadKey\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Value\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"ParentKey\": 1,\r\n                \"Parent\": {\r\n                    \"EntityType\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"SecStatus\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"FieldOptions\": {\r\n            \"Type\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -6861,10 +6871,105 @@
                   "response": []
                 }
               ],
-              "id": "2e7b7777-8313-4fd6-baa9-2e32e7665467"
+              "id": "850f6069-aa60-4d1f-992e-82424029512f"
+            },
+            {
+              "name": "Note CRUD",
+              "item": [
+                {
+                  "name": "Create-Note",
+                  "id": "cfdf20bd-5e04-4555-867e-1382d0087908",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            // ParentKey can be key of Opportunity, AbEntry, Lead or Case\r\n            \"ParentKey\": \"QWJFbnRyeQlERU1PXzFDCTA=\",\r\n            \"DateTime\": \"2018-04-20T11:12:13\",\r\n            // Check field options to see Type available options\r\n            \"Type\": 0,\r\n            // Check field options to see Category available options (based on parentKey)\r\n            \"Category\": \"Comment\",\r\n            \"Important\": true,\r\n            \"RichText\": \"<div>NoteRichText</div>\"\r\n            // Instead of RichText you can use\r\n            // \"Text\": \"Plain text\"            \r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read-Notes",
+                  "id": "6cb51aed-7c30-4b86-9f0b-ba9443bdcc5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"ParentKey\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update-Note",
+                  "id": "e580229e-f87a-4bbd-b3aa-b4e108f505c3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Data\": {\r\n            \"Key\": \"Tm90ZQkzODEz\", // Mandatory\r\n            \"Text\": \"Updating this note using postman\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete-Note",
+                  "id": "fa652515-4816-40bc-be68-2f4051c9f608",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Data\": {\r\n            \"Key\": \"Tm90ZQkzODEz\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "870a63d3-6a87-4f91-9462-02ba977339c4"
             }
           ],
-          "id": "1aed2310-79d6-42e9-9cdb-88fed2898f16"
+          "id": "1aed2310-79d6-42e9-9cdb-88fed2898f16",
+          "description": "Note object allows users to manage notes associated with various entities in Maximizer CRM.\n\nNotes are used to document activities related to AbEntries, Cases, Campaigns, Leads, and Opportunities. They can include details such as ideas or impressions about a customer, brief company profiles, or summaries of contracts and business agreements."
         },
         {
           "name": "Opportunity",
@@ -7233,6 +7338,28 @@
               "name": "HowTo's",
               "item": [
                 {
+                  "name": "Create - PAT for a User",
+                  "id": "3155dadd-3e6d-4838-a5e6-3b96f1179449",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Name\": \"{{$randomFullName}}\",\r\n            // User the UID Key for which you want to create PAT \r\n            \"UserKey\": \"VXNlcglEQ0VST04=\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
                   "name": "Read - Get all my PAT",
                   "id": "7d565718-463f-4987-8b86-8116cbe65688",
                   "protocolProfileBehavior": {
@@ -7243,7 +7370,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Status\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Name\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            // By default, even if no search criteria is provided, only the PAT related to the user executing the request will be retrieved\r\n            \"SearchQuery\": {}\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Status\":1,\r\n                \"Name\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            // By default, even if no search criteria is provided, only the PAT related to the user executing the request will be retrieved\r\n            \"SearchQuery\": {}\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7266,7 +7393,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\",\r\n            \"Status\": 2 // Status = Revoked\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token_key\",\r\n            // Status 0=Active, 1=Expired ,2=Revoked\r\n            \"Status\": 2 \r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7379,7 +7506,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/PersonalAccessToken\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/PersonalAccessToken\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7408,7 +7535,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    // Applicable to all those properties which have \"HasOption\": true\r\n    \"PersonalAccessToken\": {\r\n        \"FieldOptions\": {\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    // Should return all fieldOptions for Status - Active, Expired & Revoked\r\n    \"PersonalAccessToken\": {\r\n        \"FieldOptions\": {\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7486,7 +7613,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"UserKey\": {\r\n                    \"Uid\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"Name\": 1,\r\n                \"Status\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"personal_access_token\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"UserKey\": 1,\r\n                \"Name\": 1,\r\n                \"Status\": 1,\r\n                \"ExpirationDate\": 1,\r\n                \"RevokeDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7533,7 +7660,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\",\r\n            \"Name\": \"Updated PAT From Postman\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token_key\", // Mandatory\r\n            \"Name\": \"Updated PAT From Postman\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7569,7 +7696,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"PersonalAccessToken\": {\r\n        \"Data\": {\r\n            \"Key\": \"personal_access_token_key\" // Mandatory\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7586,7 +7713,7 @@
             }
           ],
           "id": "b0014298-95bc-4918-a81c-bf1a2874d235",
-          "description": "Personal Access Token (a.k.a. PAT) allows users to manage tokens that are issued for a specific user of Maximizer CRM. The PAT is a great alternative for authentication, rather than providing raw credentials (user + password). This increases security as, in case of a possible leak, PATs can be easily revoked (and the credentials will still be secured).\n\nSee below some considerations for Personal Access Tokens:\n\n- Any active Maximizer CRM user can create PAT for their User IDs\n    \n- There is no limit on the number of PAT one can create\n    \n- The ExpirationDate must be set to a future date (can't be in the past). We suggest to use a reasonable expiration date (for example, 3 to 6 months) and to avoid creating PAT with long expiration dates\n    \n- PAT can be revoked at any time\n    \n- For all possible PAT status available, check \"FieldOptions\" section, there is a request to retrieve this information\n    \n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api-getting-started](https://developer.maximizer.com/reference/octopus-api-getting-started)"
+          "description": "Personal Access Token (a.k.a. PAT) allows users to manage tokens that are issued for a specific user of Maximizer CRM. The PAT is a great alternative for authentication, rather than providing raw credentials (user + password). This increases security as, in case of a possible leak, PATs can be easily revoked (and the credentials will still be secured).\n\nSee below some considerations for Personal Access Tokens:\n\n- Any active Maximizer CRM user can create PAT for their User IDs\n    \n- There is no limit on the number of PAT one can create\n    \n- The ExpirationDate must be set to a future date (can't be in the past). We suggest to use a reasonable expiration date (for example, 3 to 6 months) and to avoid creating PAT with long expiration dates\n    \n- PAT can be revoked at any time\n    \n- For all possible PAT status available, check \"FieldOptions\" section, there is a request to retrieve this information"
         },
         {
           "name": "SalesTeam",
@@ -7820,7 +7947,7 @@
               "item": [
                 {
                   "name": "Read Task metadata (simple)",
-                  "id": "22e4ccd0-9fdd-40c6-ac2d-628fe8966ebe",
+                  "id": "945003f0-fc6e-4448-8311-ec43ae268647",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7837,7 +7964,7 @@
                 },
                 {
                   "name": "Read Task metadata (more)",
-                  "id": "8abcadcd-1b82-4522-8ee7-e7f9114c1ed4",
+                  "id": "a8f956cc-dbac-48d9-9a6b-359a6921fdf4",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7854,7 +7981,7 @@
                 },
                 {
                   "name": "Read Task FieldOptions",
-                  "id": "79f81dda-9621-4560-9de8-6ab296f69c3b",
+                  "id": "aa8d7f7a-24a0-4384-b44b-9203024eb61c",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7870,14 +7997,14 @@
                   "response": []
                 }
               ],
-              "id": "6ba67bc6-00a4-4d7a-aa07-a5f6f82d8b12"
+              "id": "38e9cd63-f980-4e78-a324-d904aed45951"
             },
             {
               "name": "Task CRUD",
               "item": [
                 {
                   "name": "Task - Create",
-                  "id": "f88be98b-f09a-440a-bba2-018e1d5543af",
+                  "id": "0e3b80f9-5faf-44b9-b320-63690269826b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7894,7 +8021,7 @@
                 },
                 {
                   "name": "Task - Update",
-                  "id": "f61d92ff-58fc-479b-a9aa-1702466c1f9a",
+                  "id": "72d62407-5be8-482a-b97e-96c128c0a50b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7911,7 +8038,7 @@
                 },
                 {
                   "name": "Task - Delete",
-                  "id": "01fe1466-a806-42ac-94c2-23f0bdfa73ac",
+                  "id": "0cc2a776-ef31-4ef0-9839-8ab3df6889d7",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7928,7 +8055,7 @@
                 },
                 {
                   "name": "Task - Read",
-                  "id": "fe9022ff-2cf0-487e-80fe-2ca6f9d336e0",
+                  "id": "e66a8aa8-1e2f-4878-9ecb-866b7bd611de",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7944,14 +8071,14 @@
                   "response": []
                 }
               ],
-              "id": "c64a360d-d850-4e76-950c-8c120c32574d"
+              "id": "035b1934-0f95-4599-94c1-c1d79206a086"
             },
             {
               "name": "HowTo's",
               "item": [
                 {
                   "name": "Create - For Lead",
-                  "id": "66159aca-6c9b-49ad-8fbc-8d127a432298",
+                  "id": "cfb97efc-38d9-463d-8dc4-2e41ac5df7a3",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7973,7 +8100,7 @@
                 },
                 {
                   "name": "Create - For AbEntry",
-                  "id": "f231fe40-1a07-4b7c-99af-357f55d4008a",
+                  "id": "b32cb6da-3ae9-456a-8acd-87c9e2c61cfc",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -7995,7 +8122,7 @@
                 },
                 {
                   "name": "Read - Count Overdue Tasks By Contact",
-                  "id": "7df9ca5f-d659-4dfa-8e1d-e523a2fca404",
+                  "id": "1ecfa3b8-f7b1-4f05-824e-3214fe5ebb4d",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -8017,7 +8144,7 @@
                 },
                 {
                   "name": "Read - List of Overdue Tasks By Contact",
-                  "id": "5f08400d-27e8-4ba1-97b3-c2ade8acf938",
+                  "id": "1f22618e-9f88-4209-807b-b4336a9fcd83",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -8039,7 +8166,7 @@
                 },
                 {
                   "name": "Read - Count Upcoming Tasks By Contact",
-                  "id": "aeaba3aa-0f5f-4352-820d-6102962c37e5",
+                  "id": "fc1642a5-c084-4d66-999d-c2ee1476c786",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -8061,7 +8188,7 @@
                 },
                 {
                   "name": "Read - List of Upcoming Tasks By Contact",
-                  "id": "957c676a-4c0e-4435-91ba-2fe6bcf94807",
+                  "id": "06001044-0981-4046-b2ab-47b1dc87214a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -8082,10 +8209,10 @@
                   "response": []
                 }
               ],
-              "id": "1cec2146-c5a6-41ed-9e18-aff1d1ea283a"
+              "id": "48aa1e02-4cbe-431c-b846-0232f231eb50"
             }
           ],
-          "id": "94b46886-510f-4c26-a663-f8f9ecdc7ae2"
+          "id": "90578d38-8797-4f21-94e3-0b7f716da91e"
         },
         {
           "name": "Territory",
