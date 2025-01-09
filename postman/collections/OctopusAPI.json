@@ -9323,29 +9323,120 @@
           "name": "Batch Queries",
           "item": [
             {
-              "name": "Batch Read - Use different criteria for the same object in a single request",
-              "id": "94411f16-fbf0-4d91-965d-80272dfad85f",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    // We can add \".\" + any alias to the object name. \r\n    // In this example we use \"AbEntry.Companies\" and \"AbEntry.Individuals\" where:\r\n    // - \"AbEntry\" - the object name\r\n    // - \".\" - separator\r\n    // - \"Companies\" / \"Individuals\" - aliases\r\n    // Octopus API will return objects under \"AbEntry.Companies\" and \"AbEntry.Individuals\"\r\n    \"AbEntry.Companies\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"AbEntry.Individuals\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Individual\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{BaseURL}}/Read"
-              },
-              "response": []
+              "name": "Read",
+              "item": [
+                {
+                  "name": "Batch Read",
+                  "id": "94411f16-fbf0-4d91-965d-80272dfad85f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    // Get top 3 Companies\r\n    \"AbEntry.Companies\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Company\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    // Get top 3 Individuals\r\n    \"AbEntry.Individuals\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Type\": {\r\n                    \"$EQ\": \"Individual\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    // Get top 3 Won Opportunities\r\n    \"Opportunity.Won\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Status\": {\r\n                    \"$EQ\": 3 // Won\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\",\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "63e0fda0-b402-4825-a17a-8246d0c28185"
+            },
+            {
+              "name": "Create",
+              "item": [
+                {
+                  "name": "Batch Create",
+                  "id": "d301b7ab-6b73-432e-8879-218445f31715",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry.1\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Type\": \"Company\", // mandatory\r\n            \"CompanyName\": \"My Test Company\", // mandatory for Type = Company\r\n            \"Address\": {\r\n                \"AddressLine1\": \"1234 Main St.\",\r\n                \"City\": \"Anytown\",\r\n                \"StateProvince\": \"BC\",\r\n                \"ZipCode\": \"12345\",\r\n                \"Country\": \"CAN\"\r\n            }\r\n        }\r\n    },\r\n    \"AbEntry.2\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"Type\": \"Individual\", // mandatory\r\n            \"LastName\": \"My Individual LastName\", // mandatory for Type = Individual\r\n            \"Address\": {\r\n                \"AddressLine1\": \"1234 Main St.\",\r\n                \"City\": \"Anytown\",\r\n                \"StateProvince\": \"BC\",\r\n                \"ZipCode\": \"12345\",\r\n                \"Country\": \"CAN\"\r\n            }\r\n        }\r\n    },\r\n    \"Opportunity.1\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\", // mandatory\r\n            \"Objective\": \"My Test Objective\" // mandatory\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "140e4c54-8b67-453d-bd6c-dd57b7c560ad"
+            },
+            {
+              "name": "Update",
+              "item": [
+                {
+                  "name": "Batch Update",
+                  "id": "c88d2ad3-bf37-47c7-b4c5-2b6621aa2b86",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry.1\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29tcGFueQkyNTAxMDkyNTEyNDUxNzc4OTAwMDdDCTA=\", // mandatory\r\n            \"CompanyName\": \"My Test Company UPDATED 3\"\r\n        }\r\n    },\r\n    \"AbEntry.2\": {\r\n        \"Data\": {\r\n            \"Key\": \"SW5kaXZpZHVhbAkyNTAxMDkyNTEyNDUxODY3NzAwMDhDCTA=\", // mandatory\r\n            \"LastName\": \"My Individual LastName UPDATED 3\"\r\n        }\r\n    },\r\n    \"Opportunity.1\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjUwMTA5MjUxMjQ1MTk3NzgwMDA5Twkw\", // mandatory\r\n            \"Objective\": \"My Test Objective UPDATED\"\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "b5e35d9b-38ed-4c0c-9f1d-77893c4caed4"
+            },
+            {
+              "name": "Delete",
+              "item": [
+                {
+                  "name": "Batch Delete",
+                  "id": "c94f2814-bc56-47e3-acd2-199014bdacc8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"AbEntry.1\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q29tcGFueQkyNTAxMDkyNTExNDE0Njc5MzAwMDRDCTA=\" // mandatory\r\n        }\r\n    },\r\n    \"AbEntry.2\": {\r\n        \"Data\": {\r\n            \"Key\": \"SW5kaXZpZHVhbAkyNTAxMDkyNTEyNDUxODY3NzAwMDhDCTA=\" // mandatory\r\n        }\r\n    },\r\n    \"Opportunity.1\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjUwMTA5MjUxMTQxNDk3NzMwMDA2Twkw\" // mandatory\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "4b4097a6-a8bb-4b20-80fe-def43318db3c"
             }
           ],
-          "id": "2c1971fc-8917-4dff-9c15-904fe9feedd8"
+          "id": "2c1971fc-8917-4dff-9c15-904fe9feedd8",
+          "description": "The Octopus API supports **batch queries**, which allow multiple payloads to be sent within a single request. This feature is available for all basic operations: **Read**, **Create**, **Update**, and **Delete**.\n\n#### Naming Convention\n\nTo perform batch queries, the objects in the payload must follow this naming pattern:\n\n```\n<object-name>.<alias> {\n    ... payload ...\n},\n<object-name>.<alias> {\n    ... payload ...\n},\n<object-name>.<alias> {\n    ... payload ...\n}\n\n ```\n\n**Examples:**\n\n- `AbEntry.Individual`\n    \n    - Object: `AbEntry`\n        \n    - Alias: `Individual`\n        \n- `Opportunity.Won`\n    \n    - Object: `Opportunity`\n        \n    - Alias: `Won`\n        \n- `Lead.AnyValue`\n    \n    - Object: `Lead`\n        \n    - Alias: `AnyValue`\n        \n\n#### Key Guidelines\n\n1. For all Operations:\n    \n    1. The object name must be valid and supported by Octopus API.\n        \n    2. The alias must be unique within the payload; the same object cannot have duplicate aliases.\n        \n2. **Read Operations:**\n    \n    1. Any object and criteria can be used\n        \n    2. If an error occurs during the processing of any batch, the entire process is **aborted**, and an error is returned. In such cases, the API does <u>not</u> return any success responses for the completed operations. For example, if a request contains 10 queries and the last query fails, the API response will include **only the error message for the last operation**. The results of the other 9 successfully executed queries will <u>not</u> be included in the response.\n        \n3. **Create, Update, and Delete Operations:**\n    \n    1. Each operation is processed as a **single-record operation**:\n        \n        1. **Create:** Generates one key per operation.\n            \n        2. **Update/Delete:** Requires one key as a mandatory field.\n            \n    2. The payload must adhere to the object’s schema and constraints.\n        \n    3. As each batch is isolated, it is **not possible** to reference data from previous batches. For example, you might consider creating a new Company and then using the dynamically generated company key to create Contacts within the same payload. However, this is **not supported**, as there is no way to reference the generated company key in the contact payload.\n        \n\n#### Execution Behavior\n\n- The Octopus API processes batch payloads **sequentially**, one record at a time.\n    \n- Each operation is **independent**, meaning that if an error occurs, the execution halts immediately, and subsequent operations are not executed.\n    \n\n#### Transaction Isolation\n\n- Transactions are isolated per operation:\n    \n    - Once a batch is successfully processed, its transaction is committed.\n        \n    - If a failure occurs in a subsequent batch, only that specific batch is rolled back. Previously committed transactions remain unaffected."
         },
         {
           "name": "Schema",
