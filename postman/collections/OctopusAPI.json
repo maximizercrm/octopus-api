@@ -3715,7 +3715,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Case\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Case\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -6975,10 +6975,177 @@
           "name": "Opportunity",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read - Opportunity by SalesTeam",
+                  "id": "c298cfec-4800-456f-84e8-58c13f942fc8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"SalesTeam\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"SalesTeam/Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTE=\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunity by SalesProcessSetup",
+                  "id": "3274147e-6815-4957-bc53-4881a5d440ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"SalesProcessSetup\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"sSearchQuery\": {\r\n                \"SalesProcessSetupKey\": {\r\n                    \"$EQ\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunity Revenue by AbEntryKey or ContactKey",
+                  "id": "a8120943-1970-4bcd-9ee3-4226f59f9df1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"Revenue\": 1,\r\n                \"Status\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"$OR\": [\r\n                            {\r\n                                \"AbEntryKey\": {\r\n                                    \"$EQ\": \"Q29tcGFueQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n                                }\r\n                            },\r\n                            {\r\n                                \"ContactKey\": {\r\n                                    \"$EQ\": \"Q29tcGFueQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n                                }\r\n                            }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Status\": {\r\n                            \"$IN\": [\r\n                                0,\r\n                                2,\r\n                                3\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    // Required for retrieving Revenue property\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunity using $PHRASE operator",
+                  "id": "26aa0f37-07ca-449e-9689-0de850ff733b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"Description\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // This search will execute on the Objective & Description property\r\n                \"$PHRASE\": \"Test\"\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunities created from Leads",
+                  "id": "9090974f-6fe4-4295-9a3e-90ce54539f53",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    // This condition translates to: \"retrieve all Lead objects that have OpportunityKey associated\"\r\n                    \"$EXISTS(LeadObject)\": \"OpportunityKey\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Configuration\": { // Needed for using $EXISTS\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Get monthly total revenue for a year",
+                  "id": "67fb561c-66da-4e16-8ae5-66241dfd436b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$MONTH(closeDate)\": 1,\r\n                \"$COUNT()\": 1,\r\n                \"$SUM(corporateRevenue)/displayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$YEAR(CloseDate)\": {\r\n                    \"$EQ\": 2022\r\n                }\r\n            }\r\n        },\r\n        \"GroupBy\": {\r\n            \"Fields\": [\r\n                \"$MONTH(CloseDate)\"\r\n            ]\r\n        },\r\n        \"OrderBy\": {\r\n            \"Fields\": [\r\n                {\r\n                    \"$MONTH(CloseDate)\": \"ASC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    // Needed for using $YEAR and $MONTH\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunity by PartnerInfo",
+                  "id": "1f344693-a6ec-4959-abba-4cf06905a2f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"PartnerInfo\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"PartnerInfo\": {\r\n                    \"$EQ\": {\r\n                        \"Key\": \"Q29udGFjdAlERU1PXzVDCTE=\"\r\n                    }\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                }
+              ],
+              "id": "4371c5c0-c455-46dd-912e-a8c9bca4c1d9"
+            },
+            {
               "name": "Metadata",
               "item": [
                 {
-                  "name": "read opp schema (simple)",
+                  "name": "Read Opportunity metadata (simple)",
                   "id": "ed704f8e-6ac3-47bc-8ade-6287581a6d2b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -6988,15 +7155,20 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Opportunity\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Opportunity\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/SchemaRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
                   "response": []
                 },
                 {
-                  "name": "read opp schema (more)",
+                  "name": "Read Opportunity metadata (more)",
                   "id": "fec95b04-5fcf-4d91-b2d7-c15eb069b1c0",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7006,15 +7178,26 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Opportunity\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: {\r\n                key: 1,\r\n                type: 1,\r\n                name: 1,\r\n                queryable: [1],\r\n                attributes: 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Opportunity\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/SchemaRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
                   },
                   "response": []
-                },
+                }
+              ],
+              "id": "55dc0243-f5d6-4638-8fad-32e138a1ffca"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
                 {
-                  "name": "read opp sales process options",
+                  "name": "Read Opportunity FieldOptions - SalesProcessSetup",
                   "id": "58880ca7-a71d-4bd5-9fd7-ca7f6201ff19",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7024,15 +7207,43 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tfieldOptions: {\r\n\t\t\tsalesProcessSetup: [{\r\n\t\t\t\tkey: 1,\r\n\t\t\t\tdisplayValue: 1\r\n\t\t\t}]\r\n\t\t}\r\n\t},\r\n}\r\n"
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"SalesProcessSetup\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/OpportunityRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
                   },
                   "response": []
                 },
                 {
-                  "name": "read opp sales stage options",
+                  "name": "Read Opportunity FieldOptions - SalesStageSetup",
+                  "id": "e683fbb7-0a79-493c-9075-6611723466ee",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"SalesStageSetup\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"ProbabilityClose\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Data\": {\r\n            // Mandatory\r\n            // We need to know which SalesProcessSetup to retrieve the Stages from\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - Reason",
                   "id": "39cdd21a-6647-4f78-a4ab-91c097fb7ad8",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7042,21 +7253,141 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tfieldOptions: {\r\n\t\t\tsalesStageSetup: [{\r\n\t\t\t\tkey: 1,\r\n                probabilityClose: 1,\r\n\t\t\t\tdisplayValue: 1,\r\n\t\t\t}]\r\n\t\t},\r\n        data: {\r\n            salesProcessSetupKey: \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\"\r\n        }\r\n    },\r\n}"
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"Reason\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
-                    "url": "{{BaseURL}}/OpportunityRead",
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - Category",
+                  "id": "9ad9893e-6403-45e0-af9d-b2b1ced6965f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - Product",
+                  "id": "4246ec2d-42b2-46a7-9ed6-cf19caf1087d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"Product\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - Rating",
+                  "id": "594268cc-f34c-4a8a-8b12-7f8a9638f110",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"Rating\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - RevenueType",
+                  "id": "fea5ef6f-5813-4517-bb22-f46ae605756d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"RevenueType\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Opportunity FieldOptions - Status",
+                  "id": "85d27741-9cef-41bb-934a-b68ab826e5f9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"Status\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryGetFieldOptions` method to retrieve the options for table-valued fields of AbEntry objects."
                   },
                   "response": []
                 }
               ],
-              "id": "55dc0243-f5d6-4638-8fad-32e138a1ffca"
+              "id": "31e21844-bd2d-4d3d-ba97-5da7647fcc58"
             },
             {
               "name": "Opportunity CRUD",
               "item": [
                 {
-                  "name": "create opp",
+                  "name": "Create - Opportunity",
                   "id": "39c61936-f6b8-4e76-b4cb-47d172b23d6a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7066,7 +7397,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\",\r\n            \"Objective\": \"Test Objective\",\r\n            \"Description\": \"Test Description\",\r\n            \"Status\": 2,\r\n            \"Cost\": 1234.56,\r\n            \"ForecastRevenue\": 5678.90,\r\n            \"StartDate\": \"2024-09-19T12:00:00Z\",\r\n            \"Leader\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"SalesTeam/Key\": \"U2FsZXNUZWFtCTY1NTM1\",\r\n            \"NextAction\": \"Develop solution\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MTEyNTE1NTg1NzQxNDAwMDFHCTA=\",\r\n            \"PartnerInfo\": [\r\n                \"QWJFbnRyeQlERU1PXzVDCTA=\",\r\n                \"QWJFbnRyeQlERU1PXzVDCTE=\"\r\n            ],\r\n            \"CompetitorInfo\": [\r\n                \"QWJFbnRyeQkyMzEwMDUyNTEyNTY1MzA3MTAwMDFDCTA=\",\r\n                \"QWJFbnRyeQkyMzEwMDUyNTEzNDIyMDM3MjAwMjZDCTA=\"\r\n            ],\r\n            \"Comment\": \"Test Comment\",\r\n            \"Reason\": 293887011,\r\n            \"Category\": [\r\n                \"1\"\r\n            ],\r\n            \"Product\": [\r\n                \"1\",\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [\r\n                \"57998\" // Fair\r\n            ],\r\n            \"RevenueType\": \"60001\" // New Business\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\", // Mandatory\r\n            \"Objective\": \"Test Objective\", // Mandatory\r\n            \"Description\": \"Test Description\",\r\n            \"Status\": 2, // In Progress - Check FieldOptions for possible values\r\n            \"Cost\": 1234.56,\r\n            \"ForecastRevenue\": 5678.90,\r\n            \"StartDate\": \"2025-01-02T12:00:00Z\",\r\n            \"Leader\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"SalesTeam/Key\": \"U2FsZXNUZWFtCTY1NTM1\",\r\n            \"NextAction\": \"Develop solution\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\", // Check FieldOptions for possible values\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MTEyNTE1NTg1NzQxNDAwMDFHCTA=\",//Check FieldOptions for possible values related to SalesProcessSetupKey\r\n            \"Category\": [ // Check FieldOptions for possible values\r\n                \"1\"\r\n            ],\r\n            \"Product\": [ // Check FieldOptions for possible values\r\n                \"1\",\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [ // Check FieldOptions for possible values\r\n                \"57998\"\r\n            ],\r\n            \"RevenueType\": \"60001\" // Check FieldOptions for possible values\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7079,7 +7410,7 @@
                   "response": []
                 },
                 {
-                  "name": "read opp details",
+                  "name": "Read - Opportunity",
                   "id": "8d0408a5-0279-44a4-9420-894979c1c1f1",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7089,7 +7420,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"opportunity\": {\r\n        \"criteria\": {\r\n            \"searchQuery\": {\r\n                \"key\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJMDIxMDA4MDAyOTUzMDYzNjcxMTU2Twkw\"\r\n                }\r\n            },\r\n            \"top\": 2\r\n        },\r\n        \"scope\": {\r\n            \"fields\": {\r\n                \"Key\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"Objective\": 1,\r\n                \"Description\": 1,\r\n                \"Status\": 1,\r\n                \"Cost\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"Leader\": 1,\r\n                \"SalesTeam\": 1,\r\n                \"NextAction\": 1,\r\n                \"SalesProcessSetupKey\": 1,\r\n                \"SalesStageSetupKey\": 1,\r\n                \"SalesProcessKey\": 1,\r\n                \"CurrentSalesStageKey\": 1,\r\n                \"PartnerInfo\": 1,\r\n                \"CompetitorInfo\": 1,\r\n                \"Comment\": 1,\r\n                \"Reason\": 1,\r\n                \"Category\": 1,\r\n                \"Product\": 1,\r\n                \"Rating\": 1,\r\n                \"RevenueType\": 1\r\n            }\r\n        }\r\n    }",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"Objective\": 1,\r\n                \"Description\": 1,\r\n                \"Status\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Cost\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"SalesTeam/Key\": 1,\r\n                \"NextAction\": 1,\r\n                \"SalesProcessSetupKey\": 1,\r\n                \"SalesStageSetupKey\": 1,\r\n                \"Reason\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ],\r\n                \"Category\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ],\r\n                \"Product\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ],\r\n                \"Rating\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ],\r\n                \"RevenueType\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ]\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7102,25 +7433,7 @@
                   "response": []
                 },
                 {
-                  "name": "update opp to Lost",
-                  "id": "c3c0915a-43f4-4207-923a-c3ad3e94e5a9",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n\topportunity: {\r\n\t\tdata: {\r\n\t\t\tkey: \"T3Bwb3J0dW5pdHkJMjMwMjI0MjUxOTU1MTcyOTkwMDE3Twkw\",\r\n\t\t\tstatus: 4,\r\n            lostToKey: \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n\t\t}\r\n\t}\r\n}"
-                    },
-                    "url": "{{BaseURL}}/Update",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "update opp",
+                  "name": "Update - Opportunity",
                   "id": "12dd88ea-d7a2-462b-b8e1-939d93b65d86",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7130,7 +7443,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjQwOTE5MDAwMDAwMDA5NzkyMDQ3ME8JMA==\",\r\n            \"Objective\": \"Test Objective Updated\",\r\n            \"Description\": \"Test Description Updated\",\r\n            \"Status\": 3,\r\n            \"Cost\": 1111.11,\r\n            \"ForecastRevenue\": 2222.22,\r\n            \"Leader\": {\r\n                \"Uid\": \"MAX\"\r\n            },\r\n            \"NextAction\": \"Contact prospect\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTI0Nzk5ODAwMDdHCTA=\",\r\n            \"Comment\": \"Test Comment Updated\",\r\n            \"Reason\": 293887012,\r\n            \"Category\": [\r\n                \"2\"\r\n            ],\r\n            \"Product\": [\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [\r\n                \"57999\" // Confident\r\n            ],\r\n            \"RevenueType\": \"60002\" // Existing Business\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjUwMTAzMjUxNTM2NTg1MTMwMDA5Twkw\", // Mandatory\r\n            \"Objective\": \"Test Objective updated\",\r\n            \"Status\": 3 // Won - See FieldOptions for possible values\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7143,30 +7456,7 @@
                   "response": []
                 },
                 {
-                  "name": "read opp",
-                  "id": "d08fb6c4-935f-4048-9d93-f785d76a7138",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    },\r\n    \"Opportunity\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": {\r\n                        \"Id\": \"240528250918555150002O\"\r\n                    }\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"AbEntry\": 1,\r\n                \"ContactKey\": 1,\r\n                \"Contact\": 1,\r\n                \"Objective\": 1,\r\n                \"Description\": 1,\r\n                \"Status\": 1,\r\n                \"Cost\": 1,\r\n                \"ActualRevenue\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"StartDate\": 1,\r\n                \"CloseDate\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"Leader\": 1,\r\n                \"SalesTeam\": 1,\r\n                \"NextAction\": 1,\r\n                \"SalesProcessSetupKey\": 1,\r\n                \"SalesProcessSetup\": 1,\r\n                \"SalesStageSetupKey\": 1,\r\n                \"SalesStageSetup\": 1,\r\n                \"SalesProcessKey\": 1,\r\n                \"SalesProcess\": 1,\r\n                \"CurrentSalesStageKey\": 1,\r\n                \"CurrentSalesStage\": 1,\r\n                \"CurrentSalesStageAge\": 1,\r\n                \"PartnerKeys\": 1,\r\n                \"PartnerInfo\": 1,\r\n                \"CompetitorInfo\": 1,\r\n                \"Comment\": 1,\r\n                \"Reason\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Age\": 1,\r\n                \"CampaignKey\": 1,\r\n                \"Campaign\": 1,\r\n                \"Category\": 1,\r\n                \"Product\": 1,\r\n                \"Rating\": 1,\r\n                \"RevenueType\": 1\r\n            }\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "delete opp",
+                  "name": "Delete - Opportunity",
                   "id": "5934813a-fb58-4096-85c9-e01ffaf78039",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -7176,7 +7466,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjQwOTE5MDAwMDAwMDA5NzkyMDQ3ME8JMA==\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjUwMTAzMjUxNTM2NTg1MTMwMDA5Twkw\" // Mandatory\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -7190,146 +7480,10 @@
                 }
               ],
               "id": "f96d4a74-c222-4d9d-a8b4-bd5e61087185"
-            },
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "get last 3 modified opps",
-                  "id": "b4a15552-b728-4bf3-bca2-f9e9d8e8ec4a",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n            },\r\n            top: 3\r\n        },\r\n         scope: {\r\n             fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                abEntry:{\r\n                    key: 1,\r\n                    displayValue: 1,\r\n                    lastModifyDate: 1\r\n                },\r\n                lastModifyDate: 1\r\n             }\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"lastModifyDate\": \"DESC\" }\r\n            ]\r\n         }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Opportunity - Query Revenue by AbEntryKey or ContactKey",
-                  "id": "a8120943-1970-4bcd-9ee3-4226f59f9df1",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    //The user who consumes has to summarize ForecastRevenue by Status 0 and 2\r\n    //The user who consumes has to summarize Revenue by Status 3\r\n    //This SUM is not supported by \"$SUM\" operator\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"ForecastRevenue\": 1,\r\n                \"Revenue\": 1,\r\n                \"Status\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"$OR\": [\r\n                            {\r\n                                \"AbEntryKey\": {\r\n                                    \"$EQ\": \"Q29tcGFueQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n                                }\r\n                            },\r\n                            {\r\n                                \"ContactKey\": {\r\n                                    \"$EQ\": \"Q29tcGFueQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\"\r\n                                }\r\n                            }\r\n                        ]\r\n                    },\r\n                    {\r\n                        \"Status\": {\r\n                            \"$IN\": [\r\n                                0,\r\n                                2,\r\n                                3\r\n                            ]\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get monthly revenue totals for year",
-                  "id": "67fb561c-66da-4e16-8ae5-66241dfd436b",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n                \"$YEAR(closeDate)\":{\r\n                    \"$EQ\": 2022\r\n                }\r\n            },\r\n        },\r\n         scope: {\r\n             fields: {\r\n                 \"$MONTH(closeDate)\": 1,\r\n                 \"$COUNT()\": 1,\r\n                 \"$SUM(corporateRevenue)/displayValue\": 1\r\n             }\r\n        },\r\n        groupBy:{\r\n            fields:[\r\n                \"$MONTH(closeDate)\"\r\n            ]\r\n        },\r\n        orderBy:{\r\n            fields:[\r\n                { \"$MONTH(closeDate)\" : \"ASC\" }\r\n            ]\r\n        }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get opps by sales team",
-                  "id": "c298cfec-4800-456f-84e8-58c13f942fc8",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n                \"salesTeam/key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTE=\"\r\n                }\r\n            },\r\n            top: 3\r\n        },\r\n        scope: {\r\n            fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                salesTeam:{\r\n                    key: 1,\r\n                    displayValue: 1\r\n                }\r\n            }\r\n        }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get opps by sales process",
-                  "id": "3274147e-6815-4957-bc53-4881a5d440ea",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery: {\r\n                \"salesProcessSetupKey\": {\r\n                    \"$EQ\": \"U2FsZXNQcm9jZXNzCTIyMDQwNjI1MTM1MTM0MDYwMDAwMUcJMA==\"\r\n                }\r\n            },\r\n            top: 3\r\n        },\r\n        scope: {\r\n            fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                salesProcessSetup: {\r\n                    key: 1,\r\n                    displayValue: 1\r\n                },\r\n                currentSalesStageKey: 1,\r\n                currentSalesStageAge: {\r\n                    value: 1,\r\n                    displayValue: 1\r\n                }           \r\n            }\r\n        }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get opps by partner",
-                  "id": "1f344693-a6ec-4959-abba-4cf06905a2f4",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery:{\r\n                partnerInfo:{\r\n                    \"$EQ\": {\r\n                        key: \"QWJFbnRyeQkyMjA4MjMyNTE1NTc1MTc0OTAwMDRDCTA=\"\r\n                    }\r\n                }\r\n            },\r\n            top: 3\r\n        },\r\n        scope: {\r\n            fields: {\r\n                key: 1,\r\n                objective: 1,\r\n                partnerInfo: [1]\r\n            }\r\n        }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                },
-                {
-                  "name": "get opps created from lead",
-                  "id": "9090974f-6fe4-4295-9a3e-90ce54539f53",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    opportunity: {\r\n        criteria: {\r\n            searchQuery:{\r\n                key:{\r\n                    \"$EXISTS(LeadObject)\":\"OpportunityKey\"\r\n                }\r\n            },\r\n            top: 9\r\n        },\r\n        scope: {\r\n            fields: {\r\n                key: { id: 1 },\r\n                objective: 1,\r\n                status:{ displayValue: 1 },\r\n                corporateRevenue: 1,\r\n                closeDate: 1\r\n            }\r\n        }\r\n    },\r\n    lead: {\r\n        criteria: {\r\n            searchQuery:{\r\n                opportunityKey:{\r\n                    \"$NE\":null\r\n                }\r\n            },\r\n            top: 9\r\n        },\r\n        scope: {\r\n            fields: {\r\n                key: 1,\r\n                opportunityKey: { id: 1 }\r\n            }\r\n        }\r\n    },\r\n    configuration: {\r\n        drivers: {\r\n            IOpportunitySearcher: \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}"
-                    },
-                    "url": "{{BaseURL}}/OpportunityRead",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
-                }
-              ],
-              "id": "4371c5c0-c455-46dd-912e-a8c9bca4c1d9"
             }
           ],
-          "id": "d9255080-2dec-4237-baa8-ea663c996e2f"
+          "id": "d9255080-2dec-4237-baa8-ea663c996e2f",
+          "description": "An Opportunity in Maximizer CRM is a way to track a potential sale or business deal that a given company is working on. It helps businesses organize inquiries that have shown interest in their products or services and may result in a sale.\n\nThink of an Opportunity as a digital file or record that stores all the important details about a possible deal. It is always associated with an AbEntry (Company, Individual or Contact) and has relevant information like what the customers are interested in, how much the deal might be worth, and when they might make a decision.\n\nSee below some considerations for Opportunities:\n\n- Some fields are mandatory when creating an Opportunity:\n    \n    - AbEntryKey\n        \n    - Objective\n        \n- Optionally, an Opportunity can follow a pre-defined Sales Process."
         },
         {
           "name": "Personal Access Token",
