@@ -8515,7 +8515,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Territory\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\tfields: 1\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Territory\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -8532,7 +8537,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n\tschema: {\r\n\t\tcriteria: {\r\n\t\t\tsearchQuery: {\r\n\t\t\t\tkey: {\r\n\t\t\t\t\t\"$TREE\": \"/Territory\"\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n\t\tscope: {\r\n\t\t\t\"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\":1,\r\n                \"Queryable\":1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n\t\t}\r\n\t},\r\n\tcompatibility: {\r\n\t\t\"SchemaObject\": \"1.0\"\r\n\t}\r\n}"
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Territory\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
@@ -8542,11 +8552,11 @@
               "id": "17c6ba04-fbca-4c98-804b-fff090c39173"
             },
             {
-              "name": "Territory CRUD",
+              "name": "FieldOptions",
               "item": [
                 {
-                  "name": "Territory-Read",
-                  "id": "58a5c38d-40a1-48f2-a054-db2693d03fe3",
+                  "name": "Read Territory FieldOptions - AccountManager",
+                  "id": "01056d7e-47a5-45d4-ac44-86c3e3052514",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -8555,33 +8565,25 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritorySearcher\": \"Maximizer.Model.Access.Sql.TerritorySearcher\"\r\n        }\r\n    },\r\n   \"Territory\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n             \"Creator\":{\r\n               \"$EQ\":\"VXNlcglNQVNURVI=\"\r\n            }\r\n         },       \r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Name\":1,            \r\n            \"AccountManager\":1,\r\n            \"Active\":1,\r\n            \"SortOrder\":1,\r\n            \"CreationDate\":1,\r\n            \"Creator\":1,\r\n            \"LastModifyDate\":1\r\n         }\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Territory\": {\r\n        \"FieldOptions\": {\r\n            \"AccountManager\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Read"
                   },
-                  "response": [
-                    {
-                      "id": "57aa9ae3-3e28-4151-9af5-3515c1cd29c7",
-                      "name": "Territory-ReadByKeys",
-                      "originalRequest": {
-                        "method": "POST",
-                        "header": [],
-                        "body": {
-                          "mode": "raw",
-                          "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritorySearcher\": \"Maximizer.Model.Access.Sql.TerritorySearcher\"\r\n        }\r\n    },\r\n   \"Territory\":{\r\n      \"Criteria\":{\r\n         \"SearchQuery\":{\r\n             \"Key\":{\r\n               \"$IN\":[\"VGVycml0b3J5CTE0ODc3MzczOTE=\"\r\n                    ,\"VGVycml0b3J5CTE0OTkzMjQ3OTI=\"]\r\n            }\r\n         },       \r\n      },\r\n      \"Scope\":{\r\n         \"Fields\":{\r\n            \"Key\":1,\r\n            \"Name\":1,            \r\n            \"AccountManager\":1,\r\n            \"Active\":1,\r\n            \"SortOrder\":1,\r\n            \"CreationDate\":1,\r\n            \"Creator\":1,\r\n            \"LastModifyDate\":1\r\n         }\r\n      }\r\n   }\r\n}"
-                        },
-                        "url": "{{BaseURL}}/Read"
-                      },
-                      "_postman_previewlanguage": "Text",
-                      "header": [],
-                      "cookie": [],
-                      "responseTime": null,
-                      "body": ""
-                    }
-                  ]
-                },
+                  "response": []
+                }
+              ],
+              "id": "eed59be2-c933-4144-8cfa-3c5c5bed9c31"
+            },
+            {
+              "name": "Territory CRUD",
+              "item": [
                 {
-                  "name": "Territory-Create",
+                  "name": "Create - Territory",
                   "id": "bcc61200-4077-484b-96b8-1f3b6cba8907",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -8591,14 +8593,41 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    },\r\n   \"Territory\":{\r\n      \"Data\":{\r\n         \"Key\":null,       \r\n         \"Name\":\"test Arun Territory55667788\",  \r\n         \"AccountManager\": [\r\n          \"VXNlcglCSE9MTFk=\"\r\n        ],\r\n         \"Active\": true,\r\n         \"SortOrder\": 3,\r\n         \"CreationDate\": \"2022-05-26\"       \r\n\r\n\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Territory\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"Name\": \"Territory Name\", // Mandatory\r\n            \"AccountManager\": [ // Check FieldOptions for possible values\r\n                \"VXNlcglCSE9MTFk=\"\r\n            ],\r\n            \"Active\": true,\r\n            \"SortOrder\": 3\r\n        }\r\n    },\r\n    // Required as it is only supported by SQL driver\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Create"
                   },
                   "response": []
                 },
                 {
-                  "name": "Territory-Update",
+                  "name": "Read - Territory",
+                  "id": "58a5c38d-40a1-48f2-a054-db2693d03fe3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Territory\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Name\": 1,\r\n                \"AccountManager\": 1,\r\n                \"Active\": 1,\r\n                \"SortOrder\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    // Required as it is only supported by SQL driver\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritorySearcher\": \"Maximizer.Model.Access.Sql.TerritorySearcher\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - Territory",
                   "id": "e9e9bbb4-88bf-433c-b883-e20a5d94591a",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -8608,14 +8637,19 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    },\r\n   \"Territory\":{\r\n      \"Data\":{\r\n         \"Key\": \"VGVycml0b3J5CTg4ODE4MjM2MQ==\",\r\n      \"Name\": \"test aartiji122 Territory55667788_Updated\",\r\n      \"AccountManager\":[\r\n          \"VXNlcglNQkVSVE9MTEk=\"\r\n        ],\r\n      \"Active\": true,\r\n      \"SortOrder\": 3,\r\n      \"CreationDate\": \"2022-01-23\"       \r\n\r\n\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Territory\": {\r\n        \"Data\": {\r\n            \"Key\": \"VGVycml0b3J5CTM0OTIzNjU3Mg==\", // Mandatory\r\n            \"Name\": \"Territory Name Updated\",\r\n            \"Active\": false,\r\n            \"SortOrder\": 4\r\n        }\r\n    },\r\n    // Required as it is only supported by SQL driver\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Update"
                   },
                   "response": []
                 },
                 {
-                  "name": "Territory-Delete",
+                  "name": "Delete - Territory",
                   "id": "def35dd8-1bb4-454e-9911-4b9a894fcf06",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -8625,7 +8659,12 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n   \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    },\r\n   \"Territory\":{  \r\n      \"Data\":{  \r\n         \"Key\":\"VGVycml0b3J5CTg4ODE4MjM2MQ==\"\r\n      }\r\n   }\r\n}"
+                      "raw": "{\r\n    \"Territory\": {\r\n        \"Data\": {\r\n            \"Key\": \"VGVycml0b3J5CTM0OTIzNjU3Mg==\" // Mandatory\r\n        }\r\n    },\r\n    // Required as it is only supported by SQL driver\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"ITerritoryAccess\": \"Maximizer.Model.Access.Sql.TerritoryAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
                     },
                     "url": "{{BaseURL}}/Delete"
                   },
@@ -8635,7 +8674,8 @@
               "id": "32516074-de0f-46b0-b024-c9abc0ed345d"
             }
           ],
-          "id": "3204aa30-44ac-47ca-ba54-e820bcaad431"
+          "id": "3204aa30-44ac-47ca-ba54-e820bcaad431",
+          "description": "Octopus allows users to set up Territories and assign them to Address Book entries (Company and Individual). This can be done manually or automatically (using territory rules).\n\nThis feature is accessible only to users with the Sales Manager role. Once Territories are assigned, all users can leverage the Territory and Territory Status fields for tasks like searching, reporting, and customizing views."
         },
         {
           "name": "User",
