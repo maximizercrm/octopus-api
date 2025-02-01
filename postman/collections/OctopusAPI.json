@@ -8502,7 +8502,7 @@
           "name": "Territory",
           "item": [
             {
-              "name": "MetaData",
+              "name": "Metadata",
               "item": [
                 {
                   "name": "Read Territory metadata (simple)",
