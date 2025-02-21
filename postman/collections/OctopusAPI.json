@@ -6793,7 +6793,7 @@
                   "response": []
                 },
                 {
-                  "name": "Read - Number of notes that belong to specific parent",
+                  "name": "Read - Count of notes that belong to specific parent",
                   "id": "27da1f37-3ca0-4312-a77d-3dd660d47c5b",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -6803,7 +6803,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Note\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Text\": 1,\r\n                \"RichText\": 1,\r\n                \"Category\": 1,\r\n                \"Important\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"DateTime\": 1,\r\n                \"ParentKey\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Key from Opportunity, Lead, AbEntry, Case or Campaign\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Note\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"$COUNT(key)\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                // ParentKey can be Key from Opportunity, Lead, AbEntry, Case or Campaign\r\n                \"ParentKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJT1BQX0RFTU9fMgkw\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Configuration\": { // Needed for using $COUNT operator\r\n        \"Drivers\": {\r\n            \"INoteSearcher\": \"Maximizer.Model.Access.Sql.NoteSearcher\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
