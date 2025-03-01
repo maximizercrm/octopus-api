@@ -9830,17 +9830,11 @@
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
     }
   ],
-  "auth": {
-    "type": "bearer",
-    "bearer": {
-      "token": "{{Token2}}"
-    }
-  },
   "event": [
     {
       "listen": "prerequest",
       "script": {
-        "id": "0a7d3813-4ccd-4e69-90c8-9f7ead568b60",
+        "id": "78f2ebe8-f1c0-458a-9af1-e546e624ec48",
         "type": "text/javascript",
         "exec": [
           "// This script checks to see if there is a valid token in",
@@ -9983,7 +9977,7 @@
     {
       "listen": "test",
       "script": {
-        "id": "c03bb5e1-21ac-4adb-991c-35b9a2608110",
+        "id": "d8b972c8-659e-43cf-8230-f6d689f0729b",
         "type": "text/javascript",
         "exec": [
           "pm.test(\"Status code is 200\", function () {",
