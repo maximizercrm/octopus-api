@@ -9830,16 +9830,11 @@
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
     }
   ],
-  "auth": {
-    "type": "bearer",
-    "bearer": {
-      "token": "{{Token}}"
-    }
-  },
   "event": [
     {
       "listen": "prerequest",
       "script": {
+        "id": "03bd9689-542e-483f-bdf4-00689728c0cf",
         "type": "text/javascript",
         "exec": [
           "// This script checks to see if there is a valid token in",
@@ -9976,13 +9971,13 @@
           "        }",
           "    }",
           "}"
-        ],
-        "id": "21e4c7f3-e820-4503-bb39-464c1c8be594"
+        ]
       }
     },
     {
       "listen": "test",
       "script": {
+        "id": "1b698bcf-cbdb-40b5-b2dd-61e89bfdd1af",
         "type": "text/javascript",
         "exec": [
           "pm.test(\"Status code is 200\", function () {",
@@ -9993,8 +9988,7 @@
           "    pm.expect(jsonData.Code).to.eql(0);",
           "});",
           ""
-        ],
-        "id": "3621ff2b-866e-4903-bd02-c402653ac183"
+        ]
       }
     }
   ]
