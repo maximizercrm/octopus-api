@@ -9446,7 +9446,37 @@
         }
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25",
-      "description": "Check out our simplified [object relationships schema](https://miro.com/app/board/uXjVK3hs1Yg=/?share_link_id=556036364807) to identify which objects are relevant to your needs and how they relate to each other. More detailed information about our domain schema and use cases can be found in this section."
+      "description": "Check out our simplified [object relationships schema](https://miro.com/app/board/uXjVK3hs1Yg=/?share_link_id=556036364807) to identify which objects are relevant to your needs and how they relate to each other. More detailed information about our domain schema and use cases can be found in this section.",
+      "auth": {
+        "type": "bearer",
+        "bearer": {
+          "token": "{{Token}}"
+        }
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "373da915-f819-4bf5-9f2b-6c135548c844",
+            "type": "text/javascript",
+            "packages": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "3bae0b3b-708c-4b7f-9f9d-c9cb456b46e3",
+            "type": "text/javascript",
+            "packages": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Advanced",
@@ -9830,17 +9860,11 @@
       "id": "a47a3356-91d8-4b0b-9ed3-5492415180d3"
     }
   ],
-  "auth": {
-    "type": "bearer",
-    "bearer": {
-      "token": "{{Token}}"
-    }
-  },
   "event": [
     {
       "listen": "prerequest",
       "script": {
-        "id": "20ceea81-ae51-4690-bfcd-ab3bfb2614fc",
+        "id": "e063d6fa-503b-4b6d-9e7f-5024a876b65c",
         "type": "text/javascript",
         "exec": [
           "// This script checks to see if there is a valid token in",
@@ -9983,7 +10007,7 @@
     {
       "listen": "test",
       "script": {
-        "id": "4009b635-f89d-47f8-b604-d63b2cd8ded4",
+        "id": "3e26a674-31a1-4103-b248-24dda48b5fa2",
         "type": "text/javascript",
         "exec": [
           "pm.test(\"Status code is 200\", function () {",
