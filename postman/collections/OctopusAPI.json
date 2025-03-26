@@ -6546,28 +6546,6 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Read - Lead by Phrase",
-                  "id": "424fa3e7-0696-44e8-9a6a-c65dd965052d",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Lead\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Id\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"CompanyName\": 1,\r\n                \"MrMs\": 1,\r\n                \"FirstName\": 1,\r\n                \"MiddleName\": 1,\r\n                \"LastName\": 1,\r\n                \"Salutation\": 1,\r\n                \"Position\": 1,\r\n                \"Email\": 1,\r\n                \"WebSite\": 1,\r\n                \"Status\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"Address\": 1,\r\n                \"Phone1\": 1,\r\n                \"Phone2\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"FullName\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"OpportunityKey\": 1,\r\n                \"Source\": 1,\r\n                \"NoEmployees\": 1,\r\n                \"Industry\": 1,\r\n                \"SourceUrl\": 1,\r\n                \"ArchivedDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Name: Test\"\r\n            },\r\n            \"Top\": 1\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
                   "name": "Convert Lead",
                   "id": "7109111b-f536-464b-b164-7b6f757f6b66",
                   "protocolProfileBehavior": {
@@ -6586,6 +6564,28 @@
                       }
                     },
                     "url": "{{BaseURL}}/PayloadExecute"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Lead by Phrase",
+                  "id": "424fa3e7-0696-44e8-9a6a-c65dd965052d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Lead\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": {\r\n                    \"Id\": 1,\r\n                    \"Value\": 1\r\n                },\r\n                \"CompanyName\": 1,\r\n                \"MrMs\": 1,\r\n                \"FirstName\": 1,\r\n                \"MiddleName\": 1,\r\n                \"LastName\": 1,\r\n                \"Salutation\": 1,\r\n                \"Position\": 1,\r\n                \"Email\": 1,\r\n                \"WebSite\": 1,\r\n                \"Status\": 1,\r\n                \"AssignedTo\": 1,\r\n                \"Address\": 1,\r\n                \"Phone1\": 1,\r\n                \"Phone2\": 1,\r\n                \"Creator\": 1,\r\n                \"CreationDate\": 1,\r\n                \"ModifiedBy\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"FullName\": 1,\r\n                \"AbEntryKey\": 1,\r\n                \"OpportunityKey\": 1,\r\n                \"Source\": 1,\r\n                \"NoEmployees\": 1,\r\n                \"Industry\": 1,\r\n                \"SourceUrl\": 1,\r\n                \"ArchivedDate\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$PHRASE\": \"Name: Test\"\r\n            },\r\n            \"Top\": 1\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 },
@@ -7381,27 +7381,98 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Read - Opportunity by SalesTeam",
-                  "id": "c298cfec-4800-456f-84e8-58c13f942fc8",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"SalesTeam\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"SalesTeam/Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTE=\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
+                  "name": "Change Stage",
+                  "item": [
+                    {
+                      "name": "1. List all Sales Processes",
+                      "id": "85d3b145-66ce-40ce-b096-2ae3d9966d76",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"SalesProcess/Setup\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"Description\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read"
+                      },
+                      "response": []
                     },
-                    "url": "{{BaseURL}}/Read",
-                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
-                  },
-                  "response": []
+                    {
+                      "name": "2. List all Stages of a Sales Process",
+                      "id": "a1c8dbfd-4be5-4d86-9317-e039ebddac1f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"Opportunity\": {\r\n        \"FieldOptions\": {\r\n            \"CurrentSalesStage/Setup\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"Description\": 1,\r\n                    \"ProbabilityClose\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Data\": {\r\n            \"SalesProcessSetup\": {\r\n                \"Key\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\" // key read from step 1\r\n            }\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "3. Read Current Sales Stage (Instance) from Opportunity",
+                      "id": "42231da3-35c4-4ae3-a057-2d2b9e91d803",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"Status\": 1,\r\n                \"SalesProcess\": {\r\n                    \"Key\": 1,\r\n                    \"Setup\": 1,\r\n                    \"Description\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"CurrentSalesStage\": {\r\n                    \"Key\": 1,\r\n                    \"Setup\": 1,\r\n                    \"Description\": 1,\r\n                    \"Age\": 1,\r\n                    \"TargetAge\": 1,\r\n                    \"ProbabilityClose\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJMjUwMTAzMjUxNTUwMzE0NTIwMDExTwkw\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Read"
+                      },
+                      "response": []
+                    },
+                    {
+                      "name": "4. Change Opportunity Stage",
+                      "id": "f8fc59ff-ceeb-44ec-901e-dad66b37126e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": \"T3Bwb3J0dW5pdHkJMjUwMTAzMjUxNTUwMzE0NTIwMDExTwkw\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTE0Mjc0ODAwMDJHCTA=\" // one of the keys read on step 2, depending to which stage you want to move the Opportunity to\r\n        }\r\n    }\r\n}\r\n",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": "{{BaseURL}}/Update"
+                      },
+                      "response": []
+                    }
+                  ],
+                  "id": "23ce6336-7080-46b2-bc47-d3ae71926957"
                 },
                 {
                   "name": "Read - Opportunity by SalesProcessSetup",
@@ -7530,6 +7601,52 @@
                     "body": {
                       "mode": "raw",
                       "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"PartnerInfo\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"PartnerInfo\": {\r\n                    \"$EQ\": {\r\n                        \"Key\": \"Q29udGFjdAlERU1PXzVDCTE=\"\r\n                    }\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Opportunity by SalesTeam",
+                  "id": "c298cfec-4800-456f-84e8-58c13f942fc8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"SalesTeam\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"SalesTeam/Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTE=\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read",
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - Sales stages of a given opportunity",
+                  "id": "8b61f137-46f5-4ad5-a94c-5441cc486baa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesStage\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1,\r\n                \"ProbabilityClose\": 1,\r\n                \"Age\": {\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Current\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"OpportunityKey\": {\r\n                    \"$EQ\": \"T3Bwb3J0dW5pdHkJMjIwNTA1MjUxNTM2NTg5NDAwMDAzTwkw\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -8271,6 +8388,308 @@
           ],
           "id": "b0014298-95bc-4918-a81c-bf1a2874d235",
           "description": "Personal Access Token (a.k.a. PAT) allows users to manage tokens that are issued for a specific user of Maximizer CRM. The PAT is a great alternative for authentication, rather than providing raw credentials (user + password). This increases security as, in case of a possible leak, PATs can be easily revoked (and the credentials will still be secured).\n\nSee below some considerations for Personal Access Tokens:\n\n- Any active Maximizer CRM user can create PAT for their User IDs\n    \n- There is no limit on the number of PAT one can create\n    \n- The ExpirationDate must be set to a future date (can't be in the past). We suggest to use a reasonable expiration date (for example, 3 to 6 months) and to avoid creating PAT with long expiration dates\n    \n- PAT can be revoked at any time\n    \n- For all possible PAT status available, check \"FieldOptions\" section, there is a request to retrieve this information"
+        },
+        {
+          "name": "SalesProcessSetup",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read SalesProcessSetup metadata (simple)",
+                  "id": "e5efca89-105a-4cf8-a22b-70d6e92a040e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesProcessSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read SalesProcessSetup metadata (more)",
+                  "id": "6c23d860-b1fb-4900-8af5-ee3b7edb41e1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Inactive\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesProcessSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "1dc69f0d-9c00-4e03-be3b-a125f6856f71"
+            },
+            {
+              "name": "SalesProcessSetup CRUD",
+              "item": [
+                {
+                  "name": "Create - SalesProcessSetup",
+                  "id": "f49e200b-a8e7-4419-973a-5b6abd8d9612",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesProcessSetup\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"Description\": \"Sales process for opportunities\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - SalesProcessSetup",
+                  "id": "a1711f04-d971-412c-a082-0f54b101b764",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesProcessSetup\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - SalesProcessSetup",
+                  "id": "bbee0049-5ce9-4a6d-8de2-d1a710a04dcb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesProcessSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNQcm9jZXNzCTI1MDEwMTAwMDAwMDA3NDI1OTI2MTBHCTA=\", // Mandatory\r\n            \"Description\": \"Description Updated\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - SalesProcessSetup",
+                  "id": "55dcca3f-2c80-40f2-bb01-c3713f27719f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesProcessSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNQcm9jZXNzCTIzMDMwMjAwMDA1MTMxOTcxNjUzMUcJMA==\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Delete"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "8e82c85d-81bf-4d72-85f7-bd820e60ecff"
+            }
+          ],
+          "id": "fc99b118-af32-4a4f-988f-5add4d305195",
+          "description": "SalesProcessSetup allows users to manage the different sales processes available for opportunities in Maximizer CRM.\n\nA sales process is a predefined sequence of stages that guides users through managing and closing opportunities. See below some considerations for SalesProcessSetup:\n\n- The SalesProcessSetup object is composed only by a key (autogenerated) and a description for the Sales Process.\n    \n- The stages for every Sales Process can be managed using the object SalesStageSetup."
+        },
+        {
+          "name": "SalesStageSetup",
+          "item": [
+            {
+              "name": "MetaData",
+              "item": [
+                {
+                  "name": "Read SalesStageSetup metadata (simple)",
+                  "id": "598d5ce2-6a1c-443b-b692-91766b2f2465",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesStageSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read SalesStageSetup metadata (more)",
+                  "id": "d6af658c-dea1-4816-8074-01db522c90d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Inactive\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesStageSetup\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "f30c18f7-6b64-48ea-8f09-8cd6d12b3dae"
+            },
+            {
+              "name": "SalesStageSetup CRUD",
+              "item": [
+                {
+                  "name": "Create - SalesStageSetup",
+                  "id": "4e1197c9-87ef-4e4f-acee-83380824c0f5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCTI1MDEwMTAwMDAwMDA3NDI1OTI2MTBHCTA=\", // Mandatory\r\n            \"Description\": \"First contact\", // Mandatory\r\n            // The probability of close represents the likelihood that user expects a successful outcome for the opportunity, given that it has reached the specified stage.\r\n            \"ProbabilityClose\": 10,\r\n            //  The target age indicates the number of days that user expect the activities in that stage to take.\r\n            \"TargetAge\": 5\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Create"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read - SalesStageSetup",
+                  "id": "5e808988-9288-4e5a-b022-8675f44882db",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1,\r\n                \"SalesProcessSetupKey\": 1,\r\n                \"TargetAge\": 1,\r\n                \"ProbabilityClose\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update - SalesStageSetup",
+                  "id": "44788c9f-1fc4-4a78-821a-c3f6163cff87",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyNTAxMDIwMDAwMDAwOTE0MTI1NDYwRwkw\", // Mandatory\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\",\r\n            \"Description\": \"Sales Stage updated\",\r\n            \"ProbabilityClose\": 35,\r\n            \"TargetAge\": 20\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete - SalesStageSetup",
+                  "id": "70618a82-c271-400a-a425-1bffd19b76d0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyNTAxMDIwMDAwMDAwOTE0MTI1NDYwRwkw\" // Mandatory\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "01361ad7-dac4-4112-8dd6-2db31dae1972"
+            }
+          ],
+          "id": "3708b8b5-95c7-4aab-8645-fb2838496ced",
+          "description": "SalesStageSetup allows users to manage the stages of a sales process for opportunities in Maximizer CRM.\n\nSales Stages are the sequential steps within a sales process that represent key milestones from initial engagement to closing an opportunity. See below some considerations for SalesStageSetup:\n\n- The SalesStageSetup object consists of an autogenerated key and three main fields:\n    \n    - Description: The name of the stage.\n        \n    - TargetAge: The expected number of days for activities in this stage.\n        \n    - ProbabilityClose: The likelihood of a successful outcome at this stage."
         },
         {
           "name": "SalesTeam",
