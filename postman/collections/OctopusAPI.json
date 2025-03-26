@@ -7121,7 +7121,7 @@
             }
           ],
           "id": "703e9bde-4083-4b06-9ed4-0adf8cdd1cec",
-          "description": "Lead V2 is a new version of the Lead object. To instruct the API to use it, the payload needs to include the compatibility section requesting LeadObject version 1.0 or higher, see below\n\n`\"Compatibility\": { \"LeadObject\": \"1.3\" }`\n\nMost of the properties and operations of Lead V1 are compatible but there are some key breaking changes.\n\nSee below a summary of the breaking changes that Lead V2 includes:\n\n- Removed properties \"Process\" and \"CurrentProcessStage\"/\"ProcessStage\", replaced by new approach to manage processes and stages that uses new properties \"ProcessSetup\" and \"ProcessStageSetup\"."
+          "description": "Lead V2 is a new version of the Lead object. To instruct the API to use it, the payload needs to include the compatibility section requesting LeadObject version 1.0 or higher, see below\n\n`\"Compatibility\": { \"LeadObject\": \"1.3\" }`\n\nMost of the properties and operations of Lead V1 are compatible with Lead V2 but there are some key breaking changes.\n\nSee below a summary of the breaking changes that Lead V2 includes:\n\n- Removed properties \"Process\" and \"CurrentProcessStage\"/\"ProcessStage\", replaced by new approach to manage processes and stages that uses new properties \"ProcessSetup\" and \"ProcessStageSetup\"."
         },
         {
           "name": "Note",
