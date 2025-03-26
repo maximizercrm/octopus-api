@@ -6920,7 +6920,7 @@
             }
           ],
           "id": "d2d35890-f8af-4160-bd1e-34b0b1b72406",
-          "description": "Lead allows users to manage potential customers in Maximizer CRM. See below some considerations for Leads:\n\n- This foder contains the payloads for what we call Lead V1. For the most recent implementation see Lead V2 folder. If you are creating a new implementation we recommend using Lead V2.\n    \n- The lead object has some built in functionality that allows converting a Lead entry to an AbEntry. See \"Convert Lead\" in the HowTo's section for an example of that one."
+          "description": "Lead allows users to manage potential customers in Maximizer CRM. See below some considerations for Leads:\n\n- This folder contains the payloads for what we call Lead V1. For the most recent implementation see Lead V2 folder. If you are creating a new implementation we recommend using Lead V2.\n    \n- The lead object has some built in functionality that allows converting a Lead entry to an AbEntry. See \"Convert Lead\" in the HowTo's section for an example of that one."
         },
         {
           "name": "Lead V2",
@@ -9806,17 +9806,11 @@
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25",
       "description": "Check out our simplified [object relationships schema](https://miro.com/app/board/uXjVK3hs1Yg=/?share_link_id=556036364807) to identify which objects are relevant to your needs and how they relate to each other. More detailed information about our domain schema and use cases can be found in this section.",
-      "auth": {
-        "type": "bearer",
-        "bearer": {
-          "token": "{{Token}}"
-        }
-      },
       "event": [
         {
           "listen": "prerequest",
           "script": {
-            "id": "373da915-f819-4bf5-9f2b-6c135548c844",
+            "id": "105576be-a44d-448d-a0ef-c7932aa457ad",
             "type": "text/javascript",
             "packages": {},
             "exec": [
@@ -9827,7 +9821,7 @@
         {
           "listen": "test",
           "script": {
-            "id": "3bae0b3b-708c-4b7f-9f9d-c9cb456b46e3",
+            "id": "52db7bdc-211b-4bf0-b6b1-88b03e5b46f2",
             "type": "text/javascript",
             "packages": {},
             "exec": [
