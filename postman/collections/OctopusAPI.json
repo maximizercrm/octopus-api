@@ -8780,7 +8780,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCTI1MDEwMTAwMDAwMDA3NDI1OTI2MTBHCTA=\", // Mandatory\r\n            \"Description\": \"First contact\", // Mandatory\r\n            // The probability of close represents the likelihood that user expects a successful outcome for the opportunity, given that it has reached the specified stage.\r\n            \"ProbabilityClose\": 10,\r\n            //  The target age indicates the number of days that user expect the activities in that stage to take.\r\n            \"TargetAge\": 5\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesStageSetup\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCTI1MDEwMTAwMDAwMDA3NDI1OTI2MTBHCTA=\", // Mandatory\r\n            \"Description\": \"First contact\", // Mandatory\r\n            // Likelihood that user expects a successful outcome for the opportunity, given that it has reached the specified stage.\r\n            \"ProbabilityClose\": 10,\r\n            // Number of days that user expect the activities in that stage to take.\r\n            \"TargetAge\": 5\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
