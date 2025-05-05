@@ -9022,7 +9022,7 @@
               "name": "HowTo's",
               "item": [
                 {
-                  "name": "Get Sales Teams",
+                  "name": "Get Top 10 Sales Teams",
                   "id": "0375b48b-7171-4cbb-89c5-c52e9627f5a3",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -9032,7 +9032,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 33\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 10\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9055,7 +9055,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTM=\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"MemberKeys\": [\r\n                    {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Members\": {\r\n                    \"Key\": {\r\n                        \"Uid\": 1,\r\n                        \"Value\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Role\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Right\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$EQ\": \"U2FsZXNUZWFtCTM=\" \r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9066,6 +9066,50 @@
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
+                },
+                {
+                  "name": "Add user to SalesTeam",
+                  "id": "15ddedab-fbb5-42b0-89a9-b609fa1e76e5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",// Mandatory\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"// Mandatory\r\n                    },\r\n                    \"Role\": 0,\r\n                    \"Right\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Append\": true // Used to add a new Team member in the existing Team\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Remove user from SalesTeam",
+                  "id": "fbe91164-7727-4d3f-af40-40b64792618d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",// Mandatory\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"// Mandatory\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Remove\": true\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Update"
+                  },
+                  "response": []
                 }
               ],
               "id": "333512e2-2e14-4a52-9e06-d609277e1b0f"
@@ -9074,7 +9118,7 @@
               "name": "MetaData",
               "item": [
                 {
-                  "name": "SalesTeam - Read Metadata (simple)",
+                  "name": "Read SalesTeam metadata (simple)",
                   "id": "df68e115-37f7-4b5f-85c7-221670afd2d1",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -9084,7 +9128,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9096,7 +9140,7 @@
                   "response": []
                 },
                 {
-                  "name": "SalesTeam - Read Metadata (more)",
+                  "name": "Read SalesTeam metadata (more)",
                   "id": "bb78e490-521b-410a-ae79-91c7c493d82e",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
@@ -9106,7 +9150,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Nullable\": 1,\r\n                \"Assignable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"HasOption\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Inactive\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/SalesTeam\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9134,7 +9178,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        },\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayName\": 1,\r\n                \"Members\": {\r\n                    \"Key\": {\r\n                        \"Uid\": 1,\r\n                        \"Value\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Role\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Right\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"DisplayName\": 1,\r\n                \"Members\": {\r\n                    \"Key\": {\r\n                        \"Uid\": 1,\r\n                        \"Value\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Role\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"Right\": {\r\n                        \"Key\": 1,\r\n                        \"DisplayValue\": 1\r\n                    },\r\n                    \"DisplayValue\": 1\r\n                }\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {},\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9156,7 +9200,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"DisplayName\": \"TestSalesTeam\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER1\"\r\n                    },\r\n                    \"Role\": 1, // 1 = Leader\r\n                    \"Right\": 0 // 0 = Edit\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER2\"\r\n                    },\r\n                    \"Role\": 0, // 0 = Member\r\n                    \"Right\": 2 // 2 = Standard\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER3\"\r\n                    },\r\n                    \"Role\": 0, // 0 = Member\r\n                    \"Right\": 1 // 1 = Audit\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": null,\r\n            \"DisplayName\": \"TestSalesTeam\", // Mandatory\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER1\" // Mandatory\r\n                    },\r\n                    // Reminder: a SalesTeam can have only one Leader\r\n                    \"Role\": 1, // 1 = Leader, 0 = Member\r\n                    \"Right\": 0 // 0 = Edit, 1 = Audit, 2 = Standard\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER2\"\r\n                    },\r\n                    \"Role\": 0,\r\n                    \"Right\": 2\r\n                },\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER3\"\r\n                    },\r\n                    \"Role\": 0,\r\n                    \"Right\": 1\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9168,8 +9212,8 @@
                   "response": []
                 },
                 {
-                  "name": "SalesTeam - Update (Append/Add User)",
-                  "id": "15ddedab-fbb5-42b0-89a9-b609fa1e76e5",
+                  "name": "SalesTeam - Update",
+                  "id": "9c9fb913-c969-4191-a1e1-12a585b40f67",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
@@ -9178,29 +9222,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"\r\n                    },\r\n                    \"Role\": 0,\r\n                    \"Right\": 1\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Append\": true,\r\n            \"ReadAfterSave\": true\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Update"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "SalesTeam - Update (Remove User)",
-                  "id": "fbe91164-7727-4d3f-af40-40b64792618d",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\",\r\n            \"DisplayName\": \"TestSalesTeamUpdated\",\r\n            \"Members\": [\r\n                {\r\n                    \"Key\": {\r\n                        \"Uid\": \"USER4\"\r\n                    }\r\n                }\r\n            ]\r\n        },\r\n        \"Options\": {\r\n            \"Remove\": true,\r\n            \"ReadAfterSave\": true\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTE2MTQ4MDQwMDA=\",// Mandatory\r\n            \"DisplayName\": \"TestSalesTeamUpdated\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9222,7 +9244,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTM=\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"SalesTeam\": {\r\n        \"Data\": {\r\n            \"Key\": \"U2FsZXNUZWFtCTE2MTQ4MDQwMDA=\"// Mandatory\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -9237,7 +9259,8 @@
               "id": "6b7a099b-b2aa-4015-91d4-2020dd8a3d97"
             }
           ],
-          "id": "76b1bf2c-3008-429c-9c5c-6424099d5e14"
+          "id": "76b1bf2c-3008-429c-9c5c-6424099d5e14",
+          "description": "In Maximizer, opportunities can be assigned to predefined sales teams configured by the system administrator within the Administrator module. This feature enables structured delegation by associating opportunities with specific teams, where access permissions—such as view and edit rights—are controlled at the team member level. Sales team configurations, including membership and access controls, are centrally managed in the Administrator settings.\n\nSales team are composed of the following types of members:  \n  \n• Team leader – In a team, one person is designated as a team  \nleader who has the right to make any changes to the  \nopportunity. The team leader can change the status of  \nopportunities.  \n  \n• Team member – Regular team members can update the basic  \nand user-defined fields in an opportunity, but they do not have  \nthe right to change the status of the opportunity. The member’s  \nrole is to perform the tasks the team leader assigns. Team  \nmembers can modify the tasks from the Calendar and Hotlist  \npages.  \n  \n• Team member with edit rights – Team members can be  \ngranted edit rights for opportunities, giving the team member  \nthe same abilities as the team leader."
         },
         {
           "name": "Task",
