@@ -4255,7 +4255,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"CurrencyExchange\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"CurrencyCode\": \"USD\", // Mandatory - Needs to be valid currency code, see field options\r\n            \"Description\": \"United States Dollar\", // Can be any string but its recommended to use currency name\r\n            \"Rate\": 5.0, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n            \"EffectiveDate\": \"2018-07-13T00:00:00Z\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"CurrencyRate\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"CurrencyCode\": \"USD\", // Mandatory - Needs to be valid currency code, see field options\r\n            \"Description\": \"United States Dollar\", // Can be any string but its recommended to use currency name\r\n            \"Rate\": 5.0, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n            \"EffectiveDate\": \"2018-07-13T00:00:00Z\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4277,7 +4277,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"CurrencyExchange\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1,\r\n                \"CurrencyCode\": { // Currency this rate applies to \r\n                    \"Code\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Rate\": 1, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n                \"EffectiveDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CurrencyCode\": {\r\n                    \"$EQ\": \"AUD\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"CurrencyRate\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Description\": 1,\r\n                \"CurrencyCode\": { // Currency this rate applies to \r\n                    \"Code\": 1,\r\n                    \"DisplayValue\": 1\r\n                },\r\n                \"Rate\": 1, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n                \"EffectiveDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CurrencyCode\": {\r\n                    \"$EQ\": \"AUD\"\r\n                }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -4299,7 +4299,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"CurrencyExchange\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q3VycmVuY3lSYXRlCTY=\", // Mandatory\r\n            \"CurrencyCode\": \"EUR\", // Needs to be valid currency code, see field options\r\n            \"Description\": \"Euro\", // Can be any string but its recommended to use currency name\r\n            \"Rate\": 4.0, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n            \"EffectiveDate\": \"2024-08-15T00:00:00Z\"\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"CurrencyRate\": {\r\n        \"Data\": {\r\n            \"Key\": \"Q3VycmVuY3lSYXRlCTY=\", // Mandatory\r\n            \"CurrencyCode\": \"EUR\", // Needs to be valid currency code, see field options\r\n            \"Description\": \"Euro\", // Can be any string but its recommended to use currency name\r\n            \"Rate\": 4.0, // Exchange rate between CurrencyCode and Corporate Currency Code. Specifies how much of the input currency is equivalent to one unit of the corporate currency\r\n            \"EffectiveDate\": \"2024-08-15T00:00:00Z\"\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
