@@ -930,6 +930,28 @@
                             "url": "{{BaseURL}}/Read"
                           },
                           "response": []
+                        },
+                        {
+                          "name": "$OFFSET() - Get 10 companies created in the past 90 days Copy",
+                          "id": "dd455b2d-cb48-4f77-8f64-f8c5076be622",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\r\n    \"AbEntry\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Type\": 1,\r\n                \"CompanyName\": 1,\r\n                \"CreationDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"$AND\": [\r\n                    {\r\n                        \"Type\": {\r\n                            \"$EQ\": \"Company\"\r\n                        }\r\n                    },\r\n                    {\r\n                        \"CreationDate\": {\r\n                            \"$GT\": \"$OFFSET(D-90, $TODAY())\"\r\n                        }\r\n                    }\r\n                ]\r\n\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IAbEntrySearcher\": \"Maximizer.Model.Access.Sql.AbEntrySearcher\"\r\n        }\r\n    }\r\n}",
+                              "options": {
+                                "raw": {
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": "{{BaseURL}}/Read"
+                          },
+                          "response": []
                         }
                       ],
                       "id": "d53d345e-49a0-4f30-ab1a-31c0f1177f57",
