@@ -932,7 +932,7 @@
                           "response": []
                         },
                         {
-                          "name": "$OFFSET() - Get 10 opportunities planned to be closed until the end of the 6th month from now",
+                          "name": "$OFFSET() - Get 10 opportunities planned to be closed between the beginning of this month and the end of the 6th month from this month",
                           "id": "dd455b2d-cb48-4f77-8f64-f8c5076be622",
                           "protocolProfileBehavior": {
                             "disableBodyPruning": true
@@ -942,7 +942,7 @@
                             "header": [],
                             "body": {
                               "mode": "raw",
-                              "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"CloseDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CloseDate\": {\r\n                    \"$RANGE\": [\r\n                        \"$THISMONTH()\",\r\n                        \"$OFFSET(M+6, $THISMONTH())\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
+                              "raw": "{\r\n    \"Opportunity\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Objective\": 1,\r\n                \"CloseDate\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"CloseDate\": {\r\n                    // Will evaluate to the first day of the current month and the last day of the month 6 months from now\r\n                    \"$RANGE\": [\r\n                        \"$THISMONTH()\",\r\n                        \"$OFFSET(M+6, $THISMONTH())\"\r\n                    ]\r\n                }\r\n            },\r\n            \"Top\": 10\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunitySearcher\": \"Maximizer.Model.Access.Sql.OpportunitySearcher\"\r\n        }\r\n    }\r\n}",
                               "options": {
                                 "raw": {
                                   "language": "json"
