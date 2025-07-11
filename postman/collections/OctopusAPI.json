@@ -10689,7 +10689,7 @@
         }
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25",
-      "description": "Check out our simplified [object relationships schema](https://miro.com/app/board/uXjVK3hs1Yg=/?share_link_id=556036364807) to identify which objects are relevant to your needs and how they relate to each other. More detailed information about our domain schema and use cases can be found in this section.",
+      "description": "Check out our simplified [object relationships schema](https://developer.maximizer.com/reference/maximizer-api#object-relationships-schema) to identify which objects are relevant to your needs and how they relate to each other. More detailed information about our domain schema and use cases can be found in this section.",
       "event": [
         {
           "listen": "prerequest",
