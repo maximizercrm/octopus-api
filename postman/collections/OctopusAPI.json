@@ -8706,6 +8706,34 @@
           "name": "ProcessStageSetup",
           "item": [
             {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read - Stages from a process",
+                  "id": "83a5fbad-26fd-4f96-9e10-61a2dfb56a4a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"ProcessStageSetup\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"ProcessSetupKey\": 1,\r\n                \"Name\": 1,\r\n                \"TargetAge\": 1,\r\n                \"Sequence\": 1,\r\n                \"TAG\": 1,\r\n                \"CreationDate\": 1,\r\n                \"Creator\": 1,\r\n                \"LastModifyDate\": 1,\r\n                \"ModifiedBy\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"ProcessSetupKey\": {\r\n                    \"$EQ\": \"UHJvY2Vzc1NldHVwCUAqL0NBU0UJMA==\" // Key of the process you want to read the detail of the stages\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "2432b19a-1dff-4723-9cdb-bb568e7d1f37"
+            },
+            {
               "name": "MetaData",
               "item": [
                 {
