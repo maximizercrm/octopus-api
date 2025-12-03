@@ -4,7 +4,7 @@
     "name": "Octopus API",
     "description": "## Quick Start\n\n##### Step 1: Fork the collection using the \"Run in Postman\" button\n\n<img src=\"https://run.pstmn.io/button.svg\">\n\n##### Step 2: Make your API call against your Maximizer CRM instance\n\nBefore making API calls against your Maximizer CRM instance, you should decide what integrations you want to create. It will help you understand what type of access you need.\n\nTo get access to OctopusAPI, please follow the guide: [https://developer.maximizer.com/docs/api-access](https://developer.maximizer.com/docs/api-access)\n\nIn the Postman \"Environments\" you can find 3 environment examples for this collection:  \n1\\. Octopus API (api.maximizer.com) PAT - example with PAT token.\n\n2\\. Octopus API (api.maximizer.com) - example with AppKey and VendorId\n\n3\\. Octopus API (on-premise) - example for on-premise\n\n##### Step 3: Read the documentation and get familiar with Postman examples\n\nFor details about the API, including syntax and additional information, please follow this link:  \n[https://developer.maximizer.com/reference/octopus-api](https://developer.maximizer.com/v2/reference/octopus-api)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "updatedAt": "2025-11-14T00:51:55.000Z",
+    "updatedAt": "2025-12-03T01:19:12.000Z",
     "createdAt": "2024-04-11T19:00:12.000Z",
     "lastUpdatedBy": "34250449",
     "uid": "34024038-2fb6b864-57a0-404e-96fc-76fb9f783685"
@@ -10633,6 +10633,142 @@
                   },
                   "response": [],
                   "uid": "34024038-63876736-5234-471c-866d-ca9078a977b7"
+                },
+                {
+                  "name": "Validate - Get opportunity mandatory fields",
+                  "id": "d3e526c5-5568-426d-a002-5366dfaa2d66",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "// The endpoint response will be an echo of the payload + Validation result listing all mandatory fields\r\n// The endpoint validates fields as described below:\r\n//      * Basic fields.\r\n//      * UDFs always mandatory.\r\n//      * UDFs mandatory on rule if the rule is true for the payload below (payload should include all fields that are part of the rule for it to be evaluated).\r\n//      * Fields mandatory per business rules:\r\n//          - AbEntryKey in Creation.\r\n//          - SalesStageSetupKey if SalesProcessSetupKey is present in the payload.\r\n{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null, // If null, validation will be done assuming is a create operation. If not null, validation will be done assuming is an update operation\r\n            \"AbEntryKey\": \"Q29tcGFueQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTA=\",\r\n            \"ContactKey\": \"Q29udGFjdAkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\",\r\n            \"Cost\": 1000,\r\n            \"ForecastRevenue\": 2000,\r\n            \"Leader\": \"VXNlcglNQVNURVI=\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTIzMjM3MzAwMDZHCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BaseURL}}/Validate",
+                      "host": [
+                        "{{BaseURL}}"
+                      ],
+                      "path": [
+                        "Validate"
+                      ]
+                    },
+                    "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
+                  },
+                  "response": [
+                    {
+                      "id": "b750f7cb-7900-49af-a631-2c172507a7be",
+                      "name": "Example response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "// The endpoint response will be an echo of the payload + Validation result listing all mandatory fields\r\n// The endpoint validates fields as described below:\r\n//      * Basic fields.\r\n//      * UDFs always mandatory.\r\n//      * UDFs mandatory on rule if the rule is true for the payload below (payload should include all fields that are part of the rule for it to be evaluated).\r\n//      * Fields mandatory per business rules:\r\n//          - AbEntryKey in Creation.\r\n//          - SalesStageSetupKey if SalesProcessSetupKey is present in the payload.\r\n{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null, // If null, validation will be done assuming is a create operation. If not null, validation will be done assuming is an update operation\r\n            \"AbEntryKey\": \"Q29tcGFueQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTA=\",\r\n            \"ContactKey\": \"Q29udGFjdAkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\",\r\n            \"Cost\": 1000,\r\n            \"ForecastRevenue\": 2000,\r\n            \"Leader\": \"VXNlcglNQVNURVI=\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\",\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTIzMjM3MzAwMDZHCTA=\"\r\n        }\r\n    },\r\n    \"Configuration\": {\r\n        \"Drivers\": {\r\n            \"IOpportunityAccess\": \"Maximizer.Model.Access.Sql.OpportunityAccess\"\r\n        }\r\n    }\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{BaseURL}}/Validate",
+                          "host": [
+                            "{{BaseURL}}"
+                          ],
+                          "path": [
+                            "Validate"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": null,
+                      "header": [
+                        {
+                          "key": "Date",
+                          "value": "Wed, 03 Dec 2025 00:51:34 GMT"
+                        },
+                        {
+                          "key": "Content-Type",
+                          "value": "application/octet-stream"
+                        },
+                        {
+                          "key": "Content-Length",
+                          "value": "871"
+                        },
+                        {
+                          "key": "Connection",
+                          "value": "keep-alive"
+                        },
+                        {
+                          "key": "Server",
+                          "value": "cloudflare"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Origin",
+                          "value": "*"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Methods",
+                          "value": "POST, GET, OPTIONS"
+                        },
+                        {
+                          "key": "Access-Control-Allow-Headers",
+                          "value": "Authorization,Content-Type,Expires,Cache-Control,Pragma"
+                        },
+                        {
+                          "key": "Access-Control-Max-Age",
+                          "value": "86400"
+                        },
+                        {
+                          "key": "Strict-Transport-Security",
+                          "value": "max-age=31536000; includeSubDomains"
+                        },
+                        {
+                          "key": "X-XSS-Protection",
+                          "value": "1; mode=block"
+                        },
+                        {
+                          "key": "X-Content-Type-Options",
+                          "value": "nosniff"
+                        },
+                        {
+                          "key": "Referrer-Policy",
+                          "value": "strict-origin"
+                        },
+                        {
+                          "key": "cf-cache-status",
+                          "value": "DYNAMIC"
+                        },
+                        {
+                          "key": "Nel",
+                          "value": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}"
+                        },
+                        {
+                          "key": "Report-To",
+                          "value": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=BVpFMDrTbZWE%2FfT6ADnTD7oLIcm2qtrKEKWkFvD3KPAUxZy8%2FcCXDiaGMMXfnMxR4ICxjLessGYpjOUvq9%2BOtlZtK6qlW71OA7OoaP9iYic%2FhCKmGA%3D%3D\"}]}"
+                        },
+                        {
+                          "key": "CF-RAY",
+                          "value": "9a7f138bec678e05-YVR"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\r\n  \"Code\": 0,\r\n  \"Opportunity\": {\r\n    \"Data\": {\r\n      \"Key\": null,\r\n      \"AbEntryKey\": \"Q29tcGFueQkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTA=\",\r\n      \"ContactKey\": \"Q29udGFjdAkyMjA1MDUyNTIyMjczODY2NDAwMjlDCTE=\",\r\n      \"Cost\": 1000.0,\r\n      \"ForecastRevenue\": 2000.0,\r\n      \"Leader\": \"VXNlcglNQVNURVI=\",\r\n      \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\",\r\n      \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MDYyNTEzNTIzMjM3MzAwMDZHCTA=\"\r\n    },\r\n    \"Validation\": {\r\n      \"AbEntryKey\": {\r\n        \"Mandatory\": true\r\n      },\r\n      \"Leader\": {\r\n        \"Mandatory\": true\r\n      },\r\n      \"SalesStageSetupKey\": {\r\n        \"Mandatory\": true\r\n      },\r\n      \"Description\": {\r\n        \"Mandatory\": true\r\n      },\r\n      \"CloseDate\": {\r\n        \"Mandatory\": true\r\n      },\r\n      \"SalesTeam\": {\r\n        \"Mandatory\": true\r\n      }\r\n    }\r\n  }\r\n}",
+                      "uid": "34024038-b750f7cb-7900-49af-a631-2c172507a7be"
+                    }
+                  ],
+                  "uid": "34024038-d3e526c5-5568-426d-a002-5366dfaa2d66"
                 }
               ],
               "id": "4371c5c0-c455-46dd-912e-a8c9bca4c1d9",
@@ -11018,7 +11154,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\", // Mandatory\r\n            \"Objective\": \"Test Objective\", // Mandatory\r\n            \"Description\": \"Test Description\",\r\n            \"Status\": 2, // In Progress - Check FieldOptions for possible values\r\n            \"Cost\": 1234.56,\r\n            \"ForecastRevenue\": 5678.90,\r\n            \"StartDate\": \"2025-01-02T12:00:00Z\",\r\n            \"Leader\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"SalesTeam/Key\": \"U2FsZXNUZWFtCTY1NTM1\",\r\n            \"NextAction\": \"Develop solution\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\", // Check FieldOptions for possible values\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MTEyNTE1NTg1NzQxNDAwMDFHCTA=\", //Check FieldOptions for possible values related to SalesProcessSetupKey\r\n            \"Category\": [ // Check FieldOptions for possible values\r\n                \"1\"\r\n            ],\r\n            \"Product\": [ // Check FieldOptions for possible values\r\n                \"1\",\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [ // Check FieldOptions for possible values\r\n                \"57998\"\r\n            ],\r\n            \"RevenueType\": \"60001\" // Check FieldOptions for possible values\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Opportunity\": {\r\n        \"Data\": {\r\n            \"Key\": null, // Will be generated automatically\r\n            \"AbEntryKey\": \"QWJFbnRyeQkyMjA1MDUyNTE1MzY1OTg0NTAwMDVDCTA=\", // Mandatory\r\n            \"Objective\": \"Test Objective\", // Mandatory\r\n            \"Description\": \"Description\",\r\n            \"Status\": 2, // In Progress - Check FieldOptions for possible values\r\n            \"Cost\": 1234.56,\r\n            \"ForecastRevenue\": 5678.90,\r\n            \"StartDate\": \"2025-01-02T12:00:00Z\",\r\n            \"Leader\": {\r\n                \"Uid\": \"MASTER\"\r\n            },\r\n            \"SalesTeam/Key\": \"U2FsZXNUZWFtCTY1NTM1\",\r\n            \"NextAction\": \"Develop solution\",\r\n            \"SalesProcessSetupKey\": \"U2FsZXNQcm9jZXNzCURFRkFVTFQJMA==\", // Check FieldOptions for possible values\r\n            \"SalesStageSetupKey\": \"U2FsZXNQcm9jZXNzU3RhZ2VTZXR1cAkyMjA0MTEyNTE1NTg1NzQxNDAwMDFHCTA=\", //Check FieldOptions for possible values related to SalesProcessSetupKey\r\n            \"Category\": [ // Check FieldOptions for possible values\r\n                \"1\"\r\n            ],\r\n            \"Product\": [ // Check FieldOptions for possible values\r\n                \"1\",\r\n                \"2\"\r\n            ],\r\n            \"Rating\": [ // Check FieldOptions for possible values\r\n                \"57998\"\r\n            ],\r\n            \"RevenueType\": \"60001\" // Check FieldOptions for possible values\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\"\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
