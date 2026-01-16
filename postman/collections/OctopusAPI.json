@@ -5778,7 +5778,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"Interaction\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Creator\": 1,\r\n                \"SecStatus\": 1,\r\n                \"Completed\": 1,\r\n                \"Priority\": 1,\r\n                \"AbEntries\": 1,\r\n                \"Leads\": 1,\r\n                \"Users\": 1,\r\n                \"WithKey\": 1,\r\n                \"With\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Attachment\": 1,\r\n                \"Recurring\": 1,\r\n                \"Source\": 1,\r\n                \"Result\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Value\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                },\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"AbEntries/Key\":{\r\n                     \"$EQ\": \"\" // Mandatory\r\n                  }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "raw": "{\r\n    \"Interaction\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Creator\": 1,\r\n                \"SecStatus\": 1,\r\n                \"Completed\": 1,\r\n                \"Priority\": 1,\r\n                \"AbEntries\": 1,\r\n                \"Leads\": 1,\r\n                \"Users\": 1,\r\n                \"WithKey\": 1,\r\n                \"With\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Attachment\": 1,\r\n                \"Recurring\": 1,\r\n                \"Source\": 1,\r\n                \"Result\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Value\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                },\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"AbEntries/Key\":{\r\n                     \"$EQ\": \"Q29udGFjdAkxMzA3MDgyNTE0MjAzNDYxNjAwMDdDCTQ=\" // Mandatory\r\n                  }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -5796,14 +5796,68 @@
               "name": "FieldOptions",
               "item": [
                 {
-                  "name": "New Request",
+                  "name": "Read InteractionLog FieldOptions - Type",
                   "id": "eec8dfdc-5a46-4872-a1e7-562f320476d8",
                   "protocolProfileBehavior": {
                     "disableBodyPruning": true
                   },
                   "request": {
-                    "method": "GET",
-                    "header": []
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Interaction\":{\r\n        \"FieldOptions\": {\r\n            \"Type\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"Value\": 1,\r\n                    \"Name\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read InteractionLog FieldOptions - Category",
+                  "id": "0bf08d13-5ba9-4a96-874e-1243ed7b30c6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Interaction\":{\r\n        \"FieldOptions\": {\r\n            \"Category\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read InteractionLog FieldOptions - Result",
+                  "id": "db50accc-d376-40f6-8612-1ad4cd2a1c61",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Interaction\":{\r\n        \"FieldOptions\": {\r\n            \"Result\": [\r\n                {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
                   },
                   "response": []
                 }
