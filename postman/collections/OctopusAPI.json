@@ -5684,6 +5684,137 @@
           "description": "Folder object allows users to manage folders for both Udfs (organizing Udfs under each tab related to AbEntry/Lead, Opportunity, Campaign and Case) and Company Library module (general use documents, notes and hyperlinks).\n\nIMPORTANT: the Folder object is currently using the beta version by default (0.x). Which means, if you send payloads without setting the compatibility, you will use the functionality of FolderObject = 0.x. That version supports only Udf folders, and for that reason, we strongly suggest to always use compatibility with FolderObject = 1.x, which supports both Udf and DocumentLibrary folder types. Saying that, make sure to always include the following section in any payload:\n\n``` json\n\"Compatibility\": {\n    \"FolderObject\": \"1.0\" // supports both Udf and DocumentLibrary folders\n}\n\n ```\n\nThe solution is pretty similar for both Udf and Company Library folders, which only a few differences in terms of validation/required fields. See below some considerations for the Folder object:\n\n- Udf folders are created using the following values in the AppliesTo field:\n    \n    - AbEntry (applies for all types - Contact, Company and Individual)\n        \n    - Company\n        \n    - Contact\n        \n    - Individual\n        \n    - Opportunity\n        \n    - Case\n        \n    - Campaign\n        \n    - Lead\n        \n- Company Library folders are created using the \"DocumentLibrary\" value (alone) in the AppliesTo field.\n    \n- The concept of \"parent\" folder applies in both cases: we can create folders within folders. To do that, simply provide the parent folder you want to create the new folder under in the ParentKey field.\n    \n- The concept or \"root\" folder also applies in both cases: it's the top level folder in which everything is created (it's the \"parent\" of all folders and entries added to it). There is a very special key that represents \"root\" folder:\n    \n    **Um9vdEZvbGRlcgkw**\n    \n    This is a fixed value that represents \"RootFolder 0\" (meaning the Id = 0 of a given folder). You can safely use this fixed value whenever you need to reference the \"root\" folder.\n    \n- We can only delete folders that are completely empty. If you try to delete a folder that is associated with at least one file (in case of the Company Library module) or one Udf (in case of the Udf folder), you will receive an error."
         },
         {
+          "name": "Interaction",
+          "item": [
+            {
+              "name": "HowTo's",
+              "item": [
+                {
+                  "name": "Read - Get last 3 emails interactions for AbEntry",
+                  "id": "7eb75c47-f2b9-4e96-9c8e-d6d0f01a30fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Interaction\":{\r\n        \"Scope\":{\r\n            \"Fields\":{\r\n                \"Key\":1,\r\n                \"Type\":{\r\n                \"DisplayValue\":1,\r\n                \"Value\":1\r\n                },\r\n                \"Description\":1,\r\n                \"Attachment\":1,\r\n                \"Subject\":1,\r\n                \"StartDate\":1,\r\n                \"AbEntries/Key\":1\r\n            }\r\n        },\r\n        \"Criteria\":{\r\n            \"SearchQuery\":{\r\n                \"$AND\":[\r\n                    {\r\n                        \"Type\":{\r\n                            \"$EQ\":\"60002\" // Email\r\n                        }\r\n                    },\r\n                    {\r\n                        \"AbEntries/Key\":{\r\n                            \"$EQ\":\"Q29udGFjdAkxMzA3MDgyNTE0MjAzNDYxNjAwMDdDCTQ=\" // Key of the AbEntry you want to search interactions for\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"OrderBy\":{\r\n            \"Fields\":[\r\n                {\r\n                    \"StartDate\":\"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\" // for ParentKey\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "7cdc090b-c020-4dbc-bff7-569b48041441"
+            },
+            {
+              "name": "Metadata",
+              "item": [
+                {
+                  "name": "Read Interaction metadata (simple)",
+                  "id": "c5733a2d-0699-4d23-8835-9d462556d060",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Interaction\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Read Interaction metadata (more)",
+                  "id": "8d26055e-bd2c-4bce-a5f3-49a915f266cc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Interaction\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "d389c36d-771c-49cf-a82d-e61f3830be35"
+            },
+            {
+              "name": "Interaction CRUD",
+              "item": [
+                {
+                  "name": "Read - Interaction",
+                  "id": "da5d8f2a-138f-47cf-bf79-0a287d7dc9e1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"Interaction\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Creator\": 1,\r\n                \"SecStatus\": 1,\r\n                \"Completed\": 1,\r\n                \"Priority\": 1,\r\n                \"AbEntries\": 1,\r\n                \"Leads\": 1,\r\n                \"Users\": 1,\r\n                \"WithKey\": 1,\r\n                \"With\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Attachment\": 1,\r\n                \"Recurring\": 1,\r\n                \"Source\": 1,\r\n                \"Result\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Value\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                },\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"AbEntries/Key\":{\r\n                     \"$EQ\": \"\" // Mandatory\r\n                  }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": "{{BaseURL}}/Read"
+                  },
+                  "response": []
+                }
+              ],
+              "id": "b8a72f56-8f71-4bc2-9818-3a9131ba3242"
+            },
+            {
+              "name": "FieldOptions",
+              "item": [
+                {
+                  "name": "New Request",
+                  "id": "eec8dfdc-5a46-4872-a1e7-562f320476d8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": []
+                  },
+                  "response": []
+                }
+              ],
+              "id": "5fccd3c7-ef4c-4768-8e1c-2f2f856e82b6"
+            }
+          ],
+          "id": "b4c18725-4c45-4430-9797-661cd625c345",
+          "description": "Below are some considerations for interactions:\n\n- The Type field defines the kind of interaction. There are default options like \"Phone Call\" or \"Email,\" but custom ones can also be created. Check the field options to see the available types.\n    \n- To tie an interaction to an AbEntry, set the AbEntryKey field with the key of the related AbEntry.\n    \n- Some fields like Result or Category have customizable values, check the field options to see the available ones."
+        },
+        {
           "name": "InteractionLog",
           "item": [
             {
@@ -11104,118 +11235,6 @@
           ],
           "id": "cb49744c-cb6d-4f09-bd50-ecf14ea66043",
           "description": "User Defined Fields (UDFs) are customized fields that extend the standard fields in a CRM instance. They allow users to tailor their CRM to specific needs.\n\n### Supported UDF Types\n\nYou can create the following UDF types using the Octopus API:\n\n- **AlphaNumeric**\n    \n    - Use `MaxLength` attribute to specify the maximum allowed character length\n        \n- **Numeric**\n    \n    - Use `DecimalPlaces` attribute to define precision\n        \n- **YesNo**\n    \n- Date\n    \n- **Table**\n    \n    - Use `MultiSelect` attribute to determine whether multiple values can be selected from that table Udf at once.\n        \n\n### UDF Management\n\nUDFs are managed through the **Schema** object. Creating a UDF involves creating a schema for a customized field. Each UDF is associated with an object type, specified by the `AppliesTo` field.\n\n### Object Types Supporting UDFs\n\nCurrently, UDFs can be applied to the following object types:\n\n- AbEntry (sub-types can be applied individually)\n    \n    - Company\n        \n    - Contact\n        \n    - Individual\n        \n- Lead\n    \n- Opportunity\n    \n- Case\n    \n- Campaign\n    \n\n### Organizing UDFs\n\nFor objects that support UDFs, fields can be organized into folders. For guidance on folder organization, refer to the \"Folders\" object documentation."
-        },
-        {
-          "name": "Interaction",
-          "item": [
-            {
-              "name": "HowTo's",
-              "item": [
-                {
-                  "name": "Read - Get last 3 emails interactions for AbEntry",
-                  "id": "7eb75c47-f2b9-4e96-9c8e-d6d0f01a30fe",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Interaction\":{\r\n        \"Scope\":{\r\n            \"Fields\":{\r\n                \"Key\":1,\r\n                \"Type\":{\r\n                \"DisplayValue\":1,\r\n                \"Value\":1\r\n                },\r\n                \"Description\":1,\r\n                \"Attachment\":1,\r\n                \"Subject\":1,\r\n                \"StartDate\":1,\r\n                \"AbEntries/Key\":1\r\n            }\r\n        },\r\n        \"Criteria\":{\r\n            \"SearchQuery\":{\r\n                \"$AND\":[\r\n                    {\r\n                        \"Type\":{\r\n                            \"$EQ\":\"60002\" // Email\r\n                        }\r\n                    },\r\n                    {\r\n                        \"AbEntries/Key\":{\r\n                            \"$EQ\":\"Q29udGFjdAkxMzA3MDgyNTE0MjAzNDYxNjAwMDdDCTQ=\" // Key of the AbEntry you want to search interactions for\r\n                        }\r\n                    }\r\n                ]\r\n            },\r\n            \"Top\": 3\r\n        },\r\n        \"OrderBy\":{\r\n            \"Fields\":[\r\n                {\r\n                    \"StartDate\":\"DESC\"\r\n                }\r\n            ]\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"AbEntryKey\": \"2.0\" // for ParentKey\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "7cdc090b-c020-4dbc-bff7-569b48041441"
-            },
-            {
-              "name": "Metadata",
-              "item": [
-                {
-                  "name": "Read Interaction metadata (simple)",
-                  "id": "c5733a2d-0699-4d23-8835-9d462556d060",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": 1\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Interaction\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                },
-                {
-                  "name": "Read Interaction metadata (more)",
-                  "id": "8d26055e-bd2c-4bce-a5f3-49a915f266cc",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Schema\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Alias\": 1,\r\n                \"Type\": 1,\r\n                \"Name\": 1,\r\n                \"AppliesTo\": 1,\r\n                \"Sortable\": 1,\r\n                \"Queryable\": 1,\r\n                \"Mandatory\": 1,\r\n                \"Attributes\": 1,\r\n                \"DisplayValue\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"Key\": {\r\n                    \"$TREE\": \"/Interaction\"\r\n                }\r\n            }\r\n        }\r\n    },\r\n    \"Compatibility\": {\r\n        \"SchemaObject\": \"1.0\"\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "d389c36d-771c-49cf-a82d-e61f3830be35"
-            },
-            {
-              "name": "Interaction CRUD",
-              "item": [
-                {
-                  "name": "Read - Interaction",
-                  "id": "da5d8f2a-138f-47cf-bf79-0a287d7dc9e1",
-                  "protocolProfileBehavior": {
-                    "disableBodyPruning": true
-                  },
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"Interaction\": {\r\n        \"Scope\": {\r\n            \"Fields\": {\r\n                \"Key\": 1,\r\n                \"Subject\": 1,\r\n                \"Description\": 1,\r\n                \"StartDate\": 1,\r\n                \"EndDate\": 1,\r\n                \"Creator\": 1,\r\n                \"SecStatus\": 1,\r\n                \"Completed\": 1,\r\n                \"Priority\": 1,\r\n                \"AbEntries\": 1,\r\n                \"Leads\": 1,\r\n                \"Users\": 1,\r\n                \"WithKey\": 1,\r\n                \"With\": 1,\r\n                \"DisplayValue\": 1,\r\n                \"Duration\": 1,\r\n                \"Direction\": 1,\r\n                \"Attachment\": 1,\r\n                \"Recurring\": 1,\r\n                \"Source\": 1,\r\n                \"Result\": 1,\r\n                \"Type\": {\r\n                    \"Key\": 1,\r\n                    \"DisplayValue\": 1,\r\n                    \"Value\": 1,\r\n                    \"Icon\": 1,\r\n                    \"BiDirectional\": 1,\r\n                    \"External\": 1\r\n                },\r\n                \"Category\": 1\r\n            }\r\n        },\r\n        \"Criteria\": {\r\n            \"SearchQuery\": {\r\n                \"AbEntries/Key\":{\r\n                     \"$EQ\": \"\" // Mandatory\r\n                  }\r\n            },\r\n            \"Top\": 3\r\n        }\r\n    }\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": "{{BaseURL}}/Read"
-                  },
-                  "response": []
-                }
-              ],
-              "id": "b8a72f56-8f71-4bc2-9818-3a9131ba3242"
-            }
-          ],
-          "id": "b4c18725-4c45-4430-9797-661cd625c345"
         }
       ],
       "id": "8e49e800-4615-4fb8-8236-23dbd97c3a25",
