@@ -2307,7 +2307,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/DocumentDownload/RG9jdW1lbnQJMzcwMDUzNzMz"
+                    "url": "{{BaseURL}}/BinaryDownload/RG9jdW1lbnQJMzcwMDUzNzMz"
                   },
                   "response": []
                 },
