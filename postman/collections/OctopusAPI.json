@@ -11110,7 +11110,7 @@
                         }
                       }
                     },
-                    "url": "{{BaseURL}}/UserRead",
+                    "url": "{{BaseURL}}/Read",
                     "description": "Use the `AbEntryRead` method to search for Address Book entries in the database."
                   },
                   "response": []
@@ -11888,7 +11888,7 @@
                     }
                   }
                 },
-                "url": "{{BaseURL}}/SchemaRead",
+                "url": "{{BaseURL}}/Read",
                 "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
               },
               "response": []
@@ -11911,7 +11911,7 @@
                     }
                   }
                 },
-                "url": "{{BaseURL}}/SchemaRead",
+                "url": "{{BaseURL}}/Read",
                 "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
               },
               "response": []
@@ -11934,7 +11934,7 @@
                     }
                   }
                 },
-                "url": "{{BaseURL}}/SchemaRead",
+                "url": "{{BaseURL}}/Read",
                 "description": "Use the `SchemaRead` method to query the structure or metadata of entities in the database."
               },
               "response": []
